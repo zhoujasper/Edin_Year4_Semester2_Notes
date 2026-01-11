@@ -8,9 +8,197 @@
 \begin{document}
 \maketitle
 
-\section{}
+\begin{multicols}{2}
+
+    \section{Background}
+
+    \begin{MyTh}{Semidirect Product $G \ltimes H$}
+        Given groups $G,H$ and a homomorphism $\rho: G\to \Aut(H)$ \ps{\tiny (Aut: iso \& $V=W$)}, the semidirect product $G \ltimes H$ is defined as the set \ps{$G\times H$} with operation: {\tiny $(g_1,h_1)(g_2,h_2) = (g_1g_2, \rho(g_2^{-1})(h_1)h_2)$}. \qquad \quad \ \ \ps{\tiny If $\rho$ is trivial, $\rho(g)=id_H$, then $G \ltimes H = G \times H$.}
+    \end{MyTh}
+
+    \begin{MyTh}{Homogeneous Polynomial}
+        \tiny $f(x_0,x_1,...,x_n)=\sum_i \alpha_{a_1,...,a_n} x_0^{a_0}x_1^{a_1}...x_n^{a_n}$, \ok{$\sum a_j = d$}.
+        
+        \vspace{-2pt}
+        \quad \ok{Property}: \ps{$f(\lambda x_0, \lambda x_1,...,\lambda x_n) = \lambda^d f(x_0,x_1,...,x_n)$} for any $\lambda \in k$.
+    \end{MyTh}
 
 
+    
+    \section{Plane Curves}
+
+    \subsection{Affine Geometry}
+
+    \begin{MyTh}{Affine Plane $(\A^2,\A_k^2)$}
+        The affine plane over a (ground) field $k$ is defined as $\A_k^2 = k^2$.
+    \end{MyTh}
+
+    \begin{MyTh}{Curve}
+        Plane curve $C\subset \A^2$ s.t. $C: p(x,y)=0$ \ where \ps{$p$} is a non-constant polynomial.
+    \end{MyTh}
+
+    \begin{MyTh}{Line $(L)$}
+        $L\subset \A_k^2: ax+by+c=0$ \ \ where \ \ \ps{$a,b,c\in k; (a,b)\neq(0,0)$}
+
+        \begin{enumerate}
+            \item $\left.\begin{smallmatrix}
+                L_1: a_1x+b_1y+c_1=0 \\
+                L_2: a_2x+b_2y+c_2=0
+            \end{smallmatrix}\right\}$ are \ok{equal lines} $\Leftrightarrow$ \ps{\tiny $\exists d\in k^*$} \ s.t. \ \ps{$a_1=da_2, b_1=db_2, c_1=dc_2$.}
+            \item $\left.\begin{smallmatrix}
+                P_1=(x_1,y_1) \\
+                P_2=(x_2,y_2)
+            \end{smallmatrix}\right\}$ \ok{distinct} points $\Rightarrow$ $\exists ! \ L:\det\left(\begin{smallmatrix}
+                x & y & 1 \\
+                x_1 & y_1 & 1 \\
+                x_2 & y_2 & 1
+            \end{smallmatrix}\right)=0$ \ok{passes through $P_1,P_2$.}
+            \item For any $L_1,L_2\in \A^2$, there are three cases: \\
+            \ok{a.} \ps{$L_1=L_2$} \quad \ok{b.} \ps{$L_1\cap L_2=$ a point $P$} \quad \ok{c.} \ps{$L_1, L_2$ do not intersect (parallel).}
+            
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Conic}
+        $C\subset \A^2: ax^2+bxy+cy^2+dx+ey+f=0$ \ \ where \ \ \ps{$(a,b,c)\neq(0,0,0)$}
+        
+        \begin{enumerate}
+            \item If conic is \ok{reducible}, it's \ps{union of 2 lines}: {\tiny $C: (\alpha_1x+\beta_1y+\gamma_1)(\alpha_2x+\beta_2y+\gamma_2)=0$}
+            \item For a \textit{line} $L$ and a \textit{conic} $C$, there are two cases: \\
+            \ok{a.} \ps{$C$ is a union of $L$ and another line $L'$ ($C$ reducible) \quad \ok{b.} $L\cap C$ \textit{at most} 2 points.}
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Affine Transformation}
+        An affine transformation \ps{$\A^2\to \A^2$} is given by \ps{combinations of}:
+
+        \quad \ok{a.Translations:} $(x,y) \mapsto (x+x_0,y+y_0)$ \hspace{50pt} \ps{\tiny NB: Not Euclidean translations!}
+        
+        \quad \ok{b.Linear Changes:} $(x,y) \mapsto A(x,y)$ \ where \ \ps{$A$ invertible $2\times 2$ matrix over $k$.}
+
+        \quad \begin{MyTh}{Theorem}
+            \imp{Group of affine transformations: $\{ \mathbf{x} \mapsto A(\mathbf{x}+\mathbf{b}): A\in GL_2(k), \mathbf{b}\in k^2 \}$}
+            
+            \quad \imp{isomorphic to semidirect product $GL_2(k) \ltimes k^2$ with operation:} \ps{$\rho(A)(\mathbf{b})=A\mathbf{b}$.}
+
+            \qquad i.e. \ok{1.} {\tiny 所有仿射变换可写作} \ps{$\mathbf{x} \mapsto A(\mathbf{x}+\mathbf{b})$}.
+
+            \qquad i.e. \ok{2.} $A(\mathbf{x}+\mathbf{b})\leftrightarrow (A,\mathbf{b})$ and \ps{$(A_1,\mathbf{b_1})(A_2,\mathbf{b_2})=(A_1A_2, A_2^{-1}b_1+b_2)$}.
+        \end{MyTh}
+    \end{MyTh}
+
+    
+    \subsection{Projective Geometry}
+
+    \begin{MyTh}{$\sim$}
+        Let $\sim$ be \textit{e.r.} on $k^2\setminus\{(0,0)\}$ s.t. $(x,y) \sim (x',y')$ \ iff \ $\exists \lambda \in k^*, x'=\lambda x, y'=\lambda y$.
+    \end{MyTh}
+
+    \begin{MyTh}{Projective Line $(\Prob^1)$}
+        $\Prob^1 = (k^2\setminus\{(0,0)\})/\sim$ \quad \ps{\tiny (过原点的直线的集合,无原点)}.
+
+        \quad \begin{MyTh}{Topology}\tiny
+            \ok{$\Prob^1_{\R}$ is homeomorphic to a circle $S^1$.} \quad \ok{$\Prob^1_{\C}$ is homeomorphic to a sphere $S^2$.}
+        \end{MyTh}
+    \end{MyTh}
+
+    \begin{MyTh}{Points $([x:y])$}
+        A point in $\Prob^1$ is denoted by $[x:y]$, called \ok{homogeneous coordinates}.
+
+        \ \ \ \ok{a.} \ps{$[x:y]=[ \lambda x: \lambda y ]$ for any $\lambda \in k^*$.} \qquad \ok{b.} \ps{$[0:0]$ not defined.}
+
+        \begin{enumerate}
+            \item A point \ok{$[a:b]\in \Prob^1$} specifies a line \ok{$L: ax+by=0$} in $k^2$.
+            \item The map \ps{$f: \Prob^1 \setminus \{[1:0]\} \to k$ by $f([x:y]) = \frac{x}{y}$} is a \textit{bijection}.
+            \item $P=[1:0]$ is called \ok{point at infinity}. \quad \ps{(NB: \tiny $\Prob^1 = k \cup \{\infty\}$, ``$\infty=P$'', \imp{$\Prob^1\setminus P\cong k$})}.
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Projective Space $\Prob(V)$}
+        Let $V$ be a vector space over $k$, then $\Prob(V) = (V\setminus\{\mathbf{0}\})/\sim$
+
+        \quad \ok{a.} $\sim$: $\mathbf{v} \sim \mathbf{v'}$ \ iff \ $\exists \lambda \in k^*, \mathbf{v'}=\lambda \mathbf{v}$. \qquad
+        \ok{b. $\Prob^n = \Prob(k^{n+1})$} \quad \ok{c.} Point $[\mathbf{v}]$
+    \end{MyTh}
+
+    \begin{MyTh}{Projective Plane $\Prob^2$}
+        $\Prob^2 = (k^3\setminus\{(0,0,0)\})/\sim$ \qquad Point in $\Prob^2$ is $[x:y:z]$.
+
+        \quad \ok{a.} \ok{Line at infinity}: $U=\{[x:y:0]: x,y\in k\}$, and \imp{$U\cong \Prob^1$.}
+
+        \quad \ok{b.} The map \ps{$f: \Prob^2 \setminus U \to k^2$ by $f([x:y:z]) = (\frac{x}{z}, \frac{y}{z})$} is a \textit{bijection}, and \imp{$\Prob^2 \setminus U \cong \A^2$.}
+
+        \quad \begin{MyTh}{Identification}
+                \ok{Affine plane $\A^2$} identified as \ps{\textit{subset} of projective plane $\Prob^2$} by $z\neq 0$.
+              \end{MyTh}
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Relation between $\A^2$ and $\Prob^2$}}
+        $p$ homogeneous in $\Prob^2$.
+
+        \begin{enumerate}
+            \item $C:p(x,y,z)=0$ in $\Prob^2$ \ \ $\Rightarrow$ \ \ $C\cap \A^2$ will in $\A^2$ by $p(x,y,1)=0$. \quad \ok{\tiny (dehomogenization)}
+            \item $C:p(x,y)=0$ in $\A^2$ \ \ $\Rightarrow$ \ \ $\tilde{C}: z^d p(\frac{x}{z},\frac{y}{z})=0$ in $\Prob^2$ \quad \ok{\tiny (homogenization)}
+        \end{enumerate}
+    \end{MyTh}
+
+
+    \subsection{Projective Curves}
+
+    \begin{MyTh}{Projective Curve}
+        $C\subset \Prob^2$, $C: p(x,y,z)=0$ where $p$ \ok{homogeneous polynomial}.
+
+        \quad ps: Homogeneous ensure that: \ok{$p(x,y,z)=0$ $\Rightarrow$ $p(\lambda x, \lambda y, \lambda z)=0$,$\forall \lambda \in k^*$.}
+    \end{MyTh}
+
+    \begin{MyTh}{Line $(L)$}
+        $L\subset \Prob^2$, \ps{$L: ax+by+cz=0$} \ where \ \ps{$(a,b,c)\neq(0,0,0)$}.
+
+        \begin{enumerate}
+            \item $\left.\begin{smallmatrix}
+                L_1: a_1x+b_1y+c_1z=0 \\
+                L_2: a_2x+b_2y+c_2z=0
+            \end{smallmatrix}\right\}$ are \ok{equal lines} $\Leftrightarrow$ \ps{\tiny $\exists d\in k^*$} \ s.t. \ \ps{$a_1=da_2, b_1=db_2, c_1=dc_2$.}
+            \item $\left.\begin{smallmatrix}
+                P_1=[x_1:y_1:z_1] \\
+                P_2=[x_2:y_2:z_2]
+            \end{smallmatrix}\right\}$ \ok{distinct} $\Rightarrow$ $\exists ! \ L:\det\left(\begin{smallmatrix}
+                x & y & z \\
+                x_1 & y_1 & z_1 \\
+                x_2 & y_2 & z_2
+            \end{smallmatrix}\right)=0$ \ok{passes through $P_1,P_2$.}
+            \item For any $L_1,L_2\in \Prob^2$, there are \ps{two} cases: \quad
+            \ok{a.} \ps{$L_1=L_2$} \quad \ok{b.} \ps{$L_1\cap L_2=$ a point $P$.}
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Conic}
+        $C\subset \Prob^2$, $C: ax^2+bxy+cy^2+dxz+eyz+fz^2=0$\ \ \ps{\tiny where $(a,...,f)\neq(0,...,0)$}
+
+        \begin{enumerate}
+            \item If conic is \ok{reducible}, it's \ps{union of 2 lines}: {\tiny $C: (\alpha_1x+\beta_1y+\gamma_1z)(\alpha_2x+\beta_2y+\gamma_2z)=0$}
+            \item For a Line $L$ and a Conic $C$, there are two cases: \\
+            \ok{a.} \ps{$C$ is a union of $L$ and another line $L'$ ($C$ reducible)} \quad \ok{b.} \ps{$L\cap C$ at most 2 points.}
+            \item \ok{Any 5 distinct points $P_1,...,P_5$ \textit{no 3 collinear}, $\exists !$ conic $C$ passing through them}.
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Projective Transformation}
+        It's a map $\phi: \Prob(V) \to \Prob(V)$ by \ps{$\phi([v]) = [T(v)]$}, {\tiny $T\in GL(V)$.}
+
+        \quad \ok{Property}: \imp{$\text{PGL}(V) = \text{GL}(V)/k^*$}, \ps{\tiny $k^*=\{\lambda \cdot id_V: \lambda \in k^*\}$}. \ \ \ok{\tiny i.e. If $T_1 = \lambda T_2$, 对应射影变换相同.}
+
+        \begin{enumerate}
+            \item For line: $\forall L\subset \Prob^2$, $\exists$ projective transformation $\phi$ s.t. $\phi(L): x=0$.
+            \item For points: \ok{Given 4 points $P_1,P_2,P_3,P_4$ no 3 collinear}, $\exists$ projective transformation $\phi$ s.t. \ok{$\phi(P_1)=[1:0:0], \phi(P_2)=[0:1:0], \phi(P_3)=[0:0:1], \phi(P_4)=[1:1:1]$.}
+        \end{enumerate}
+    \end{MyTh}
+
+    \columnbreak
+
+    \section{}
+
+\end{multicols}
 
 
 

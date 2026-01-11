@@ -8,11 +8,136 @@
 \begin{document}
 \maketitle
 
-\section{}
+\begin{multicols}{2}
+    
+    \fbox{\parbox{\linewidth}{
+
+    \section{Notation \& Definitions}
+
+    \begin{MyTh}{Big $\Ocal$}
+        $f(z)=\Ocal(g(z))$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}$ bdd} \ $\Leftrightarrow$ \ \ok{$|f(z)|\leq A|g(z)|$ {\tiny as $z\to z_0$}}
+    \end{MyTh}
+
+    \vspace{-4pt}
+    \begin{MyTh}{Small $o$}
+        $f(z)=o(g(z))$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=0$} \ $\Leftrightarrow$ \ \ok{$f(z)\ll g(z)$ {\tiny as $z\to z_0$}}
+    \end{MyTh}
+
+    \vspace{-4pt}
+    \begin{MyTh}{Asymptotic $\sim$}
+        $f(z)\sim g(z)$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=1$}
+    \end{MyTh}
+
+    \vspace{-8pt}
+    \hspace{245pt} \scalebox{0.8}{\tiny (as $z\to z_0$)}
+
+    \begin{MyTh}{Asymptotic Sequence}
+        $\{\varphi_n(z)\}$: If $\forall n\in\N$ \ok{$\varphi_{n+1}(z)=o(\varphi_n(z))$} {\tiny (or \ps{$\varphi_{n+1}(z)\ll \varphi_n(z)$}, $\downarrow$)}
+    \end{MyTh}
+
+    \vspace{-1pt}
+    \begin{MyTh}{Asymptotic Expansion}
+        {\tiny \scalebox{0.9}{$f(z)\sim \sum\limits_{n=0}^{M}a_n\varphi_n(z)$}} {\tiny as $z\to z_0$} \ if \ok{\tiny \scalebox{0.9}{$f(z)-\sum\limits_{n=0}^{N}a_n\varphi_n(z)\ll\varphi_N(z)$,$\forall N\leq M$}}
+
+        \vspace{-5pt}
+
+        \ \ - {\tiny \scalebox{0.9}{$f(x,\eps)\sim \sum\limits_{n=0}^{\infty}a_n(x)\eps^n$ as $\eps\to 0$} \ps{uniformly} in $x\in I$ \ if \scalebox{0.9}{\tiny \ok{$\eps$与$x$无关}} \scalebox{0.9}{($\sup\limits_{x\in I}|f(x,\eps)-\sum\limits_{n=0}^{N}a_n(x)\eps^n|\ll \eps^N$, $\forall N$)}}
+    \end{MyTh}
+
+    \begin{MyTh}{Singular|Regular - Perturbation Method}
+        \ok{Regular}: {\tiny $\eps=0$时,问题性质不变(阶数,条件无矛盾等)}
+
+        \ \ - {\tiny 对$p(x,\eps)=0$假设解 Asymptotic Expansion \scalebox{0.9}{\tiny \ok{$x(\eps)\sim \sum_{n=0}^{\infty}a_n\eps^n = x_0+a_1\eps+a_2\eps^2+\cdots$}},代入求系数}
+
+        \ \ - {\tiny \ok{Principle of dominant balance}: For Singular Perturbation $p(x,\eps)=0$, Let $X=\eps^{-\alpha}x$, 代入选择$\alpha$:}
+
+        \quad {\tiny \ok{a.} 至少有两项阶数相同且最低;  \ \ \ \ok{b.} 其他项阶数均更高.}
+    \end{MyTh}
+    }}
+
+
+    \section{Integral By Parts \& Laplace's Method}
+
+    \vspace{-3pt}
+    \begin{MyTh}{Exp. Integral}
+        \tiny $E_1(x)=\int_{x}^{\infty}\frac{e^{-t}}{t}dt$ , \ \ \ps{\tiny ($x\to 0$发散)} \quad \ok{$E_1(x)\sim e^{-x}\sum\limits_{n=0}^{\infty}(-1)^n\frac{n!}{x^{n+1}}$, $x\to\infty$}
+    \end{MyTh}
+
+    \vspace{-3pt}
+    \begin{MyTh}{Gamma Func}
+        \tiny $\Gamma(x)=\int_{0}^{\infty}t^{x-1}e^{-t}dt$ \quad \ok{$\Gamma(x+1)=x\Gamma(x)$} and \ok{$\Gamma(n)=(n-1)!$} \quad \ps{$\Gamma(\frac{1}{2})=\sqrt{\pi}$}
+    \end{MyTh}
+
+    \begin{MyTh}{Incomplete Gamma Func}
+        {\tiny \ok{Lower}: $\gamma(a,x)=\int_0^{x}t^{a-1}e^{-t}dt$ \quad \ok{Upper}: $\Gamma(a,x)=\int_x^{\infty}t^{a-1}e^{-t}dt$}
+
+        \vspace{-2pt}
+        \ \ - \ok{$\gamma(a,x)=\Gamma(a)-\Gamma(a,x)$} \qquad {\tiny \ok{$\Gamma(a,x) \sim e^{-x}x^{a-1}\sum\limits_{n=0}^{\infty}\frac{\Gamma(a)}{\Gamma(a-n)}x^{-n}$}, $x\to\infty$}
+    \end{MyTh}
+
+    \vspace{-4pt}
+    \begin{MyTh}{\imp{Laplace's Method}}
+        If $I(x)=\int_{a}^{b} e^{-xf(t)}dt$ \quad \ok{a.} $f(t)$ has \ps{unique min} at $t=t_0\in(a,b)$
+
+        \vspace{-2pt}\quad
+        \ok{b.} $f'(t_0)=0$, $f''(t_0)>0$  \quad \ok{c.} Taylor of $f(t)=f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots$ \\
+        
+        \vspace{-7pt}\quad
+        Then, as $x\to\infty$, \quad \imp{$I(x)\sim \int_{-\infty}^{\infty}e^{-x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2]}dt$}
+
+        \vspace{-2pt}\quad
+        \imp{Remark}: {\tiny If $t_0=g(x)$, Let $t=g(x)s$, then \ok{$I(x)=g(x)\int_{a/g(x)}^{b/g(x)}e^{-xf(g(x)s)}ds$} min at $s=1$.}
+
+        \vspace{-2pt}\quad
+        \ok{Application}: {\tiny $\int_{-\infty}^{\infty}e^{-x \cosh \theta}d\theta \sim e^{-x}\sqrt{\frac{2\pi}{x}}$ \quad $\Gamma(n+1)=n! \sim \sqrt{2\pi n}(\frac{n}{e})^n$ \ps{(Stirling Formula)}}
+    \end{MyTh}
+
+
+
+
+    \columnbreak
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{Appendix}
+    \tiny
+
+    \begin{MyTh}{$y'+Py=Q$}
+        $\mu y = \int Q(x)e^{\mu} dx$ , \ \ \ps{$\mu = e^{\int P(x)dx}$} \hspace{110pt} \scalebox{0.9}{$\downarrow x\geq0$}
+    \end{MyTh}
+
+    \begin{MyTh}{Gaussian Integral}
+        $\int^\infty_{-\infty} e^{-ax^2} dx =$ \ok{$\frac{\sqrt{\pi}}{\sqrt{a}}$}
+    \end{MyTh}
+    \quad
+    \begin{MyTh}{Inequalities}
+        $\ln(x+1) < x$ , \ \ $e^x > x+1$ , \ \ $(1+x)^a < e^{ax}$
+    \end{MyTh}
+
+    \vspace{-2pt}
+    \begin{MyTh}{Binomial Expansion}
+        \tiny $(1+x)^{\alpha} = \sum\limits_{n=0}^{\infty}\binom{\alpha}{n}x^n = 1+\alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots$, \ \ \tiny $|x|<1$
+    \end{MyTh}
+
+    \vspace{-6pt}
+    \begin{MyTh}{Taylor}
+        \tiny $f(x+h) = \sum\limits_{n=0}^{\infty}\frac{f^{(n)}(x)}{n!}h^n = f(x) + f'(x)h + \frac{f''(x)}{2!}h^2 + \cdots$
+
+        \vspace{-2pt}
+        \quad $\sin(x)=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots$ \quad $\cos(x)=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots$ \quad $e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots$
+        
+        \quad $\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots$ \quad $\sinh(x)=x+\frac{x^3}{3!}+\frac{x^5}{5!}+\cdots$ \quad $\cosh(x)=1+\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots$
+    \end{MyTh}
+
+    \begin{MyTh}{Integral}
+        $\int \tan x dx = -\ln|\cos x| = \ln|\sec x|$ \quad $\int \cot x dx = \ln|\sin x|= -\ln|\csc x|$
+    \end{MyTh}
+    }}
 
 
 
 
 
+\end{multicols}
 
 \end{document}

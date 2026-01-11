@@ -51,6 +51,7 @@
 \titlespacing*{\subsubsection}{0pt}{-2pt}{-2pt}
 
 % 常用数学符号
+\newcommand{\A}{\mathbb{A}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Prob}{\mathbb{P}}
 \newcommand{\R}{\mathbb{R}}
@@ -181,7 +182,7 @@
 % 初始化设置
 \AtBeginDocument{
     \fontsize{7pt}{6pt}\selectfont
-    \setlist[enumerate]{itemsep=-2pt, topsep=-2pt, leftmargin=15pt, after=\vspace{4pt}}
+    \setlist[enumerate]{itemsep=-2pt, topsep=0pt, leftmargin=15pt, after=\vspace{2pt}}
 }
 
 \endinput
