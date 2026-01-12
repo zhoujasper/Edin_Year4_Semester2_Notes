@@ -8,10 +8,36 @@
 \begin{document}
 \maketitle
 
-\section{Missing Patterns \& Mechanisms}
+\begin{multicols}{2}
+    
+    \fbox{\parbox{\linewidth}{
+
+    \section{Missing Data Pattern \& Mechanism}
+
+    \begin{MyTh}{Mechanism}
+        Insight about \ok{reasons for missingness}. \quad \ps{\tiny ps: 缺失值可能与其自己的属性有关!}
+
+        \begin{enumerate}
+            \item \ok{MCAR}: \ok{a.} {\tiny 缺失数据与已/未观测到变量无关}. \ \ \ok{b.} {\tiny 观察到的数据可以作为完整数据. ($Y_{\text{obs}}\sim Y_{\text{mis}} \sim Y$)} \\
+            \ok{c.} {\tiny 所有对\textit{完整数据分析}的方法均对MCAR假设下的观察数据有效.} \ \ \ok{d.} {\tiny \ps{对样本按是否观察分组因无区别}.}
+            \item \ok{MAR}: \ok{a.} {\tiny 缺失数据\textit{仅与观测到的变量}有关,与其本身无关.} \ \ \ok{b.} {\tiny \ps{把观测变量分层starata;在同一层中,缺失数据的概率因是随机的(MCAR)}.} \ \ \ok{c.} {\tiny 无法由数据本身证明是MAR,需要背景支持.}
+            \item \ok{MNAR}: \ok{a.} {\tiny 趋势数据\textit{与本身数值}有关,也可能和观测到的变量有关.} \ \ \ok{b.} {\tiny 缺失数据如果\ps{与一未被测量的变量}有关,也是MNAR.(医学研究中未测量不适感,但不适感和患者退出导致的数据缺失有关)}
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Pattern}
+        Insight about \ok{localtions of the missing values} in a dataset. \quad \ps{\tiny NB: Not about reasons!}
+        
+        \begin{enumerate}
+            \item \ok{Univariate}: {\tiny 只有一种变量存在缺失数据} \qquad\qquad\quad \scalebox{0.9}{\tiny 常见于longitudinal study $\downarrow$}
+            \item \ok{Monotone}: {\tiny 对变量进行排序,前一个变量的数据缺失会有后续变量的数据都缺失}.
+            \item \ok{Arbitrary/General}: {\tiny 任意一个变量中的数据都有可能缺失}.
+        \end{enumerate}
+    \end{MyTh}
+    }}
 
 
-
+\end{multicols}
 
 
 

@@ -12,7 +12,7 @@
     
     \fbox{\parbox{\linewidth}{
 
-    \section{Notation \& Definitions}
+    \section{Notation \& Perturbation Method}
 
     \begin{MyTh}{Big $\Ocal$}
         $f(z)=\Ocal(g(z))$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}$ bdd} \ $\Leftrightarrow$ \ \ok{$|f(z)|\leq A|g(z)|$ {\tiny as $z\to z_0$}}
@@ -44,14 +44,25 @@
         \ \ - {\tiny \scalebox{0.9}{$f(x,\eps)\sim \sum\limits_{n=0}^{\infty}a_n(x)\eps^n$ as $\eps\to 0$} \ps{uniformly} in $x\in I$ \ if \scalebox{0.9}{\tiny \ok{$\eps$与$x$无关}} \scalebox{0.9}{($\sup\limits_{x\in I}|f(x,\eps)-\sum\limits_{n=0}^{N}a_n(x)\eps^n|\ll \eps^N$, $\forall N$)}}
     \end{MyTh}
 
-    \begin{MyTh}{Singular|Regular - Perturbation Method}
-        \ok{Regular}: {\tiny $\eps=0$时,问题性质不变(阶数,条件无矛盾等)}
+    \begin{MyTh}{\imp{Singular|Regular - Perturbation Method}}
+        {\tiny \ok{a.} Let $\eps=0$ solve $f(x,0)=0$.}
 
-        \ \ - {\tiny 对$p(x,\eps)=0$假设解 Asymptotic Expansion \scalebox{0.9}{\tiny \ok{$x(\eps)\sim \sum_{n=0}^{\infty}a_n\eps^n = x_0+a_1\eps+a_2\eps^2+\cdots$}},代入求系数}
+        \quad {\tiny \ok{b.i.} 如果$f$结构变了\scalebox{0.9}{(阶数降低)}, Let $x=\eps^{-\alpha}X$, PDB 找$\alpha$ \ \ \ok{c.} 假设$X=a_0+a_1\eps^{1}+a_2\eps^{2}+\cdots$ 代入求系数}
 
-        \ \ - {\tiny \ok{Principle of dominant balance}: For Singular Perturbation $p(x,\eps)=0$, Let $X=\eps^{-\alpha}x$, 代入选择$\alpha$:}
+        \quad {\tiny \ok{b.ii.} 如果$f$结构不变/变, 但有重根$x_0$, Let $x=x_0+\eps^{\alpha}$, PDB 找$\alpha$.}
 
-        \quad {\tiny \ok{a.} 至少有两项阶数相同且最低;  \ \ \ \ok{b.} 其他项阶数均更高.}
+        \quad {\tiny \ok{Principle of dominant balance (PDB)}: For Singular Perturbation $p(x,\eps)=0$, Let $x=\eps^{\alpha}X$, 代入选择$\alpha$:}
+
+        \quad {\tiny 对于$\eps$来说 \ \ \ok{a.} 至少有两项阶数相同且最低;  \ \ \ \ok{b.} 其他项阶数均更高.}
+
+
+        %\tiny
+        %\ok{Regular}: $\eps=0$时,问题性质不变(阶数,条件无矛盾等)
+
+        %\ \ - Find \ok{Perturbation Expansion}: \ok{a.} $\eps=0$ 解 $p(x,0)=0$ 看是否有足够解/重根;
+
+        %\ \ - {\tiny 对$p(x,\eps)=0$假设解 Asymptotic Expansion \scalebox{0.9}{\tiny \ok{$x(\eps)\sim \sum_{n=0}^{\infty}a_n\eps^n = x_0+a_1\eps+a_2\eps^2+\cdots$}},代入求系数}
+
     \end{MyTh}
     }}
 
@@ -76,20 +87,20 @@
     \end{MyTh}
 
     \vspace{-4pt}
-    \begin{MyTh}{\imp{Laplace's Method}}
-        If $I(x)=\int_{a}^{b} e^{-xf(t)}dt$ \quad \ok{a.} $f(t)$ has \ps{unique min} at $t=t_0\in(a,b)$
+    \begin{MyTh}{\imp{Laplace's Method}}???
+        %If $I(x)=\int_{a}^{b} e^{-xf(t)}dt$ \quad \ok{a.} $f(t)$ has \ps{unique min} at $t=t_0\in(a,b)$
 
-        \vspace{-2pt}\quad
-        \ok{b.} $f'(t_0)=0$, $f''(t_0)>0$  \quad \ok{c.} Taylor of $f(t)=f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots$ \\
-        
-        \vspace{-7pt}\quad
-        Then, as $x\to\infty$, \quad \imp{$I(x)\sim \int_{-\infty}^{\infty}e^{-x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2]}dt$}
+        %\vspace{-2pt}\quad
+        %\ok{b.} $f'(t_0)=0$, $f''(t_0)>0$  \quad \ok{c.} Taylor of $f(t)=f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots$ \\
+        %
+        %\vspace{-7pt}\quad
+        %Then, as $x\to\infty$, \quad \imp{$I(x)\sim \int_{-\infty}^{\infty}e^{-x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2]}dt$}
 
-        \vspace{-2pt}\quad
-        \imp{Remark}: {\tiny If $t_0=g(x)$, Let $t=g(x)s$, then \ok{$I(x)=g(x)\int_{a/g(x)}^{b/g(x)}e^{-xf(g(x)s)}ds$} min at $s=1$.}
+        %\vspace{-2pt}\quad
+        %\imp{Remark}: {\tiny If $t_0=g(x)$, Let $t=g(x)s$, then \ok{$I(x)=g(x)\int_{a/g(x)}^{b/g(x)}e^{-xf(g(x)s)}ds$} min at $s=1$.}
 
-        \vspace{-2pt}\quad
-        \ok{Application}: {\tiny $\int_{-\infty}^{\infty}e^{-x \cosh \theta}d\theta \sim e^{-x}\sqrt{\frac{2\pi}{x}}$ \quad $\Gamma(n+1)=n! \sim \sqrt{2\pi n}(\frac{n}{e})^n$ \ps{(Stirling Formula)}}
+        %\vspace{-2pt}\quad
+        %\ok{Application}: {\tiny $\int_{-\infty}^{\infty}e^{-x \cosh \theta}d\theta \sim e^{-x}\sqrt{\frac{2\pi}{x}}$ \quad $\Gamma(n+1)=n! \sim \sqrt{2\pi n}(\frac{n}{e})^n$ \ps{(Stirling Formula)}}
     \end{MyTh}
 
 
