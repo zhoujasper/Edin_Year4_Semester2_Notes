@@ -14,42 +14,41 @@
 
     \section{Notation \& Perturbation Method}
 
-    \begin{MyTh}{Big $\Ocal$}
-        $f(z)=\Ocal(g(z))$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}$ bdd} \ $\Leftrightarrow$ \ \ok{$|f(z)|\leq A|g(z)|$ {\tiny as $z\to z_0$}}
+    \begin{MyTh}{Big $\Ocal$}\tiny
+        $f(z)=\Ocal(g(z))$ \ as $z\to z_0$ \quad if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}$ bdd} \ $\Leftrightarrow$ \ \ok{$|f(z)|\leq A|g(z)|$} \ as $z\to z_0$
     \end{MyTh}
 
-    \vspace{-4pt}
-    \begin{MyTh}{Small $o$}
-        $f(z)=o(g(z))$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=0$} \ $\Leftrightarrow$ \ \ok{$f(z)\ll g(z)$ {\tiny as $z\to z_0$}}
+    \vspace{-2pt}
+    \begin{MyTh}{Small $o$}\tiny
+        $f(z)=o(g(z))$ \ as $z\to z_0$ \quad if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=0$} \ $\Leftrightarrow$ \ \ok{$f(z)\ll g(z)$} \ as $z\to z_0$
     \end{MyTh}
 
-    \vspace{-4pt}
-    \begin{MyTh}{Asymptotic $\sim$}
-        $f(z)\sim g(z)$ {\tiny as $z\to z_0$} \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=1$}
-    \end{MyTh}
-
-    \vspace{-8pt}
-    \hspace{245pt} \scalebox{0.8}{\tiny (as $z\to z_0$)}
-
-    \begin{MyTh}{Asymptotic Sequence}
-        $\{\varphi_n(z)\}$: If $\forall n\in\N$ \ok{$\varphi_{n+1}(z)=o(\varphi_n(z))$} {\tiny (or \ps{$\varphi_{n+1}(z)\ll \varphi_n(z)$}, $\downarrow$)}
+    \vspace{-2pt}
+    \begin{MyTh}{Asymptotic $\sim$}\tiny
+        $f(z)\sim g(z)$ \ as $z\to z_0$ \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=1$}
     \end{MyTh}
 
     \vspace{-1pt}
-    \begin{MyTh}{Asymptotic Expansion}
-        {\tiny \scalebox{0.9}{$f(z)\sim \sum\limits_{n=0}^{M}a_n\varphi_n(z)$}} {\tiny as $z\to z_0$} \ if \ok{\tiny \scalebox{0.9}{$f(z)-\sum\limits_{n=0}^{N}a_n\varphi_n(z)\ll\varphi_N(z)$,$\forall N\leq M$}}
+    \begin{MyTh}{Asymptotic Sequence}\tiny
+        Seq $\{\varphi_n(z)\}$ is asy. if \ \ $\forall n\in\N$ \ok{$\varphi_{n+1}(z)=o(\varphi_n(z))$} \ as $z\to z_0$
+    \end{MyTh}
 
-        \vspace{-5pt}
+    \begin{MyTh}{Asymptotic Expansion}\tiny
+        \scalebox{0.9}{$f(z)\sim \sum\limits_{n=0}^{M}a_n\varphi_n(z)$} \ as $z\to z_0$ to $M$ \quad if \ok{$\phi_n(z)$ is asy. seq.} \ and
+        
+        \vspace{-4pt}
+        \quad \scalebox{0.9}{\ok{$f(z)-\sum\limits_{n=0}^{N}a_n\varphi_n(z)=o(\varphi_N(z))=\Ocal(\varphi_{N+1}(z))$}}, \ $\forall N\leq M$ \ as $z\to z_0$
 
-        \ \ - {\tiny \scalebox{0.9}{$f(x,\eps)\sim \sum\limits_{n=0}^{\infty}a_n(x)\eps^n$ as $\eps\to 0$} \ps{uniformly} in $x\in I$ \ if \scalebox{0.9}{\tiny \ok{$\eps$与$x$无关}} \scalebox{0.9}{($\sup\limits_{x\in I}|f(x,\eps)-\sum\limits_{n=0}^{N}a_n(x)\eps^n|\ll \eps^N$, $\forall N$)}}
+        \vspace{-3pt}
+        \quad \scalebox{0.9}{\ok{$f(x,\eps)\sim \sum\limits_{n=0}^{\infty}a_n(x)\eps^n$} \ps{ uniformly} \ in $x\in I$ \ as $\eps\to 0$ \ \ if \ok{$\eps$与$x$无关}\ps{(i.e. $\sup\limits_{x\in I}|f(x,\eps)-\sum\limits_{n=0}^{N}a_n(x)\eps^n|=o(\eps^N)$)}}
     \end{MyTh}
 
     \begin{MyTh}{\imp{Singular|Regular - Perturbation Method}}
         {\tiny \ok{a.} Let $\eps=0$ solve $f(x,0)=0$.}
 
-        \quad {\tiny \ok{b.i.} 如果$f$结构变了\scalebox{0.9}{(阶数降低)}, Let $x=\eps^{-\alpha}X$, PDB 找$\alpha$ \ \ \ok{c.} 假设$X=a_0+a_1\eps^{1}+a_2\eps^{2}+\cdots$ 代入求系数}
+        \quad {\tiny \ok{b.i.} 如果$f$结构变了\scalebox{0.9}{(阶数降低)}, Let $x=\eps^{-\alpha}X$, PDB 找$\alpha$ \ \ \ok{c.} 假设$X=a_0+a_1\eps^{\beta}+a_2\eps^{2\beta}+\cdots$ 代入求解}
 
-        \quad {\tiny \ok{b.ii.} 如果$f$结构不变/变, 但有重根$x_0$, Let $x=x_0+\eps^{\alpha}$, PDB 找$\alpha$.}
+        \quad {\tiny \ok{b.ii.} 如果$f$结构不变/变, 但有重根$x_0$, Let $x=x_0+\eps^{\alpha}$, PDB 找$\alpha$.\qquad\qquad $\uparrow$ $\beta$看化简后的$X$方程得出}
 
         \quad {\tiny \ok{Principle of dominant balance (PDB)}: For Singular Perturbation $p(x,\eps)=0$, Let $x=\eps^{\alpha}X$, 代入选择$\alpha$:}
 
@@ -68,6 +67,10 @@
 
 
     \section{Integral By Parts \& Laplace's Method}
+
+    \begin{MyTh}{Taylor}\tiny
+        \scalebox{0.9}{$f(x)=\sum\limits_{n=0}^{N-1}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + \frac{f^{(N)}(\xi)}{N!}(x-x_0)^N$} \ $\Rightarrow$ \ \scalebox{0.9}{\ok{$f(x)\sim \sum\limits_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$} as $x\to x_0$}
+    \end{MyTh}
 
     \vspace{-3pt}
     \begin{MyTh}{Exp. Integral}
@@ -138,6 +141,8 @@
         \quad $\sin(x)=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots$ \quad $\cos(x)=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots$ \quad $e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots$
         
         \quad $\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots$ \quad $\sinh(x)=x+\frac{x^3}{3!}+\frac{x^5}{5!}+\cdots$ \quad $\cosh(x)=1+\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots$
+
+        \quad $\sum_{n=0}^{\infty} x^n = \frac{1}{1-x}$ \quad $\tan(x)= x+\frac{x^3}{3}+\frac{2x^5}{15}+\cdots$ \quad $\cot(x)=\frac{1}{x}-\frac{x}{3}-\frac{x^3}{45}-\cdots$
     \end{MyTh}
 
     \begin{MyTh}{Integral}
