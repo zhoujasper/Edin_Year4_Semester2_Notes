@@ -1,0 +1,607 @@
+\documentclass{elegantbook}
+
+\usepackage{dsfont}
+
+\title{Analytic Number Theory Note}
+\subtitle{Introduction to the Theory of Numbers}
+
+\author{Jasper Zhou}
+\date{\today}
+\version{1.0 - Using ElegantBook}
+
+\extrainfo{From James Wright's Notes on Analytic Number Theory}
+
+\setcounter{tocdepth}{3}
+
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+
+\section{Basic Definitions}
+
+\begin{definition}[Natural Numbers]
+  The set of natural numbers is denoted by $\mathbb{N} = \{1, 2, 3, \ldots\}$.
+\end{definition}
+
+\begin{definition}[Prime Numbers]
+  A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. And the set of prime numbers is denoted by $\mathbb{P} = \{2, 3, 5, 7, 11, \ldots\}$.
+\end{definition}
+
+\begin{definition}[Prime Counting Function]
+  We using the notation $\pi(N)=\#\{p \leq N: p \in \mathbb{P}\}$ to denote the number of primes less than or equal to $N$.
+
+  Sometimes, we also use $\pi(N)=\sum_{p \leq N} 1$ to denote the same function.
+\end{definition}
+
+\begin{definition}[Euler Totient Function]
+  For any natural number $n$, the Euler totient function $\phi(n)$ is defined as the number of integers from 1 to $n$ that are coprime to $n$. In other words,
+  \[
+    \phi(n) = \#\{k \in \mathbb{N} : 1 \leq k \leq n, \gcd(k, n) = 1\}.
+  \]
+\end{definition}
+
+
+\section{Fundamental Theorem of Arithmetic and Infinitely Many Primes}
+
+\begin{theorem}[Fundamental Theorem of Arithmetic (FTA)] \label{thm:FTA}
+  Every natural number greater than 1 can be uniquely factored into prime numbers, up to the order of the factors.
+  In other words, for any $n \in \mathbb{N}$ with $n > 1$, there exist unique primes $p_1 < p_2 < \cdots < p_k$ and positive integers $\alpha_1, \alpha_2, \ldots, \alpha_k$ such that
+  \[
+    n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k^{\alpha_k}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  First, we show existence. We proceed by induction on $n$. The base case $n=2$ is prime itself. Assume true for all integers less than $n$. If $n$ is prime, we are done. If not, let $n = ab$ with $1 < a, b < n$. By the induction hypothesis, both $a$ and $b$ can be factored into primes. Combining these factorizations gives a prime factorization of $n$.
+
+  Next, we show uniqueness. Suppose $n$ has two distinct prime factorizations:
+  \[
+    n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k^{\alpha_k} = q_1^{\beta_1} q_2^{\beta_2} \cdots q_m^{\beta_m},
+  \]
+  where $p_i$ and $q_j$ are primes. Without loss of generality, let $p_1$ be the smallest prime in the first factorization. Since $p_1$ divides $n$, it must divide the right-hand side. By the property of primes, $p_1$ must equal one of the $q_j$. Repeating this argument for all primes in both factorizations shows that the multisets of primes must be identical, establishing uniqueness.
+\end{proof}
+
+\begin{theorem}[Infinitely Many Primes]
+  Over 2,300 years agao, Euclid showed that there are infinitely many primes. (i.e. $\lim\limits_{N \to \infty} \pi(N) = \infty$)
+\end{theorem}
+
+\begin{proof}
+  Assume, for the sake of contradiction, that there are only finitely many primes: $p_1, p_2, \ldots, p_k$. Consider the number
+  \[
+    N = p_1 p_2 \cdots p_k + 1.
+  \]
+  By construction, $N$ is not divisible by any of the primes $p_1, p_2, \ldots, p_k$, since it leaves a remainder of 1 when divided by any of them. Therefore, either $N$ is prime itself or it has prime factors not in our original list. In either case, this contradicts our assumption that we had listed all primes. Hence, there must be infinitely many primes.
+\end{proof}
+
+\begin{proposition}[Lower Bound for $\pi(n)$] \label{prop:lower_bound_pi}
+    For any natural number $n \geq 1$, we have the following inequality for $\pi(n)$:
+    \[
+      \log \log n \leq \pi(n)
+    \]
+\end{proposition}
+
+\begin{exercise}
+  Prove the Proposition \ref{prop:lower_bound_pi}. (workshop 1)
+
+  \qquad\quad (Hint: Let $p_n$ be the $n$-th prime number. Show that $p_n \leq 2^{2^{n-1}}$ for all $n \geq 1$.)
+\end{exercise}
+
+\begin{solution}
+  First, we prove by induction that $p_n \leq 2^{2^{n-1}}$ for all $n \geq 1$. \\
+  The base case $n=1$ holds since $p_1 = 2 \leq 2^{2^0} = 2$. Assume the statement is true for some $k \geq 1$, i.e., $p_k \leq 2^{2^{k-1}}$. We need to show it holds for $k+1$. Consider the number
+  \[
+    N = p_1 p_2 \cdots p_k + 1.
+  \]
+  By construction, $N$ is not divisible by any of the primes $p_1, p_2, \ldots, p_k$. Therefore, either $N$ is prime itself or it has a prime factor greater than $p_k$. In either case, we have
+  \[
+    p_{k+1} \leq N = p_1 p_2 \cdots p_k + 1 \leq (2^{2^0})(2^{2^1}) \cdots (2^{2^{k-1}}) + 1 = 2^{\sum_{i=0}^{k-1} 2^i} + 1 = 2^{2^k - 1} + 1 \leq 2^{2^k}.
+  \]
+  Thus, by induction, the inequality $p_n \leq 2^{2^{n-1}}$ holds for all $n \geq 1$.
+
+  Now, to prove the proposition, let $n \geq 1$ and let $k = \pi(n)$, which is the number of primes less than or equal to $n$. By the definition of $\pi(n)$, we have $p_k \leq n < p_{k+1}$. Using the inequality we just proved, we get
+  \[
+    n < p_{k+1} \leq 2^{2^k} \implies \log n \leq 2^k\log 2 \implies \log \log n \leq k \log 2 + \log \log 2\leq k=\pi(n).
+  \]
+  Therefore, we conclude that $\log \log n \leq \pi(n)$ for all $n \geq 1$.
+\end{solution}
+
+\begin{theorem}[Prime Number Theorem (PNT)] \label{thm:PNT}
+  As $N$ approaches infinity, the prime counting function $\pi(N)$ is asymptotically equivalent to $\frac{N}{\log N}$: $\pi(N)\sim \frac{N}{\log N}$ as $N \to \infty$. In other words,
+  \[
+    \lim_{N \to \infty} \frac{\pi(N)}{\frac{N}{\log N}} = 1.
+  \]
+\end{theorem}
+
+The proof of Theorem \ref{thm:PNT} is one of the main goal of this course and will be \textit{given in later chapters} after introducing more tools from complex analysis. [TODO: Proof can be find in ...]
+
+\begin{lemma}
+  To prove Theorem \ref{thm:PNT}, it equivalent to show that for any positive constants $c_1, c_2$ with $c_1 < 1 < c_2$, we have
+  \[
+    c_1 \frac{N}{\log N} \leq \pi(N) \leq c_2 \frac{N}{\log N}
+  \]
+\end{lemma}
+
+\begin{proof}
+  Suppose Theorem \ref{thm:PNT} holds. Then for any $\varepsilon > 0$, there exists $N_0$ such that for all $N > N_0$,
+  \[
+    \left| \frac{\pi(N)}{\frac{N}{\log N}} - 1 \right| < \varepsilon.
+  \]
+  Choosing $\varepsilon = \min(1 - c_1, c_2 - 1)$, we have
+  \[
+    1 - \varepsilon < \frac{\pi(N)}{\frac{N}{\log N}} < 1 + \varepsilon,
+  \]
+  which implies
+  \[
+    c_1 \frac{N}{\log N} < \pi(N) < c_2 \frac{N}{\log N}.
+  \]
+
+  Conversely, suppose the inequalities hold for all sufficiently large $N$. Then for any $\varepsilon > 0$, we can choose $c_1 = 1 - \varepsilon$ and $c_2 = 1 + \varepsilon$. Thus, for all sufficiently large $N$,
+  \[
+    (1 - \varepsilon) \frac{N}{\log N} < \pi(N) < (1 + \varepsilon) \frac{N}{\log N},
+  \]
+  which leads to
+  \[
+    -\varepsilon < \frac{\pi(N)}{\frac{N}{\log N}} - 1 < \varepsilon.
+  \]
+  Therefore,
+  \[
+    \left| \frac{\pi(N)}{\frac{N}{\log N}} - 1 \right| < \varepsilon,
+  \]
+  proving Theorem \ref{thm:PNT}.
+\end{proof}
+
+\begin{remark}
+  A more precise version of Theorem \ref{thm:PNT} states that
+  \begin{equation} \label{eq:precise_PNT}
+    \pi(x) = \mathrm{Li}(x) + E(x)
+  \end{equation}
+  where $\mathrm{Li}(x) = \int_2^x \frac{dt}{\log t}\sim \frac{x}{\log x}$ and the error term $E(x)$ satisfies $E(x) = \mathcal{O}(\sqrt{x}\log x)$.
+\end{remark}
+
+\begin{exercise}
+  Prove that equation \eqref{eq:precise_PNT} implies Theorem \ref{thm:PNT}.
+\end{exercise}
+
+\begin{solution}
+  From equation \eqref{eq:precise_PNT}, we have
+  \[
+    \pi(x) = \mathrm{Li}(x) + E(x).
+  \]
+  Dividing both sides by $\frac{x}{\log x}$, we get
+  \[
+    \frac{\pi(x)}{\frac{x}{\log x}} = \frac{\mathrm{Li}(x)}{\frac{x}{\log x}} + \frac{E(x)}{\frac{x}{\log x}}.
+  \]
+  As $x \to \infty$, we know that $\mathrm{Li}(x) \sim \frac{x}{\log x}$, so
+  \[
+    \lim_{x \to \infty} \frac{\mathrm{Li}(x)}{\frac{x}{\log x}} = 1.
+  \]
+  Next, we analyze the error term:
+  \[
+    \left| \frac{E(x)}{\frac{x}{\log x}} \right| = \left| E(x) \cdot \frac{\log x}{x} \right| = \mathcal{O}\left( \sqrt{x} \log x \cdot \frac{\log x}{x} \right) = \mathcal{O}\left( \frac{(\log x)^2}{\sqrt{x}} \right).
+  \]
+  Since $\frac{(\log x)^2}{\sqrt{x}} \to 0$ as $x \to \infty$, we have
+  \[
+    \lim_{x \to \infty} \frac{E(x)}{\frac{x}{\log x}} = 0.
+  \]
+  Combining these results, we find
+  \[
+    \lim_{x \to \infty} \frac{\pi(x)}{\frac{x}{\log x}} = 1 + 0 = 1.
+  \]
+  Thus, equation \eqref{eq:precise_PNT} implies Theorem \ref{thm:PNT}.
+\end{solution}
+
+\begin{definition}[Riemann Zeta Function (Outline)]
+  The Riemann zeta function $\zeta(z)$ is defined for complex numbers $z$ and for $\Re(z) > 1$ is given by the infinite series
+  \[
+    \zeta(z) = \sum_{n=1}^{\infty} \frac{1}{n^z}.
+  \]
+  for the other values of $z$, $\zeta(z)$ is defined by analytic continuation as it has an analytic continuation to the whole complex plane except $z=1$.
+
+  In the following chapters, we will show that
+  \[
+    \zeta(1-z) = 2^{1-z} \pi^{-z} \cos\left(\frac{\pi z}{2}\right) \Gamma(z) \zeta(z) \quad \text{for all } z \in \mathbb{C}.
+  \]
+  and thus $\zeta(-2n)=0$ which are called the trivial zeros of $\zeta(z)$.
+\end{definition}
+
+Moreover, if we let $\{\rho\}$ be the set of non-trivial zeros of $\zeta(z)$, then we have the following explicit formula for $\pi(x)$:
+\[
+  \pi(x) = \mathrm{Li}(x) - \sum_{\rho} \mathrm{Li}(x^{\rho}) + \text{smaller order terms}.
+\]
+
+\begin{proposition}[Analytic Continuation of Zeta Function] \label{prop:analytic_continuation_zeta_positive}
+  The Riemann zeta function $\zeta(z)$ is holomorphic for all $z$ with $\Re(z) > 1$.
+\end{proposition}
+
+\begin{exercise}
+  Show the proposition \ref{prop:analytic_continuation_zeta_positive} by Weierstrass M-test.
+\end{exercise}
+
+\begin{solution}
+  To show that the Riemann zeta function $\zeta(z) = \sum_{n=1}^{\infty} \frac{1}{n^z}$ is holomorphic for all $z$ with $\Re(z) > 1$, we will use the Weierstrass M-test.
+
+  Let $z = x + iy$ where $x = \Re(z)$ and $y = \Im(z)$. For $\Re(z) > 1$, we have $x > 1$. We can write
+  \[
+    \left| \frac{1}{n^z} \right| = \frac{1}{|n^z|} = \frac{1}{n^{\Re(z)}} = \frac{1}{n^x}.
+  \]
+  Since $x > 1$, the series $\sum_{n=1}^{\infty} \frac{1}{n^x}$ converges. 
+
+  Now, we can choose $M_n = \frac{1}{n^x}$ as our bounding sequence. Since $\sum_{n=1}^{\infty} M_n = \sum_{n=1}^{\infty} \frac{1}{n^x}$ converges for $x > 1$, by the Weierstrass M-test, the series $\sum_{n=1}^{\infty} \frac{1}{n^z}$ converges uniformly on any compact subset of the half-plane $\Re(z) > 1$.
+
+  Since each term $\frac{1}{n^z}$ is holomorphic in $z$ for $\Re(z) > 1$, and the series converges uniformly, it follows that the sum $\zeta(z)$ is also holomorphic in this region.
+
+  Therefore, we conclude that the Riemann zeta function $\zeta(z)$ is holomorphic for all $z$ with $\Re(z) > 1$.
+\end{solution}
+
+\begin{postulate}[Riemann Hypothesis (RH)] \label{post:RH}
+  All non-trivial zeros $\rho$ of the Riemann zeta function $\zeta(z)$ have real part equal to $\frac{1}{2}$, i.e., $\Re(\rho) = \frac{1}{2}$.
+\end{postulate}
+
+\begin{remark}
+  One can find that the non-trivial zeros of $\zeta(z)$ are only appear in the critical strip: $0 < \Re(z) < 1$.
+\end{remark}
+
+\begin{definition}
+  Usually, we using the notation $(RH)_\sigma$ to denote the following statement:
+  \[
+    \zeta(\rho)\ne0 \quad \text{for all } \rho \text{ with } \Re(\rho) > \sigma.
+  \]
+  where ${\rho}$ is the set of non-trivial zeros of $\zeta(z)$.
+\end{definition}
+
+By extend Euler Product Formula~\ref{thm:Euler_product} to complex variable, one can show that $\zeta(z)\ne0$ for all $z$ with $\Re(z) > 1$. Hence, $(RH)_1$ is true. And the Riemann Hypothesis~\ref{post:RH} is equivalent to $(RH)_{\frac{1}{2}}$.
+
+A fact is that for $\sigma<1$, $(RH)_{\sigma}$ is equivalent to the following statement about the error term $E(x)$ in equation \eqref{eq:precise_PNT}:
+\[
+  |\pi(x)-\mathrm{Li}(x)|=\mathcal{O}(x^{\sigma}\log x).
+\]
+and by using this fact, it can be shown the Prime Number Theorem~\ref{thm:PNT}. But unfortunately, we have no ideal if $(RH)_{\sigma}$ is true for any $\sigma < 1$.
+
+However, Hadamard and de la Vallée Poussin (1896) independently proved that by using the fact that $(RH)_1$ is true (i.e. $\zeta(z)\ne0$ for $\Re(z) > 1$), one can prove the Prime Number Theorem~\ref{thm:PNT}.
+
+\begin{note}
+  Why the zeros of $\zeta(z)$ is important for the distribution of primes? 
+
+  From the Complex Analysis course, we know that a holomorphic function is completely determined by its zeros and poles (i.e. Singularities). In order to using complex analysis to study $\zeta(z)$, one introduces a fixed function which has the same zeros and poles as $\zeta(z)$, called the Riemann Xi function $\xi(z)$:
+  \[
+    \xi(z) = \frac{1}{2} z (z-1) \pi^{-\frac{z}{2}} \Gamma\left(\frac{z}{2}\right) \zeta(z).
+  \]
+  where $\Gamma(z)$ is the Gamma function.
+
+  A famous result about $\xi(z)$ is the Hadamard Factorization Theorem:
+  \[
+    \xi(z) = e^{A + B z} \prod_{\rho} \left(1 - \frac{z}{\rho}\right) e^{\frac{z}{\rho}}
+  \]
+  where the product is over all non-trivial zeros $\rho$ of $\zeta(z)$, and $A$ and $B$ are constants.
+
+  So once we know the distribution of zeros of $\zeta(z)$, we can understand the behavior of $\xi(z)$ and hence $\zeta(z)$, which in turn gives us information about the distribution of prime numbers via the explicit formula for $\pi(x)$.
+\end{note}
+
+
+\section{Euler Product Formula and Dirichlet Theorem}
+
+\begin{theorem}[Euler Product Formula] \label{thm:Euler_product}
+  Thinking the zeta function as a function of real variable $x > 1$, we have the Euler Product Formula:
+  \[
+    \zeta(x) = \sum_{n=1}^{\infty} \frac{1}{n^x} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-x}}. \quad \text{ for } x > 1.
+  \]
+\end{theorem}
+
+\begin{proof}
+  Recall the geometric series formula: for $|r| < 1$, we have
+  \[
+    \frac{1}{1 - r} = \sum_{k=0}^{\infty} r^k= 1 + r + r^2 + r^3 + \cdots.
+  \]
+  Setting $r = p^{-x}< 1$ for each prime $p$, we get
+  \[
+    \frac{1}{1 - p^{-x}} = \sum_{k=0}^{\infty} p^{-kx}= 1 + p^{-x} + p^{-2x} + p^{-3x} + \cdots.
+  \]
+  Consider two distinct primes $p$ and $q$. Multiplying their corresponding series, we have
+  \[
+    (1 + p^{-x} + p^{-2x} + \cdots)(1 + q^{-x} + q^{-2x} + \cdots) = \sum_{j,k\geq0} \frac{1}{[p^j q^k]^x}.
+  \]
+  and so by the Fundamental Theorem of Arithmetic~\ref{thm:FTA}, the number of the form $p^j q^k$ are precisely the number $n$ whose prime factors are only $p$ and $q$. Hence
+  \[
+    \frac{1}{1 - p^{-x}} \cdot \frac{1}{1 - q^{-x}} = \sum_{n\in N_{p,q}} \frac{1}{n^x} \quad \text{ where } N_{p,q} = \{n \in \mathbb{N}: n=p^j q^k, j,k \in \mathbb{N}_0\}.
+  \]
+  Extending this argument to all primes less than or equal to integer $N$, let $E_N=\{n\in\mathbb{N}: \text{all prime factors of } n \text{ are } \leq N\}$, we have
+  \[
+    \prod_{p \leq N} \frac{1}{1 - p^{-x}} = \sum_{n \in E_N} \frac{1}{n^x}.
+  \]
+  Now, we show that as $N \to \infty$, we can get Euler Product Formula. Let
+  \[
+    S_N = \sum_{n \in E_N} \frac{1}{n^x} \quad T_N = \zeta(x) - S_N = \sum_{n \notin E_N} \frac{1}{n^x}.
+  \]
+  For any $n \notin E_N$, $n$ must have a prime factor greater than $N$. Thus, $n=pm$ for some prime $p > N$ and some $m \in \mathbb{N}$. Therefore,
+  \[
+    T_N \leq \sum_{p > N} \sum_{m=1}^{\infty} \frac{1}{(pm)^x} = \sum_{p > N} \frac{1}{p^x} \sum_{m=1}^{\infty} \frac{1}{m^x} = \zeta(x) \sum_{p > N} \frac{1}{p^x}.
+  \]
+  Since the series $\sum_{p \in \mathbb{P}} \frac{1}{p^x}$ converges for $x > 1$ by p-series test, the tail $\sum_{p > N} \frac{1}{p^x} \to 0$ as $N \to \infty$. Hence, $T_N \to 0$ as $N \to \infty$, which implies that $S_N \to \zeta(x)$. Thus, we conclude that
+  \[
+    \zeta(x) = \lim_{N \to \infty} S_N = \lim_{N \to \infty} \prod_{p \leq N} \frac{1}{1 - p^{-x}} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-x}}.
+  \]
+\end{proof}
+
+\begin{corollary}[Divergence of the Sum of Reciprocals of Primes] \label{cor:divergence_sum_reciprocal_primes}
+  By taking the logarithmic derivative of the Euler Product Formula, we can get the following fact
+  \[
+    \sum_{p \in \mathbb{P}} \frac{1}{p}=\infty.
+  \]
+\end{corollary}
+
+\begin{proof}
+  Taking the logarithm of both sides of the Euler Product Formula, we have
+  \[
+    \log \zeta(x) = -\sum_{p \in \mathbb{P}} \log(1 - p^{-x}) = \sum_{p \in \mathbb{P}} \sum_{k=1}^{\infty} \frac{p^{-kx}}{k} 
+  \]
+  where the last equality follows from the Taylor series expansion of $\log(1 - y) = -\sum_{k=1}^{\infty} \frac{y^k}{k}$ for $0 \leq y < 1$.
+  
+  For the inner sum, we have
+  \[
+    \sum_{k=2}^{\infty} \frac{p^{-kx}}{k} < \sum_{k=2}^{\infty} p^{-k}= \frac{p^{-2}}{1 - p^{-1}} = \frac{1}{p(p-1)}.
+  \]
+  Thus,
+  \[
+    \log \zeta(x) = \sum_{p \in \mathbb{P}} \left( \frac{p^{-x}}{1} + \sum_{k=2}^{\infty} \frac{p^{-kx}}{k} \right) = \sum_{p \in \mathbb{P}} p^{-x} + \sum_{p \in \mathbb{P}} \sum_{k=2}^{\infty} \frac{p^{-kx}}{k} \leq \sum_{p \in \mathbb{P}} p^{-x} + E(x)
+  \]
+  where $E(x) = \sum_{p \in \mathbb{P}} \frac{1}{p(p-1)}$ is a convergent series, and
+  \[
+    E(x) \leq \sum_{n=2}^{\infty} \frac{1}{n(n-1)} = \sum_{n=2}^{\infty} \left( \frac{1}{n-1} - \frac{1}{n} \right) = 1.
+  \]
+  Therefore,
+  \[
+    \log \zeta(x) \leq \sum_{p \in \mathbb{P}} p^{-x} + 1.
+  \]
+  As $x \to 1^+$, $\zeta(x) \to \infty$, so $\log \zeta(x) \to \infty$ by continuity of logarithm. Hence,
+  \[
+    \sum_{p \in \mathbb{P}} p^{-x} \to \infty \quad \text{as } x \to 1^+.
+  \]
+  and thus,
+  \[
+    \sum_{p \in \mathbb{P}} \frac{1}{p} = \infty.
+  \]
+\end{proof}
+
+\begin{definition}[Arithmetic Progression (AP)]
+  An arithmetic progression is a sequence of numbers in which the difference between consecutive terms is constant. It can be expressed in the form:
+  \[
+    \mathrm{AP}_{a,q}=\{a + q, a + 2q, a + 3q, \ldots\} = \{nq + a : n \in \mathbb{N}\}
+  \]
+  where $a$ is the first term and $q$ is the common difference.
+\end{definition}
+
+\begin{proposition}[Finiteness of Primes in Certain APs]
+  If $d=\gcd(a, q) > 1$, then the arithmetic progression $\mathrm{AP}_{a,q}=\{nq + a : n \in \mathbb{N}\}$ contains only finitely many primes.
+\end{proposition}
+
+\begin{proof}
+  If $d = \gcd(a, q) > 1$, then every term in the arithmetic progression can be expressed as
+  \[
+    nq + a = n(dk) + (dm) = d(nk + m)
+  \]
+  for some integers $k$ and $m$. This means that every term in the progression is divisible by $d$. Since $d > 1$, none of these terms can be prime (except possibly the first term if it equals $d$ itself). Therefore, the arithmetic progression contains only finitely many primes.
+\end{proof}
+
+
+\begin{theorem}[Dirichlet's Theorem on Arithmetic Progressions] \label{thm:PN_in_AP}
+  If $a$ and $q$ are coprime (i.e., $\gcd(a, q) = 1$), then the arithmetic progression $\mathrm{AP}_{a,q} = \{nq + a : n \in \mathbb{N}\}$ contains infinitely many primes.
+\end{theorem}
+
+The proof of Dirichlet's Theorem requires more advanced tools from analytic number theory, including Dirichlet characters and L-functions, which will be introduced in later chapters. However, various special cases and consequences of this theorem can be explored with more elementary methods. The following exercise provides an opportunity to investigate one such special case. [TODO: Proof can be find in ...]
+
+\begin{exercise}
+  Give an elementary proof of Dirichlet's Theorem for the AP $\{ 4n-1: n \in \mathbb{N} \}$ by completing the following outline:
+  \begin{itemize}
+    \item Argue by contradiction as Euclid did for the infinitude of primes and suppose there are only finitely many primes of the form $4n-1$, say $p_1, p_2, \ldots, p_k$.
+    \item Consider the number $N := 2^2 \cdot 3 \cdot 5 \cdots p_k - 1$. (all odd primes up to $p_k$).
+    \item Note that $N > p$ and $N = 4m-1$ for some $m \in \mathbb{N}$.
+    \item Hence $N$ is not prime. Deduce that $N$ has a prime factor of the form $4n-1$ to obtain a contradiction.
+  \end{itemize}
+\end{exercise}
+
+\begin{solution}
+  We proceed by contradiction. Suppose there are only finitely many primes of the form $4n-1$, say $p_1, p_2, \ldots, p_k$. Consider the number
+  \[
+    N := 2^2 \cdot 3 \cdot 5 \cdots p_k - 1.
+  \]
+  Note that $N > p_k$ since $p_k\geq 3$. Also, we can express $N$ in the form $4m - 1$ for some integer $m$.
+
+  Since $N$ is greater than any of the primes $p_1, p_2, \ldots, p_k$, it cannot be prime itself (as it would contradict our assumption). Therefore, $N$ must be composite and have prime factors.
+
+  Now, we analyze the prime factors of $N$. Any prime factor of $N$ must be either of the form $4n-1$ or $4n+1$. (This is because all primes greater than 2 are odd, and odd primes can be expressed in one of these two forms.) However, if all prime factors were of the form $4n+1$, then their product would also be of the form $4n+1$. This is because the product of two numbers of the form $4n+1$ is also of that form:
+  \[
+    (4a + 1)(4b + 1) = 16ab + 4a + 4b + 1 = 4(4ab + a + b) + 1.
+  \]
+  
+  Since we have established that $N$ is of the form $4m - 1$, it cannot be expressed as a product of only primes of the form $4n+1$. Therefore, at least one prime factor of $N$ must be of the form $4n-1$. But this contradicts our initial assumption that $p_1, p_2, \ldots, p_k$ were the only primes of that form and all of them not dividing $N$.
+
+  Hence, we conclude that there are infinitely many primes of the form $4n-1$.
+\end{solution}
+
+\begin{lemma} \label{lem:Dirichlet_Euler_product_idea}
+  Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
+  \[
+    \mathds{1}_{a,q}(n) = \begin{cases} 1 & \text{if } n \equiv a \mod q, \\ 0 & \text{otherwise}. \end{cases}
+  \]
+  Then once we have
+  \[
+    \sum_{n=1}^{\infty} \frac{\mathds{1}_{a,q}(n)}{n^x} = \prod_{p\in \mathbb{P}} \frac{1}{1 - \mathds{1}_{a,q}(p) p^{-x}} \quad \text{ for } x > 1.
+  \]
+  we can show that the series
+  \[
+    \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p} = \infty
+  \]
+  and hence Dirichlet's Theorem~\ref{thm:PN_in_AP} holds.
+\end{lemma}
+
+\begin{proof}
+  Dirichlet was inspired by Euler's proof that the series of reciprocals of primes diverges (Corollary \ref{cor:divergence_sum_reciprocal_primes}) to prove his theorem. Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
+  \[
+    \mathds{1}_{a,q}(n) = \begin{cases} 1 & \text{if } n \equiv a \mod q, \\ 0 & \text{otherwise}. \end{cases}
+  \]
+  Then once can show that the series
+  \[
+    \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p} = \infty
+  \]
+  for any $a, q$ with $\gcd(a, q) = 1$, which implies that there are infinitely many primes in the arithmetic progression $\mathrm{AP}_{a,q}$ and hence Dirichlet's Theorem~\ref{thm:PN_in_AP} holds. Then one might hope extend Euler's Product Formula~\ref{thm:Euler_product} to
+  \[
+    \sum_{n=1}^{\infty} \frac{\mathds{1}_{a,q}(n)}{n^x} = \prod_{p\in \mathbb{P}} \frac{1}{1 - \mathds{1}_{a,q}(p) p^{-x}} \quad \text{ for } x > 1.
+  \]
+  On the other hand, since
+  \[
+    \sum_{n=1}^{\infty} \frac{\mathds{1}_{a,q}(n)}{n} = \sum_{m=1}^{\infty} \frac{1}{mq + a} \geq \frac{1}{a+q}\sum_{m=1}^{\infty} \frac{1}{m} = \infty.
+  \]
+  wee see that $L(x;\mathds{1}_{a,q}):= \sum_{n=1}^{\infty} \frac{\mathds{1}_{a,q}(n)}{n^x}$ tends to infinity as $x \to 1^+$. Thus, do the similar things as in Corollary \ref{cor:divergence_sum_reciprocal_primes}, we have
+  \[
+    \log L(x;\mathds{1}_{a,q}) = -\sum_{p \in \mathbb{P}} \log(1 - \mathds{1}_{a,q}(p) p^{-x}) = \sum_{p \in \mathbb{P}} \sum_{k=1}^{\infty} \frac{\mathds{1}_{a,q}(p)^k p^{-kx}}{k}.
+  \]
+  where the last equality follows from the Taylor series expansion of $\log(1 - y) = -\sum_{k=1}^{\infty} \frac{y^k}{k}$ for $0 \leq y < 1$. And as before, since
+  \[
+    \sum_{k=2}^{\infty} \frac{\mathds{1}_{a,q}(p)^k p^{-kx}}{k} \leq \sum_{k=2}^{\infty} p^{-k} = \frac{p^{-2}}{1 - p^{-1}} = \frac{1}{p(p-1)},
+  \]
+  we have
+  \begin{equation} \label{eq:log_L_function_AP_idea}
+    \log L(x;\mathds{1}_{a,q}) = \sum_{p \in \mathbb{P}} \left( \frac{\mathds{1}_{a,q}(p) p^{-x}}{1} + \sum_{k=2}^{\infty} \frac{\mathds{1}_{a,q}(p)^k p^{-kx}}{k} \right) = \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p^x} + E(x)
+  \end{equation}
+  where $E(x) = \sum_{p \in \mathbb{P}} \frac{1}{p(p-1)}\leq 1$ is a convergent series as before. Therefore,
+  \[
+    \log L(x;\mathds{1}_{a,q}) \leq \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p^x} + 1.
+  \]
+  As $x \to 1^+$, $L(x;\mathds{1}_{a,q}) \to \infty$, so $\log L(x;\mathds{1}_{a,q}) \to \infty$ by continuity of logarithm. Hence,
+  \[
+    \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p^x} \to \infty \quad \text{as } x \to 1^+.
+  \]
+  and thus,
+  \[
+    \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p} = \infty.
+  \]
+\end{proof}
+
+\begin{note}
+  Note that if we want to show
+  \[
+    \sum_{n=1}^{\infty} \frac{\mathds{1}_{a,q}(n)}{n^x} = \prod_{p\in \mathbb{P}} \frac{1}{1 - \mathds{1}_{a,q}(p) p^{-x}} \quad \text{ for } x > 1.
+  \]
+  in the above Lemma~\ref{lem:Dirichlet_Euler_product_idea}. Examining the proof of Euler Product Formula~\ref{thm:Euler_product}, we need to show that $\mathds{1}_{a,q}(n)$ is completely multiplicative. (i.e. $\mathds{1}_{a,q}(p^jq^k) = \mathds{1}_{a,q}(p)^j\mathds{1}_{a,q}(q)^k$). But unfortunately, $\mathds{1}_{a,q}(n)$ is not completely multiplicative on arithmetic progression. So Lemma~\ref{lem:Dirichlet_Euler_product_idea} just gives the idea of Dirichlet's proof of Theorem~\ref{thm:PN_in_AP}, but we need more advanced tools to complete the proof.
+
+  One way to fix this problem is to introduce Dirichlet characters $\chi$ modulo $q$, which will be discussed in later chapters. The core idea is to show the formula
+  \[
+    \sum_{n=1}^{\infty} \frac{\chi(n)}{n^x} = \prod_{p\in \mathbb{P}} \frac{1}{1 - \chi(p) p^{-x}} \quad \text{ for } x > 1.
+  \]
+  and then using the similar argument as in Lemma~\ref{lem:Dirichlet_Euler_product_idea} but replacing $\mathds{1}_{a,q}(n)$ by Dirichlet characters $\chi$ modulo $q$: $1_{a,q}(n)=\sum_{\chi} c_{\chi} \chi(n)$ (which will be discussed in later chapters) to get
+  \[
+    \log L(x;\chi) = -\sum_{p \in \mathbb{P}} \log(1 - \chi(p) p^{-x}) = \sum_{p \in \mathbb{P}} \sum_{k=1}^{\infty} \frac{\chi(p)^k p^{-kx}}{k}.
+  \]
+  as before, where $L(x;\chi):= \sum_{n=1}^{\infty} \frac{\chi(n)}{n^x}$ and
+  \[
+    \sum_{\chi} c_{\chi} \log L(x;\chi) = \sum_{\substack{p \in \mathbb{P} \\ p \equiv a \mod q}} \frac{1}{p^x} + E(x)
+  \]
+  as in equation \eqref{eq:log_L_function_AP_idea}. At last, we just need $\sum_{\chi} c_{\chi} \log L(x;\chi) \to \infty$ as $x \to 1^+$, the following Lemma~\ref{lem:Dirichlet_L_function_principal_character} give us $\log L(x;\chi_0) \to \infty$, and later chapters will show that:
+  \begin{itemize}
+    \item $L(x;\chi)$ is bounded for all $\chi \ne \chi_0$ as $x \to 1^+$.
+    \item $L(x;\chi)\ne0$ for all $\chi\ne \chi_0$ as $x \to 1^+$.
+  \end{itemize}
+  by using these two properties, we can show that $\sum_{\chi} c_{\chi} \log L(x;\chi) \to \infty$ as $x \to 1^+$. Finally, we arrive at the conclusion of Dirichlet's Theorem~\ref{thm:PN_in_AP}.
+\end{note}
+
+\begin{lemma} \label{lem:Dirichlet_L_function_principal_character}
+  For principal Dirichlet character $\chi_0$ modulo $q$
+  \[
+    \chi_0(n) = \begin{cases} 1 & \text{if } \gcd(n, q) = 1, \\ 0 & \text{otherwise}, \end{cases}
+  \]
+  we have
+  \[
+    L(x;\chi_0) = \sum_{n=1}^{\infty} \frac{\chi_0(n)}{n^x} \to \infty \quad \text{ as } x \to 1^+.
+  \]
+\end{lemma}
+
+\begin{proof}
+  By the definition of principal Dirichlet character $\chi_0$ modulo $q$, we have
+  \[
+    L(x;\chi_0)= \sum_{n=1}^{\infty} \frac{\chi_0(n)}{n^x} = \sum_{m=0}^{\infty} \sum_{\substack{b=1 \\ \gcd(b, q) = 1}}^{q} \frac{1}{(mq + b)^x} \geq \sum_{m=0}^{\infty} \sum_{\substack{b=1 \\ \gcd(b, q) = 1}}^{q} \frac{1}{(m q + q)^x} = \phi(q) \sum_{m=1}^{\infty} \frac{1}{(m q)^x} = \frac{\phi(q)}{q^x} \sum_{m=1}^{\infty} \frac{1}{m^x}.
+  \]
+  where the second equality follows from the definition of $\chi_0(n)$, and $\gcd(b, q) = 1$ if and only if $\gcd(mq + b, q) = 1$ for any $m \in \mathbb{N}_0$.
+
+  Thus, as $x \to 1^+$, we have
+  \[
+    L(x;\chi_0) \geq \frac{\phi(q)}{q^x} \sum_{m=1}^{\infty} \frac{1}{m^x} \to \infty.
+  \]
+\end{proof}
+
+\begin{exercise}
+  The Principal Dirichlet Character $\chi_0$ modulo $q$ is defined as
+  \[
+    \chi_0(n) = \begin{cases} 1 & \text{if } \gcd(n, q) = 1, \\ 0 & \text{otherwise}. \end{cases}
+  \]
+  Show that
+  \[
+    \chi_0(mn) = \chi_0(m) \chi_0(n) \quad \text{ for all } m, n \in \mathbb{N}.
+  \]
+  and
+  \[
+    \chi_0(b+nq)=\chi_0(b) \quad \text{ for all } b, n \in \mathbb{N}.
+  \]
+\end{exercise}
+
+\begin{solution}
+  First, we show that $\chi_0(mn) = \chi_0(m) \chi_0(n)$ for all $m, n \in \mathbb{N}$. We consider two cases:
+  \begin{itemize}
+    \item If $\gcd(m, q) = 1$ and $\gcd(n, q) = 1$, then $\gcd(mn, q) = 1$. Therefore,
+    \[
+      \chi_0(mn) = 1 = 1 \cdot 1 = \chi_0(m) \chi_0(n).
+    \]
+    \item If either $\gcd(m, q) > 1$ or $\gcd(n, q) > 1$, then $\gcd(mn, q) > 1$. Therefore,
+    \[
+      \chi_0(mn) = 0 = 0 \cdot \chi_0(n) = \chi_0(m) \chi_0(n) \quad \text{or} \quad \chi_0(mn) = 0 = \chi_0(m) \cdot 0 = \chi_0(m) \chi_0(n).
+    \]
+  \end{itemize}
+  Thus, in both cases, we have $\chi_0(mn) = \chi_0(m) \chi_0(n)$.
+
+  Next, we show that $\chi_0(b+nq) = \chi_0(b)$ for all $b, n \in \mathbb{N}$. We consider two cases:
+  \begin{itemize}
+    \item If $\gcd(b, q) = 1$, then $\gcd(b+nq, q) = 1$. Therefore,
+    \[
+      \chi_0(b+nq) = 1 = \chi_0(b).
+    \]
+    \item If $\gcd(b, q) > 1$, then $\gcd(b+nq, q) > 1$. Therefore,
+    \[
+      \chi_0(b+nq) = 0 = \chi_0(b).
+    \]
+  \end{itemize}
+  Thus, in both cases, we have $\chi_0(b+nq) = \chi_0(b)$.
+\end{solution}
+
+\begin{definition}[Dirichlet $L$-Function (Outline)]
+  Given a Dirichlet character $\chi$ modulo $q$, the Dirichlet $L$-function $L(s, \chi)$ is defined for complex numbers $s$ with $\Re(s) > 1$ by the series
+  \[
+    L(s, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s}.
+  \]
+  Similar to the Riemann zeta function, the Dirichlet $L$-function can be analytically continued to the entire complex plane except for a simple pole at $s=1$ when $\chi$ is the principal character.
+\end{definition}
+
+\section{}
+
+
+
+
+\end{document}
