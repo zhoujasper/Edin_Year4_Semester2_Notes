@@ -394,13 +394,17 @@ However, Hadamard and de la Vallée Poussin (1896) independently proved that by 
   If $d=\gcd(a, q) > 1$, then the arithmetic progression $\mathrm{AP}_{a,q}=\{nq + a : n \in \mathbb{N}\}$ contains only finitely many primes.
 \end{proposition}
 
-\begin{proof}
+\begin{exercise}
+  Prove the proposition above.
+\end{exercise}
+
+\begin{solution}
   If $d = \gcd(a, q) > 1$, then every term in the arithmetic progression can be expressed as
   \[
     nq + a = n(dk) + (dm) = d(nk + m)
   \]
   for some integers $k$ and $m$. This means that every term in the progression is divisible by $d$. Since $d > 1$, none of these terms can be prime (except possibly the first term if it equals $d$ itself). Therefore, the arithmetic progression contains only finitely many primes.
-\end{proof}
+\end{solution}
 
 
 \begin{theorem}[Dirichlet's Theorem on Arithmetic Progressions] \label{thm:PN_in_AP}
@@ -565,7 +569,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
 
 \begin{solution}
   First, we show that $\chi_0(mn) = \chi_0(m) \chi_0(n)$ for all $m, n \in \mathbb{N}$. We consider two cases:
-  \begin{itemize}
+  \begin{enumerate}[(C1)]
     \item If $\gcd(m, q) = 1$ and $\gcd(n, q) = 1$, then $\gcd(mn, q) = 1$. Therefore,
     \[
       \chi_0(mn) = 1 = 1 \cdot 1 = \chi_0(m) \chi_0(n).
@@ -574,11 +578,11 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
     \[
       \chi_0(mn) = 0 = 0 \cdot \chi_0(n) = \chi_0(m) \chi_0(n) \quad \text{or} \quad \chi_0(mn) = 0 = \chi_0(m) \cdot 0 = \chi_0(m) \chi_0(n).
     \]
-  \end{itemize}
+  \end{enumerate}
   Thus, in both cases, we have $\chi_0(mn) = \chi_0(m) \chi_0(n)$.
 
   Next, we show that $\chi_0(b+nq) = \chi_0(b)$ for all $b, n \in \mathbb{N}$. We consider two cases:
-  \begin{itemize}
+  \begin{enumerate}[(C1)]
     \item If $\gcd(b, q) = 1$, then $\gcd(b+nq, q) = 1$. Therefore,
     \[
       \chi_0(b+nq) = 1 = \chi_0(b).
@@ -587,7 +591,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
     \[
       \chi_0(b+nq) = 0 = \chi_0(b).
     \]
-  \end{itemize}
+  \end{enumerate}
   Thus, in both cases, we have $\chi_0(b+nq) = \chi_0(b)$.
 \end{solution}
 
@@ -602,6 +606,131 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
 \section{}
 
 
+\begin{problemset}[Exercises]
+  \item For each $n \in \mathbb{N}$, show that the prime factors of $n(n+1)$ have more than the prime factors of $n$ itself. \\
+  And deduce that there are infinitely many primes by considering the sequence $\{x_n\}_{n=1}^{\infty}$ where $x_{n}=x_{n-1}(x_{n-1}+1)$. \\
+  (Hint: show that $\gcd(n, n+1) = 1$.)
+  \begin{solution}
+    By Euclid's algorithm, we have $\gcd(n, n+1) = \gcd(n+1 - n, n) = \gcd(1, n) = 1$. 
 
+    Thus, $n$ and $n+1$ are coprime, which means they share no common prime factors. Therefore, the prime factors of $n(n+1)$ are the union of the prime factors of $n$ and the prime factors of $n+1$, which means
+    \[
+      \# \text{prime factors of } n(n+1) = \# \text{prime factors of } n + \# \text{prime factors of } (n+1).
+    \]
+    and clearly, $\# \text{prime factors of } (n+1) \geq 1$ as it is either prime itself or has at least one prime factor. Hence, the prime factors of $n(n+1)$ have more than the prime factors of $n$ itself.
+
+    For the sequence $\{x_n\}_{n=1}^{\infty}$ defined by $x_{n} = x_{n-1}(x_{n-1}+1)$ with $x_1 = 1$. By previous result, $x_n$ has more (strictly) prime factors than $x_{n-1}$. Since $x_1 = 1$ has no prime factors, it follows that $x_n$ has at least $n-1$ distinct prime factors. Therefore, as $n$ increases, the number of distinct prime factors of $x_n$ also increases without bound, which implies that there are infinitely many primes.
+  \end{solution}  
+  \item Fix any positive integer $N$, let $P_k={2, 3, 5, \ldots, p_k}$ denote the set of first $k$ primes. Define
+  \[
+    E^k_N = \{n \in \mathbb{N}: n\leq N \text{ and $n$ only divisible by any prime in } P_k\}.
+  \]
+  Show that
+  \begin{enumerate}[(a)]
+    \item Every $n \in E^k_N$ can be expressed as
+    \[
+      n = p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k} s^2
+    \]
+    for some non-negative integers $e_1, e_2, \ldots, e_k \in \{0, 1\}$ and some $s \in \mathbb{N}$.
+    \item Then deduce that there are at most $2^k \sqrt{N}$ elements in $E^k_N$.
+    \item Finally, for any fixed $N$, let $n\in\mathbb{N}$ such that $P_n=\{p_1, p_2, \ldots, p_n\}$ will exact all the primes less than or equal to $N$. i.e.
+    \[
+      P_n = \{p \in \mathbb{P}: p \leq N\}= \{2, 3, 5, \ldots, p_n\}.
+    \]
+    So that $\pi(N)=n$ and note that $E^n_N=\{1, 2, \ldots, N\}$ (prove it!). From above results, we have $N=\#E^n_N \leq 2^n \sqrt{N}$ or equivalently
+    \[
+      \pi(N)=n \geq \frac{\log N}{2 \log 2}.
+    \]
+    By using this, we can show that $\pi(N)\to\infty$ as $N \to \infty$. And compare this bound with our previous bound for $\pi(N)$ in Proposition~\ref{prop:lower_bound_pi}, which is
+    \[
+      \pi(N) \geq \log \log N
+    \]
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item By the Fundamental Theorem of Arithmetic~\ref{thm:FTA}, every $n \in E^k_N$ can be expressed as
+      \[
+        n = p_1^{a_1} p_2^{a_2} \cdots p_k^{a_k}
+      \]
+      for some non-negative integers $a_1, a_2, \ldots, a_k$. For each $a_i$, by using Euclid's division algorithm, we can write
+      \[
+        a_i = 2d_i + r_i \quad \text{ where } d_i \in \mathbb{N}_0 \text{ and } r_i \in \{0, 1\}.
+      \]
+      Thus,
+      \[
+        n = p_1^{2d_1 + r_1} p_2^{2d_2 + r_2} \cdots p_k^{2d_k + r_k} = (p_1^{d_1} p_2^{d_2} \cdots p_k^{d_k})^2 \cdot p_1^{r_1} p_2^{r_2} \cdots p_k^{r_k}.
+      \]
+      and we get the desired form by letting $s = p_1^{d_1} p_2^{d_2} \cdots p_k^{d_k}$.
+      \item By the above result, for each $n \in E^k_N$, there are $2^k$ choices for the exponents $e_1, e_2, \ldots, e_k$ and since $n \leq N$, we have
+      \[
+        s^2 \leq n \leq N \implies s \leq \sqrt{N}.
+      \]
+      Thus, there are at most $\sqrt{N}$ choices for $s$. Therefore, the total number of elements in $E^k_N$ is at most $2^k \sqrt{N}$.
+      \item To show that $E^n_N = \{1, 2, \ldots, N\}$, notice that any integer $m$ such that $1 \leq m \leq N$ can only have prime factors less than or equal to $N$. Since $P_n$ contains all primes less than or equal to $N$, it follows that every integer $m$ in this range is included in $E^n_N$. Conversely, any number in $E^n_N$ is by definition less than or equal to $N$. Thus, we have $E^n_N = \{1, 2, \ldots, N\}$. \\
+      For the lower bound on $\pi(N)$, this bounds shows a quicker growth rate compared to the previous bound. Can be seen as follows:
+
+      \includegraphics[width=0.9\textwidth]{image/loglogx_vs_log2log2x.png}
+    \end{enumerate}
+  \end{solution}
+  \item This question show how previous exercises implies that $\sum_{p \in \mathbb{P}} \frac{1}{p}=\infty$. \\
+  Suppose by contradiction that $\sum_{p \in \mathbb{P}} \frac{1}{p}$ converges. Then the tails of the series must tend to zero, and so we can find a positive integer $k$ such that
+    \[
+      \sum_{i=k+1}^{\infty} \frac{1}{p_i} < \frac{1}{2}.
+    \]
+    where we denote the $i$-th prime by $p_i$.
+
+    Now, fix a positive integer $N$ and fix a prime $p$ then we have
+    \[
+    \#\{0<n \leq N: p \mid n, n\in\mathbb{N}\} \leq \frac{N}{p}. \quad \text{(show it!)}
+    \]
+    Then consider $E^k_N$ defined in the previous exercise, we have
+    \[
+      N - \#E^k_N \leq \frac{N}{p_{k+1}} + \frac{N}{p_{k+2}} + \frac{N}{p_{k+3}} + \cdots < \frac{N}{2}. \quad \text{(show it!)}
+    \]
+    As $\#E^k_N \leq 2^k \sqrt{N}$ from previous exercise, we have
+    \[
+      \frac{N}{2} < 2^k \sqrt{N} \implies N < 2^{2k+2}
+    \]
+    which is impossible as $N$ can be arbitrarily large. Hence, we conclude that $\sum_{p \in \mathbb{P}} \frac{1}{p}=\infty$.
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item For a fixed prime $p$ and positive integer $N$, the integers $n$ such that $1 \leq n \leq N$ and $p \mid n$ are precisely the multiples of $p$: $p, 2p, 3p, \ldots, mp$ where $mp \leq N$. Thus, the largest integer $m$ satisfying this condition is $\lfloor \frac{N}{p} \rfloor$. Therefore we have the inequality.
+      \item For a integer $0\leq n \leq N$, if $n \notin E^k_N$, then $n$ must be divisible by at least one prime $p_i$ where $i > k$. Thus, by the previous result, the number of integers $n$ such that $1 \leq n \leq N$ and $n \notin E^k_N$ is at most $\frac{N}{p_{k+1}} + \frac{N}{p_{k+2}} + \frac{N}{p_{k+3}} + \cdots$. By our assumption, this sum is less than $\frac{N}{2}$. Therefore, we have the inequality.
+    \end{enumerate}
+  \end{solution}
+  \item This is a topological way to show there are infinitely many primes. There are some basic concepts in topology we need to introduce first. \\
+  Suppose that a collection $\mathcal{B}$ of subsets of a set $X$ (i.e. $\mathcal{B} \subseteq \mathcal{P}(X)$) satisfies the following two properties: 
+  \begin{enumerate}[(i)]
+    \item Every $x \in X$, there is at least one $B \in \mathcal{B}$ such that $x \in B$; \label{ex:property_basis_1}
+    \item For any $B_1, B_2 \in \mathcal{B}$ and any $x \in B_1 \cap B_2$, there is a $B_3 \in \mathcal{B}$ such that $x \in B_3 \subseteq B_1 \cap B_2$. \label{ex:property_basis_2}
+  \end{enumerate}
+  then we call $\mathcal{B}$ a basis for a topology $\tau$ on $X$ it generates. Here a open set of $\tau$ is either the empty set or it is a union of sets in $\mathcal{B}$ and a set $F\subset X$ is called closed if its complement $X\setminus F$ is open. We now consider the a topology on $X=\mathbb{Z}$.
+  \begin{enumerate}[(a)]
+    \item Let $\mathcal{B} = \{\mathrm{S}_{a, q}: a, q \in \mathbb{Z}, q > 0\}$ where $\mathrm{S}_{a, q} = \{a + nq: n \in \mathbb{Z}\}$ denotes the arithmetic progression. Show that $\mathcal{B}$ is a basis for a topology $\tau$ on $\mathbb{Z}$ and any finite set $S \subset \mathbb{Z}$ cannot be open in this topology.
+    \item Show that $S_{a,q}$ is both open and closed for any $a, q \in \mathbb{Z}, q > 0$.
+    \item Finally, show that
+    \[
+      \mathbb{Z} \setminus \{-1, 1\} = \bigcup_{p \in \mathbb{P}} S_{0, p}.
+    \]
+    and thus if $\#\mathbb{P}<\infty$, then the right hand side is a closed set but the left hand side cannot be closed. Hence, we conclude that there are infinitely many primes.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item For any $x \in \mathbb{Z}$, by letting $a = x$ and $q = 1$, then $x \in S_{a, q}$. and hence property \ref{ex:property_basis_1} holds. For any $B_1 = S_{a_1, q_1}, B_2 = S_{a_2, q_2} \in \mathcal{B}$ and any $x \in B_1 \cap B_2$, then $x=a_1 + n_1 q_1 = a_2 + n_2 q_2$ and by letting $q_3 = \mathrm{lcm}(q_1, q_2)$ and $a_3 = x$. Then $x \in S_{a_3, q_3}$ and for any $y \in S_{a_3, q_3}$, we have
+      \[
+        y = a_3 + n_3 q_3 = x + n_3 \mathrm{lcm}(q_1, q_2)=x+ n_3 m_1 q_1 = x + n_3' m_2 q_2
+      \]
+      for some integers $m_1, m_2, n_3, n_3'$. Thus, $y \in B_1 \cap B_2$ and hence property \ref{ex:property_basis_2} holds. Therefore, $\mathcal{B}$ is a basis for a topology $\tau$ on $\mathbb{Z}$. \\
+      For any finite set $S \subset \mathbb{Z}$. Suppose by contradiction that $S$ is open, then $S$ is either the empty set (which is not the case here) or it is a union of sets in $\mathcal{B}$. Since each set in $\mathcal{B}$ is infinite, any union of sets in $\mathcal{B}$ must also be infinite. This contradicts the assumption that $S$ is finite. Hence, any finite set $S \subset \mathbb{Z}$ cannot be open in this topology.
+      \item For any $S_{a, q} \in \mathcal{B}$, it is open as it is a union of itself. To show that it is closed, consider its complement
+      \[
+      \mathbb{Z} \setminus S_{a, q}= \bigcup_{r=0}^{q-1} S_{r, q} \setminus S_{a, q}= \bigcup_{\substack{r=0 \\ r \ne a \mod q}}^{q-1} S_{r, q}
+      \]
+      which is a union of sets in $\mathcal{B}$ and hence is open. Therefore, $S_{a, q}$ is closed.
+      \item for each $n\in \mathbb{Z}\setminus \{-1, 1\}$, if $n=0$, then $n\in S_{0,2}$; if $|n|>1$, then by the Fundamental Theorem of Arithmetic~\ref{thm:FTA}, $n$ has at least one prime factor $p$, so that $n \in S_{0,p}$. Thus $\mathbb{Z} \setminus \{-1, 1\} \subseteq \bigcup_{p \in \mathbb{P}} S_{0, p}$. \\
+      Conversely, for any $n \in \bigcup_{p \in \mathbb{P}} S_{0, p}$, then there exists a prime $p$ such that $n \in S_{0, p}$, which means $p \mid n$. Therefore, $n$ cannot be $\pm 1$. Thus, $\bigcup_{p \in \mathbb{P}} S_{0, p} \subseteq \mathbb{Z} \setminus \{-1, 1\}$. Therefore, we get the desired equality.
+    \end{enumerate}
+  \end{solution}
+\end{problemset}
 
 \end{document}
