@@ -334,11 +334,11 @@ However, Hadamard and de la Vallée Poussin (1896) independently proved that by 
   \]
   For any $n \notin E_N$, $n$ must have a prime factor greater than $N$. Thus, $n=pm$ for some prime $p > N$ and some $m \in \mathbb{N}$. Therefore,
   \[
-    T_N \leq \sum_{p > N} \sum_{m=1}^{\infty} \frac{1}{(pm)^x} = \sum_{p > N} \frac{1}{p^x} \sum_{m=1}^{\infty} \frac{1}{m^x} = \zeta(x) \sum_{p > N} \frac{1}{p^x}.
+    T_N \leq \sum_{\substack{p > N \\ p \in \mathbb{P}}} \sum_{m=1}^{\infty} \frac{1}{(pm)^x} = \sum_{\substack{p > N \\ p \in \mathbb{P}}} \frac{1}{p^x} \sum_{m=1}^{\infty} \frac{1}{m^x} = \zeta(x) \sum_{\substack{p > N \\ p \in \mathbb{P}}} \frac{1}{p^x}.
   \]
-  Since the series $\sum_{p \in \mathbb{P}} \frac{1}{p^x}$ converges for $x > 1$ by p-series test, the tail $\sum_{p > N} \frac{1}{p^x} \to 0$ as $N \to \infty$. Hence, $T_N \to 0$ as $N \to \infty$, which implies that $S_N \to \zeta(x)$. Thus, we conclude that
+  Since the series $\sum_{p \in \mathbb{P}} \frac{1}{p^x}$ converges for $x > 1$ by p-series test and comparison test, the tail $\sum_{p > N} \frac{1}{p^x} \to 0$ as $N \to \infty$. Hence, $T_N \to 0$ as $N \to \infty$, which implies that $S_N \to \zeta(x)$. Thus we have
   \[
-    \zeta(x) = \lim_{N \to \infty} S_N = \lim_{N \to \infty} \prod_{p \leq N} \frac{1}{1 - p^{-x}} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-x}}.
+    \zeta(x) = \lim_{N \to \infty} S_N = \lim_{N \to \infty} \prod_{\substack{p \leq N \\ p \in \mathbb{P}}} \frac{1}{1 - p^{-x}} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-x}}.
   \]
 \end{proof}
 
