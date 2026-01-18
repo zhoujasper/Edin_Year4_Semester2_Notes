@@ -603,7 +603,183 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   Similar to the Riemann zeta function, the Dirichlet $L$-function can be analytically continued to the entire complex plane except for a simple pole at $s=1$ when $\chi$ is the principal character.
 \end{definition}
 
-\section{}
+\section{Chebyshev's bounds}
+
+\begin{lemma}[Legendre's Formula] \label{lem:Legendre_formula}
+  For any integer $n$ and prime $p$, consider the prime factorization of $m!$:
+  \[
+    m! = p^{\alpha} \cdot \text{(other prime factors not equal to } p\text{)}.
+  \]
+  Then we have
+  \[
+    \alpha = \sum_{k=1}^{\infty} \left\lfloor \frac{m}{p^k} \right\rfloor.
+  \]
+  and denote it as $\alpha(p)=\alpha$ of the prime $p$ in the prime factorization of $m!$.
+\end{lemma}
+
+\begin{note} \label{note:Legendre_formula_finite_sum}
+  The series $\sum_{k=1}^{\infty} \left\lfloor \frac{m}{p^k} \right\rfloor$ is actually finite since $\left\lfloor \frac{m}{p^k} \right\rfloor = 0$ for all $k > \log_p m$.
+\end{note}
+
+\begin{proof}
+  Notice that the prime factors of $m!$ are exactly the all prime factors from $1$ to $m$. Since
+  \[
+    \left\lfloor \frac{m}{p^k} \right\rfloor = \#\{np^k:n\in\mathbb{N}, np^k \leq m\}
+  \]
+  counts the number of multiples of $p^k$ that are less than or equal to $m$, each multiple contributes at least $k$ to the exponent $\alpha$ of $p$ in the prime factorization of $m!$. Therefore, summing over all $k$ gives the total exponent of $p$ in $m!$:
+  \[
+    \alpha = \sum_{k=1}^{\infty} \left\lfloor \frac{m}{p^k} \right\rfloor.
+  \]
+\end{proof}
+
+\begin{exercise} \label{ex:2n_choose_n_bounds}
+  Show that $2^n\leq\binom{2n}{n}<4^n$ for all $n \in \mathbb{N}$.
+\end{exercise}
+
+\begin{solution}
+  We can prove this inequality using the definition of the binomial coefficient:
+  \[
+    \binom{2n}{n} = \frac{(2n)!}{(n!)^2}.
+  \]
+  We want to show that
+  \[
+    2^n \leq \frac{(2n)!}{(n!)^2}.
+  \]
+  Multiplying both sides by $(n!)^2$, we need to prove that
+  \[
+    2^n (n!)^2 \leq (2n)!.
+  \]
+  We can rewrite $(2n)!$ as the product of the first $2n$ integers:
+  \[
+    (2n)! = 1 \cdot 2 \cdot 3 \cdots (2n).
+  \]
+  Now, we can group the terms in pairs:
+  \[
+    (2n)! = (1 \cdot 2) \cdot (3 \cdot 4) \cdots ((2n-1) \cdot (2n)).
+  \]
+  Each pair $(2k-1) \cdot (2k)$ for $k = 1, 2, \ldots, n$ is greater than or equal to $2k$, since
+  \[
+    (2k-1) \cdot (2k) = 4k^2 - 2k = 2k(2k-1) \geq 2k \quad \text{for } k \geq 1.
+  \]
+  Therefore, 
+  \[
+    (2n)! \geq (2 \cdot 1) \cdot (2 \cdot 2) \cdots (2 \cdot n) = 2^n (1 \cdot 2 \cdots n) = 2^n n!.
+  \]
+  This shows that
+  \[
+    2^n (n!)^2 \leq (2n)!.
+  \]
+  For the upper bound, by using the binomial theorem, we have
+  \[
+    4^n = (1 + 1)^{2n} = \sum_{k=0}^{2n} \binom{2n}{k} \geq \binom{2n}{n}.
+  \]
+  Thus, we have shown that
+  \[
+    2^n \leq \binom{2n}{n} < 4^n.
+  \]
+\end{solution}
+
+\begin{lemma}[Chebyshev's Product Bounds lemma] \label{lem:Chebyshev_product_bounds_lemma}
+  For $n$ sufficiently large, we have
+  \[
+    \left(\frac{4}{3}\right)^n\leq \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} \quad {and} \quad \prod_{\substack{p \in \mathbb{P} \\ n<p \leq 2n}} p \leq 4^n.
+  \]
+\end{lemma}
+
+\begin{proof}
+  By Lemma~\ref{lem:Legendre_formula}, and notice that the prime factors of $m!$ are exactly the all prime factors from $1$ to $m$, we have
+  \[
+    n! = \prod_{\substack{p \in \mathbb{P} \\ p \leq n}} p^{\alpha(p)} \quad \text{where } \alpha(p) = \sum_{k=1}^{\infty} \left\lfloor \frac{n}{p^k} \right\rfloor.
+  \]
+  Thus, by the definition of binomial coefficient, we have
+  \[
+    \binom{2n}{n} = \frac{(2n)!}{(n!)^2} = \frac{\prod\limits_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p^{\sum_{k=1}^{\infty} \left\lfloor \frac{2n}{p^k} \right\rfloor}}{\left(\prod\limits_{\substack{p \in \mathbb{P} \\ p \leq n}} p^{\sum_{k=1}^{\infty} \left\lfloor \frac{n}{p^k} \right\rfloor}\right)^2} = \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p^{\beta(p)}
+  \]
+  where
+  \[
+    \beta(p) = \sum_{k=1}^{\infty} \left( \left\lfloor \frac{2n}{p^k} \right\rfloor - 2 \left\lfloor \frac{n}{p^k} \right\rfloor \right).
+  \]
+  By the \hyperref[note:Legendre_formula_finite_sum]{Note}, $\lfloor \frac{2n}{p^k} \rfloor = 0$ if $p^k > 2n$ or equivalently $k > \log_p(2n)$, and since $0\leq \lfloor 2x \rfloor - 2\lfloor x \rfloor \leq 1$ for all $x \geq 0$, we have
+  \[
+    \beta(p) \leq \sum_{k=1}^{\lfloor \log_p(2n) \rfloor} 1 = \lfloor \log_p(2n) \rfloor \leq \log_p(2n) \quad \text{and thus} \quad p^{\beta(p)}=p^{\log_p(2n)} \leq 2n.
+  \]
+  Furthermore, when $p > \sqrt{2n}$, $\lfloor \frac{2n}{p^k} \rfloor = 0$ and $\lfloor \frac{n}{p^k} \rfloor = 0$ for all $k \geq 2$, so
+  \[
+    \beta(p) = \left\lfloor \frac{2n}{p} \right\rfloor - 2 \left\lfloor \frac{n}{p} \right\rfloor \leq 1 \quad \text{for } p > \sqrt{2n}.
+  \]
+  Hence,
+  \begin{align*}
+    \binom{2n}{n} &= \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p^{\beta(p)} = \prod_{\substack{p \in \mathbb{P} \\ p \leq \sqrt{2n}}} p^{\beta(p)} \cdot \prod_{\substack{p \in \mathbb{P} \\ \sqrt{2n} < p \leq 2n}} p^{\beta(p)} \leq \prod_{\substack{p \in \mathbb{P} \\ p \leq \sqrt{2n}}} 2n \cdot \prod_{\substack{p \in \mathbb{P} \\ \sqrt{2n} < p \leq 2n}} p \\
+    &\leq (2n)^{\sqrt{2n}} \cdot \prod_{\substack{p \in \mathbb{P} \\ \sqrt{2n} < p \leq 2n}} p \\
+    &\leq \left(\frac{3}{2}\right)^n\prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p
+  \end{align*}
+  where the last inequality holds for $n$ sufficiently large since
+  \[
+    \lim_{n \to \infty} \frac{(2n)^{\sqrt{2n}}}{(3/2)^n} = \lim_{n \to \infty} \frac{e^{\sqrt{2n}\log(2n)}}{e^{n\log(3/2)}} = \lim_{n \to \infty} e^{n\left(\frac{\log(2n)}{\sqrt{2n}} - \log(3/2)\right)} = 0 \quad \text{ since } \lim_{n\to \infty} \frac{\log(2n)}{\sqrt{2n}} = \lim_{n\to \infty} \frac{1/n}{1/\sqrt{2n}} = 0.
+  \]
+  where the last equality follows from L'Hôpital's rule if we treat $n$ as a real variable and then replace it back to integer variable. Therefore, by Exercise~\ref{ex:2n_choose_n_bounds}, we have
+  \[
+    2^n \leq \binom{2n}{n} \leq \left(\frac{3}{2}\right)^n \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p \implies \left(\frac{4}{3}\right)^n \leq \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p.
+  \]
+  For the second inequality, notice that
+  \[
+    \beta(p)= \left\lfloor \frac{2n}{p} \right\rfloor - 2 \left\lfloor \frac{n}{p} \right\rfloor = 1 - 0 = 1 \quad \text{for } n < p \leq 2n,
+  \]
+  Combining with Exercise~\ref{ex:2n_choose_n_bounds} again, we have
+  \[
+    4^n\geq\binom{2n}{n} = \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p^{\beta(p)} \geq \prod_{\substack{p \in \mathbb{P} \\ n < p \leq 2n}} p.
+  \]
+\end{proof}
+
+\begin{theorem}[Chebyshev's Bounds on $\pi(N)$]
+  There exist positive constants $c_1, c_2 > 0$ such that
+  \[
+    c_1 \frac{N}{\log N} \leq \pi(N) \leq c_2 \frac{N}{\log N} \quad \text{ for } N \text{ sufficiently large}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  Chebyshev used the bounds in Lemma~\ref{lem:Chebyshev_product_bounds_lemma} to prove the theorem. By using the first inequality in Lemma~\ref{lem:Chebyshev_product_bounds_lemma}, we have
+  \[
+    \left(\frac{4}{3}\right)^n \leq \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} p \leq \prod_{\substack{p \in \mathbb{P} \\ p \leq 2n}} 2n = (2n)^{\pi(2n)}.
+  \]
+  Taking logarithm on both sides, we have
+  \[
+    n \log \left(\frac{4}{3}\right) \leq \pi(2n) \log(2n) \implies \frac{\log(4/3)}{2}\cdot\frac{2n}{\log(2n)} \leq \pi(2n).
+  \]
+  Thus, for $N = 2n$ sufficiently large, it gives the lower bound. And for $N=2n+1$ sufficiently large, we have
+  \[
+    \pi(N) = \pi(2n+1) \geq \pi(2n) \geq \frac{\log(4/3)}{2}\cdot\frac{2n}{\log(2n)} \geq \frac{\log(4/3)}{4}\cdot\frac{2n+1}{\log(2n+1)}
+  \]
+  where the last inequality holds as $\frac{x}{\log x}$ is increasing for $x \geq e$ ($[\frac{x}{\log x}]' = \frac{\log x - 1}{(\log x)^2} > 0$ for $x > e$). Hence, we have the lower bound for all sufficiently large $N$ with $c_1 = \frac{\log(4/3)}{4}$.
+
+  For the upper bound, by extend the second inequality in Lemma~\ref{lem:Chebyshev_product_bounds_lemma} (Let $n=\lfloor \frac12 x \rfloor$,$x>0$), we have
+  \[
+    \prod_{\substack{p \in \mathbb{P} \\ \lfloor x/2 \rfloor < p \leq 2\lfloor x/2 \rfloor}} p \leq 4^{\lfloor x/2 \rfloor} \leq 4^{x/2}=2^x
+  \]
+  and since there are at most one prime between $2\lfloor x/2 \rfloor$ and $x$. For $x$ sufficiently large, we have
+  \[
+    \left(\frac{x}{2}\right)^{\pi(x) - \pi(x/2)} \leq \left(\frac{x}{2}\right)^{\pi(x) - \pi(\lfloor x/2 \rfloor)} \leq \prod_{\substack{p \in \mathbb{P} \\ \lfloor x/2 \rfloor < p \leq x}} \frac{x}{2} \leq \prod_{\substack{p \in \mathbb{P} \\ \lfloor x/2 \rfloor < p \leq x}} p \leq x\cdot 2^{x}\leq 3^x.
+  \]
+  Taking logarithm on both sides, we have
+  \[
+    (\pi(x) - \pi(x/2)) \log\left(\frac{x}{2}\right) \leq x \log 3 \implies \pi(x) - \pi(x/2) \leq \frac{x \log 3}{\log(x/2)}.
+  \]
+  Replacing $x$ by $\frac{x}{2^{j-1}}$ for $j=1, 2, \ldots, m$
+  \[
+    \pi\left(\frac{x}{2^{j-1}}\right) - \pi\left(\frac{x}{2^j}\right) \leq \frac{\frac{x}{2^{j-1}} \log 3}{\log\left(\frac{x}{2^{j-1}}\right)} \leq \log(9) \cdot \frac{x2^{-j}}{\log(x2^{-j})}.
+  \]
+  Summing over $j=1, 2, \ldots, m$ gives
+  \[
+    \pi(x) \leq \pi\left(\frac{x}{2^m}\right) + \log(9) \sum_{j=1}^{m} \frac{x2^{-j}}{\log(x2^{-j})}.
+  \]
+  As for $j\leq m$, we have $\log(x2^{-j}) \geq \log(x2^{-m}) \geq \log(x)/2$, $\pi(\frac{x}{2^m})\leq \frac{x}{2^m} \leq 2\sqrt{x}$ and $\sqrt{x} \leq \frac{x}{\log(x)}$ for $x$ sufficiently large, it gives
+  \[
+    \pi(x) \leq 2\sqrt{x} + \log(9) \sum_{j=1}^{m} \frac{x2^{-j}}{\log(x)/2} = 2\sqrt{x} + \frac{2x\log(9)}{\log(x)} \sum_{j=1}^{m} 2^{-j} \leq 2\sqrt{x} + \frac{2x\log(9)}{\log(x)} \leq (1+2\log(9)) \frac{x}{\log(x)}
+  \]
+  By setting $c_2 = 1 + 2\log(9)$, and $x = N$, we have the upper bound for all sufficiently large $N$.
+\end{proof}
+
 
 
 \begin{problemset}[Exercises]
@@ -724,7 +900,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
       For any finite set $S \subset \mathbb{Z}$. Suppose by contradiction that $S$ is open, then $S$ is either the empty set (which is not the case here) or it is a union of sets in $\mathcal{B}$. Since each set in $\mathcal{B}$ is infinite, any union of sets in $\mathcal{B}$ must also be infinite. This contradicts the assumption that $S$ is finite. Hence, any finite set $S \subset \mathbb{Z}$ cannot be open in this topology.
       \item For any $S_{a, q} \in \mathcal{B}$, it is open as it is a union of itself. To show that it is closed, consider its complement
       \[
-      \mathbb{Z} \setminus S_{a, q}= \bigcup_{r=0}^{q-1} S_{r, q} \setminus S_{a, q}= \bigcup_{\substack{r=0 \\ r \ne a \mod q}}^{q-1} S_{r, q}
+        \mathbb{Z} \setminus S_{a, q}= \bigcup_{r=0}^{q-1} S_{r, q} \setminus S_{a, q}= \bigcup_{\substack{r=0 \\ r \ne a \mod q}}^{q-1} S_{r, q}
       \]
       which is a union of sets in $\mathcal{B}$ and hence is open. Therefore, $S_{a, q}$ is closed.
       \item for each $n\in \mathbb{Z}\setminus \{-1, 1\}$, if $n=0$, then $n\in S_{0,2}$; if $|n|>1$, then by the Fundamental Theorem of Arithmetic~\ref{thm:FTA}, $n$ has at least one prime factor $p$, so that $n \in S_{0,p}$. Thus $\mathbb{Z} \setminus \{-1, 1\} \subseteq \bigcup_{p \in \mathbb{P}} S_{0, p}$. \\
