@@ -132,7 +132,7 @@
   \]
 \end{theorem}
 
-The proof of Theorem \ref{thm:PNT} is one of the main goal of this course and will be \textit{given in later chapters} after introducing more tools from complex analysis. [TODO: Proof can be find in ...]
+The proof of Theorem \ref{thm:PNT} is one of the main goal of this course and will be \textit{given in later chapters} after introducing more tools from complex analysis.
 
 \begin{lemma}
   To prove Theorem \ref{thm:PNT}, it equivalent to show that for any positive constants $c_1, c_2$ with $c_1 < 1 < c_2$, we have
@@ -411,7 +411,7 @@ However, Hadamard and de la Vallée Poussin (1896) independently proved that by 
   If $a$ and $q$ are coprime (i.e., $\gcd(a, q) = 1$), then the arithmetic progression $\mathrm{AP}_{a,q} = \{nq + a : n \in \mathbb{N}\}$ contains infinitely many primes.
 \end{theorem}
 
-The proof of Dirichlet's Theorem requires more advanced tools from analytic number theory, including Dirichlet characters and L-functions, which will be introduced in later chapters. However, various special cases and consequences of this theorem can be explored with more elementary methods. The following exercise provides an opportunity to investigate one such special case. [TODO: Proof can be find in ...]
+The proof of Dirichlet's Theorem requires more advanced tools from analytic number theory, including Dirichlet characters and L-functions, which will be introduced in later chapters. However, various special cases and consequences of this theorem can be explored with more elementary methods. The following exercise provides an opportunity to investigate one such special case.
 
 \begin{exercise}
   Give an elementary proof of Dirichlet's Theorem for the AP $\{ 4n-1: n \in \mathbb{N} \}$ by completing the following outline:
@@ -1396,7 +1396,7 @@ Proof omitted.
   \]
 \end{solution}
 
-\begin{lemma}
+\begin{lemma}[``Euler Product''] \label{lem:euler_product_lemma}
   Suppose $f:\mathbb{N} \to \mathbb{C}$ is a multiplicative function (not identically zero) and the series
   \[
     \sum_{n=1}^{\infty} |f(n)|<\infty.
@@ -1412,15 +1412,75 @@ Proof omitted.
 \end{note}
 
 \begin{proof}
-  Let $u_p = \sum_{k\geq 1} |f(p^k)|$ for each prime $p$ and set
+  Let $u_p = \sum_{k\geq 1} f(p^k)$ for each prime $p$ and set
   \[
     P_N = \prod_{\substack{p\in\mathbb{P}\\p\leq N}} \left(1 + u_p\right)= (1 + u_{p_1})(1 + u_{p_2}) \cdots (1 + u_{p_r}),
   \]
-  where $p_1, p_2, \ldots, p_r$ are all the primes less than or equal to $N$ and suppose $p_1<p_2<\cdots<p_r$.
+  where $p_1, p_2, \ldots, p_r$ are all the primes less than or equal to $N$ and suppose $p_1<p_2<\cdots<p_r$. We need to show $u_p$ is convergent for each prime $p$ to ensure $P_N$ is well-defined (i.e. The limit of $P_N$ exists) for each $N$. As $|u_p|\leq \sum_{k=1}^{\infty} |f(p^k)|\leq \sum_{n=1}^{\infty} |f(n)|<\infty$, each $u_p$ is convergent.
+  
+  Notice that $f(1)=1$ by proposition~\ref{prop:multiplicative_function_at_1}. Thus,
+  \[
+    P_N = \lim_{K\to\infty}[\sum_{k_1=0}^{K} f(p_1^{k_1})\sum_{k_2=0}^{K} f(p_2^{k_2}) \cdots \sum_{k_r=0}^{K} f(p_r^{k_r})].
+  \]
+  because if $\lim_{K\to\infty} a_K = A$ and $\lim_{K\to\infty} b_K = B$, then $\lim_{K\to\infty} a_K b_K = AB$.
+  Rearranging the sums on the RHS, and using the multiplicative property of $f$, we have
+  \[
+    \sum_{k_1=0}^{K} \sum_{k_2=0}^{K} \cdots \sum_{k_r=0}^{K} f(p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r})=\sum_{n \in F_{N,K}}f(n) \quad \text{since } \gcd(p_i^{k_i}, p_j^{k_j}) = 1 \text{ for } i \ne j.
+  \]
+  where
+  \[
+    F_{N,K} = \{ n \in \mathbb{N} : n = p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r}, 0 \leq k_i \leq K \text{ for } 1 \leq i \leq r\}.
+  \]
+  Recall $u_p$ is convergent, $P_N$ exists for each $N$. Thus
+  \[
+    \lim_{K\to\infty} \sum_{n \in F_{N,K}} f(n) = P_N.
+  \]
+  Since $F_{N,K} \subseteq \mathbb{N}$, we can choose a large $M_{N,K}$ such that $F_{N,K} \subseteq \{1, 2, \ldots, M_{N,K}\}$ for each $N,K$. Then
+  \begin{equation} \label{eq:euler_product_inequality}
+    \left| \sum_{n=1}^{M_{N,K}} f(n) - \sum_{n \in F_{N,K}} f(n) \right| = \left| \sum_{\substack{n\leq M_{N,K} \\ n \notin F_{N,K}}} f(n) \right| \leq \sum_{n\geq N} |f(n)| + \sum_{n \geq 2^K} |f(n)|
+  \end{equation}
+  where the last inequality holds since any $n \notin F_{N,K}$, it is either has a prime factor greater than $N$ (So that $n>N$) or has a prime factor less than or equal to $N$ with exponent greater than $K$ (So that $n \geq p_i^{K}\geq 2^{K}$ for some $1 \leq i \leq r$).
+
+  Fix a value of $N$, and let $K \to \infty$, notice that
+  \[
+    \lim_{K\to\infty} \sum_{n=1}^{M_{N,K}} f(n) = \sum^{\infty}_{n=1} f(n) \quad \text{ and } \quad \lim_{K\to\infty} \sum_{n \in F_{N,K}} f(n) = P_N.
+  \]
+  Thus, taking $K \to \infty$ in the above inequality~\eqref{eq:euler_product_inequality}, we obtain
+  \[
+    \left| \sum_{n=1}^{\infty} f(n) - P_N \right| \leq \sum_{n\geq N} |f(n)|.
+  \]
+  Finally, letting $N \to \infty$. As $\sum_{n=1}^{\infty} |f(n)|$ converges, the tail $\sum_{n\geq N} |f(n)| \to 0$ as $N \to \infty$. Thus,
+  \[
+    \sum_{n=1}^{\infty} f(n) = \lim_{N\to\infty} P_N = \prod_{p\in\mathbb{P}} \left(1 + f(p) + f(p^2) + \cdots\right).
+  \]
 \end{proof}
 
+\begin{theorem}[Euler Product Formula] \label{thm:euler_product_formula}
+  Let $f:\mathbb{N} \to \mathbb{C}$ be a completely multiplicative function (not identically zero) and suppose the series
+  \[
+    \sum_{n=1}^{\infty} |f(n)| < \infty.
+  \]
+  Then the Euler Product holds:
+  \[
+    \sum_{n=1}^{\infty} f(n) = \prod_{p\in\mathbb{P}} \left(1 + f(p) + f(p^2) + \cdots\right)=\prod_{p\in\mathbb{P}} \sum_{k=0}^{\infty} f(p)^k=\prod_{p\in\mathbb{P}} \frac{1}{1 - f(p)}.
+  \]
+\end{theorem}
 
-\begin{corollary}[Euler Product Formula]
+\begin{proof}
+  We only need to prove the last equality holds as the first two equalities are direct from lemma~\ref{lem:euler_product_lemma}.
+
+  Recall the geometric series formula,
+  \[
+    1 + z + z^2 + \cdots = \frac{1}{1 - z} \quad \text{ for } |z| < 1.
+  \]
+  one may want to use this to justify the last equality. However, we need to ensure that $|f(p)| < 1$ for all primes $p$ to apply the geometric series formula. But this is indeed true since if there exists a prime $p_0$ such that $|f(p_0)| \geq 1$, then as $f$ is completely multiplicative, we have
+  \[
+    |f(p_0^k)| = |f(p_0)|^k \geq 1 \quad \text{ for all } k \in \mathbb{N},
+  \]
+  thus the series $\sum_{n=1}^{\infty} |f(n)|$ diverges, as the subseries $\sum_{k=1}^{\infty} |f(p_0^k)|$ diverges. This contradicts our assumption that $\sum_{n=1}^{\infty} |f(n)| < \infty$. Therefore, we must have $|f(p)| < 1$ for all primes $p$, and hence we can apply the geometric series formula to get the last equality.
+\end{proof}
+
+\begin{corollary}[Classical Euler Product Formula] \label{cor:classical_euler_product_formula}
   The Riemann zeta function and the Euler product formula
   \[
     \zeta(z)=\sum_{n=1}^{\infty}\frac{1}{n^z} \quad \text{ and } \quad \mathcal{P}(z)=\prod_{p\in\mathbb{P}}\frac{1}{1-p^{-z}} \quad \text{ for } \Re(z)>1,
@@ -1432,8 +1492,15 @@ Proof omitted.
 \end{corollary}
 
 \begin{proof}
-  
+  By applying theorem~\ref{thm:euler_product_formula} to the completely multiplicative function $f(n) = \frac{1}{n^z}$ for $\Re(z)>1$, and noticing that $\sum_{n=1}^{\infty} |f(n)| = \sum_{n=1}^{\infty} \frac{1}{n^{\Re(z)}}$ converges for $\Re(z)>1$, we have
+  \[
+    \sum_{n=1}^{\infty} \frac{1}{n^z} = \prod_{p\in\mathbb{P}} \frac{1}{1 - \frac{1}{p^z}} = \prod_{p\in\mathbb{P}} \frac{1}{1 - p^{-z}}.
+  \]
 \end{proof}
+
+\begin{remark}
+  We will also want to apply $f(n)=\chi(n)n^{-z}$ to get the Euler product formula for Dirichlet $L$-functions later, where $\chi$ is a Dirichlet character.
+\end{remark}
 
 
 
