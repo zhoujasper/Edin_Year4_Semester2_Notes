@@ -909,4 +909,235 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   \end{solution}
 \end{problemset}
 
+\chapter{Infinite Products and Series}
+
+\section{}
+
+\begin{definition}[Infinite Product]
+  A infinite product $\prod_{n=1}^{\infty} a_n$ converges if the sequence of partial products
+  \[
+    P_N = \prod_{n=1}^{N} a_n
+  \]
+  converges to a a limit $P$ as $N \to \infty$. In this case, we write
+  \[
+    \prod_{n=1}^{\infty} a_n = P.
+  \]
+\end{definition}
+
+\begin{theorem}[n-term Test, Divergence Test for Infinite Products]
+  If the infinite product $\prod_{n=1}^{\infty} a_n$ converges to a nonzero limit, then $\lim_{n \to \infty} a_n = 1$.
+
+  And thus we usually write infinite products in the form
+  \[
+    \prod_{n=1}^{\infty} (1 + b_n)
+  \]
+  and then the n-term test becomes: if $\prod_{n=1}^{\infty} (1 + b_n)$ converges, then $\lim_{n \to \infty} b_n = 0$.
+\end{theorem}
+
+\begin{proof}
+  Suppose that the infinite product $\prod_{n=1}^{\infty} a_n$ converges to a nonzero limit $P$. Then the sequence of partial products
+  \[
+    P_N = \prod_{n=1}^{N} a_n \to P \ne 0 \quad \text{ as } N \to \infty.
+  \]
+  Then, $a_n\ne 0$ for any $n\in\mathbb{N}$, and we have
+  \[
+    a_n = \frac{P_n}{P_{n-1}} \to \frac{P}{P} = 1 \quad \text{ as } n \to \infty.
+  \]
+\end{proof}
+
+\begin{definition}[Bounded Complex-Value Function]
+  A complex-value function $G:X\to\mathbb{C}$ defined on a set $X$ is bounded If
+  \[
+    \|G\|_{\infty} := \sup_{x \in X} |G(x)| < \infty.
+  \]
+  and the number $\|G\|_{\infty}$ is the least upper bound of $|G(x)|$ for all $x \in X$.
+\end{definition}
+
+\begin{definition}
+  A sequence of complex-value functions $S_n:X\to\mathbb{C}$ converges uniformly to a complex-value function $S:X\to\mathbb{C}$ on a set $X$ if
+  \[
+    \lim_{n \to \infty} \|S_n - S\|_{\infty} = \lim_{n \to \infty} \sup_{x \in X} |S_n(x) - S(x)| = 0.
+  \]
+\end{definition}
+
+\begin{exercise}
+  If a sequence of complex-value functions $S_n:X\to\mathbb{C}$ converges uniformly to a complex-value function $S:X\to\mathbb{C}$ on a set $X$, then $S$ is a bounded function on $X$.
+\end{exercise}
+
+\begin{solution}
+  Since $S_n$ converges uniformly to $S$ on $X$, for any $\varepsilon > 0$, there exists an integer $N$ such that for all $n \geq N$,
+  \[
+    \|S_n - S\|_{\infty} = \sup_{x \in X} |S_n(x) - S(x)| < \varepsilon.
+  \]
+  This implies that for all $x \in X$ and all $n \geq N$,
+  \[
+    |S(x)| \leq |S_n(x)| + |S_n(x) - S(x)| < |S_n(x)| + \varepsilon.
+  \]
+  Since $S_N$ is a bounded function on $X$, there exists a constant $M_N$ such that
+  \[
+    |S_N(x)| \leq M_N \quad \text{for all } x \in X.
+  \]
+  Therefore, for all $x \in X$,
+  \[
+    |S(x)| < M_N + \varepsilon.
+  \]
+  Thus,
+  \[
+    \sup_{x \in X} |S(x)| \leq M_N + \varepsilon < \infty.
+  \]
+  Hence, $S$ is a bounded function on $X$.
+\end{solution}
+
+\begin{exercise}
+  Show that if $F,G:X\to\mathbb{C}$ are bounded complex-value functions on a set $X$, then $\|F+G\|_{\infty} \leq \|F\|_{\infty} + \|G\|_{\infty}$ and $\|FG\|_{\infty} \leq \|F\|_{\infty} \|G\|_{\infty}$.
+\end{exercise}
+
+\begin{solution}
+  For any $x \in X$, by the triangle inequality, we have
+  \[
+    |F(x) + G(x)| \leq |F(x)| + |G(x)| \leq \|F\|_{\infty} + \|G\|_{\infty}.
+  \]
+  Taking the supremum over all $x \in X$, we get
+  \[
+    \|F + G\|_{\infty} = \sup_{x \in X} |F(x) + G(x)| \leq \|F\|_{\infty} + \|G\|_{\infty}.
+  \]
+  Similarly, for the product, we have
+  \[
+    |F(x) G(x)| = |F(x)| |G(x)| \leq \|F\|_{\infty} \|G\|_{\infty}.
+  \]
+  Taking the supremum over all $x \in X$, we get
+  \[
+    \|FG\|_{\infty} = \sup_{x \in X} |F(x) G(x)| \leq \|F\|_{\infty} \|G\|_{\infty}.
+  \]
+\end{solution}
+
+\begin{definition}[Uniform Convergence of Series of Functions]
+  A series of complex-value bounded functions $\sum_{n=1}^{\infty} f_n(x)$ converges uniformly on a set $X$ if the sequence of partial sums
+  \[
+    S_N(x) = \sum_{n=1}^{N} f_n(x)
+  \]
+  converges uniformly on $X$.
+\end{definition}
+
+\begin{definition}[Uniform Convergence of Products of Functions]
+  A product of complex-value bounded functions $\prod_{n=1}^{\infty} f_n(x)$ converges uniformly on a set $X$ if the sequence of partial products
+  \[
+    P_N(x) = \prod_{n=1}^{N} f_n(x)
+  \]
+  converges uniformly on $X$.
+\end{definition}
+
+\begin{theorem}[Cauchy Criterion for Uniform Convergence of Series of Functions]
+  A series of complex-value bounded functions $\sum_{n=1}^{\infty} f_n(x)$ converges uniformly on a set $X$ if the series of norms $\sum_{n=1}^{\infty} \|f_n\|_{\infty}$ converges.
+  \[
+    S_N(x) = \sum_{n=1}^{N} f_n(x)
+  \]
+  satisfies
+  \[
+    \|S_N - S\|_{\infty} \to 0 \quad \text{ as } N \to \infty.
+  \]
+\end{theorem}
+
+\begin{proof}
+  For any $\varepsilon > 0$, since the series of norms $\sum_{n=1}^{\infty} \|f_n\|_{\infty}$ converges, there exists an integer $N$ such that for all $m > n \geq N$,
+  \[
+    \sum_{k=n+1}^{m} \|f_k\|_{\infty} < \varepsilon.
+  \]
+  Then, for any $x \in X$ and all $m > n \geq N$, we have
+  \[
+    |S_m(x) - S_n(x)| = \left|\sum_{k=n+1}^{m} f_k(x)\right| \leq \sum_{k=n+1}^{m} |f_k(x)| \leq \sum_{k=n+1}^{m} \|f_k\|_{\infty} < \varepsilon.
+  \]
+  Taking the supremum over all $x \in X$, we get
+  \[
+    \|S_m - S_n\|_{\infty} = \sup_{x \in X} |S_m(x) - S_n(x)| < \varepsilon.
+  \]
+  This shows that the sequence of partial sums $\{S_N\}$ is uniformly Cauchy on $X$. Since the space of bounded functions on $X$ is complete with respect to the supremum norm, it follows that $\{S_N\}$ converges uniformly to a bounded function $S:X\to\mathbb{C}$ on $X$. Hence, the series $\sum_{n=1}^{\infty} f_n(x)$ converges uniformly on $X$.
+\end{proof}
+
+\begin{theorem}
+  A product of complex-value bounded functions $\prod_{n=1}^{\infty} (1 + f_n(x))$ converges uniformly on a set $X$ if the series of norms $\sum_{n=1}^{\infty} \|f_n\|_{\infty}$ converges.
+  \[
+    P_N(x) = \prod_{n=1}^{N} (1 + f_n(x))
+  \]
+  satisfies
+  \[
+    \|P_N - P\|_{\infty} \to 0 \quad \text{ as } N \to \infty.
+  \]
+\end{theorem}
+
+\begin{proof}
+  Let
+  \[
+    P_N(x)=\prod_{k=1}^{N}\bigl(1+f_k(x)\bigr), \qquad x\in X.
+  \]
+  Fix $\varepsilon>0$. Since $\sum_{n=1}^{\infty}\|f_n\|_{\infty}$ converges, define
+  \[
+    A:=\sum_{n=1}^{\infty}\|f_n\|_{\infty}<\infty, \qquad M:=e^{A}.
+  \]
+  For any $n\in\mathbb{N}$ and any $x\in X$, we have
+  \[
+    |P_n(x)| =\prod_{k=1}^{n}\bigl|1+f_k(x)\bigr| \le \prod_{k=1}^{n}\bigl(1+|f_k(x)|\bigr) \le \prod_{k=1}^{n}\bigl(1+\|f_k\|_{\infty}\bigr) \le \exp\!\Bigl(\sum_{k=1}^{n}\|f_k\|_{\infty}\Bigr) \le M.
+  \]
+  Now choose $\delta>0$ such that
+  \[
+    e^{\delta}-1<\frac{\varepsilon}{M}.
+  \]
+  Since $\sum_{n=1}^{\infty}\|f_n\|_{\infty}$ converges, there exists $N\in\mathbb{N}$ such that for all $m>n\ge N$,
+  \[
+    \sum_{k=n+1}^{m}\|f_k\|_{\infty}<\delta.
+  \]
+  For any $x\in X$ and $m>n\ge N$, we write
+  \[
+    |P_m(x)-P_n(x)| =\left|\prod_{k=1}^{n}(1+f_k(x))\right| \left|\prod_{k=n+1}^{m}(1+f_k(x))-1\right|.
+  \]
+  Using the inequality $|1+z|\le e^{|z|}$ for $z\in\mathbb{C}$, we obtain
+  \[
+    \left|\prod_{k=n+1}^{m}(1+f_k(x))\right| \le \exp\!\Bigl(\sum_{k=n+1}^{m}|f_k(x)|\Bigr),
+  \]
+  and hence
+  \[
+    \left|\prod_{k=n+1}^{m}(1+f_k(x))-1\right| \le e^{\sum_{k=n+1}^{m}|f_k(x)|}-1 < e^{\delta}-1.
+  \]
+  Combining the estimates, we obtain
+  \[
+    |P_m(x)-P_n(x)| \le M\,(e^{\delta}-1) <\varepsilon.
+  \]
+  Taking the supremum over all $x\in X$, we get
+  \[
+    \|P_m-P_n\|_{\infty} =\sup_{x\in X}|P_m(x)-P_n(x)| <\varepsilon.
+  \]
+  Thus $\{P_N\}$ is a uniformly Cauchy sequence on $X$.
+  Since the space of bounded functions on $X$ is complete with respect to the supremum norm, there exists a bounded function $P:X\to\mathbb{C}$ such that
+  \[
+    \|P_N-P\|_{\infty}\to0\quad(N\to\infty).
+  \]
+  Therefore, the infinite product $\prod_{n=1}^{\infty}(1+f_n(x))$ converges uniformly on $X$.
+\end{proof}
+
+\begin{theorem}[Uniform Convergence and Zeros of Infinite Products]
+  Let $u_n:X\to\mathbb{C}$ be a sequence of bounded complex-value functions on a set $X$ such that the series
+  \[
+    \sum_{n=1}^{\infty} |u_n| \text{ converges uniformly on } X.
+  \]
+  Then the infinite product
+  \[
+    f(x) = \prod_{n=1}^{\infty} (1 + u_n(x))
+  \]
+  converges uniformly on $X$.
+
+  Furthermore,
+  \[
+    f(x_0) = 0 \text{ for some } x_0 \in X \iff u_n(x_0) = -1 \text{ for some } n \in \mathbb{N}.
+  \]
+  i.e. $f$ has a zero at $x_0$ if and only if one of the factors in the product is zero at $x_0$.
+\end{theorem}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{theorem}
+  
+\end{theorem}
+
 \end{document}
