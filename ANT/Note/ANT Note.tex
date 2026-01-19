@@ -911,7 +911,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
 
 \chapter{Infinite Products and Series}
 
-\section{}
+\section{Infinite Products, Uniform Convergence Criteria and M-test}
 
 \begin{definition}[Infinite Product]
   A infinite product $\prod_{n=1}^{\infty} a_n$ converges if the sequence of partial products
@@ -960,7 +960,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   \]
 \end{definition}
 
-\begin{exercise}
+\begin{exercise} \label{ex:uniform_limit_bounded}
   If a sequence of complex-value functions $S_n:X\to\mathbb{C}$ converges uniformly to a complex-value function $S:X\to\mathbb{C}$ on a set $X$, then $S$ is a bounded function on $X$.
 \end{exercise}
 
@@ -988,7 +988,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   Hence, $S$ is a bounded function on $X$.
 \end{solution}
 
-\begin{exercise}
+\begin{exercise} \label{ex:infinity_norm_properties}
   Show that if $F,G:X\to\mathbb{C}$ are bounded complex-value functions on a set $X$, then $\|F+G\|_{\infty} \leq \|F\|_{\infty} + \|G\|_{\infty}$ and $\|FG\|_{\infty} \leq \|F\|_{\infty} \|G\|_{\infty}$.
 \end{exercise}
 
@@ -1114,7 +1114,7 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   Therefore, the infinite product $\prod_{n=1}^{\infty}(1+f_n(x))$ converges uniformly on $X$.
 \end{proof}
 
-\begin{theorem}[Uniform Convergence and Zeros of Infinite Products]
+\begin{theorem}[Uniform Convergence and Zeros of Infinite Products] \label{thm:uniform_convergence_infinite_product}
   Let $u_n:X\to\mathbb{C}$ be a sequence of bounded complex-value functions on a set $X$ such that the series
   \[
     \sum_{n=1}^{\infty} |u_n| \text{ converges uniformly on } X.
@@ -1132,12 +1132,314 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   i.e. $f$ has a zero at $x_0$ if and only if one of the factors in the product is zero at $x_0$.
 \end{theorem}
 
+\begin{note}
+  We can use this theorem even in the case where $u_n$ is constant function. And in this case, it states that
+  \[
+    \sum_{n=1}^{\infty} |u_n| \text{ converges } \text{ and } u_n \ne -1 \text{ for all } n \in \mathbb{N} \implies \prod_{n=1}^{\infty} (1 + u_n) \text{ converges to a nonzero limit. }
+  \]
+\end{note}
+
+\begin{exercise} \label{ex:exponential_inequality}
+  Show that $e^x \geq x+1$ for all $x\geq0$
+\end{exercise}
+
+\begin{solution}
+  By applying Mean Value Theorem to the function $f(x) = e^x$ on the interval $[0, x]$ for any $x \geq 0$, there exists some $c \in (0, x)$ such that
+  \[
+    f'(c) = \frac{f(x) - f(0)}{x - 0} \implies e^c = \frac{e^x - 1}{x}.
+  \]
+  Since $e^c \geq 1$ for all $c \geq 0$, we have
+  \[
+    \frac{e^x - 1}{x} \geq 1 \implies e^x - 1 \geq x \implies e^x \ge x + 1.
+  \]
+\end{solution}
+
+\begin{exercise} \label{ex:product_inequality_based_on_exponential}
+  Show that for any sequence of complex numbers $\{a_n\}_{n=1}^{\infty}$, we have
+  \[
+    \left|\prod_{n=1}^{N} (1 + a_n) - 1\right| \leq \exp\left(\sum_{n=1}^{N} |a_n|\right) - 1.
+  \]
+\end{exercise}
+
+\begin{solution}
+  We prove this by induction on $N$. For $N=1$, we have
+  \[
+    \left| (1 + a_1) - 1 \right| = |a_1| \leq e^{|a_1|} - 1, \text{ by Exercise~\ref{ex:exponential_inequality}.}
+  \]
+  Now, assume the inequality holds for some $N \geq 1$. Then for $N+1$, we have
+  \begin{align*}
+    \left|\prod_{n=1}^{N+1} (1 + a_n) - 1\right| &= \left| (1 + a_{N+1}) \prod_{n=1}^{N} (1 + a_n) - 1 \right| = \left| (1 + a_{N+1}) \left(\prod_{n=1}^{N} (1 + a_n) - 1\right) + a_{N+1} \right| \\
+    &\leq |1 + a_{N+1}| \left|\prod_{n=1}^{N} (1 + a_n) - 1\right| + |a_{N+1}| \\
+    &\leq (1 + |a_{N+1}|) \left( e^{\sum_{n=1}^{N} |a_n|} - 1 \right) + |a_{N+1}|, \text{ by the induction hypothesis } \\
+    &= e^{\sum_{n=1}^{N} |a_n|} - 1 + |a_{N+1}| e^{\sum_{n=1}^{N} |a_n|} - |a_{N+1}| + |a_{N+1}| \\
+    &= (1+ |a_{N+1}|) e^{\sum_{n=1}^{N} |a_n|} - 1 \\
+    &\leq e^{|a_{N+1}|} e^{\sum_{n=1}^{N} |a_n|} - 1, \text{ by Exercise~\ref{ex:exponential_inequality} } \\
+    &= e^{\sum_{n=1}^{N+1} |a_n|} - 1.
+  \end{align*}
+  Thus, by induction, the inequality holds for all $N \in \mathbb{N}$.
+\end{solution}
+
+\begin{proof}
+  By our assumption, as $\sum_{n=1}^{\infty} |u_n|$ converges uniformly on $X$, the partial sums $S_N(x)= \sum_{n=1}^N |u_n(x)|$ converge uniformly to $S=\sum_{n=1}^{\infty} |u_n(x)|$ on $X$. Thus, for a given $\varepsilon>0$, there is a $N_0$ (not depending on $x$) such that
+  \[
+    \| S_N- S\|_{\infty} = \sup_{x\in X} \sum_{n=N+1}^{\infty} |u_n(x)| < \varepsilon, \quad \text{ for all } N \geq N_0.
+  \]
+  and exercise~\ref{ex:uniform_limit_bounded} implies that $S$ is bounded on $X$. Hence, $S(x)=\sum_{n=1}^{\infty} |u_n(x)| \leq M$ for some $M>0$ and all $x\in X$.
+
+  Let $P_N(x) = \prod_{n=1}^{N} (1 + u_n(x))$ denote the $N$-th partial product of $f(x)$. Then by exercise~\ref{ex:product_inequality_based_on_exponential}, we have
+  \[
+    |P_N(x) - 1| \leq \exp\left(\sum_{n=1}^{N} |u_n(x)|\right) - 1 \leq e^{M} - 1 \quad \text{ since } \sum_{n=1}^{N} |u_n(x)| \leq S(x) \leq M.
+  \]
+  and thus $|P_N(x)| \leq e^{M}-1+1= e^{M}$ for all $x \in X$ and all $N \in \mathbb{N}$. Therefore, for any $M > N \geq N_0$ and any $x \in X$, using exercise~\ref{ex:product_inequality_based_on_exponential} again, we have
+  \begin{equation} \label{eq:infinite_product_uniform_convergence}
+    |P_M(x) - P_N(x)| = |P_N(x)| \left| \prod_{n=N+1}^{M} (1 + u_n(x)) - 1 \right| \leq e^{M} \left( \exp\left(\sum_{n=N+1}^{M} |u_n(x)|\right) - 1 \right) < e^{M} (e^{\varepsilon} - 1)
+  \end{equation}
+  for all $x \in X$. Taking the supremum over all $x \in X$, we get
+  \[
+    \|P_M - P_N\|_{\infty} = \sup_{x \in X} |P_M(x) - P_N(x)| < e^{M} (e^{\varepsilon} - 1) < \varepsilon'
+  \]
+  when we choose $\varepsilon=\log\left(\frac{\varepsilon'}{e^{M}} + 1\right)>0$. Thus, $\{P_N\}$ is a uniformly Cauchy sequence on $X$, and hence $f(x)$ converges uniformly on $X$.
+
+  Now, do the similar argument as in equation~\eqref{eq:infinite_product_uniform_convergence} and choose $M \to \infty$, $N = N_0$, we have
+  \[
+    |f(x) - P_{N_0}(x)| \leq |P_{N_0}|(e^{\varepsilon} - 1) \quad \text{ for all } x \in X.
+  \]
+  Setting $\varepsilon<\frac{1}{2}$, we have
+  \[
+    |f(x)-P_{N_0}(x)| < |P_{N_0}(x)| |\sqrt{e} - 1|
+  \]
+  thus,
+  \[
+    |f(x)|=|P_{N_0}(x)-(f(x)-P_{N_0}(x))| \geq |P_{N_0}(x)| - |P_{N_0}(x)| |\sqrt{e} - 1| = |P_{N_0}(x)|(2 - \sqrt{e}) \geq \frac13 |P_{N_0}(x)|
+  \]
+  Therefore, if $f(x_0) = 0$ for some $x_0 \in X$, then $P_{N_0}(x_0) = 0$ and hence $u_n(x_0) = -1$ for some $1 \leq n \leq N_0$. The converse is trivial.
+\end{proof}
+
+\begin{theorem}[Weierstrass M-test for Infinite Series and Products] \label{thm:weierstrass_m_test_infinite_product}
+  If a sequence of complex function $u_n:X\to\mathbb{C}$ satisfies $|u_n(x)| \leq M_n$ and $\sum_{n=1}^{\infty} M_n$ converges, then the infinite series
+  \[
+    \sum_{n=1}^{\infty} |u_n(x)| \text{ converges uniformly on } X.
+  \]
+  hence the series
+  \[
+    \sum_{n=1}^{\infty} u_n(x) \text{ converges uniformly on } X.
+  \]
+  And by the previous theorem~\ref{thm:uniform_convergence_infinite_product}, the infinite product
+  \[
+    f(x) = \prod_{n=1}^{\infty} (1 + u_n(x))
+  \]
+  converges uniformly on $X$.
+\end{theorem}
+
+\begin{proof}
+  Direct from the $M$-test in Complex Analysis and theorem~\ref{thm:uniform_convergence_infinite_product}.
+\end{proof}
+
+\begin{proposition}[Properties of Uniform Convergence] \label{prop:properties_uniform_convergence}
+  \begin{enumerate}
+    \item uniform limit of continuous functions is continuous.
+    \item uniform limit of bounded functions is bounded. (See exercise~\ref{ex:uniform_limit_bounded}.)
+    \item uniform limit of analytic functions is analytic.
+  \end{enumerate}
+\end{proposition}
+
+Proof omitted.
+
+\begin{corollary}[Analyticity of Riemann Zeta Function and Euler Product] \label{cor:analyticity_zeta_euler_product}
+  Recall the Riemann zeta function and the Euler product formula
+  \[
+    \zeta(z)=\sum_{n=1}^{\infty}\frac{1}{n^z} \quad \text{ and } \quad \mathcal{P}(z)=\prod_{p\in\mathbb{P}}\frac{1}{1-p^{-z}}=\prod_{p\in\mathbb{P}}(1+u_p(z)) \quad \text{ for } \Re(z)>1,
+  \]
+  where $u_p(z)=\frac{1}{1-p^{z}}-1=\frac{p^{-z}}{1-p^{-z}}$.
+
+  Then both $\zeta(z)$ and $\mathcal{P}(z)$ are analytic on the half plane $\{z\in\mathbb{C}:\Re(z)>1\}$. Further more, if
+  \[
+    \zeta(z) = \mathcal{P}(z) \quad \text{ for } \Re(z)>1,
+  \]
+  $|\zeta(z)|\ne0$ on $\{z\in\mathbb{C}:\Re(z)>1\}$ (i.e., $\zeta(z)$ has no zero on this half plane)
+
+\end{corollary}
+
+\begin{note}
+  For $a^{z}$, where $a>0$ is a positive real number, if not specified, we always consider it as $e^{z\log a}$, where $\log a$ is using the real logarithm to avoid multi-valued issue. And thus $a^{z}$ is analytic on the whole complex plane $\mathbb{C}$.
+\end{note}
+
+\begin{proof}
+  Notice that $\frac{1}{n^z}$ is an analytic function on $\mathbb{C}$ and $u_p(z)$ is analytic on $\{z\in\mathbb{C}:\Re(z)>1\}$ for each prime $p$. Also, 
+  \[
+    |1-p^{-z}| \geq 1 - |p^{-z}| = 1 - p^{-\Re(z)} \geq 1 - p^{-1} \geq \frac12 \quad \text{ for } \Re(z) > 1.
+  \]
+  Thus, for $\Re(z) \geq 1$, on the open set $X_{\varepsilon}=\{z\in\mathbb{C}:\Re(z)\geq1+\varepsilon\}$ for any $\varepsilon>0$, we have
+  \[
+    |u_p(z)| = \left|\frac{p^{-z}}{1-p^{-z}}\right| \leq 2 |p^{-z}| = 2 p^{-\Re(z)} \leq 2 p^{-(1+\varepsilon)} \quad \text{and} \quad \left|\frac{1}{n^z}\right| = n^{-\Re(z)} \leq n^{-(1+\varepsilon)}.
+  \]
+  Since
+  \[
+    \sum_{p\in\mathbb{P}} \frac{1}{p^{1+\varepsilon}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{1+\varepsilon}} < \infty
+  \]
+  the Weierstrass M-test~\ref{thm:weierstrass_m_test_infinite_product} implies that both $\zeta(z)$ and $\mathcal{P}(z)$ converge uniformly on $X_{\varepsilon}$ for any $\varepsilon>0$. Therefore, by proposition~\ref{prop:properties_uniform_convergence}, both $\zeta(z)$ and $\mathcal{P}(z)$ are analytic on $\{z\in\mathbb{C}:\Re(z)>1\}$.
+
+  Further more, by theorem~\ref{thm:uniform_convergence_infinite_product}, since $u_p(z) \ne -1$ for all primes $p$ and all $z$ with $\Re(z)>1$, we have $|\mathcal{P}(z)| \ne 0$ for all $z$ with $\Re(z)>1$. As $\zeta(z) = \mathcal{P}(z)$ for $\Re(z)>1$, we have $|\zeta(z)| = |\mathcal{P}(z)| \ne 0$ for all $z$ with $\Re(z)>1$.
+\end{proof}
+
+\begin{note}
+  The same analysis can be applied to Dirichlet $L$-functions and their Euler product representations
+  \[
+    \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} \quad \text{ and } \quad \prod_{p \in \mathbb{P}} \frac{1}{1 - \chi(p) p^{-z}}
+  \]
+  but will discuss later once we have introduced Dirichlet characters.
+\end{note}
+
+\section{Recap of Complex Analysis}
+
+\begin{theorem}[Morera's Theorem]
+  Suppose $f:X\to\mathbb{C}$ is continuous function on an open set $X \subseteq \mathbb{C}$. If
+  \[
+    \int_{\Gamma} f(z) \, dz = 0 \quad \text{ for all loop } \Gamma \text{ in } X, \quad \text{ then } f \text{ is analytic on } X.
+  \]
+\end{theorem}
+
+\begin{proof}
+  Omitted.
+\end{proof}
+
+\begin{theorem}[Cauchy Integral Theorem]
+  Suppose $f:X\to\mathbb{C}$ is an analytic function inside and on a simple closed contour $\Gamma$ in an open set $X \subseteq \mathbb{C}$. Then
+  \[
+    \int_{\Gamma} f(z) \, dz = 0
+  \]
+\end{theorem}
+
+\begin{proof}
+  Omitted.
+\end{proof}
+
+\begin{exercise}
+  Use Morera's Theorem and Cauchy Integral Theorem to show the 3rd property in the above proposition~\ref{prop:properties_uniform_convergence}.
+\end{exercise}
+
+\begin{solution}
+  Suppose $\{f_n\}$ is a sequence of analytic functions on an open set $X \subseteq \mathbb{C}$ that converges uniformly to a function $f$ on $X$. We want to show that $f$ is analytic on $X$.
+
+  For any simple closed contour $\Gamma$ in $X$, as $f_n$ is analytic on $X$, by Cauchy Integral Theorem, we have
+  \[
+    \int_{\Gamma} f_n(z) \, dz = 0 \quad \text{ for all } n \in \mathbb{N}.
+  \]
+  Since $f_n$ converges uniformly to $f$ on $X$, by the properties of uniform convergence, we can interchange the limit and the integral:
+  \[
+    \int_{\Gamma} f(z) \, dz = \lim_{n \to \infty} \int_{\Gamma} f_n(z) \, dz = \lim_{n \to \infty} 0 = 0.
+  \]
+  Thus, by Morera's Theorem, since $f$ is continuous (as uniform limit of continuous functions is continuous) and the integral of $f$ over any simple closed contour in $X$ is zero, we conclude that $f$ is analytic on $X$.
+\end{solution}
+
+
+\section{Euler Products}
+
+\begin{definition}
+  For a function $f:\mathbb{N} \to \mathbb{C}$ which is not identically zero, we say:
+  \begin{enumerate}[(a)]
+    \item $f$ is multiplicative, if $f(mn)=f(m)f(n)$ for all $m,n\in\mathbb{N}$ with $\gcd(m,n)=1$.
+    \item $f$ is completely multiplicative, if $f(mn)=f(m)f(n)$ for all $m,n\in\mathbb{N}$.
+  \end{enumerate}
+\end{definition}
+
+\begin{exercise}
+  Show that the Möbius function $\mu(n)$ which is defined as
+  \[
+    \mu(n) = \begin{cases}
+      1 & \text{ if } n=1, \\
+      (-1)^k & \text{ if } n=p_1\cdots p_k \text{ is a product of } k \text{ distinct primes}, \\
+      0 & \text{ otherwise},
+    \end{cases}
+  \]
+  is a multiplicative function.
+\end{exercise}
+
+\begin{solution}
+  Let $m,n\in\mathbb{N}$ with $\gcd(m,n)=1$. We want to show that $\mu(mn) = \mu(m) \mu(n)$.
+
+  Case 1: If either $m$ or $n$ has a squared prime factor, then $mn$ also has a squared prime factor. Thus, $\mu(m) = 0$ or $\mu(n) = 0$, and hence $\mu(mn) = 0 = \mu(m) \mu(n)$.
+
+  Case 2: If both $m$ and $n$ are products of distinct primes, say $m = p_1 p_2 \cdots p_k$ and $n = q_1 q_2 \cdots q_l$, where $p_i$ and $q_j$ are distinct primes. Since $\gcd(m,n)=1$, the sets of primes $\{p_1, p_2, \ldots, p_k\}$ and $\{q_1, q_2, \ldots, q_l\}$ are disjoint. Therefore, $mn = p_1 p_2 \cdots p_k q_1 q_2 \cdots q_l$ is a product of $k+l$ distinct primes. Thus,
+  \[
+    \mu(mn) = (-1)^{k+l} = (-1)^k (-1)^l = \mu(m) \mu(n).
+  \]
+
+  Case 3: If either $m$ or $n$ is equal to 1, then without loss of generality, let $m=1$. Then $\mu(1) = 1$, and we have
+  \[
+    \mu(mn) = \mu(n) = \mu(1) \mu(n).
+  \]
+
+  In all cases, we have shown that $\mu(mn) = \mu(m) \mu(n)$ for all $m,n\in\mathbb{N}$ with $\gcd(m,n)=1$. Therefore, the Möbius function $\mu(n)$ is multiplicative.
+\end{solution}
+
+\begin{proposition} \label{prop:multiplicative_function_at_1}
+  If $f:\mathbb{N} \to \mathbb{C}$ is a (completely) multiplicative function, and $f(n_0)\ne0$ for some $n_0\in\mathbb{N}$, then $f(1)=1$.
+\end{proposition}
+
+\begin{note}
+  If $f$ is identically zero, then $f(mn)=f(m)f(n)$ holds trivially for all $m,n\in\mathbb{N}$. Thus, if not specified, we always assume that a (completely) multiplicative function is not identically zero. And then by the above proposition holds always for any (completely) multiplicative function.
+\end{note}
+
+\begin{exercise}
+  Prove the above proposition.
+\end{exercise}
+
+\begin{solution}
+  Since $f$ is (completely) multiplicative, we have
+  \[
+    f(n_0) = f(1 \cdot n_0) = f(1) f(n_0) \quad \text{ since } \gcd(1, n_0) = 1.
+  \]
+  Since $f(n_0) \ne 0$, we can divide both sides by $f(n_0)$ to get
+  \[
+    f(1) = 1.
+  \]
+\end{solution}
+
+\begin{lemma}
+  Suppose $f:\mathbb{N} \to \mathbb{C}$ is a multiplicative function (not identically zero) and the series
+  \[
+    \sum_{n=1}^{\infty} |f(n)|<\infty.
+  \]
+  Then the ``Euler Product'' holds:
+  \[
+    \sum_{n=1}^{\infty} f(n) = \prod_{p\in\mathbb{P}} \left(1 + f(p) + f(p^2) + \cdots\right)=\prod_{p\in\mathbb{P}}\sum_{k=0}^{\infty} f(p^k).
+  \]
+\end{lemma}
+
+\begin{note}
+  The last equality holds since $f$ is multiplicative function (not identically zero) implies that $f(1)=1$ by proposition~\ref{prop:multiplicative_function_at_1}.
+\end{note}
+
+\begin{proof}
+  Let $u_p = \sum_{k\geq 1} |f(p^k)|$ for each prime $p$ and set
+  \[
+    P_N = \prod_{\substack{p\in\mathbb{P}\\p\leq N}} \left(1 + u_p\right)= (1 + u_{p_1})(1 + u_{p_2}) \cdots (1 + u_{p_r}),
+  \]
+  where $p_1, p_2, \ldots, p_r$ are all the primes less than or equal to $N$ and suppose $p_1<p_2<\cdots<p_r$.
+\end{proof}
+
+
+\begin{corollary}[Euler Product Formula]
+  The Riemann zeta function and the Euler product formula
+  \[
+    \zeta(z)=\sum_{n=1}^{\infty}\frac{1}{n^z} \quad \text{ and } \quad \mathcal{P}(z)=\prod_{p\in\mathbb{P}}\frac{1}{1-p^{-z}} \quad \text{ for } \Re(z)>1,
+  \]
+  are equal, i.e.,
+  \[
+    \zeta(z) = \mathcal{P}(z) \quad \text{ for } \Re(z)>1.
+  \]
+\end{corollary}
+
 \begin{proof}
   
 \end{proof}
 
-\begin{theorem}
-  
-\end{theorem}
+
+
+
+
+
+
 
 \end{document}
