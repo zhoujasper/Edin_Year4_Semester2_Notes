@@ -25,7 +25,7 @@
 
     \vspace{-2pt}
     \begin{MyTh}{Asymptotic $\sim$}\tiny
-        $f(z)\sim g(z)$ \ as $z\to z_0$ \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=1$}
+        $f(z)\sim g(z)$ \ as $z\to z_0$ \ if \ok{$\lim\limits_{z\to z_0}\frac{f(z)}{g(z)}=1$} \qquad \imp{\tiny ps:$e^{-x}=o(x^{-n})$, $\forall n>0$ \ as $x\to\infty$}
     \end{MyTh}
 
     \vspace{-1pt}
@@ -56,6 +56,7 @@
     \end{MyTh}
     }}
 
+    \fbox{\parbox{\linewidth}{
 
     \section{Integral By Parts \& Laplace's Method}
 
@@ -81,21 +82,18 @@
     \end{MyTh}
 
     \vspace{-4pt}
-    \begin{MyTh}{\imp{Laplace's Method}}??????
-        If $I(x)=\int_{a}^{b} e^{-xf(t)}dt$ \quad \ok{a.} $f(t)$ has \ps{unique min} at $t=t_0\in(a,b)$
+    \begin{MyTh}{\imp{Laplace's Method}}\tiny For \ $I(x)=\int_{a}^{b}e^{xf(t)}g(t)dt$ \ as $x\to\infty$
 
-        \vspace{-2pt}\quad
-        \ok{b.} $f'(t_0)=0$, $f''(t_0)>0$  \quad \ok{c.} Taylor of $f(t)=f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots$ \\
-        
-        \vspace{-7pt}\quad
-        Then, as $x\to\infty$, \quad \imp{$I(x)\sim \int_{-\infty}^{\infty}e^{-x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2]}dt$}
-
-        \vspace{-2pt}\quad
-        \imp{Remark}: {\tiny If $t_0=g(x)$, Let $t=g(x)s$, then \ok{$I(x)=g(x)\int_{a/g(x)}^{b/g(x)}e^{-xf(g(x)s)}ds$} min at $s=1$.}
-
-        \vspace{-2pt}\quad
-        \ok{Application}: {\tiny $\int_{-\infty}^{\infty}e^{-x \cosh \theta}d\theta \sim e^{-x}\sqrt{\frac{2\pi}{x}}$ \quad $\Gamma(n+1)=n! \sim \sqrt{2\pi n}(\frac{n}{e})^n$ \ps{(Stirling Formula)}}
+        \vspace{-8pt}
+        \begin{enumerate}
+            \item If $f(t)$ has \ps{unique max} at $t=t_0\in(a,b)$ $\Rightarrow$ \scalebox{0.9}{$I\sim \int^{\infty}_{\infty} e^{x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots]}g(t_0)dt$} \\
+            \scalebox{0.9}{(留n项非常数展开为 $n$ term approximation)} \quad \ps{(ps: $\max$ $\leftrightarrow$ $f'(t_0)=0$, $f''(t_0)<0$)}
+            \item \ok{Exact Substitution}: 由1的基础,得到$f(t)$在$t_0$处的展开式,换元令$f(t)$就等于展开式前几项求解.
+            \item \ok{If $g=g(t,x)$}: $e^{xf(t)}g(t,x)=e^{xf(t)+\ln(g(t,x))}$, 看$xf(t)+\ln(g(t,x))$的最大值,类似1处理.
+        \end{enumerate}
     \end{MyTh}
+
+    }}
 
 
 

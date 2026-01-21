@@ -837,6 +837,20 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
         n = p_1^{2d_1 + r_1} p_2^{2d_2 + r_2} \cdots p_k^{2d_k + r_k} = (p_1^{d_1} p_2^{d_2} \cdots p_k^{d_k})^2 \cdot p_1^{r_1} p_2^{r_2} \cdots p_k^{r_k}.
       \]
       and we get the desired form by letting $s = p_1^{d_1} p_2^{d_2} \cdots p_k^{d_k}$.
+
+      For the uniqueness of this representation, suppose there are two representations of $n$:
+      \[
+        n = p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k} s^2 = p_1^{f_1} p_2^{f_2} \cdots p_k^{f_k} t^2
+      \]
+      where $e_i, f_i \in \{0, 1\}$ and $s, t \in \mathbb{N}$. Rearranging gives
+      \[
+        p_1^{e_1 - f_1} p_2^{e_2 - f_2} \cdots p_k^{e_k - f_k} = \left(\frac{t}{s}\right)^2.
+      \]
+      The left side is an integer, so $\frac{t}{s}$ must also be an integer, say $m$. Thus,
+      \[
+        p_1^{e_1 - f_1} p_2^{e_2 - f_2} \cdots p_k^{e_k - f_k} = m^2.
+      \]
+      Since the right side is a perfect square, all exponents on the left side must be even. Given that $e_i, f_i \in \{0, 1\}$, the only way for $e_i - f_i$ to be even is if $e_i = f_i$ for all $i$. This implies that the exponents are unique.
       \item By the above result, for each $n \in E^k_N$, there are $2^k$ choices for the exponents $e_1, e_2, \ldots, e_k$ and since $n \leq N$, we have
       \[
         s^2 \leq n \leq N \implies s \leq \sqrt{N}.
@@ -908,6 +922,9 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
     \end{enumerate}
   \end{solution}
 \end{problemset}
+
+
+
 
 \chapter{Infinite Products and Series}
 
