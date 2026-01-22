@@ -58,7 +58,7 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{Integral By Parts \& Laplace's Method}
+    \section{\footnotesize Integral By Parts, Laplace's Method \& Method of Steepest Descents}
 
     \begin{MyTh}{Taylor}\tiny
         \scalebox{0.9}{$f(x)=\sum\limits_{n=0}^{N-1}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + \frac{f^{(N)}(\xi)}{N!}(x-x_0)^N$} \ $\Rightarrow$ \ \scalebox{0.9}{\ok{$f(x)\sim \sum\limits_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$} as $x\to x_0$}
@@ -88,11 +88,30 @@
         \begin{enumerate}
             \item If $f(t)$ has \ps{unique max} at $t=t_0\in(a,b)$ $\Rightarrow$ \scalebox{0.9}{$I\sim \int^{\infty}_{\infty} e^{x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots]}g(t_0)dt$} \\
             \scalebox{0.9}{(留n项非常数展开为 $n$ term approximation)} \quad \ps{(ps: $\max$ $\leftrightarrow$ $f'(t_0)=0$, $f''(t_0)<0$)}
-            \item \ok{Exact Substitution}: 由1的基础,得到$f(t)$在$t_0$处的展开式,换元令$f(t)$就等于展开式前几项求解.
+            \vspace{-2pt}
+            \item {\tiny 对于留n项展开: e.g. \ok{$n=2$}. 由1基础$\to xf(t_0)\sim 1 \to t=\Ocal(x^{-\frac{1}{2}})\to u=t_0+x^{\frac{1}{2}}t$换元求解}
+            \item \ok{Exact Substitution}: 由1的基础,得到$f(t)$在$t_0$处的展开式,换元令$f(t)$就等于\ps{展开式前几项求解}.
             \item \ok{If $g=g(t,x)$}: $e^{xf(t)}g(t,x)=e^{xf(t)+\ln(g(t,x))}$, 看$xf(t)+\ln(g(t,x))$的最大值,类似1处理.
         \end{enumerate}
     \end{MyTh}
 
+    \begin{MyTh}{\imp{Method of Steepest Descents}}\tiny
+        For $I(x)=\int_{C}e^{xf(z)}g(z)dz$ \ as $x\to\infty$. \quad \ok{\scalebox{0.9}{\tiny $f$ 容易避开singular point}}
+        
+        \vspace{-3pt}
+        \quad If $z_0$ is saddle point: $f'(z_0)=0, f''(z_0)\neq0$ \quad $f(z)$ Taylor at $z_0$: $f(z)=f(z_0)+\frac{f''(z_0)}{2}(z-z_0)^2+\cdots$
+
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item Let $z=z_0+e^{i\theta}y$ \scalebox{0.8}{($\theta$选让$f''(z_0)e^{2i\theta}$为负实数)} \ $\to$ \ \scalebox{0.9}{$I(x)\sim \int_{-\infty}^{\infty} e^{x[f(z_0)-\frac{|f''(z_0)|}{2}y^2+\cdots]}g(z_0) e^{i\theta}dy$}
+            \item If $f$ 不容易避开singular point: \ok{a.}$\mathrm{Im}(f(z))=\mathrm{Im}(f(z_0))$ and $z_0\in C_0$ to find steepest descent path $C_0$
+            \item \ok{b.} 画图看哪些singular points 在$C\to C_0$变形路径上, 计算residues. \quad \ok{c.} $I=$ 1 部分 + $2\pi i\sum$ residues.
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Residue}\tiny 
+        If $z_0$ pole of order $m$ of $f$, \ok{$\Rightarrow\mathrm{Res}(f,z_0)=\frac{1}{(m-1)!}\lim\limits_{z\to z_0}\frac{d^{m-1}}{dz^{m-1}}[(z-z_0)^mf(z)]$}
+    \end{MyTh}
     }}
 
 
@@ -102,7 +121,7 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{Appendix}
+    \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}
     \tiny
 
     \begin{MyTh}{$y'+Py=Q$}
