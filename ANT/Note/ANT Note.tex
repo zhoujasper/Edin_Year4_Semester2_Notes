@@ -1273,7 +1273,11 @@ Proof omitted.
   \[
     \zeta(z) = \mathcal{P}(z) \quad \text{ for } \Re(z)>1,
   \]
-  $|\zeta(z)|\ne0$ on $\{z\in\mathbb{C}:\Re(z)>1\}$ (i.e., $\zeta(z)$ has no zero on this half plane)
+  we can show that 
+  \[
+  |\zeta(z)|\ne0 \quad \text{ on } \{z\in\mathbb{C}:\Re(z)>1\}
+  \]
+  (i.e., $\zeta(z)$ has no zero on this half plane)
 
 \end{corollary}
 
@@ -1309,7 +1313,7 @@ Proof omitted.
 
 \section{Recap of Complex Analysis}
 
-\begin{theorem}[Morera's Theorem]
+\begin{theorem}[Morera's Theorem] \label{thm:morera_theorem}
   Suppose $f:X\to\mathbb{C}$ is continuous function on an open set $X \subseteq \mathbb{C}$. If
   \[
     \int_{\Gamma} f(z) \, dz = 0 \quad \text{ for all loop } \Gamma \text{ in } X, \quad \text{ then } f \text{ is analytic on } X.
@@ -1320,7 +1324,7 @@ Proof omitted.
   Omitted.
 \end{proof}
 
-\begin{theorem}[Cauchy Integral Theorem]
+\begin{theorem}[Cauchy Integral Theorem] \label{thm:cauchy_integral_theorem}
   Suppose $f:X\to\mathbb{C}$ is an analytic function inside and on a simple closed contour $\Gamma$ in an open set $X \subseteq \mathbb{C}$. Then
   \[
     \int_{\Gamma} f(z) \, dz = 0
@@ -1517,13 +1521,736 @@ Proof omitted.
 
 \begin{remark}
   We will also want to apply $f(n)=\chi(n)n^{-z}$ to get the Euler product formula for Dirichlet $L$-functions later, where $\chi$ is a Dirichlet character.
+  And extend the Euler product formula to
+  \[
+    L(z, \chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} = \prod_{p\in\mathbb{P}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z)>1.
+  \]
 \end{remark}
 
 
+\section{Taking Logarithm}
+
+\begin{definition}[Simple Connected]
+  An open set $X \subseteq \mathbb{C}$ is said to be simply connected if there is no hole in $X$, i.e., any loop in $X$ can be continuously contracted to a point within $X$.
+\end{definition}
+
+\begin{theorem}[Existence of Logarithm Branch] \label{thm:existence_log_branch}
+  Let $X \subseteq \mathbb{C}$ be a simply connected open set, and $g(z)$ is analytic on $X$ with no zeros in $X$. Then there exists an analytic function $h(z)$ on $X$ such that
+  \[
+    e^{h(z)} = g(z) \quad \text{ for all } z \in X.
+  \]
+  and we say that $h(z)$ is a branch of logarithm of $g(z)$ on $X$.
+\end{theorem}
+
+\begin{note}
+  There is a mini definition in the above theorem: A branch of logarithm of $g(z)$ on $X$ is an analytic function $h(z)$ on $X$ such that $e^{h(z)} = g(z)$ for all $z \in X$.
+\end{note}
+
+\begin{note}
+    We may also write $h(z) = \log g(z)$ to denote a branch of the logarithm of $g(z)$ on $X$. However, one must be careful when performing algebraic operations with the logarithm, since $\log g(z)$ is defined only up to a choice of branch.
+    Nevertheless, many familiar properties of the logarithm still hold for a fixed branch. For example, the derivative of $h(z)$ is given by
+    \[
+      h'(z) = \frac{g'(z)}{g(z)},
+    \]
+    which is formally the same as the derivative of the real logarithm.
+
+    Indeed, differentiating both sides of the identity $e^{h(z)} = g(z)$ and applying the chain rule, we obtain
+    \[
+      e^{h(z)} h'(z) = g'(z).
+    \]
+    Since $e^{h(z)} = g(z)$, it follows that
+    \[
+      h'(z) = \frac{g'(z)}{g(z)}.
+  \]
+\end{note}
+
+\begin{proof}
+  Since $g(z)$ has no zeros in $X$, we can define a function
+  \[
+    f(z) := \int_{z_0}^{z} \frac{g'(w)}{g(w)} \, dw
+  \]
+  for some fixed $z_0 \in X$. This integral is well-defined because $X$ is simply connected, and $\frac{g'(w)}{g(w)}$ is analytic on $X$ (as $g(w)$ has no zeros).
+
+  Now, consider $F(z):= g(z)e^{-f(z)}$. Notice that $F'(z) = g'(z)e^{-f(z)} - g(z)e^{-f(z)} \cdot \frac{g'(z)}{g(z)} = g'(z)e^{-f(z)} - g'(z)e^{-f(z)} = 0$. Thus, $F(z)$ is constant on $X$. Evaluating at $z=z_0$, we have
+  \[
+    F(z)= F(z_0) = g(z_0)e^{-f(z_0)} = g(z_0)e^{0} = g(z_0) \implies g(z)e^{-f(z)} = F(z)= g(z_0).\implies g(z) = g(z_0)e^{f(z)}.
+  \]
+  Therefore, we can set $h(z) := f(z) + c$ where $e^{c} = g(z_0)$, and we have $e^{h(z)} = g(z)$ for all $z \in X$. 
+\end{proof}
+
+\begin{exercise} \label{ex:taylor_series_log_complex}
+  Consider the analytic function $f(z)=\mathrm{Log}(1-z)$ on the simply connected open set $X=\{z\in\mathbb{C}:|z|<1\}$ where $\mathrm{Log}$ is the principal branch of logarithm defined on $\mathbb{C}\setminus(-\infty,0]$. Show the $f(z)$ has the Taylor series expansion
+  \[
+    \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} z^n = -\sum_{n=1}^{\infty} \frac{z^n}{n} \quad \text{valid for } z \in X,
+  \]
+  and hence deduce that when $|z|\leq\frac{1}{2}$, $|\mathrm{Log}(1-z)| \leq 2|z|$.
+\end{exercise}
+
+\begin{solution}
+  Notice that for each $n \in \mathbb{N}$,
+  \[
+    f^{(n)}(z) = \frac{d^n}{dz^n} \mathrm{Log}(1-z) = \frac{d^{n-1}}{dz^{n-1}} \left(-\frac{1}{1-z}\right) = \frac{d^{n-2}}{dz^{n-2}} \left(-\frac{1}{(1-z)^2}\right) = \cdots = - \frac{(n-1)!}{(1-z)^n}, \quad \text{ for } n \geq 1.
+  \]
+  Thus,
+  \[
+    f^{(n)}(0) = - (n-1)! \quad \text{ for all } n \geq 1, \quad \text{ and } \quad f(0) = \mathrm{Log}(1-0) = \mathrm{Log}(1) = 0.
+  \]
+  Therefore, the Taylor series expansion of $f(z)$ at $z=0$ is
+  \[
+    \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} z^n = f(0) + \sum_{n=1}^{\infty} \frac{- (n-1)!}{n!} z^n = -\sum_{n=1}^{\infty} \frac{z^n}{n}.
+  \]
+  where the last equality holds since $\sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} z^n$ converges for $|z|<1$.
+
+  Next, we show that when $|z|\leq\frac{1}{2}$, we have $|\mathrm{Log}(1-z)|\leq 2|z|$.
+  Since $|z|<\frac{1}{2}$, we have
+  \[
+    |\mathrm{Log}(1-z)| = \left| -\sum_{n=1}^{\infty} \frac{z^n}{n} \right| \leq \sum_{n=1}^{\infty} \frac{|z|^n}{n} \leq \sum_{n=1}^{\infty} |z|^n = \frac{|z|}{1 - |z|} \leq \frac{|z|}{1 - \frac{1}{2}} = 2|z|.
+  \]
+\end{solution}
+
+\begin{theorem}[Uniform Convergence of Logarithm of Infinite Product] \label{thm:uniform_convergence_log_infinite_product}
+  On a simply connected open set $X \subseteq \mathbb{C}$, the infinite product
+  \[
+    f(z) = \prod_{n=1}^{\infty} (1 + u_n(z))  
+  \]
+  where $|u_n(z)|\leq M_n<1$ for all $z \in X$ and $\sum_{n=1}^{\infty} M_n < \infty$, is uniformly convergent on $X$. Further more, the function
+  \[
+    L(z) := \sum_{n=1}^{\infty} \mathrm{Log}(1 + u_n(z)) \quad \text{ where } \mathrm{Log} \text{ is principal branch of logarithm,}
+  \]
+  is convergent uniformly on $X$ and satisfies
+  \[
+    e^{L(z)} = f(z) \quad \text{ for all } z \in X.
+  \]
+  $L(z)$ is thus a branch of logarithm of $f(z)$ on $X$.
+
+  (i.e., ``$L(z)=\log f(z)$'' and $L(z)$ is analytic on $X$, which is an application of the previous theorem~\ref{thm:existence_log_branch}.)
+\end{theorem}
+
+\begin{proof}
+  $f(z)$ is clearly uniformly convergent on $X$ by theorem~\ref{thm:weierstrass_m_test_infinite_product} since $\sum_{n=1}^{\infty} M_n < \infty$ and $|u_n(z)| \leq M_n$ for all $z \in X$.
+
+  Next, we need to show that $L(z)$ is well-defined and uniformly convergent on $X$. For each $N \in \mathbb{N}$, we define
+  \[
+    \widetilde{\log} \ P_N(z) := \sum_{n=1}^{N} \mathrm{Log}(1 + u_n(z)), \quad \text{ where } P_N(z) = \prod_{n=1}^{N} (1 + u_n(z)).
+  \]
+  Since $|u_n(z)| \leq M_n < 1$ for all $z \in X$, we have $|1 + u_n(z)| \geq 1 - |u_n(z)| \geq 1 - M_n > 0$ for all $z \in X$. Thus, $\widetilde{\log} \ P_N(z)$ is well-defined and analytic on $X$.
+  Further more, notice that
+  \[
+    e^{\widetilde{\log} \ P_N(z)} = e^{\sum_{n=1}^{N} \mathrm{Log}(1 + u_n(z))} = \prod_{n=1}^{N} e^{\mathrm{Log}(1 + u_n(z))} = \prod_{n=1}^{N} (1 + u_n(z)) = P_N(z).
+  \]
+  so that $\widetilde{\log} \ P_N(z)$ is a branch of logarithm of $P_N(z)$ on $X$. (i.e., $e^{\widetilde{\log} \ P_N(z)} = P_N(z)$ for all $z \in X$.) Since $|u_n(z)| \leq M_n$ and $\sum_{n=1}^{\infty} M_n < \infty$, $u_n(z) \leq \frac{1}{2}$ for all sufficiently large $N_0$ and all $z \in X$. Thus, by exercise~\ref{ex:taylor_series_log_complex}, for all $N \geq N_0$ and all $z \in X$, we have $|\mathrm{Log}(1 + u_n(z))| \leq 2 |u_n(z)|$. Therefore, by the Weierstrass M-test~\ref{thm:weierstrass_m_test_infinite_product}, considering applying it to the series $\sum_{n=N_0}^{\infty} \mathrm{Log}(1 + u_n(z))$, we have
+  \[
+    \widetilde{\log} \ P_N(z) \to L(z) := \sum_{n=1}^{\infty} \mathrm{Log}(1 + u_n(z)) \quad \text{ uniformly on } X \text{ as } N \to \infty
+  \]
+  and hence
+  \[
+    P_N(z)= e^{\widetilde{\log} \ P_N(z)} \to e^{L(z)} \quad \text{ uniformly on } X \text{ as } N \to \infty.
+  \]
+  Recall that $P_N(z) \to f(z)$ uniformly on $X$ as $N \to \infty$, we have
+  \[
+    f(z) = e^{L(z)} \quad \text{ for all } z \in X.
+  \]
+\end{proof}
+
+\begin{exercise} \label{sol:uniform_convergence_derivative}
+  Recall the Generalized Cauchy Integral Formula
+  \[
+    f^{(n)}(z_0) = \frac{n!}{2\pi i} \int_{\Gamma} \frac{f(z)}{(z - z_0)^{n+1}} \, dz,
+  \]
+  where $f$ is analytic inside and on a simple closed contour $\Gamma$ in an open set $X \subseteq \mathbb{C}$ and $z_0$ is a point inside $\Gamma$.
+  
+  Use this formula to show that if a sequence of analytic functions $\{f_n\}$ converges uniformly to a function $f$ on an open set $X \subseteq \mathbb{C}$, then the sequence of derivatives $\{f_n'\}$ converges uniformly to $f'$ on $X$.
+  i.e., show that
+  \[
+    f_n' \to f' \quad \text{ uniformly on } X.
+  \]
+\end{exercise}
+
+\begin{solution}
+  Let $\{f_n\}$ be a sequence of analytic functions on an open set $X \subseteq \mathbb{C}$ that converges uniformly to a function $f$ on $X$. We show that the sequence of derivatives $\{f_n'\}$ converges uniformly to $f'$ on every compact subset of $X$.
+
+  Let $K \subset X$ be an arbitrary compact set. Since $X$ is open and $K$ is compact, there exists $\delta > 0$ such that
+  \[
+    \mathrm{dist}(K, \partial X) \ge \delta.
+  \]
+  Fix $z_0 \in K$ and let $\Gamma$ be the positively oriented circle
+  \[
+    \Gamma := \{ z \in \mathbb{C} : |z - z_0| = r \}, \quad r := \delta/2.
+  \]
+  Then $\Gamma \subset X$ for all $z_0 \in K$. By the Generalized Cauchy Integral Formula, we have
+  \[
+    f_n'(z_0) = \frac{1}{2\pi i} \int_{\Gamma} \frac{f_n(z)}{(z - z_0)^2} \, dz, \quad f'(z_0) = \frac{1}{2\pi i} \int_{\Gamma} \frac{f(z)}{(z - z_0)^2} \, dz.
+  \]
+  Since $f_n \to f$ uniformly on $X$, for any $\varepsilon > 0$ there exists $N \in \mathbb{N}$ such that for all $n \ge N$ and all $z \in X$,
+  \[
+    |f_n(z) - f(z)| < \varepsilon.
+  \]
+  Hence, for $n \ge N$, using the M--L inequality we obtain
+  \[
+  \begin{aligned}
+    |f_n'(z_0) - f'(z_0)| &= \left| \frac{1}{2\pi i}\int_{\Gamma} \frac{f_n(z) - f(z)}{(z - z_0)^2} \, dz \right| \\
+                          &\le \frac{1}{2\pi} \max_{z \in \Gamma} \left| \frac{f_n(z) - f(z)}{(z - z_0)^2} \right|\cdot \mathrm{length}(\Gamma).
+  \end{aligned}
+  \]
+  Since $|z - z_0| = r$ on $\Gamma$ and $\mathrm{length}(\Gamma) = 2\pi r$,
+  we have
+  \[
+    |f_n'(z_0) - f'(z_0)| \le \frac{1}{2\pi} \cdot \frac{\varepsilon}{r^2} \cdot 2\pi r = \frac{\varepsilon}{r}.
+  \]
+  The constant $r = \delta/2$ is independent of $z_0 \in K$. Therefore,
+  \[
+    \sup_{z_0 \in K} |f_n'(z_0) - f'(z_0)| \le \frac{\varepsilon}{r}, \quad \text{for all } n \ge N.
+  \]
+  This shows that $f_n' \to f'$ uniformly on $K$. Since $K \subset X$ was arbitrary, we conclude that
+  \[
+    f_n' \to f' \quad \text{uniformly on compact subsets of } X.
+  \]
+\end{solution}
+
+\begin{corollary}
+  Let $\zeta(z)$ be zeta function defined as in corollary~\ref{cor:classical_euler_product_formula}, we have
+  \[
+    \frac{\zeta'(z)}{\zeta(z)} = -\sum_{p\in\mathbb{P}} \frac{\log p}{p^{z}-1} \quad \text{ for } \Re(z)>1.
+  \]
+\end{corollary}
+
+\begin{note}
+  It's a very important formula in the proof of the prime number theorem (PNT) later.
+\end{note}
+
+\begin{proof}
+  For the zeta function $\zeta(z)$, by corollary~\ref{cor:classical_euler_product_formula}, we have
+  \[
+    \zeta(z) = \prod_{p\in\mathbb{P}} \frac{1}{1 - p^{-z}} = \prod_{p\in\mathbb{P}} (1 + u_p(z)) \quad \text{ where } u_p(z) = \frac{1}{p^{z} - 1}.
+  \]
+  Consider a simply connected open set $X_{\varepsilon} = \{ z \in \mathbb{C} : \Re(z) > 1 + \varepsilon \}$ for some $\varepsilon > 0$, we have
+  \[
+    |u_p(z)| = \left| \frac{1}{p^{z} - 1} \right| \leq 2 |p^{-z}| = 2 p^{-\Re(z)} \leq 2 p^{-(1 + \varepsilon)} \quad \text{ for all } z \in X_{\varepsilon}.
+  \]
+  Let $M_p = 2 p^{-(1 + \varepsilon)}$, we have $\sum_{p\in\mathbb{P}} M_p < \infty$ (Comparison test with the p-series test.) and $M_p < 1$ for all primes $p$.
+  Thus, by theorem~\ref{thm:uniform_convergence_log_infinite_product}, we have
+  \[
+    L(z) := \sum_{p\in\mathbb{P}} \mathrm{Log}(1 + u_p(z))= \sum_{p\in\mathbb{P}} \mathrm{Log}\left(\frac{1}{1 - p^{-z}}\right)= -\sum_{p\in\mathbb{P}} \mathrm{Log}(1 - p^{-z})
+  \]
+  is uniformly convergent on $X_{\varepsilon}$ and satisfies
+  \[
+    e^{L(z)} = \zeta(z) \quad \text{ for all } z \in X_{\varepsilon}.
+  \]
+  Then, by exercise~\ref{sol:uniform_convergence_derivative}, considering the sequence of partial sums of $L(z)$, denoted by $S_N(z) = -\sum_{p \leq N} \mathrm{Log}(1 - p^{-z})$, we have
+  \[
+    S_N'(z) = -\sum_{p \leq N} \frac{p^{-z} \log p}{1 - p^{-z}} = -\sum_{p \leq N} \frac{\log p}{p^{z} - 1} \to L'(z) \quad \text{ uniformly on } X_{\varepsilon} \text{ as } N \to \infty.
+  \]
+  As $e^{L(z)} = \zeta(z)$ for all $z \in X_{\varepsilon}$, by the chain rule, we have
+  \[
+    L'(z) e^{L(z)} = L'(z) \zeta(z) = \zeta'(z) \implies L'(z) = \frac{\zeta'(z)}{\zeta(z)}.
+  \]
+  Therefore, for all $z$ such that $\Re(z) > 1$, we can choose $\varepsilon > 0$ such that $z \in X_{\varepsilon}$, and hence
+  \[
+    \frac{\zeta'(z)}{\zeta(z)} = L'(z) = -\sum_{p\in\mathbb{P}} \frac{\log p}{p^{z} - 1} \quad \text{ for } z \in X_{\varepsilon}.
+  \]
+\end{proof}
+
+\begin{corollary}
+  The Dirichlet $L$-function $L(z, \chi)$ for a Dirichlet character $\chi$ satisfies
+  \[
+    L(z;\chi)=\sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}=\prod_{p\in\mathbb{P}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z)>1,
+  \]
+  (although we have not defined Dirichlet characters yet, and not proved the Euler product formula for Dirichlet $L$-functions, but we will do so later, just take it as given for now).
+
+  Then we have
+  \[
+    \log L(z, \chi) := \sum_{p\in\mathbb{P}}\sum_{k=1}^{\infty}\frac{1}{k}\chi(p^k)p^{-kz} \quad \text{ for } \Re(z)>1,
+  \]
+  is a branch of logarithm of $L(z, \chi)$ on the open set $\{ z \in \mathbb{C} : \Re(z) > 1 \}$, i.e.,
+  \[
+    e^{\log L(z, \chi)} = L(z, \chi) \quad \text{ for } \Re(z)>1.
+  \]
+\end{corollary}
+
+\begin{note}
+  Be careful that here $\log L(z, \chi)$ is defined as a branch of logarithm of $L(z, \chi)$ on the open set $\{ z \in \mathbb{C} : \Re(z) > 1 \}$, not the natural logarithm of real numbers.
+\end{note}
+
+\begin{proof}
+  For the Dirichlet $L$-function $L(z, \chi)$, we have
+  \[
+    L(z, \chi) = \prod_{p\in\mathbb{P}} \frac{1}{1 - \chi(p)p^{-z}} = \prod_{p\in\mathbb{P}} (1 + u_p(z)) \quad \text{ where } u_p(z) = \frac{\chi(p)}{p^{z} - \chi(p)}.
+  \]
+  Consider a simply connected open set $X_{\varepsilon} = \{ z \in \mathbb{C} : \Re(z) > 1 + \varepsilon \}$ for some $\varepsilon > 0$, we have
+  \[
+    |u_p(z)| = \left| \frac{\chi(p)}{p^{z} - \chi(p)} \right| \leq 2 |\chi(p)| |p^{-z}| = 2 p^{-\Re(z)} \leq 2 p^{-(1 + \varepsilon)} \quad \text{ for all } z \in X_{\varepsilon}.
+  \]
+  Let $M_p = 2p^{-(1 + \varepsilon)}$, we have $\sum_{p\in\mathbb{P}} M_p < \infty$ (Comparison test with the p-series test.) and $M_p < 1$ for all primes $p$.
+  Thus, by theorem~\ref{thm:uniform_convergence_log_infinite_product}, we have
+  \[
+    L(z) := \sum_{p\in\mathbb{P}} \mathrm{Log}(1 + u_p(z))= \sum_{p\in\mathbb{P}} \mathrm{Log}\left(\frac{1}{1 - \chi(p)p^{-z}}\right)= -\sum_{p\in\mathbb{P}} \mathrm{Log}(1 - \chi(p)p^{-z})
+  \]
+  is uniformly convergent on $X_{\varepsilon}$ and satisfies
+  \[
+    e^{L(z)} = L(z, \chi) \quad \text{ for all } z \in X_{\varepsilon}.
+  \]
+  Next, we expand $\mathrm{Log}(1 - \chi(p)p^{-z})$ using the Taylor series expansion from exercise~\ref{ex:taylor_series_log_complex}, $\mathrm{Log}(1-z) = -\sum_{n=1}^{\infty} \frac{z^n}{n}$ for $|z|<1$, we have
+  \[
+    \mathrm{Log}(1 - \chi(p)p^{-z}) = -\sum_{k=1}^{\infty} \frac{(\chi(p)p^{-z})^k}{k} = -\sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kz}.
+  \]
+  Therefore,
+  \[
+    L(z) = \sum_{p\in\mathbb{P}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kz} \quad \text{ for } z \in X_{\varepsilon}.
+  \]
+  Finally, for all $z$ such that $\Re(z) > 1$, we can choose $\varepsilon > 0$ such that $z \in X_{\varepsilon}$, and hence
+  \[
+    e^{\log L(z, \chi)} = L(z, \chi) \quad \text{ for } \Re(z) > 1.
+  \]
+\end{proof}
 
 
+\chapter{Dirichlet Characters}
+
+\section{Definition and Basic Properties}
+
+\begin{definition}[Dirichlet Character]
+  A function $\chi:\mathbb{Z}\to\mathbb{C}$ is called a Dirichlet character modulo $q$ if the following conditions hold:
+  \begin{enumerate}[(i)]
+    \item $\chi$ is completely multiplicative, i.e., for all $m,n\in \mathbb{Z}$, $\chi(mn)=\chi(m)\chi(n)$.
+    \item $\chi$ is periodic with period $q$, i.e., for all $n\in \mathbb{Z}$, $\chi(n+q)=\chi(n)$.
+    \item $\chi(n)\ne0$ if and only if $\gcd(n,q)= 1$.
+  \end{enumerate}
+\end{definition}
+
+\begin{note}
+  By the definition of Dirichlet character, we have $\chi(1)=1$ since $\chi(1)=\chi(1\cdot1)=\chi(1)\chi(1)$ and $\chi(1)\ne0$ as $\gcd(1,q)=1$. So $\chi(1)=1$ for any Dirichlet character $\chi$.
+\end{note}
+
+\begin{exercise}
+  For $m,n\in \mathbb{Z}$ and $q$ a positive integer, show that:
+  \[
+    \gcd(mn,q)=1 \iff \gcd(m,q)=1 \text{ and } \gcd(n,q)=1.
+  \]
+\end{exercise}
+
+\begin{solution}
+  ($\Rightarrow$) Suppose that $\gcd(mn,q)=1$. Then there are integers $a,b$ such that
+  \[
+    a(mn) + bq = 1.
+  \]
+  Thus, any common divisor of $m$ and $q$ must divide the right-hand side, which is $1$. Therefore, $\gcd(m,q)=1$. Similarly, any common divisor of $n$ and $q$ must also divide $1$, so $\gcd(n,q)=1$.
+
+  ($\Leftarrow$) Conversely, suppose that $\gcd(m,q)=1$ and $\gcd(n,q)=1$. Then there exist integers $a_1,b_1$ such that
+  \[
+    a_1 m + b_1 q = 1,
+  \]
+  and integers $a_2,b_2$ such that
+  \[
+    a_2 n + b_2 q = 1.
+  \]
+  Multiplying these two equations together, we get
+  \[
+    (a_1 m + b_1 q)(a_2 n + b_2 q) = 1.
+  \]
+  Expanding the left-hand side, we have
+  \[
+    a_1 a_2 mn + (a_1 b_2 m + a_2 b_1 n + b_1 b_2 q) q = 1.
+  \]
+  This shows that any common divisor of $mn$ and $q$ must divide the right-hand side, which is $1$. Therefore, $\gcd(mn,q)=1$.
+\end{solution}
+
+\begin{proposition}
+  Let $\chi$ be a Dirichlet character modulo $q$. Consider a function $\widetilde{\chi}:\mathbb{Z}/q\mathbb{Z}\to\mathbb{C}$ defined by
+  \[
+    \widetilde{\chi}([n]) := \chi(n)
+  \]
+  where $[n]$ is the equivalence class of $n$ in $\mathbb{Z}/q\mathbb{Z}$.
+
+  Then, $\widetilde{\chi}$ is well-defined on $\mathbb{Z}/q\mathbb{Z}$.
+\end{proposition}
+
+\begin{remark}
+  Recall that $\mathbb{Z}/q\mathbb{Z}$ is a finite cyclic group under addition modulo $q$, and further more, if we add the multiplication operation modulo $q$, then it becomes a finite ring.
+
+  One may consider $\widetilde{\chi}$ as a function defined on the finite ring $\mathbb{Z}/q\mathbb{Z}$ but note that $\widetilde{\chi}$ is not a ring homomorphism since it is not additive in general, i.e., $\widetilde{\chi}([m]+[n]) \ne \widetilde{\chi}([m]) + \widetilde{\chi}([n])$ in general.
+\end{remark}
+
+\begin{note}
+  After this proposition, we will often identify $\chi$ with $\widetilde{\chi}$ and simply write $\chi:\mathbb{Z}/q\mathbb{Z}\to\mathbb{C}$. Hopefully this abuse of notation will not cause any confusion.
+\end{note}
+
+\begin{exercise}
+  Prove the above proposition.
+\end{exercise}
+
+\begin{solution}
+  To show that $\widetilde{\chi}$ is well-defined, we need to verify that if $[n] = [m]$ in $\mathbb{Z}/q\mathbb{Z}$, then $\widetilde{\chi}([n]) = \widetilde{\chi}([m])$. 
+
+  By the definition of equivalence classes in $\mathbb{Z}/q\mathbb{Z}$, we have $[n] = [m]$ if and only if $n \equiv m \mod q$. This means that there exists an integer $k$ such that
+  \[
+    n = m + kq.
+  \]
+  Since $\chi$ is periodic with period $q$, we have
+  \[
+    \chi(n) = \chi(m + kq) = \chi(m).
+  \]
+  Therefore,
+  \[
+    \widetilde{\chi}([n]) = \chi(n) = \chi(m) = \widetilde{\chi}([m]).
+  \]
+  This shows that $\widetilde{\chi}$ is well-defined on $\mathbb{Z}/q\mathbb{Z}$.
+\end{solution}
+
+\begin{definition}[Group of Units of $\mathbb{Z}/q\mathbb{Z}$]
+  Let $\mathbb{Z}/q\mathbb{Z}$ be the finite \textbf{ring} of integers modulo $q$. The group of units of $\mathbb{Z}/q\mathbb{Z}$, denoted by $G_q$, is the set of all elements in $\mathbb{Z}/q\mathbb{Z}$ that have a multiplicative inverse. We regard $G_q$ as a finite \textbf{group} under multiplication modulo $q$.
+\end{definition}
+
+\begin{example} \label{ex:gcd_ideal}
+  Here, we review some properties in elementary number theory to introduce the following lemma.
+
+  Let $I_{m,n}=\{mx+ny : x,y\in\mathbb{Z}\}=\langle m,n\rangle$ be the ideal generated by $m$ and $n$ in the ring of integers $\mathbb{Z}$. Then it is a well-known result that
+  \[
+    I_{m,n}=d\mathbb{Z} \quad \text{where } d=\gcd(m,n)
+  \]
+  (i.e.\ $\langle m,n\rangle=\langle \gcd(m,n)\rangle$). If you are familiar with the concept of a principal ideal domain (PID), then this result follows directly from the fact that $\mathbb{Z}$ is a PID. Here, however, we give a fundamental proof without using the concept of PID. Our goal is first to show that $I_{m,n}=d\mathbb{Z}$ for some $d\in\mathbb{Z}$, and then to show that this $d$ is indeed $\gcd(m,n)$.
+
+  First, we show that $I_{m,n}\subseteq d\mathbb{Z}$ for some $d\in\mathbb{Z}$. Let $d$ be the smallest positive integer in $I_{m,n}$, so there exist integers $x_0,y_0$ such that $ d=mx_0+ny_0.$
+  For any element $a\in I_{m,n}$, we have $a=mx_1+ny_1$ for some integers $x_1,y_1$. By the division algorithm, there exist unique integers $q,r$ such that $ a=qd+r \quad \text{with } 0\le r<d.$
+  Thus,
+  \[
+    r=a-qd=(mx_1+ny_1)-q(mx_0+ny_0) =m(x_1-qx_0)+n(y_1-qy_0)\in I_{m,n}.
+  \]
+  Since $d$ is the smallest positive integer in $I_{m,n}$, we must have $r=0$. Therefore, $a=qd\in d\mathbb{Z}$, and hence $I_{m,n}\subseteq d\mathbb{Z}$.
+
+  Now we show that $d\mathbb{Z}\subseteq I_{m,n}$. Since $d=mx_0+ny_0$, for any integer $k$ we have
+  \[
+    kd=k(mx_0+ny_0)=m(kx_0)+n(ky_0)\in I_{m,n}.
+  \]
+  Thus, $d\mathbb{Z}\subseteq I_{m,n}$, and hence $I_{m,n}=d\mathbb{Z}$.
+
+  Furthermore, since both $m$ and $n$ belong to $I_{m,n}$, $d$ divides both $m$ and $n$. Thus, $d$ is a common divisor of $m$ and $n$. If there exists a common divisor $d'$ of $m$ and $n$ such that $d'>d$, then $d'$ divides every element of $I_{m,n}$, which contradicts the definition of $d$ as the smallest positive integer in $I_{m,n}$. Therefore, $d=\gcd(m,n).$
+\end{example}
+
+\begin{lemma}[Characterization of Group of Units of $\mathbb{Z}/q\mathbb{Z}$]
+  The group of units of $\mathbb{Z}/q\mathbb{Z}$ is given by
+  \[
+    G_q = \{ [n] \in \mathbb{Z}/q\mathbb{Z} : \gcd(n,q) = 1 \}.
+  \]
+  Sometimes, we also write $G_q = \{ 0 \leq r \leq q-1 : \gcd(r,q) = 1 \}$ by using $r$ to denote the representative of the equivalence class $[r]$ in $\mathbb{Z}/q\mathbb{Z}$.
+
+  Furthermore, by definition of Euler's totient function $\phi(q)$, we have
+  \[
+    |G_q| = \phi(q).
+  \]
+\end{lemma}
+
+\begin{proof}
+  For a given $[n] \in \mathbb{Z}/q\mathbb{Z}$, we have $[n] \in G_q$ if and only if there exists $[m] \in \mathbb{Z}/q\mathbb{Z}$ such that
+  \[
+    [n][m] = [1] \implies [nm] = [1] \implies nm \equiv 1 \mod q.
+  \]
+  This is equivalent to saying that for which $n\in \mathbb{Z}$ the linear congruence equation $nx \equiv 1 \mod q$ has a solution. And this is equivalent to solve the linear Diophantine equation
+  \[
+    nx - qy = 1
+  \]
+  for integers $x,y$. By example~\ref{ex:gcd_ideal}, we know that $nx - qy \in \gcd(n,q) \mathbb{Z}$ for all integers $x,y$. Thus, the above equation has integer solutions only if $\gcd(n,q) = 1$. (Otherwise, $1 \notin \gcd(n,q) \mathbb{Z}$.) Thus, we have shown that
+  \[
+    G_q \subseteq \{ [n] \in \mathbb{Z}/q\mathbb{Z} : \gcd(n,q) = 1 \}.
+  \]
+  Conversely, suppose that $\gcd(n,q) = 1$. Then $1 \in I_{n,q}$ by example~\ref{ex:gcd_ideal}, so there exist integers $x_0,y_0$ such that $n x_0 + q y_0 = 1$. The equation $n x \equiv 1 \mod q$ has a solution $x \equiv x_0 \mod q$. Thus, there exists $[m] \in \mathbb{Z}/q\mathbb{Z}$ such that $[n][m] = [1]$, and hence $[n] \in G_q$.
+\end{proof}
+
+\begin{corollary}[Euler's Theorem] \label{cor:eulers_theorem}
+  For any integer $n$ such that $\gcd(n,q) = 1$, we have
+  \[
+    n^{\phi(q)} \equiv 1 \mod q.
+  \]
+\end{corollary}
+
+\begin{proof}
+  Since $\gcd(n,q) = 1$, we have $[n] \in G_q$. By Corollary of Lagrange's Theorem (If $g\in G$, $G$ is a finite group, then $g^{|G|}=e$ is the identity element of $G$), we have
+  \[
+    [n]^{|G_q|} = [1] \implies [n]^{\phi(q)} = [1] \implies n^{\phi(q)} \equiv 1 \mod q.
+  \]
+\end{proof}
+
+\begin{corollary}[Property of Dirichlet Characters from Euler's Theorem] \label{cor:dirichlet_character_root_of_unity}
+  Let $\chi$ be a Dirichlet character modulo $q$. Then for any $n \in \mathbb{Z}$ such that $\gcd(n,q) = 1$, we have
+  \[
+    \chi(n)^{\phi(q)} =  1
+  \]
+\end{corollary}
+
+\begin{proof}
+  Direct from corollary~\ref{cor:eulers_theorem} and the fact that $\chi$ is completely multiplicative, we have
+  \[
+    \chi(n)^{\phi(q)} = \chi(n^{\phi(q)}) = \chi(1) = 1.
+  \]
+\end{proof}
+
+\begin{corollary}[Dirichlet Characters are Roots of Unity] \label{cor:dirichlet_character_are_roots_of_unity}
+  Let $\chi$ be a Dirichlet character modulo $q$. Then we have
+  \[
+    \chi(n) = \begin{cases}
+      0 & \text{ if } \gcd(n,q) \ne 1, \\
+      e^{\frac{2\pi i \cdot k_q(n)}{\phi(q)}} & \text{ for some } k_q(n) \in \{0,1,2,\ldots,\phi(q)-1\} \text{ if } \gcd(n,q) = 1.
+    \end{cases}
+  \]
+\end{corollary}
+
+\begin{proof}
+  Direct from corollary~\ref{cor:dirichlet_character_root_of_unity}, we have $\chi(n)^{\phi(q)} = 1$ for all $n$ such that $\gcd(n,q) = 1$. Thus, $\chi(n)$ is a $\phi(q)$-th root of unity. The $\phi(q)$-th roots of unity are given by
+  \[
+    e^{2\pi i k / \phi(q)} \quad \text{ for } k = 0, 1, 2, \ldots, \phi(q)-1.
+  \]
+  and for $n$ such that $\gcd(n,q) \ne 1$, we have $\chi(n) = 0$ by definition of Dirichlet characters.
+\end{proof}
+
+\begin{remark}
+  Clearly, $k=k_q(n)$ may depend on both $q$ and $n$. Thus, understanding a Dirichlet character $\chi$ mod $q$ boils down to understanding the map
+  \[
+    n \mapsto k_q(n) \quad \text{ for } n \text{ such that } \gcd(n,q) = 1.
+  \]
+\end{remark}
 
 
+\section{Characters in Group Theory}
+
+\begin{definition}[Character of a Finite Abelian Group]
+  Let $G$ be a finite abelian group. A character of $G$ is a group homomorphism $\chi:G\to \mathbb{C}\setminus\{0\}$, where $\mathbb{C}\setminus\{0\}$ is regarded as a group under multiplication.
+\end{definition}
+
+\begin{note}
+  Recall that a group homomorphism $\varphi:G\to H$ between two groups $G$ and $H$ is a map such that for all $g_1,g_2\in G$,
+  \[
+    \varphi(g_1 g_2) = \varphi(g_1) \varphi(g_2).
+  \]
+\end{note}
+
+\begin{proposition}[Characters have Modulus 1] \label{prop:character_modulus_1}
+  Let $\chi$ be a character of a finite abelian group $G$. Then, $|\chi(g)|=1$, for all $g\in G$.
+\end{proposition}
+
+\begin{exercise}
+  Prove the above proposition.
+\end{exercise}
+
+\begin{solution}
+    (Recall that for a homomorphism $\varphi:G\to H$, we have $\varphi(e_G)=e_H$, where $e_G$ and $e_H$ are the identity elements of $G$ and $H$ respectively.) Thus, for any $g\in G$ with order $d$, we have
+    \[
+      1 = \chi(e_G) = \chi(g^{|G|}) = (\chi(g))^{|G|} \implies (\chi(g))^{|G|} = 1 \implies |\chi(g)| = 1.
+    \]
+\end{solution}
+
+\begin{definition}[Principal Character]
+  Let $G$ be a finite abelian group. The character $\chi_0:G\to \mathbb{C}\setminus\{0\}$ defined by
+  \[
+    \chi_0(g) = 1 \quad \text{ for all } g \in G
+  \]
+  is called the Principal Character of $G$.
+\end{definition}
+
+\begin{definition}[Group of Characters]
+  Let $G$ be a finite abelian group. The set of all characters of $G$ is denoted by $\widehat{G}$, i.e.,
+  \[
+    \widehat{G} := \{ \chi : \chi \text{ is a character of } G \}.
+  \]
+\end{definition}
+
+\begin{exercise} \label{ex:left-translation-bijection}
+  Let $G$ be a finite abelian group and $g^*\in G$ be any element. Show that $H := \{ gg^* : g \in G \}$ has the same cardinality as $G$. (i.e. Elements of $G$ and $H$ are same.)
+\end{exercise}
+
+\begin{solution}
+  We only need to show that the map $f:G\to G$ defined by $f(g) = gg^*$ is bijective. Clearly it is surjective so we only need to show that it is injective.
+
+  Suppose that $f(g_1) = f(g_2)$ for some $g_1,g_2\in G$. Then, we have
+  \[
+    g_1 g^* = g_2 g^* \implies g_1g^* (g^*)^{-1} = g_2 g^* (g^*)^{-1} \implies g_1 = g_2
+  \]
+  since $G$ is a group and hence every element has a multiplicative inverse. Thus, $f$ is injective.
+\end{solution}
+
+\begin{exercise}
+  
+\end{exercise}
+
+\begin{solution}
+  
+\end{solution}
+
+\begin{theorem}[Orthogonality Relations of Characters] \label{thm:orthogonality_relations_of_characters}
+  For a finite abelian group $G$, let $\chi_1,\chi_2\in \widehat{G}$, define the inner product of $\chi_1$ and $\chi_2$ by
+  \[
+    \langle \chi_1, \chi_2 \rangle := \frac{1}{|G|} \sum_{g \in G} \chi_1(g) \overline{\chi_2(g)}.
+  \]
+  Then, we have
+  \[
+    \langle \chi_1, \chi_2 \rangle = \begin{cases}
+      1 & \text{ if } \chi_1 = \chi_2, \\
+      0 & \text{ if } \chi_1 \ne \chi_2.
+    \end{cases}
+  \]
+\end{theorem}
+
+\begin{proof}
+  We omitted the inner product proof of $\langle \chi_1, \chi_2 \rangle$ here. Just show the last part that $\langle \chi_1, \chi_2 \rangle = \delta_{\chi_1,\chi_2}$ where $\delta$ is the Kronecker delta.
+
+  If $\chi_1 = \chi_2$, $\chi_1(g) \overline{\chi_2(g)} = |\chi_1(g)|^2 = 1$ for all $g \in G$ by proposition~\ref{prop:character_modulus_1}. Thus, sum of them is $|G|$ and hence $\langle \chi_1, \chi_2 \rangle = \frac{1}{|G|} \cdot |G| = 1$.
+
+  If $\chi_1 \ne \chi_2$, Let $\psi(g) := \chi_1(g) \overline{\chi_2(g)}$ is also a character of $G$. If $\psi$ is the principal character, then $\psi(g)=1$ for all $g \in G$, which implies that for all $g \in G$,
+  \[
+    \chi_1(g)\overline{\chi_2(g)} = 1 \implies \chi_1(g)\overline{\chi_2(g)}\chi_2(g) = \chi_2(g) \implies \chi_1(g) = \chi_2(g)
+  \]
+  contradicting the assumption that $\chi_1 \ne \chi_2$. Thus, $\psi$ is not the principal character, so there exists some $g_0 \in G$ such that $\psi(g_0) \ne 1$. Then, by exercise~\ref{ex:left-translation-bijection}, we have
+  \[
+    \sum_{g \in G} \psi(g) = \sum_{g \in G} \psi(g g_0) = \psi(g_0) \sum_{g \in G} \psi(g).
+  \]
+  Since $\psi(g_0) \ne 1$, we have $\sum_{g \in G} \psi(g) = 0$. Therefore, $\langle \chi_1, \chi_2 \rangle = \frac{1}{|G|} \cdot 0 = 0$.
+\end{proof}
+
+\begin{exercise} \label{ex:vector_space_of_functions}
+  Let $G$ be a finite set and consider the set $\mathbb{C}^{G}:=\{ f : G \to \mathbb{C} | f \text{ is any function} \}$. Show that $\mathbb{C}^{G}$ is a vector space over the field $\mathbb{C}$ with pointwise addition and scalar multiplication, i.e., for $f_1,f_2\in \mathbb{C}^{G}$ and $\alpha\in \mathbb{C}$, 
+  \[
+    (f_1 + f_2)(g) := f_1(g) + f_2(g), \quad (\alpha f_1)(g) := \alpha \cdot f_1(g) \quad \text{ for all } g \in G.
+  \]
+\end{exercise}
+
+\begin{solution}
+  We need to verify the vector space conditions for $\mathbb{C}^{G}$.
+
+  \begin{enumerate}[(i)]
+    \item (Closure under addition) For any $f_1,f_2\in \mathbb{C}^{G}$, $(f_1 + f_2)(g) = f_1(g) + f_2(g) \in \mathbb{C}$ for all $g \in G$. Thus, $f_1 + f_2 \in \mathbb{C}^{G}$.
+    \item (Closure under scalar multiplication) For any $f_1\in \mathbb{C}^{G}$ and $\alpha\in \mathbb{C}$, $(\alpha f_1)(g) = \alpha \cdot f_1(g) \in \mathbb{C}$ for all $g \in G$. Thus, $\alpha f_1 \in \mathbb{C}^{G}$.
+    \item (Associativity of addition) For any $f_1,f_2,f_3\in \mathbb{C}^{G}$, we have
+    \[
+      ((f_1 + f_2) + f_3)(g) = (f_1 + f_2)(g) + f_3(g) = f_1(g) + f_2(g) + f_3(g) = f_1(g) + (f_2 + f_3)(g) = (f_1 + (f_2 + f_3))(g).
+    \]
+    Thus, $(f_1 + f_2) + f_3 = f_1 + (f_2 + f_3)$.
+    \item (Commutativity of addition) For any $f_1,f_2\in \mathbb{C}^{G}$, we have
+    \[
+      (f_1 + f_2)(g) = f_1(g) + f_2(g) = f_2(g) + f_1(g) = (f_2 + f_1)(g).
+    \]
+    Thus, $f_1 + f_2 = f_2 + f_1$.
+    \item (Existence of additive identity) Define the zero function $0:G\to\mathbb{C}$ by $0(g)=0$ for all $g\in G$. Then, for any $f\in \mathbb{C}^{G}$, we have
+    \[
+      (f + 0)(g) = f(g) + 0(g) = f(g).
+    \]
+    Thus, $f + 0 = f$.
+    \item (Existence of additive inverses) For any $f\in \mathbb{C}^{G}$, define $-f:G\to\mathbb{C}$ by $(-f)(g) = -f(g)$ for all $g\in G$. Then, we have
+    \[
+      (f + (-f))(g) = f(g) + (-f)(g) = f(g) - f(g) = 0.
+    \]
+    Thus, $f + (-f) = 0$.
+    \item (Distributivity of scalar multiplication over vector addition) For any $\alpha\in \mathbb{C}$ and $f_1,f_2\in \mathbb{C}^{G}$, we have
+    \[
+      (\alpha (f_1 + f_2))(g) = \alpha (f_1 + f_2)(g) = \alpha (f_1(g) + f_2(g)) = \alpha f_1(g) + \alpha f_2(g)  = (\alpha f_1 + \alpha f_2)(g).
+    \]
+    Thus, $\alpha (f_1 + f_2) = \alpha f_1 + \alpha f_2$.
+    \item (Distributivity of scalar multiplication over field addition) For any $\alpha,\beta\in \mathbb{C}$ and $f\in \mathbb{C}^{G}$, we have
+    \[  ((\alpha + \beta) f)(g) = (\alpha + \beta) f(g) = \alpha f(g) + \beta f(g) = (\alpha f + \beta f)(g). \]
+    Thus, $(\alpha + \beta) f = \alpha f + \beta f$.
+    \item (Compatibility of scalar multiplication with field multiplication) For any $\alpha,\beta\in \mathbb{C}$ and $f\in \mathbb{C}^{G}$, we have
+    \[  ((\alpha \beta) f)(g) = (\alpha \beta) f(g) = \alpha (\beta f(g)) = (\alpha (\beta f))(g). \]
+    Thus, $(\alpha \beta) f = \alpha (\beta f)$.
+    \item (Existence of multiplicative identity) For any $f\in \mathbb{C}^{G}$, we have
+    \[  (1 f)(g) = 1 \cdot f(g) = f(g). \]
+    Thus, $1 f = f$.
+  \end{enumerate}
+  Therefore, $\mathbb{C}^{G}$ is a vector space over the field $\mathbb{C}$.
+\end{solution}
+
+\begin{exercise} \label{ex:dimension_of_function_vector_space}
+  Show that the vector space $\mathbb{C}^{G}$ over the field $\mathbb{C}$ which is defined in exercise~\ref{ex:vector_space_of_functions} has dimension $|G|$.
+\end{exercise}
+
+\begin{solution}
+  Consider the set of functions $\{ e_g : g \in G \}$ defined by
+  \[
+    e_g(h) = \begin{cases}
+      1 & \text{ if } h = g, \\
+      0 & \text{ if } h \ne g.
+    \end{cases}
+  \]
+  for all $h \in G$. We will show that this set forms a basis for the vector space $\mathbb{C}^{G}$.
+
+  First, we show that the set $\{ e_g : g \in G \}$ spans $\mathbb{C}^{G}$. For any function $f \in \mathbb{C}^{G}$, consider the linear combination
+  \[
+    g = \sum_{g \in G} f(g) e_g.
+  \]
+  Evaluating this linear combination at any $h \in G$, we have
+  \[
+    g(h) = \sum_{g \in G} f(g) e_g(h)= f(h) e_h(h) + \sum_{\substack{g \in G \\ g \ne h}} f(g) e_g(h) = f(h) \cdot 1 + \sum_{\substack{g \in G \\ g \ne h}} f(g) \cdot 0 = f(h).
+  \]
+  Thus, $g(h) = f(h)$ for all $h \in G$, which implies that $g = f$.
+  This shows that any function in $\mathbb{C}^{G}$ can be written as a linear combination of the functions $e_g$, so the set spans $\mathbb{C}^{G}$.
+
+  Next, we show that the set $\{ e_g : g \in G \}$ is linearly independent. Suppose that there exist scalars $\alpha_g \in \mathbb{C}$ such that
+  \[
+    \sum_{g \in G} \alpha_g e_g = 0,
+  \]
+  where $0$ is the zero function. Evaluating this equation at each $h \in G$, we have
+  \[
+    \sum_{g \in G} \alpha_g e_g(h) = 0.
+  \]
+  Since $e_g(h) = 1$ if $h = g$ and $0$ otherwise, this simplifies to
+  \[
+    \alpha_h = 0.
+  \]
+  Since this holds for all $h \in G$, we conclude that all coefficients $\alpha_g$ must be zero. Therefore, the set $\{ e_g : g \in G \}$ is linearly independent.
+
+  Since the set $\{ e_g : g \in G \}$ spans $\mathbb{C}^{G}$ and is linearly independent, it forms a basis for $\mathbb{C}^{G}$. The number of elements in this basis is equal to the cardinality of $G$, which is $|G|$. Therefore, the dimension of the vector space $\mathbb{C}^{G}$ is $|G|$.
+\end{solution}
+
+\begin{corollary}[Number of Characters is at most the Order of the Group] \label{cor:number_of_characters_at_most_order_of_group}
+  For a finite abelian group $G$, and its group of characters $\widehat{G}$, we have
+  \[
+    |\widehat{G}| \leq |G|.
+  \]
+\end{corollary}
+
+\begin{proof}
+  We can view $\widehat{G}$ as a subset of the vector space $\mathbb{C}^{G}$ over the field $\mathbb{C}$ defined in exercise~\ref{ex:vector_space_of_functions}. 
+  By theorem~\ref{thm:orthogonality_relations_of_characters}, the characters in $\widehat{G}$ are orthonormal with respect to the inner product defined there. Thus, the characters in $\widehat{G}$ are linearly independent in the vector space $\mathbb{C}^{G}$. This is one of the standard results in linear algebra: Any orthonormal set in an inner product space is linearly independent and here is the proof:
+  Suppose that there exist scalars $\alpha_i\in\mathbb{C}$ such that $\sum_{\chi_i\in \widehat{G}} \alpha_i \chi_i = 0$, then
+  \[
+    \langle \sum_{\chi_i\in \widehat{G}} \alpha_i \chi_i, \chi_j \rangle = 0 \implies \sum_{\chi_i\in \widehat{G}} \alpha_i \langle \chi_i, \chi_j \rangle = 0 \implies \sum_{\chi_i\in \widehat{G}} \alpha_i \delta_{\chi_i,\chi_j} = 0 \implies \alpha_j = 0.
+  \]
+  Therefore, by exercise~\ref{ex:dimension_of_function_vector_space}, we have
+  \[
+    |\widehat{G}| = \dim(\text{span}(\widehat{G})) \leq \dim(\mathbb{C}^{G}) = |G|.
+  \]
+\end{proof}
+
+\begin{theorem}[Number of Characters of Cyclic Group and Dirichlet Characters] \label{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters}
+  If $G = \mathbb{Z}/q\mathbb{Z}$, then there are exactly $|G| = q$ characters of $G$, i.e., $|\widehat{G}| = q$ and they are given by
+  \[
+    \chi_k([n]) = e^{\frac{2\pi i k n}{q}} \quad \text{ for } k = 0, 1, 2, \ldots, q-1.
+  \]
+  
+  Furthermore, $\widehat{G}\cong G$.
+\end{theorem}
+
+\begin{proof}
+  First, we show that $\chi_k([n])$ is indeed a character of $G$. For any $[m],[n]\in G$, we have
+  \[
+    \chi_k([m] + [n]) = \chi_k([m+n]) = e^{\frac{2\pi i k (m+n)}{q}} = e^{\frac{2\pi i k m}{q}} \cdot e^{\frac{2\pi i k n}{q}} = \chi_k([m]) \cdot \chi_k([n]).
+  \]
+  Thus, $\chi_k$ is a group homomorphism from $G$ to $\mathbb{C}\setminus\{0\}$, so it is a character of $G$.
+
+  Next, we show that the characters $\chi_k$ for $k = 0, 1, 2, \ldots, q-1$ are distinct. Since $\chi_{k}=\chi_{k+q}$ for all integers $k$, it suffices to show that $\chi_k \ne \chi_{k'}$ for $k,k' \in \{0, 1, 2, \ldots, q-1\}$ with $k \ne k'$.
+  Suppose that $\chi_k = \chi_{k'}$ for some $k,k' \in \{0, 1, 2, \ldots, q-1\}$. Then, for all $[n] \in G$, we have
+  \[
+    e^{\frac{2\pi i k n}{q}} = e^{\frac{2\pi i k' n}{q}}.
+  \]
+  This implies that
+  \[
+    e^{\frac{2\pi i (k - k') n}{q}} = 1 \quad \text{ for all } n \in \mathbb{Z}.
+  \]
+  In particular, for $n = 1$, we have
+  \[
+    e^{\frac{2\pi i (k - k')}{q}} = 1.
+  \]
+  This implies that $k - k' \equiv 0 \mod q$. Since both $k$ and $k'$ are in the range $0$ to $q-1$, we must have $k = k'$. Thus, the characters $\chi_k$ are distinct. 
+  Therefore, we have found $q$ distinct characters of $G$. By the previous corollary~\ref{cor:number_of_characters_at_most_order_of_group}, we have $|\widehat{G}| \leq |G| = q$. Thus, we conclude that $|\widehat{G}| = q$.
+
+  For the $\widehat{G} \cong G$ part, we can define the map $\varphi:G\to \widehat{G}$ by $\varphi([k]) = \chi_k$. It is easy to check that $\varphi$ is a group isomorphism.
+\end{proof}
 
 
 \end{document}
