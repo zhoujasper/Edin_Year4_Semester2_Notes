@@ -1,0 +1,178 @@
+\documentclass{note}
+
+\title{NPDE Note}
+\author{}
+
+\pagestyle{fancy}
+
+\begin{document}
+\maketitle
+
+\begin{multicols}{2}
+    \fbox{\parbox{\linewidth}{
+
+    \section{Definitions, Classification of PDEs}
+
+    \begin{MyTh}{Big $\Ocal$}
+        $f(t)=\Ocal(g(t))$ as $t\to t_0$ if \ \ \ok{$\exists \eps>0,C>0$ s.t. $\forall |t-t_0|<\eps$, $|f(t)|\leq C|g(t)|$}
+
+        \qquad {\tiny $\Leftrightarrow$ \ps{$\lim_{t\to t_0}[f(t)/g(t)]$ bdd}} \qquad \ps{ps: If not say $t\to t_0$, assume $t\to 0$}
+    \end{MyTh}
+
+    \begin{MyTh}{Classification}
+        For \ps{$au_{xx}+bu_{xy}+cu_{yy}+du_x+eu_y+fu+g=0$} \quad \scalebox{0.9}{\tiny $(a,b,c)\ne(0,0,0)$}
+
+        \begin{enumerate}
+            \item \ok{Hyperbolic}: $b^2-4ac>0$ \ \ \ps{Admits non-trivial plane wave solutions}
+            \item \ok{Parabolic}: $b^2-4ac=0$ \qquad\qquad (\ok{\tiny 对变量$x,y$进行缩放后不会改变PDE类型})
+            \item \ok{Elliptic}: $b^2-4ac<0$ \ \ \ps{No non-trivial plane wave solutions}
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Weighted 2-Norm}
+        $\|u\|_{2,\Delta x}=\sqrt{(\Delta x)^d}\|u\|_2$ \quad where $d$ s.t. $u:\R^d\to\R^n$ \ \ \scalebox{0.45}{\imp{$\downarrow$ 不确定是否要保留,应该要证明}}
+
+        \quad For $d=1$ and $\Delta x=\frac{D}{N}$, then: \ok{$\forall i,u_i=\Ocal((\Delta x)^p)$ \ $\Rightarrow$ \ $\|u\|_{2,\Delta x}=\Ocal((\Delta x)^p)$}
+
+        \quad For $A$ symmetric: \ok{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
+    \end{MyTh}
+
+    \begin{MyTh}{Linear Algebra}\tiny
+        \ok{Positive Definite}: $\lambda_i>0,\forall i$ \quad \ok{Negative Definite}: $\lambda_i<0,\forall i$
+
+        \quad \ok{Spectral Theorem}: If $A$ \ok{symmetric}, then \ok{$A=Q\Lambda Q^{\top}$} where $Q$ orthogonal, $\Lambda$ diagonal with eigenvalues.
+    \end{MyTh}
+    }}
+
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{Global/Local Error, Convergence, Consistency, Stability}
+
+    \begin{MyTh}{Exact \& Approx. Sol}\tiny
+        \ok{$U_n$: approx. $n$-th time-step sol}; \quad \ok{$u_n$: exact sol at $n$-th time-step}.
+    \end{MyTh}
+
+    \begin{MyTh}{Global Error $(e_n,\mathbf{e}(\Delta t))$}\tiny
+        \ok{$e_n=U_n-u(t=n\Delta t)$} \quad \ok{$\mathbf{e}(\Delta t)=[e_0,e_1,\ldots,e_N]^{\top}$}
+    \end{MyTh}
+
+    \begin{MyTh}{Convergence}\tiny
+        A numerical method is convergent if \ok{$\lim_{\Delta t\to 0}\|\mathbf{e}(\Delta t)\|=0$}
+        
+        \qquad If \ok{$\lim_{\Delta t\to 0}\frac{\|\mathbf{e}(\Delta t)\|}{(\Delta t)^p}=C$} \ \ (i.e. $\lim_{\Delta t\to 0}\|\mathbf{e}(\Delta t)\|=\Ocal((\Delta t)^p)$) \ $\Rightarrow$ \ok{$p$-th order accurate}
+    \end{MyTh}
+
+    \begin{MyTh}{Local Truncation Error $(\tau_n)$}\tiny
+        数值分析的\textit{离散}迭代公式, \textit{将$U_n$替换为$u_n$后的误差(LHS - RHS)}.
+        
+        \qquad - e.g. \ For \scalebox{0.9}{\ps{$\frac{U_{n+1}-U_n}{\Delta t}=f(U_n)$}, \ \ \ps{$\tau_{n+1}=\frac{u_{n+1}-u_n}{\Delta t}-f(u_n)$}} \quad $\tau_0=0$
+
+        \qquad - e.g. 我们可以把线性数值方法写成$Au=b$, $A$ matrix, $u=[U_1,...,U_{N-1}]^\top$.
+
+        \qquad - Then: \ok{$A u_{\text{exact}}-b = \tau$} where \ok{$u_{\text{exact}}=[u_1,...,u_{N-1}]^\top$}, \ok{$\tau=[\tau_1,...,\tau_{N-1}]^\top$}
+        
+        \qquad \imp{ps: $Ae=-\tau$ where $e=u-u_{\text{exact}}$} \qquad Define \imp{$\tau(\Delta t)=[\tau_1,...,\tau_{N-1}]^\top$}
+    \end{MyTh}
+
+    \begin{MyTh}{Consistency}\tiny
+        If \ok{$\lim_{\Delta t\to 0}\|\tau(\Delta t)\|=0$}, the method is consistent.
+    \end{MyTh}
+
+    \begin{MyTh}{Linear Equation}\tiny
+        Goal: Finally change ODE/PDE into \ok{$Au=b$} where \ok{$A$ is matrix}, \ok{$u=[U_1,...,U_{N-1}]^\top$}
+    \end{MyTh}
+
+    \begin{MyTh}{Stability}
+        A numerical method is stable if \quad $\exists \Delta x_0$ s.t. For the Linear System \ok{$Au=b$}:
+        \begin{enumerate}
+            \item $A(\Delta x)$ is invertible $\forall \Delta x<\Delta x_0$
+            \item \ok{$\|A^{-1}(\Delta x)\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$ {\tiny (dim $N$ depends on $\Delta x$ but value of $C$ does not)}
+        \end{enumerate}
+        \quad \ok{Property}: Consistent + Stable $\Rightarrow$ Convergent \quad and $\|\mathbf{e}(\Delta t)\|=\Ocal(\|\tau(\Delta t)\|)$
+    \end{MyTh}
+    }}
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{Intro \& Method of Lines}
+
+    \begin{MyTh}{\imp{Taylor Series}}\tiny
+        \scalebox{0.9}{$f(t+\Delta t)=f(t)+f'(t)\Delta t + \frac{1}{2}f''(t)(\Delta t)^2 + \cdots + \Ocal((\Delta t)^N)$} \ \ \tiny \imp{ps:$u_{n+1}=u(n\Delta t+\Delta t)$}
+        
+        \qquad\qquad\qquad\qquad \scalebox{0.9}{$f(t)=f(a)+f'(a)(t-a)+\frac{f''(a)}{2!}(t-a)^2+\cdots+\frac{f^{(N-1)}(a)}{(N-1)!}(t-a)^N+\Ocal((t-a)^{N})$}
+    \end{MyTh}
+
+    \begin{MyTh}{Euler Methods}\tiny
+        Forward: $\frac{du}{dt}|_{n\Delta t}\approx \frac{U_{n+1}-U_n}{\Delta t}$; \quad Backward: $\frac{du}{dt}|_{n\Delta t}\approx \frac{U_{n}-U_{n-1}}{\Delta t}$
+    \end{MyTh}
+
+    \begin{MyTh}{Leapfrog}\tiny
+        $\frac{du}{dt}|_{n\Delta t}\approx \frac{U_{n+1}-U_{n-1}}{2\Delta t}$
+    \end{MyTh}
+    \ \
+    \begin{MyTh}{Trapezoidal}\tiny
+        $\frac12[\frac{du}{dt}|_{n\Delta t}+\frac{du}{dt}|_{(n+1)\Delta t}]\approx \frac{U_{n+1}-U_n}{\Delta t}$
+    \end{MyTh}
+
+    \begin{MyTh}{Centred Difference}\tiny
+        $\frac{d^2u}{dt^2}|_{n\Delta t}\approx \frac{U_{n-1}-2U_n+U_{n+1}}{(\Delta t)^2}$
+    \end{MyTh}
+
+    \begin{MyTh}{Method of Lines}\tiny
+        Using $U_m(t)\approx u(a+m\Delta x,t)$, $U_m^n\approx u(a+m\Delta x,n\Delta t)$ \quad \scalebox{0.8}{\ps{\tiny $a$为空间起点,不重要}}
+
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item \ok{For 1D:} \ok{a.} 先对空间$x$离散化,使用$U_m$表达, \qquad \scalebox{0.9}{此时 $\frac{d\mathbf{U}}{dt}=...$ where $\mathbf{U}=[U_1(t),U_2(t),...,U_{M-1}(t)]^\top$}
+            
+            \vspace{-4pt}
+            \qquad\quad \ \ \ok{b.} 对时间$t$使用ODE离散化,使用$U_m^n$表达, 得到 Linear Equation.
+            
+            \vspace{-2pt}
+            \item Example: Crank-Nicolson for Heat Eq. $u_t=\kappa u_{xx}$: 对$x$用centred difference; 对$t$用trapezoidal.
+        \end{enumerate}
+    \end{MyTh}
+    }}
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{}
+
+
+
+
+
+
+
+
+
+    }}
+
+
+    \columnbreak
+
+
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{Appendix}
+    \tiny
+    
+    \begin{MyTh}{Prototype PDEs}
+        Laplace Eq.: $u_{xx}+u_{yy}=0$ {\tiny (E)} \quad Poisson Eq.: $u_{xx}+u_{yy}=f(x,y)$ {\tiny (E)}
+
+        \quad Helmholtz Eq.: $u_{xx}+u_{yy}+\alpha u=0,\alpha\ne0$ {\tiny (E)} \quad Heat Eq.: $u_t=\kappa(u_{xx}+u_{yy}),\kappa>0$ {\tiny (P)}
+
+        \quad Wave Eq.: $u_{xx}-u_{yy}=f(x,y)$ {\tiny (H)} \quad Advection Eq.: $u_t+vy_x+wu_y=0$ {\tiny (H)}
+    \end{MyTh}
+
+    }}
+
+
+\end{multicols}
+
+
+
+
+\end{document}
