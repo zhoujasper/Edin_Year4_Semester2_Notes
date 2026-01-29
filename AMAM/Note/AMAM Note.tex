@@ -87,7 +87,9 @@
         \vspace{-8pt}
         \begin{enumerate}
             \item If $f(t)$ has \ps{unique max} at $t=t_0\in(a,b)$ $\Rightarrow$ \scalebox{0.9}{$I\sim \int^{\infty}_{\infty} e^{x[f(t_0)+\frac{f''(t_0)}{2}(t-t_0)^2+\cdots]}g(t_0)dt$} \\
-            \scalebox{0.9}{(留n项非常数展开为 $n$ term approximation)} \quad \ps{(ps: $\max$ $\leftrightarrow$ $f'(t_0)=0$, $f''(t_0)<0$)}
+            \scalebox{0.9}{(留n项非常数展开为 $n$ term approximation)} \quad \ps{(ps: $\max$ $\leftrightarrow$ $f'(t_0)=0$, $f''(t_0)<0$)} \\
+            \imp{Useful Tool}: Now: \scalebox{0.9}{$I\sim e^{xf(t_0)}\int^{\infty}_{\infty} e^{x[\frac{f''(t_0)}{2}(t-t_0)^2+\cdots]}g(t_0)dt$ \ \ $\Rightarrow$ Let $\tau^2=-[\frac12 f''(t_0)(t-t_0)^2+\cdots]$} \\
+            \scalebox{0.98}{Assume $t=\tau+b\tau^2+c\tau^3+\cdots$ as $\tau\to0$ \ \ $\Rightarrow$ \ \ 代入换元式子求系数 \ \ $\Rightarrow$ \ \ $dt=(1+2b\tau+3c\tau^2+\cdots)d\tau$}
             \item \ok{Exact Substitution}: 由1的基础,得到$f(t)$在$t_0$处的展开式,换元令$f(t)$就等于\ps{展开式前几项求解}.
             \item \ok{If $g=g(t,x)$}: $e^{xf(t)}g(t,x)=e^{xf(t)+\ln(g(t,x))}$, 看$xf(t)+\ln(g(t,x))$的最大值,类似1处理. \\
             - If $t_0=f(x)$, 换元令$t=f(x)s$.
@@ -119,7 +121,7 @@
     \begin{MyTh}{Method of Stationary Phase}\tiny
         $\cos(xf(\theta))\to\mathrm{Re}(e^{ixf(\theta)})$ 回到Steepest Descents, 同理$\sin(xf(\theta))$
     \end{MyTh}
-    
+
     }}
 
     \fbox{\parbox{\linewidth}{
