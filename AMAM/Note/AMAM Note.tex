@@ -126,29 +126,70 @@
 
     \fbox{\parbox{\linewidth}{
 
-        \section{Perturbation Methods in ODEs}
-    
+    \section{Perturbation Methods in ODEs}
+
+    \begin{MyTh}{Regular Perturbation}
+        For \ $L(y,\eps)=0$ , \ let \ $y(x,\eps)=y_0(x)+\eps y_1(x)+\eps^2 y_2(x)+\cdots$
+
+        \quad {\tiny $\Rightarrow$ \ \ok{a.} 代入 $\Ocal(\eps^n)$ \ \ $\to$ \ \ \ok{b.} Boundary/Initial Condition 求解 $y_n(x)$ \ \ $\to$ \ \ \ok{a.} }
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Singular Perturbation}}\tiny
+        e.g. \ $\eps y'' + p(x)y' + q(x)y = 0$, \ $y(a)=A$ \  $y(b)=B$, \ $a<b$, \ 大致步骤:
+        \begin{enumerate}
+            \item Assume boundary layer at $x=a|b$. \ \ Let $x=a+\delta(\eps)X$ or $x=b-\delta(\eps)X$
+            \vspace{-2pt}
+            \item Assume inner $Y(X)=y(x)$, chain rule 求导代入原ODE \ $\to$ Domain balance 找出 $\delta(\eps)=\eps^{\alpha}$ \\
+            \textbf{Recall PDB}: \ok{a.} 至少有两项阶数相同且最低; \quad \ok{b.} 其他项阶数均更高.
+            \vspace{-2pt}
+            \item Assume $Y=Y_0(X)+\eps^\beta Y_1(X)+\eps^{2\beta} Y_2(X)+\cdots$ \ \ 代入求解 \ \ $\to$ 边界/初始条件 求解 $Y_0(X)$
+            \vspace{-2pt}
+            \item \ok{Asymptotic Matching}: Let $X\to\infty|x\to a|b$, \quad If limits not exist $\to$ boundary layer 在另一个端点 $\to 1$ \\
+            If limits exist, 假设的 boundary layer 正确 $\to$ 求出 outer/inner solution. \ok{注意使用正确的边界条件}
+            \vspace{-2pt}
+            \item 对于 inner solution, 无法接触系数的部分用 asymptotic matching, 比较 inner 和 outer solution 得到
+        \end{enumerate}
+        
+        \quad \ok{Remark 1}: Outer solution \textit{只能}用在 away from boundary layer 的区域(包括边界点).
+
+        \quad \ok{Remark 2}: Inner solution \textit{只能}用在 boundary layer 附近的区域(包括边界点).
+
+        \quad \ok{Useful Lemma}: For $\eps y'' + p(x)y' + q(x)y = 0$, \ $y(a)=A$ \  $y(b)=B$, \ $a<b$, $p(x)\ne0$ in $[a,b]$ then
+
+        \qquad\qquad\qquad\qquad Has boundary layer at $x=a$ if $p(a)>0$; \ Has boundary layer at $x=b$ if $p(a)<0$.
+    \end{MyTh}
+
     }}
 
 
     \columnbreak
 
     \fbox{\parbox{\linewidth}{
-
+    
     \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}
     \tiny
 
+    \subsection{Integral}
+
     \begin{MyTh}{$y'+Py=Q$}
-        $\mu y = \int Q(x)e^{\mu} dx$ , \ \ \ps{$\mu = e^{\int P(x)dx}$} \hspace{110pt} \scalebox{0.9}{$\downarrow x\geq0$}
+        $\mu y = \int Q(x)e^{\mu} dx$ , \ \ \ps{$\mu = e^{\int P(x)dx}$}
     \end{MyTh}
 
+    \vspace{-2pt}
     \begin{MyTh}{Gaussian Integral}
-        $\int^\infty_{-\infty} e^{-ax^2} dx =$ \ok{$\frac{\sqrt{\pi}}{\sqrt{a}}$}
+        $\int^\infty_{-\infty} e^{-ax^2} dx =$ \ok{$\frac{\sqrt{\pi}}{\sqrt{a}}$} \qquad \imp{$\int_{0}^{\infty} e^{-xt^n}t^m = \frac{1}{n} \Gamma(\frac{m+1}{n}) x^{-\frac{m+1}{n}}$}
     \end{MyTh}
-    \quad
-    \begin{MyTh}{Inequalities}
-        $\ln(x+1) < x$ , \ \ $e^x > x+1$ , \ \ $(1+x)^a < e^{ax}$
+
+    \begin{MyTh}{Integral}
+        $\int \tan x = -\ln|\cos x| = \ln|\sec x|$ \quad $\int \cot x = \ln|\sin x|= -\ln|\csc x|$
     \end{MyTh}
+
+    \begin{MyTh}{Techniques}
+        \ok{a.} e.g. $\int e^{at}\cos(bt)dt=\mathrm{Re}(\int e^{(a+ib)t}dt)$
+    \end{MyTh}
+    
+
+    \subsection{Expansion}
 
     \vspace{-2pt}
     \begin{MyTh}{Binomial Expansion}
@@ -167,15 +208,15 @@
         \quad $\sum_{n=0}^{\infty} x^n = \frac{1}{1-x}$ \quad $\tan(x)= x+\frac{x^3}{3}+\frac{2x^5}{15}+\cdots$ \quad $\cot(x)=\frac{1}{x}-\frac{x}{3}-\frac{x^3}{45}-\cdots$
     \end{MyTh}
 
-    \begin{MyTh}{Integral}
-        \scalebox{0.9}{$\int \tan x = -\ln|\cos x| = \ln|\sec x|$ \quad $\int \cot x = \ln|\sin x|= -\ln|\csc x|$ \quad \imp{$\int_{0}^{\infty} e^{-xt^n}t^m = \frac{1}{n} \Gamma(\frac{m+1}{n}) x^{-\frac{m+1}{n}}$}}
-    \end{MyTh}
-
-    \vspace{-8pt}
     \begin{MyTh}{$\sin|\cos$}
         \scalebox{0.9}{$a\sin(x)+b\cos(x)=\sqrt{a^2+b^2}\sin(x+\varphi)$ \quad $a\cos(x)+b\sin(x)=\sqrt{a^2+b^2}\cos(x-\varphi)$, $\varphi$ 过$(a,b)$.}
 
         - \scalebox{0.9}{$\sin(x)+\sin(y)=2\sin(\frac{x+y}{2})\cos(\frac{x-y}{2})$ | $\sin(x)\cos(y)=\frac{1}{2}[\sin(x+y)+\sin(x-y)]$} \quad s+s=sc,s-s=cs,c+c=cc,s-s=-ss
+    \end{MyTh}
+
+
+    \begin{MyTh}{Inequalities}
+        $\ln(x+1) < x$ , \ \ $e^x > x+1$ , \ \ $(1+x)^a < e^{ax}$
     \end{MyTh}
     }}
 
