@@ -14,9 +14,17 @@
     \section{Definitions, Classification of PDEs}
 
     \begin{MyTh}{Big $\Ocal$}
-        $f(t)=\Ocal(g(t))$ as $t\to t_0$ if \ \ \ok{$\exists \eps>0,C>0$ s.t. $\forall |t-t_0|<\eps$, $|f(t)|\leq C|g(t)|$}
+        $f(t)=\Ocal(g(t))$ as $t\to t_0$ if \ \ \ps{$\exists \eps>0,C>0$ s.t. $\forall |t-t_0|<\eps$, $|f(t)|\leq C|g(t)|$}
 
         \qquad {\tiny $\Leftrightarrow$ \ps{$\lim_{t\to t_0}[f(t)/g(t)]$ bdd}} \qquad \ps{ps: If not say $t\to t_0$, assume $t\to 0$}
+    \end{MyTh}
+
+    \begin{MyTh}{More on Big $\Ocal$}\tiny
+        \ok{a.} \ps{$F(x)=G(x)+\Ocal(H(x))$} \quad if $F(x)-G(x)=\Ocal(H(x))$
+
+        \quad \ok{b.} \ps{$F(x)=\Ocal(G(x))+\Ocal(H(x))$} \quad if $F(x)=\Ocal(\max\{|G(x)|,|H(x)|\})$
+
+        \quad \ok{c.} \ps{$F(x,y)=\Ocal(x^m) + \Ocal(y^n)$ \quad if \scalebox{0.9}{[Given $G(x)=\Ocal(x^{\frac{m}{n}})$ $\implies$ $F(x,G(x))=\Ocal(x^m)$], 且另一项同理}}
     \end{MyTh}
 
     \begin{MyTh}{Classification}
@@ -30,11 +38,11 @@
     \end{MyTh}
 
     \begin{MyTh}{Weighted 2-Norm}
-        $\|u\|_{2,\Delta x}=\sqrt{(\Delta x)^d}\|u\|_2$ \quad where $d$ s.t. $u:\R^d\to\R^n$ \ \ \scalebox{0.45}{\imp{$\downarrow$ 不确定是否要保留,应该要证明}}
+        $\|\mathbf{u}\|_{2,\Delta x}=\sqrt{(\Delta x)^d}\|u\|_2$ \quad where $d$ s.t. $\mathbf{u}:\R^d\to\R^n$
 
-        \quad For $d=1$ and $\Delta x=\frac{D}{N}$, then: \ok{$\forall i,u_i=\Ocal((\Delta x)^p)$ \ $\Rightarrow$ \ $\|u\|_{2,\Delta x}=\Ocal((\Delta x)^p)$}
+        \quad - For $d=1$ and $\Delta x=\frac{D}{N}$, then: \ps{$\forall i,u_i=\Ocal((\Delta x)^p)$ \ $\Rightarrow$ \ $\|\mathbf{u}\|_{2,\Delta x}=\Ocal((\Delta x)^p)$}
 
-        \quad For $A$ symmetric: \ok{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
+        \quad - For $A$ symmetric: \ps{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
     \end{MyTh}
 
     \begin{MyTh}{Linear Algebra}\tiny
@@ -49,7 +57,7 @@
 
     \section{Global/Local Error, Convergence, Consistency, Stability}
 
-    \begin{MyTh}{Exact \& Approx. Sol}\tiny
+    \begin{MyTh}{\imp{Exact \& Approx. Sol}}\tiny
         \ok{$U_n$: approx. $n$-th time-step sol}; \quad \ok{$u_n$: exact sol at $n$-th time-step}.
     \end{MyTh}
 
@@ -70,7 +78,7 @@
 
         \qquad - e.g. 我们可以把线性数值方法写成$Au=b$, $A$ matrix, $u=[U_1,...,U_{N-1}]^\top$.
 
-        \qquad - Then: \ok{$A u_{\text{exact}}-b = \tau$} where \ok{$u_{\text{exact}}=[u_1,...,u_{N-1}]^\top$}, \ok{$\tau=[\tau_1,...,\tau_{N-1}]^\top$}
+        \qquad\qquad \ \ Then: \ps{$\tau=A u_{\text{exact}}-b$} where \ok{$u_{\text{exact}}=[u_1,...,u_{N-1}]^\top$}, \ok{$\tau=[\tau_1,...,\tau_{N-1}]^\top$}
         
         \qquad \imp{ps: $Ae=-\tau$ where $e=u-u_{\text{exact}}$} \qquad Define \imp{$\tau(\Delta t)=[\tau_1,...,\tau_{N-1}]^\top$}
     \end{MyTh}
@@ -87,9 +95,9 @@
         A numerical method is stable if \quad $\exists \Delta x_0$ s.t. For the Linear System \ok{$Au=b$}:
         \begin{enumerate}
             \item $A(\Delta x)$ is invertible $\forall \Delta x<\Delta x_0$
-            \item \ok{$\|A^{-1}(\Delta x)\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$ {\tiny (dim $N$ depends on $\Delta x$ but value of $C$ does not)}
+            \item \ok{$\|A^{-1}(\Delta x)\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$
         \end{enumerate}
-        \quad \ok{Property}: Consistent + Stable $\Rightarrow$ Convergent \quad and $\|\mathbf{e}(\Delta t)\|=\Ocal(\|\tau(\Delta t)\|)$
+        \quad \ok{Property}: Consistent + Stable $\Rightarrow$ Convergent \scalebox{0.9}{\tiny (same norm!)} \quad and $\|\mathbf{e}(\Delta t)\|=\Ocal(\|\tau(\Delta t)\|)$
     \end{MyTh}
     }}
 
@@ -130,8 +138,32 @@
             \qquad\quad \ \ \ok{b.} 对时间$t$使用ODE离散化,使用$U_m^n$表达, 得到 Linear Equation.
             
             \vspace{-2pt}
-            \item Example: Crank-Nicolson for Heat Eq. $u_t=\kappa u_{xx}$: 对$x$用centred difference; 对$t$用trapezoidal.
+            \item Example: Crank-Nicolson for Heat Eq. $u_t=\kappa u_{xx}$: 对$x$用centred difference; 对$t$用trapezoidal:
+            \scalebox{0.9}{\tiny $
+                \frac{U_m^{n+1}-U_m^n}{\Delta t} = \frac{\kappa}{2}\left(\frac{U_{m+1}^{n+1}-2U_m^{n+1}+U_{m-1}^{n+1}}{(\Delta x)^2} + \frac{U_{m+1}^n - 2U_m^n + U_{m-1}^n}{(\Delta x)^2}\right)
+            $}
         \end{enumerate}
+
+        \ok{Solve it}: By iteration: e.g. $A\mathbf{U}^{n+1}=\mathbf{B}\mathbf{U}^n$, \quad where $\mathbf{U}^n=[U_1^n,U_2^n,...,U_{M-1}^n]^\top$.
+    \end{MyTh}
+
+    \begin{MyTh}{Truncation for MoL}\tiny 对于 $\tau_m$, 离散$x$后$U_m$替换为$u_m$; 对于 $\tau_m^n$, 再离散$t$后$U_m^n$替换为$u_m^n$.
+
+        \vspace{1pt}
+        \quad e.g. For Crank-Nicolson above: $\tau_m = \frac{\partial u_m}{\partial t} - \kappa \frac{u_{m+1}-2u_m+u_{m-1}}{(\Delta x)^2}$
+
+        \vspace{-2pt}
+        \quad e.g. For Crank-Nicolson above: $\tau_m^n = \frac{u_m^{n+1}-u_m^n}{\Delta t} - \frac{\kappa}{2}(\cdots)$
+    \end{MyTh}
+
+    \begin{MyTh}{New Norm}\tiny
+        \ok{The norm $\|\mathbf{u}\|:=\max_{n}\|\mathbf{u}^n\|_{2,\Delta x}$ \quad where $\mathbf{u}^n=[u_1^n,u_2^n,...,u_{M-1}^n]^\top$}
+
+        \qquad\qquad\qquad\quad Which means: Infinity norm in time, weighted 2-norm in space.
+    \end{MyTh}
+
+    \begin{MyTh}{Stability for MoL}
+        
     \end{MyTh}
     }}
 
@@ -165,6 +197,14 @@
         \quad Helmholtz Eq.: $u_{xx}+u_{yy}+\alpha u=0,\alpha\ne0$ {\tiny (E)} \quad Heat Eq.: $u_t=\kappa(u_{xx}+u_{yy}),\kappa>0$ {\tiny (P)}
 
         \quad Wave Eq.: $u_{xx}-u_{yy}=f(x,y)$ {\tiny (H)} \quad Advection Eq.: $u_t+vy_x+wu_y=0$ {\tiny (H)}
+    \end{MyTh}
+
+    \begin{MyTh}{Taylor Series} \tiny
+        \scalebox{0.9}{$f(t+\Delta t)=f(t)+f'(t)\Delta t + \frac{1}{2}f''(t)(\Delta t)^2 + \cdots + \Ocal((\Delta t)^N)$} \ \ \tiny \imp{ps:$u_{n+1}=u(n\Delta t+\Delta t)$}
+        
+        \quad \scalebox{0.9}{$u^{n+1}_m = u^n_m + \Delta t (u_t)^n_m + \frac{(\Delta t)^2}{2}(u_{tt})^n_m + \cdots $} \quad where \ps{$(u_t)^n_m = \frac{\partial u}{\partial t}(a+m\Delta x,n\Delta t)$}
+
+        \quad \scalebox{0.9}{$u_{m+1}^n = u_m^n + \Delta x (u_x)_m^n + \frac{(\Delta x)^2}{2}(u_{xx})_m^n + \cdots $} \quad where \ps{$(u_x)_m^n = \frac{\partial u}{\partial x}(a+m\Delta x,n\Delta t)$}
     \end{MyTh}
 
     }}
