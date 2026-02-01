@@ -13,6 +13,8 @@
 
     \section{Definitions, Classification of PDEs}
 
+    \subsection{Big O, Classification}
+
     \begin{MyTh}{Big $\Ocal$}
         $f(t)=\Ocal(g(t))$ as $t\to t_0$ if \ \ \ps{$\exists \eps>0,C>0$ s.t. $\forall |t-t_0|<\eps$, $|f(t)|\leq C|g(t)|$}
 
@@ -37,6 +39,8 @@
         \end{enumerate}
     \end{MyTh}
 
+    \subsection{Norm}
+
     \begin{MyTh}{Weighted 2-Norm}
         $\|\mathbf{u}\|_{2,\Delta x}=\sqrt{(\Delta x)^d}\|u\|_2$ \quad where $d$ s.t. $\mathbf{u}:\R^d\to\R^n$
 
@@ -45,11 +49,30 @@
         \quad - For $A$ symmetric: \ps{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
     \end{MyTh}
 
-    \begin{MyTh}{Linear Algebra}\tiny
-        \ok{Positive Definite}: $\lambda_i>0,\forall i$ \quad \ok{Negative Definite}: $\lambda_i<0,\forall i$
+    \begin{MyTh}{New Norm}\tiny 
+        \ps{The norm $\|\mathbf{u}\|:=\max_{n}\|\mathbf{u}^n\|_{2,\Delta x}$ \quad where $\mathbf{u}^n=[u_1^n,u_2^n,...,u_{M-1}^n]^\top$}
 
-        \quad \ok{Spectral Theorem}: If $A$ \ok{symmetric}, then \ok{$A=Q\Lambda Q^{\top}$} where $Q$ orthogonal, $\Lambda$ diagonal with eigenvalues.
+        \qquad\qquad\qquad\quad Which means: Infinity norm in time, weighted 2-norm in space. \quad \scalebox{0.9}{\ps{主要用于双变量PDE}}
     \end{MyTh}
+
+    \subsection{Linear Algebra}
+
+    \begin{MyTh}{Definite}\tiny
+        \ok{Positive Definite}: $\lambda_i>0,\forall i$ \quad \ok{Negative Definite}: $\lambda_i<0,\forall i$
+    \end{MyTh}
+    
+    \begin{MyTh}{Symmetric}\tiny
+        If $A$ \ok{symmetric}, then \ps{$A=Q\Lambda Q^{\top}$} where $Q$ orthogonal, $\Lambda$ diagonal with eigenvalues.
+    \end{MyTh}
+
+    \begin{MyTh}{Normal}\tiny
+        Real matrix $A$ is \ok{normal} if \ps{$AA^{\top}=A^{\top}A$} \quad The following are properties of it:
+        \begin{enumerate}
+            \item $A$ is \ps{orthogonally diagonalizable}, i.e. \ps{$A=Q\Lambda Q^{\top}$} where $Q$ orthogonal, $\Lambda$ diagonal with eigenvalues.
+            \item Exists an eigenvectors of $A$: $\{\mathbf{v}_i\}$ s.t. \ps{$\mathbf{v}_i^{*}\mathbf{v}_j=\delta_{ij}$} \qquad\qquad and \ \ \ps{Symmetric $\Rightarrow$ Normal}
+        \end{enumerate}
+    \end{MyTh}
+
     }}
 
 
@@ -144,7 +167,7 @@
             $}
         \end{enumerate}
 
-        \ok{Solve it}: By iteration: e.g. $A\mathbf{U}^{n+1}=\mathbf{B}\mathbf{U}^n$, \quad where $\mathbf{U}^n=[U_1^n,U_2^n,...,U_{M-1}^n]^\top$.
+        \quad \ok{Solve it}: By iteration: e.g. $A\mathbf{U}^{n+1}=\mathbf{B}\mathbf{U}^n$, \quad where $\mathbf{U}^n=[U_1^n,U_2^n,...,U_{M-1}^n]^\top$.
     \end{MyTh}
 
     \begin{MyTh}{Truncation for MoL}\tiny 对于 $\tau_m$, 离散$x$后$U_m$替换为$u_m$; 对于 $\tau_m^n$, 再离散$t$后$U_m^n$替换为$u_m^n$.
@@ -156,15 +179,14 @@
         \quad e.g. For Crank-Nicolson above: $\tau_m^n = \frac{u_m^{n+1}-u_m^n}{\Delta t} - \frac{\kappa}{2}(\cdots)$
     \end{MyTh}
 
-    \begin{MyTh}{New Norm}\tiny
-        \ok{The norm $\|\mathbf{u}\|:=\max_{n}\|\mathbf{u}^n\|_{2,\Delta x}$ \quad where $\mathbf{u}^n=[u_1^n,u_2^n,...,u_{M-1}^n]^\top$}
+    \begin{MyTh}{Abs. Stability for ODEs}\tiny
+        For ODEs \ok{$\frac{d\mathbf{u}}{dt}=A \mathbf{u}$}, $\mathbf{u}$ vector. \quad \scalebox{0.9}{A 1-step method for $t$ \ (i.e. $\mathbf{U}^{n+1}=B\mathbf{U}^n$)}
 
-        \qquad\qquad\qquad\quad Which means: Infinity norm in time, weighted 2-norm in space.
-    \end{MyTh}
-
-    \begin{MyTh}{Stability for MoL}
+        \quad It's \ps{absolutely stable} if \quad $\|B\mathbf{w}\|_2 \leq \|\mathbf{w}\|_2$ \quad for all $\mathbf{w}\in\R^{N-1}$
         
+        \quad \ok{Property}: If $A$ normal, then absolutely stable $\Leftrightarrow$ \ps{$|\lambda_i(B)|\leq1,\forall i$}
     \end{MyTh}
+
     }}
 
     \fbox{\parbox{\linewidth}{
@@ -188,7 +210,7 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{Appendix}
+    \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}
     \tiny
     
     \begin{MyTh}{Prototype PDEs}
@@ -205,6 +227,11 @@
         \quad \scalebox{0.9}{$u^{n+1}_m = u^n_m + \Delta t (u_t)^n_m + \frac{(\Delta t)^2}{2}(u_{tt})^n_m + \cdots $} \quad where \ps{$(u_t)^n_m = \frac{\partial u}{\partial t}(a+m\Delta x,n\Delta t)$}
 
         \quad \scalebox{0.9}{$u_{m+1}^n = u_m^n + \Delta x (u_x)_m^n + \frac{(\Delta x)^2}{2}(u_{xx})_m^n + \cdots $} \quad where \ps{$(u_x)_m^n = \frac{\partial u}{\partial x}(a+m\Delta x,n\Delta t)$}
+    \end{MyTh}
+
+    \vspace{1pt}
+    \begin{MyTh}{Useful Tools}\tiny
+        If \ps{$e^n=Ae^{n-1}+B\tau^n$}, then \ \ \ps{$e^n=\sum_{k=0}^{n}A^{n-k}B\tau^k$}, \quad where $A$ is amplification factor.
     \end{MyTh}
 
     }}
