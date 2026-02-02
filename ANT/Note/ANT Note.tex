@@ -1804,9 +1804,9 @@ Proof omitted.
 \end{proof}
 
 \begin{problemset}[Exercises]
-  \item Let $ \{ a_n \}$ be a sequence of complex number such that the infinite product $\prod_{n=1}^\infty a_n$ converges to a nonzero limit $P$. Show that 
+  \item \label{ex:infinite_product_inverse} Let $ \{ a_n \}$ be a sequence of complex number such that the infinite product $\prod_{n=1}^\infty a_n$ converges to a nonzero limit $P$. Show that 
   \begin{enumerate}[(a)]
-    \item The infinite product $\prod_{n=1}^{\infty}a^{-1}_n$ converges and
+    \item \label{part:infinite_product_inverse} The infinite product $\prod_{n=1}^{\infty}a^{-1}_n$ converges and
     \[
       \prod_{n=1}^{\infty} \frac{1}{a_n}=\frac{1}{P}
     \]
@@ -1817,10 +1817,29 @@ Proof omitted.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item
+      \item Since the infinite product $\prod_{n=1}^\infty a_n$ converges to a nonzero limit $P$, by definition, the sequence of partial products
+      \[
+        P_N := \prod_{n=1}^N a_n \longrightarrow P \quad \text{as } N \to \infty \quad \text{ and } a_n \neq 0 \text{ for all } n \in \mathbb{N}.
+      \]
+      Now, using the rule of quotient of limits, we have
+      \[
+        \prod_{n=1}^N \frac{1}{a_n} = \frac{1}{P_N} \longrightarrow \frac{1}{P} \quad \text{as } N \to \infty.
+      \]
+      Therefore,
+      \[
+        \prod_{n=1}^\infty \frac{1}{a_n} = \frac{1}{P}.
+      \]
+      \item By corollary~\ref{cor:classical_euler_product_formula}, we have
+      \[
+        \zeta(z) = \prod_{p \text{ prime}} \frac{1}{1 - p^{-z}} \quad \text{ for } \mathrm{Re}(z) > 1.
+      \]
+      By part~\ref{part:infinite_product_inverse}, we have
+      \[
+        \frac{1}{\zeta(z)} = \prod_{p \text{ prime}} (1 - p^{-z}) \quad \text{ for } \mathrm{Re}(z) > 1.
+      \]
     \end{enumerate}
   \end{solution}
-  \item The Möbius function $\mu:\mathbb{N} \to \mathbb{C}$ is defined as follows:
+  \item \label{ex:mobius_function_sum} The Möbius function $\mu:\mathbb{N} \to \mathbb{C}$ is defined as follows:
   \[
     \mu(n) = \begin{cases}
       1 & \text{ if } n=1, \\
@@ -1842,12 +1861,45 @@ Proof omitted.
   \]
   Now, use the binomial theorem, compare this to $0=(1-1)^r=\sum_{k=0}^r \binom{r}{k} (-1)^k$.)
   \begin{solution}
-    
+    For $n=1$, we have
+    \[
+      \sum_{d|1} \mu(d) = \mu(1) = 1.
+    \]
+    which satisfies the required condition.
+
+    Next, consider $n>1$. By the hint, we have
+    \[
+    \begin{aligned}
+      \sum_{d|n} \mu(d) &= \mu(1) + \left( \mu(p_1) + \mu(p_2) + \cdots + \mu(p_r) \right) + \left( \mu(p_1 p_2) + \mu(p_1 p_3) + \cdots \right) + \cdots + \mu(p_1 p_2 \cdots p_r) \\
+      &= 1 + \binom{r}{1}(-1) + \binom{r}{2} 1 + \binom{r}{3}(-1) + \cdots + \binom{r}{r}(-1)^r \\
+      &= \sum_{k=0}^r \binom{r}{k} (-1)^k \\
+      &= (1 - 1)^r = 0.
+    \end{aligned}
+    \]
+    Therefore, for $n>1$, we get the required condition as well.
   \end{solution}
-  \item Let $f(n)=\mu(n)$ denote the Möbius function as defined in the previous exercise and let $g(n)=1$ for all $n \in \mathbb{N}$. Show that
+  \vspace{30pt}
+  Let $f:\mathbb{N} \to \mathbb{C}$, then
+  \[
+    F(z) := \sum_{n=1}^{\infty} \frac{f(n)}{n^z}
+  \]
+  is called the \textit{Dirichlet series} associated to $f$. You may find that the previous exercises~\ref{ex:mobius_function_dirichlet}, \ref{ex:d_n_divisors} and~\ref{ex:euler_totient} give some examples of Dirichlet series and there is a useful properties of Dirichlet series involving the Dirichlet convolution defined below.
+
+  \textbf{Theorem}: Suppose $F(z) = \sum_{n=1}^{\infty} \frac{f(n)}{n^z}$ and $G(z) = \sum_{n=1}^{\infty} \frac{g(n)}{n^z}$ are two Dirichlet series that converge absolutely for some $z \in \mathbb{C}$. Then the product $F(z)G(z)$
+  \[
+    F(z)G(z) = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z}
+  \]
+  is also a Dirichlet series, where
+  \[
+    (f * g)(n) := \sum_{d|n} f(d) g\left(\frac{n}{d}\right).
+  \]
+  is called the \textit{Dirichlet convolution} of $f$ and $g$, which is a finite sum for each $n \in \mathbb{N}$. \\
+  This theorem will be proved later in exercise~\ref{ex:dirichlet_series_convolution_proof} and you can use it to solve the following exercises~\ref{ex:mobius_function_dirichlet},~\ref{ex:d_n_divisors} and~\ref{ex:euler_totient}.
+  \vspace{30pt}
+  \item \label{ex:mobius_function_dirichlet} Let $f(n)=\mu(n)$ denote the Möbius function as defined in the previous exercise and let $g(n)=1$ for all $n \in \mathbb{N}$. Show that
   \begin{enumerate}[(a)]
-    \item \[
-            f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = \sum_{d|n} \mu(d) = \begin{cases}
+    \item \label{part:mobius_function_dirichlet} \[
+            f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = \begin{cases}
               1 & \text{ if } n=1, \\
               0 & \text{ if } n>1.
             \end{cases}
@@ -1859,12 +1911,29 @@ Proof omitted.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item From the previous exercise~\ref{ex:mobius_function_sum}, we have
+      \[
+        \sum_{d|n} f(d) = \begin{cases}
+          1 & \text{ if } n=1, \\
+          0 & \text{ if } n>1.
+        \end{cases}
+      \]
+      Since $g\left(\frac{n}{d}\right) = 1$ for all $d|n$, we directly have the result.
+      \item By the theorem stated above, we have
+      \[
+        \sum_{n=1}^{\infty} \frac{\mu(n)}{n^z} \cdot \sum_{n=1}^{\infty} \frac{1}{n^z} = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z} = 1 \quad \text{ for } \mathrm{Re}(z)>1.
+      \]
+      where the last equality follows from part~\ref{part:mobius_function_dirichlet}, $0<|\frac{\mu}{n^z}| \leq |\frac{1}{n^z}| \leq \frac{1}{n^{\mathrm{Re}(z)}}$ for all $n \in \mathbb{N}$ and by the comparison test and the p-series test, these two Dirichlet series converge for $\mathrm{Re}(z)>1$.
+
+      Therefore,
+      \[
+        \sum_{n=1}^{\infty} \frac{\mu(n)}{n^z} = \frac{1}{\zeta(z)} \quad \text{ for } \mathrm{Re}(z)>1.
+      \]
     \end{enumerate}
   \end{solution}
   \item \label{ex:d_n_divisors} Let $d(n) := \#$ of divisors of $n$, and let $f(n)=g(n)=1$ for all $n \in \mathbb{N}$. Show that
   \begin{enumerate}[(a)]
-    \item \[
+    \item \label{part:d_n_divisors} \[
             f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = d(n).
           \]
     \item Hence conclude that
@@ -1874,16 +1943,28 @@ Proof omitted.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item Since $f(d) = 1$ and $g\left(\frac{n}{d}\right) = 1$ for all $d|n$, we have
+      \[
+        f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = \sum_{d|n} 1 = \#\{ d : d|n \} = d(n).
+      \]
+      \item By the theorem stated above and part~\ref{part:d_n_divisors}, we have
+      \[
+        \sum_{n=1}^{\infty} \frac{1}{n^z} \cdot \sum_{n=1}^{\infty} \frac{1}{n^z} = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z} = \sum_{n=1}^{\infty} \frac{d(n)}{n^z} \quad \text{ for } \mathrm{Re}(z)>1.
+      \]
+      where both Dirichlet series on the left-hand side converge for $\mathrm{Re}(z)>1$ by the p-series test.
+      Therefore,
+      \[
+        \zeta^2(z) = \sum_{n=1}^{\infty} \frac{d(n)}{n^z} \quad \text{ for } \mathrm{Re}(z)>1.
+      \]
     \end{enumerate}
   \end{solution}
   \item \label{ex:euler_totient} Let $\phi(n) := \#$ of integers $1 \leq k \leq n$ such that $\gcd(k,n)=1$ denote the Euler totient function. Show that
   \begin{enumerate}[(a)]
-    \item For $n \in \mathbb{N}$,
+    \item \label{part:euler_totient_sum} For $n \in \mathbb{N}$,
             \[
               \sum_{d|n} \phi(d) = n.
             \]
-    \item Let $f(n) = \phi(n)$ and $g(n) = 1$ for all $n \in \mathbb{N}$. Show that
+    \item \label{part:euler_totient_dirichlet} Let $f(n) = \phi(n)$ and $g(n) = 1$ for all $n \in \mathbb{N}$. Show that
             \[
               f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = n.
             \]
@@ -1894,30 +1975,90 @@ Proof omitted.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item \textit{(Method I.)} For each integer $d$ such that $d|n$, consider the set
+      \[
+        A_d := \{ k \in \mathbb{N} : 1 \leq k \leq n, \gcd(k,n) = d \}.
+      \]
+      Notice that for any two divisors $d_1$ and $d_2$ of $n$ with $d_1 \neq d_2$, the sets $A_{d_1}$ and $A_{d_2}$ are disjoint. (If not, there exists some integer $k$ such that $\gcd(k,n) = d_1$ and $\gcd(k,n) = d_2$, which is a contradiction.) Also, the union of all such sets $A_d$ for all divisors $d$ of $n$ is equal to the set $\{ k \in \mathbb{N} : 1 \leq k \leq n \}$. (If $k$ is any integer such that $1 \leq k \leq n$, then $\gcd(k,n)$ is a divisor of $n$, say $d$. So that $k \in A_d$.)
+      Therefore, we have a partition of the set $\{ k \in \mathbb{N} : 1 \leq k \leq n \}$ into disjoint subsets $A_d$ for each divisor $d$ of $n$:
+      \[
+        \{ k \in \mathbb{N} : 1 \leq k \leq n \} = \bigcup_{d|n} A_d \quad \implies \quad n = \sum_{d|n} |A_d|.
+      \]
+      Now, we compute $|A_d|$ for each divisor $d$ of $n$. Notice that if $\gcd(k,n) = d$, then we can write $k = d k'$ for some integer $k'$. Since $d|n$, we can write $n = d m$ for some integer $m$. Therefore,
+      \[
+        \gcd(k,n) = d \iff \gcd(d k', d m) = d \iff d \cdot \gcd(k', m) = d \iff \gcd(k', m) = 1.
+      \]
+      So that $A_d$ can be rewritten as
+      \[
+        A_d = \{ d k' : 1 \leq k' \leq m, \gcd(k', m) = 1 \}= d \cdot \{ k' : 1 \leq k' \leq m, \gcd(k', m) = 1 \} \quad \text{ where } m = \frac{n}{d}.
+      \]
+      Therefore, $|A_d| = \phi(m) = \phi\left(\frac{n}{d}\right)$. Hence,
+      \[
+        n = \sum_{d|n} |A_d| = \sum_{d|n} \phi\left(\frac{n}{d}\right).
+      \]
+      
+      \textit{(Method II.)}
+      For any $n \in \mathbb{N}$, factorization of $n$ into primes is given by $n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_r^{\alpha_r}$. So that the divisors $d$ of $n$ are of the form $d = p_1^{\beta_1} p_2^{\beta_2} \cdots p_r^{\beta_r}$ where $0 \leq \beta_i \leq \alpha_i$ for all $1 \leq i \leq r$. So once we understand $\phi(d)$ for each divisor $d$ of $n$, we can compute the sum $\sum_{d|n} \phi(d)$.
+      In order to compute $\phi(d)$ for each divisor $d$ of $n$, we need some properties of the Euler totient function $\phi$:
+
+      \textbf{Claim.}
+      \begin{itemize}
+        \item If $p$ is a prime number and $k$ is a positive integer, then
+              \[
+                \phi(p^k) = p^k - p^{k-1} = p^k \left(1 - \frac{1}{p}\right).
+              \]
+        \item The Euler totient function $\phi$ is multiplicative, i.e., if $\gcd(m,n) = 1$, then
+              \[
+                \phi(mn) = \phi(m) \phi(n).
+              \]
+      \end{itemize}
+
+      \textit{Proof of Claim.} For the first property, the integers from $1$ to $p^k$ that are not coprime to $p^k$ are precisely the multiples of $p$, which are $p, 2p, 3p, \ldots, p^{k-1}p$. There are $p^{k-1}$ such multiples. Therefore,
+      \[
+        \phi(p^k) = p^k - p^{k-1} = p^k \left(1 - \frac{1}{p}\right).
+      \]
+      For the second property, let $m$ and $n$ be coprime positive integers. Notice that if a number $k\in\mathbb{N}$ is coprime to $mn$ (i.e., $\gcd(k,mn)=1$), if and only if it is coprime to both $m$ and $n$ (i.e., $\gcd(k,m)=1$ and $\gcd(k,n)=1$). By the Chinese Remainder Theorem, the number of integers from $1$ to $mn$ that are coprime to both $m$ and $n$ is equal to the product of the number of integers from $1$ to $m$ that are coprime to $m$ and the number of integers from $1$ to $n$ that are coprime to $n$. Therefore,
+      \[
+        \phi(mn) = \phi(m) \phi(n).
+      \]
+      Now, using the above properties of the Euler totient function $\phi$, we can compute $\phi(d)$ for each divisor $d$ of $n$. Since $d = p_1^{\beta_1} p_2^{\beta_2} \cdots p_r^{\beta_r}$ where $0 \leq \beta_i \leq \alpha_i$ for all $1 \leq i \leq r$, by the multiplicative property of $\phi$, we have
+      \[
+        \phi(d) = \phi(p_1^{\beta_1}) \phi(p_2^{\beta_2}) \cdots \phi(p_r^{\beta_r}).
+      \]
+      Using the formula for $\phi(p^k)$, we have
+      \[
+        \phi(p_i^{\beta_i}) = p_i^{\beta_i} \left(1 - \frac{1}{p_i}\right).
+      \]
+      Therefore,
+      \[
+        \phi(d) = p_1^{\beta_1} \left(1 - \frac{1}{p_1}\right) p_2^{\beta_2} \left(1 - \frac{1}{p_2}\right) \cdots p_r^{\beta_r} \left(1 - \frac{1}{p_r}\right).
+      \]
+      Now, we can compute the sum $\sum_{d|n} \phi(d)$. We have
+      \[
+      \begin{aligned}
+        \sum_{d|n} \phi(d) &= \sum_{\beta_1=0}^{\alpha_1} \sum_{\beta_2=0}^{\alpha_2} \cdots \sum_{\beta_r=0}^{\alpha_r} \phi(p_1^{\beta_1} p_2^{\beta_2} \cdots p_r^{\beta_r}) \\
+        &= \sum_{\beta_1=0}^{\alpha_1} p_1^{\beta_1} \left(1 - \frac{1}{p_1}\right) \sum_{\beta_2=0}^{\alpha_2} p_2^{\beta_2} \left(1 - \frac{1}{p_2}\right) \cdots \sum_{\beta_r=0}^{\alpha_r} p_r^{\beta_r} \left(1 - \frac{1}{p_r}\right) \\
+        &= \left(1 - \frac{1}{p_1}\right) \left( \frac{p_1^{\alpha_1 + 1} - 1}{p_1 - 1} \right) \left(1 - \frac{1}{p_2}\right) \left( \frac{p_2^{\alpha_2 + 1} - 1}{p_2 - 1} \right) \cdots \left(1 - \frac{1}{p_r}\right) \left( \frac{p_r^{\alpha_r + 1} - 1}{p_r - 1} \right) \\
+        &= p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_r^{\alpha_r} = n.
+      \end{aligned}
+      \]  
+      \item By part~\ref{part:euler_totient_sum}, and $g(n) = 1$ for all $n \in \mathbb{N}$, we have
+      \[
+        f * g = \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = \sum_{d|n} \phi(d) = n.
+      \]
+      \item By the theorem stated above and part~\ref{part:euler_totient_dirichlet}, we have
+      \[
+        \sum_{n=1}^{\infty} \frac{\phi(n)}{n^z} \cdot \sum_{n=1}^{\infty} \frac{1}{n^z} = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z} = \sum_{n=1}^{\infty} \frac{n}{n^z} = \sum_{n=1}^{\infty} \frac{1}{n^{z-1}} \quad \text{ for } \mathrm{Re}(z)>2.
+      \]
     \end{enumerate}
   \end{solution}
-  \item Let $f:\mathbb{N} \to \mathbb{C}$, then
-  \[
-    F(z) := \sum_{n=1}^{\infty} \frac{f(n)}{n^z}
-  \]
-  is called the \textit{Dirichlet series} associated to $f$. You may find that the previous exercises~\ref{ex:d_n_divisors} and~\ref{ex:euler_totient} give some examples of Dirichlet series and satisfies certain properties, which can be summarized in the following
-
-  \textbf{Theorem}: Suppose $F(z) = \sum_{n=1}^{\infty} \frac{f(n)}{n^z}$ and $G(z) = \sum_{n=1}^{\infty} \frac{g(n)}{n^z}$ are two Dirichlet series that converge for some $z \in \mathbb{C}$. Then the product $F(z)G(z)$
-  \[
-    F(z)G(z) = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z}
-  \]
-  is also a Dirichlet series, where
-  \[
-    (f * g)(n) := \sum_{d|n} f(d) g\left(\frac{n}{d}\right).
-  \]
-  is called the \textit{Dirichlet convolution} of $f$ and $g$, which is a finite sum for each $n \in \mathbb{N}$.
-
-  Now, with the following steps, prove the above theorem.
+  \item \label{ex:dirichlet_series_convolution_proof}
+  Now, with the following steps, prove the above theorem on the product of two Dirichlet series involving the Dirichlet convolution.
   \begin{enumerate}[(a)]
     \item Suppose the Dirichlet series $F(z)=\sum_{n=1}^{\infty} \frac{f(n)}{n^z}$ and $G(z)=\sum_{n=1}^{\infty} \frac{g(n)}{n^z}$ converge for some $z \in \mathbb{C}$. For $N>1$, write
     \begin{align*}
       \sum^N_{n=1} \frac{f(n)}{n^z} \cdot \sum^N_{m=1} \frac{g(m)}{m^z} &= \sum_{k=1}^{N^2} \frac{1}{k^z}\left[ \underset{mn=k}{\sum_{m=1}^N\sum_{n=1}^N} f(n) g(m) \right] = \sum_{k=1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n= 1 \\ n|k}}^{N} f(n) g\left(\frac{k}{n}\right) \right]. \\
+      &=\sum_{k=1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n= 1 \\ n|k}}^{k} f(n) g\left(\frac{k}{n}\right) - \sum_{\substack{n>N \\ n|k}} f(n) g\left(\frac{k}{n}\right) \right] \\
       &=\sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z} - \sum_{k=N+1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n>N \\ n|k}} f(n) g\left(\frac{k}{n}\right) \right].
     \end{align*}
     Let
@@ -1936,7 +2077,40 @@ Proof omitted.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item Consider the finite sum of $F(z)$ and $G(z)$ up to $N$, by the question, we have
+      \[
+        \sum^N_{n=1} \frac{f(n)} {n^z} \cdot \sum^N_{m=1} \frac{g(m)}{m^z} = \sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z} - A_N.
+      \]
+      where
+      \[
+      \begin{aligned}
+        A_N &= \sum_{k=N+1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n>N \\ n|k}} f(n) g\left(\frac{k}{n}\right) \right]= \sum_{k=N+1}^{N^2} \frac{1}{k^z} \left[ \underset{mn = k}{\sum_{n=N+1}^{\infty} \sum_{m=1}^{N}} f(n) g(m) \right] \\
+            &= \underset{N+1 \leq nm \leq N^2}{\sum_{n=N+1}^{\infty}\sum_{m=1}^{N}} \frac{f(n)}{n^z} \cdot \frac{g(m)}{m^z} \\
+      \end{aligned}
+      \]
+      Notice that when $N+1 \leq nm \leq N^2$ and $m \leq N$, we have $n \leq \frac{N^2}{m} \leq \frac{N^2}{1} = N^2$. Therefore,
+      \[
+        |A_N| \leq \sum_{n=N+1}^{N^2} \left| \frac{f(n)}{n^z} \right| \cdot \sum_{m=1}^{N} \left| \frac{g(m)}{m^z} \right| \leq \sum_{n=N+1}^{\infty} \left| \frac{f(n)}{n^z} \right| \cdot \sum_{m=1}^{\infty} \left| \frac{g(m)}{m^z} \right|.
+      \]
+      Since both Dirichlet series $F(z)$ and $G(z)$ converge absolutely for some $z \in \mathbb{C}$, $\sum_{n=N+1}^{\infty} \left| \frac{f(n)}{n^z} \right| \to 0$ as $N \to \infty$ and $\sum_{m=1}^{\infty} \left| \frac{g(m)}{m^z} \right|$ is some finite constant. Therefore, $A_N \to 0$ as $N \to \infty$.
+      \item Now we show that $\sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z}$ converges absolutely as $N \to \infty$ to ensure that it is well-defined as $N \to \infty$. Notice that
+      \[
+      \begin{aligned}
+        \sum_{k=1}^{N^2} \frac{|(f*g)(k)|}{|k^z|} = &\sum_{k=1}^{N^2} \frac{1}{|k^z|} \left| \sum_{\substack{n=1 \\ n|k}}^{k} f(n) g\left(\frac{k}{n}\right) \right| \leq \sum_{k=1}^{N^2} \frac{1}{|k^z|} \left[ \sum_{\substack{n=1 \\ n|k}}^{k} |f(n)| \cdot \left| g\left(\frac{k}{n}\right) \right| \right] \\
+        &\leq \sum_{n=1}^{N^2} \sum_{m=1}^{N^2} \frac{|f(n)|}{|n^z|} \cdot \frac{|g(m)|}{|m^z|} \leq \sum_{n=1}^{\infty} \frac{|f(n)|}{|n^z|} \cdot \sum_{m=1}^{\infty} \frac{|g(m)|}{|m^z|}.
+      \end{aligned}
+      \]
+      Since both Dirichlet series $F(z)$ and $G(z)$ converge absolutely for some $z \in \mathbb{C}$, the right-hand side is some finite constant. Therefore, $\sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z}$ converges absolutely as $N \to \infty$.
+      
+      Taking limit as $N \to \infty$ on both sides of the equation
+      \[
+        \sum^N_{n=1} \frac{f(n)} {n^z} \cdot \sum^N_{m=1} \frac{g(m)}{m^z} = \sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z} - A_N,
+      \]
+      we have
+      \[
+        F(z)G(z) = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z}.
+      \]
+      where the left-hand side converges absolutely by the assumption.
     \end{enumerate}
   \end{solution}
 \end{problemset}
