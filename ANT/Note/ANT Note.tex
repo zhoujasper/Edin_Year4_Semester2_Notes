@@ -1803,6 +1803,144 @@ Proof omitted.
   \]
 \end{proof}
 
+\begin{problemset}[Exercises]
+  \item Let $ \{ a_n \}$ be a sequence of complex number such that the infinite product $\prod_{n=1}^\infty a_n$ converges to a nonzero limit $P$. Show that 
+  \begin{enumerate}[(a)]
+    \item The infinite product $\prod_{n=1}^{\infty}a^{-1}_n$ converges and
+    \[
+      \prod_{n=1}^{\infty} \frac{1}{a_n}=\frac{1}{P}
+    \]
+    \item Hence conclude that for $\mathrm{Re}(z)>1$,
+    \[
+      \frac{1}{\zeta(z)}=\prod_{p \text{ prime}}(1-p^{-z})
+    \]
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item
+    \end{enumerate}
+  \end{solution}
+  \item The Möbius function $\mu:\mathbb{N} \to \mathbb{C}$ is defined as follows:
+  \[
+    \mu(n) = \begin{cases}
+      1 & \text{ if } n=1, \\
+      (-1)^k & \text{ if } n=p_1\cdots p_k \text{ is a product of } k \text{ distinct primes}, \\
+      0 & \text{ otherwise},
+    \end{cases}.
+  \]
+  Show that
+  \[
+    \sum_{d|n} \mu(d) = \begin{cases}
+      1 & \text{ if } n=1, \\
+      0 & \text{ if } n>1.
+    \end{cases}
+  \]
+
+  (Hint: The case $n=1$ is easy. For $n>1$, consider the prime factorization of $n=p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_r^{\alpha_r}$ so that the divisors $d$ of $n$ are of the form $d=p_1^{\beta_1} p_2^{\beta_2} \cdots p_r^{\beta_r}$ where $0 \leq \beta_i \leq \alpha_i$ for all $1 \leq i \leq r$. The only divisors $d$ which give a non-zero contribution to the sum are those $d$ such that $\beta_i \in \{0,1\}$ for all $1 \leq i \leq r$. So that
+  \[
+    \sum_{d|n} \mu(d) = \mu(1) + \left( \mu(p_1) + \mu(p_2) + \cdots + \mu(p_r) \right) + \left( \mu(p_1 p_2) + \mu(p_1 p_3) + \cdots \right) + \cdots + \mu(p_1 p_2 \cdots p_r).
+  \]
+  Now, use the binomial theorem, compare this to $0=(1-1)^r=\sum_{k=0}^r \binom{r}{k} (-1)^k$.)
+  \begin{solution}
+    
+  \end{solution}
+  \item Let $f(n)=\mu(n)$ denote the Möbius function as defined in the previous exercise and let $g(n)=1$ for all $n \in \mathbb{N}$. Show that
+  \begin{enumerate}[(a)]
+    \item \[
+            f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = \sum_{d|n} \mu(d) = \begin{cases}
+              1 & \text{ if } n=1, \\
+              0 & \text{ if } n>1.
+            \end{cases}
+          \]
+    \item Hence conclude that
+    \[
+      \frac{1}{\zeta(z)} = \sum_{n=1}^{\infty} \frac{\mu(n)}{n^z} \quad \text{ for } \mathrm{Re}(z)>1.
+    \]
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+  \item \label{ex:d_n_divisors} Let $d(n) := \#$ of divisors of $n$, and let $f(n)=g(n)=1$ for all $n \in \mathbb{N}$. Show that
+  \begin{enumerate}[(a)]
+    \item \[
+            f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = d(n).
+          \]
+    \item Hence conclude that
+    \[
+      \zeta^2(z) = \sum_{n=1}^{\infty} \frac{d(n)}{n^z} \quad \text{ for } \mathrm{Re}(z)>1.
+    \]
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+  \item \label{ex:euler_totient} Let $\phi(n) := \#$ of integers $1 \leq k \leq n$ such that $\gcd(k,n)=1$ denote the Euler totient function. Show that
+  \begin{enumerate}[(a)]
+    \item For $n \in \mathbb{N}$,
+            \[
+              \sum_{d|n} \phi(d) = n.
+            \]
+    \item Let $f(n) = \phi(n)$ and $g(n) = 1$ for all $n \in \mathbb{N}$. Show that
+            \[
+              f * g := \sum_{d|n} f(d) g\left(\frac{n}{d}\right) = n.
+            \]
+    \item Hence conclude that
+            \[
+              \frac{\zeta(z-1)}{\zeta(z)} = \sum_{n=1}^{\infty} \frac{\phi(n)}{n^z} \quad \text{ for } \mathrm{Re}(z)>2.
+            \]
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+  \item Let $f:\mathbb{N} \to \mathbb{C}$, then
+  \[
+    F(z) := \sum_{n=1}^{\infty} \frac{f(n)}{n^z}
+  \]
+  is called the \textit{Dirichlet series} associated to $f$. You may find that the previous exercises~\ref{ex:d_n_divisors} and~\ref{ex:euler_totient} give some examples of Dirichlet series and satisfies certain properties, which can be summarized in the following
+
+  \textbf{Theorem}: Suppose $F(z) = \sum_{n=1}^{\infty} \frac{f(n)}{n^z}$ and $G(z) = \sum_{n=1}^{\infty} \frac{g(n)}{n^z}$ are two Dirichlet series that converge for some $z \in \mathbb{C}$. Then the product $F(z)G(z)$
+  \[
+    F(z)G(z) = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z}
+  \]
+  is also a Dirichlet series, where
+  \[
+    (f * g)(n) := \sum_{d|n} f(d) g\left(\frac{n}{d}\right).
+  \]
+  is called the \textit{Dirichlet convolution} of $f$ and $g$, which is a finite sum for each $n \in \mathbb{N}$.
+
+  Now, with the following steps, prove the above theorem.
+  \begin{enumerate}[(a)]
+    \item Suppose the Dirichlet series $F(z)=\sum_{n=1}^{\infty} \frac{f(n)}{n^z}$ and $G(z)=\sum_{n=1}^{\infty} \frac{g(n)}{n^z}$ converge for some $z \in \mathbb{C}$. For $N>1$, write
+    \begin{align*}
+      \sum^N_{n=1} \frac{f(n)}{n^z} \cdot \sum^N_{m=1} \frac{g(m)}{m^z} &= \sum_{k=1}^{N^2} \frac{1}{k^z}\left[ \underset{mn=k}{\sum_{m=1}^N\sum_{n=1}^N} f(n) g(m) \right] = \sum_{k=1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n= 1 \\ n|k}}^{N} f(n) g\left(\frac{k}{n}\right) \right]. \\
+      &=\sum_{k=1}^{N^2} \frac{(f*g)(k)}{k^z} - \sum_{k=N+1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n>N \\ n|k}} f(n) g\left(\frac{k}{n}\right) \right].
+    \end{align*}
+    Let
+    \[
+      A_N := \sum_{k=N+1}^{N^2} \frac{1}{k^z} \left[ \sum_{\substack{n>N \\ n|k}} f(n) g\left(\frac{k}{n}\right) \right].
+    \]
+    Show that
+    \[
+      A_N = \underset{N+1 \leq nm \leq N^2}{\sum_{n=N+1}^{\infty}\sum_{m=1}^{N}} \frac{f(n)}{n^z} \cdot \frac{g(m)}{m^z} \to 0 \quad \text{ as } N \to \infty.
+    \]
+    \item Hence conclude that
+    \[
+      F(z)G(z) = \sum_{n=1}^{\infty} \frac{(f * g)(n)}{n^z}.
+    \]
+    so that we have proved the theorem.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+\end{problemset}
+
 
 \chapter{Dirichlet Characters}
 
@@ -2064,14 +2202,6 @@ Proof omitted.
     g_1 g^* = g_2 g^* \implies g_1g^* (g^*)^{-1} = g_2 g^* (g^*)^{-1} \implies g_1 = g_2
   \]
   since $G$ is a group and hence every element has a multiplicative inverse. Thus, $f$ is injective.
-\end{solution}
-
-\begin{exercise}
-  
-\end{exercise}
-
-\begin{solution}
-  
 \end{solution}
 
 \begin{theorem}[Orthogonality Relations of Characters] \label{thm:orthogonality_relations_of_characters}
