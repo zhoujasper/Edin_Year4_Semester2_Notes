@@ -458,6 +458,10 @@ The proof of Dirichlet's Theorem requires more advanced tools from analytic numb
   and hence Dirichlet's Theorem~\ref{thm:PN_in_AP} holds.
 \end{lemma}
 
+\begin{note}
+  Although our assumption in Lemma \ref{lem:Dirichlet_Euler_product_idea} may not true, but it gives us the main idea of Dirichlet's proof of Theorem \ref{thm:PN_in_AP}.
+\end{note}
+
 \begin{proof}
   Dirichlet was inspired by Euler's proof that the series of reciprocals of primes diverges (Corollary \ref{cor:divergence_sum_reciprocal_primes}) to prove his theorem. Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
   \[
@@ -1750,7 +1754,7 @@ Proof omitted.
   \]
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}[Logarithm of Dirichlet L-function] \label{cor:log_dirichlet_L_function}
   The Dirichlet $L$-function $L(z, \chi)$ for a Dirichlet character $\chi$ satisfies
   \[
     L(z;\chi)=\sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}=\prod_{p\in\mathbb{P}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z)>1,
@@ -2323,6 +2327,8 @@ Proof omitted.
 
 \section{Characters in Group Theory}
 
+In this section and following sections, we mainly focus on characters from the \textbf{finite} abelian group theory point of view. The theory of characters of finite abelian groups is a fundamental tool in number theory, particularly in the study of Dirichlet characters and L-functions.
+
 \begin{definition}[Character of a Finite Abelian Group]
   Let $G$ be a finite abelian group. A character of $G$ is a group homomorphism $\chi:G\to \mathbb{C}\setminus\{0\}$, where $\mathbb{C}\setminus\{0\}$ is regarded as a group under multiplication.
 \end{definition}
@@ -2560,7 +2566,7 @@ Proof omitted.
 
 In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we have shown that a Dirichlet character $\chi$ modulo $q$ induces a character $\widetilde{\chi}$ of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$. On the other hand, if we start with a character $\chi$ of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$, we can extend $\chi$ to all integers $\mathbb{Z}$ and obtain a Dirichlet character modulo $q$ as follows:
 
-\begin{proposition}
+\begin{proposition} \label{prop:character_of_Z_mod_qZ_to_dirichlet_character}
   Let $\chi$ be a character of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$. Define the map $\widehat{\chi}:\mathbb{Z}\to \mathbb{C}$ by
   \[
     \widehat{\chi}(n) = \begin{cases}
@@ -2615,6 +2621,364 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   Since $\widehat{\chi}$ satisfies all three properties of a Dirichlet character modulo $q$, we conclude that $\widehat{\chi}$ is indeed a Dirichlet character modulo $q$.
 \end{solution}
 
+\begin{theorem}[Dirichlet Characters and Characters of Group of Units] \label{thm:dirichlet_characters_and_characters_of_group_of_units}
+  The Dirichlet characters modulo $q$ are just the characters of the particular finite abelian group $G_q$, where $G_q$ is the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation.
+
+  Furthermore, the number of Dirichlet characters modulo $q$ is $\phi(q)$
+\end{theorem}
+
+\begin{proof}
+  Let $\psi$ be the function we defined in proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}
+  and $\phi$ be the function we defined in the above proposition~\ref{prop:character_of_Z_mod_qZ_to_dirichlet_character}.
+  Then, for any integer $n$, we have
+  \[
+    \psi(e)(n)=\begin{cases}
+      e([n]) & \text{ if } \gcd(n,q) = 1, \\
+      0 & \text{ if } \gcd(n,q) \ne 1,
+    \end{cases}
+    \quad \text{ and } \quad
+    \phi(\chi)(n)=\begin{cases}
+      \chi([n]) & \text{ if } \gcd(n,q) = 1, \\
+      0 & \text{ if } \gcd(n,q) \ne 1.
+    \end{cases}
+  \]
+  where $e$ is a Dirichlet character modulo $q$ and $\chi$ is a character of the finite abelian group $G_q$.
+  It is clear that $\phi$ and $\psi$ are well-defined maps between the set of Dirichlet characters modulo $q$
+  and the set of characters of the finite abelian group $G_q$.
+
+  Moreover, it is easy to check that $\phi$ and $\psi$ are inverses of each other.
+  Indeed, for any integer $n$, we have
+  \[
+    \phi(\psi(e))(n)=e(n)
+    \quad \text{ and } \quad
+    \psi(\phi(\chi))([n])=\chi([n]).
+  \]
+  These equalities follow directly from propositions~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}
+  and~\ref{prop:character_of_Z_mod_qZ_to_dirichlet_character}.
+  Thus, the set of Dirichlet characters modulo $q$ is in bijection with the set of characters of the finite abelian group $G_q$.
+
+  Finally, by theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters},
+  the number of characters of the finite abelian group $G_q$ is equal to $|G_q|=\varphi(q)$.
+  Therefore, the number of Dirichlet characters modulo $q$ is also $\varphi(q)$.
+\end{proof}
+
+\begin{definition}[Primitive Root of Unity]
+  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation. If $G_q$ is a cyclic group, then a generator of $G_q$, denoted by $g$, satisfies
+  \[
+    G_q = \{ 1, g, g^2, \ldots, g^{\phi(q)-1} \}.
+  \]
+  is called a primitive root of unity modulo $q$.
+\end{definition}
+
+\begin{definition}[Index base on Primitive Root of Unity] \label{def:index_base_on_primitive_root_of_unity}
+  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation. If $G_q$ is a cyclic group generated by a primitive root of unity $g$, then we define the index base on $g$ as
+  \[
+    \mathrm{ind}_g(m) := k \quad \text{ if } g^k \equiv m \mod q \quad \text{ for } m \in \mathbb{Z} \text{ such that } \gcd(m,q) = 1.
+  \]
+  i.e. $[m]$ is the $k$-th power of the primitive root of unity $g$ in $G_q$, is called the index of $m$ base on $g$.
+\end{definition}
+
+\begin{definition}[Explicit Form of Dirichlet Characters (when corresponding Group of Units is Cyclic)] \label{thm:explicit_form_of_dirichlet_characters_when_group_of_units_is_cyclic}
+  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation. If $G_q$ is a cyclic group generated by a primitive root of unity $g$, then the Dirichlet characters modulo $q$ are given by
+  \[
+    \chi_n(m) = \begin{cases}
+      0 & \text{ if } \gcd(m,q) > 1, \\
+      e^{\frac{2\pi i n \cdot \mathrm{ind}_g(m)}{\phi(q)}} & \text{ if } \gcd(m,q) = 1,
+    \end{cases}
+  \]
+\end{definition}
+
+\begin{remark}
+  It's direct from theorem~\ref{thm:dirichlet_characters_and_characters_of_group_of_units}, theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters} and our definition of index base on primitive root of unity~\ref{def:index_base_on_primitive_root_of_unity}.
+\end{remark}
+
+
+\section{Putting Things Together}
+
+\begin{theorem}[Characters Form an Orthonormal Basis] \label{thm:characters_form_orthonormal_basis}
+  For the vector space $\mathbb{C}^{G}$ defined in exercise~\ref{ex:vector_space_of_functions}, the characters in $\widehat{G}$ form an orthonormal basis of $\mathbb{C}^{G}$.
+\end{theorem}
+
+\begin{proof}
+  By orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}, the characters in $\widehat{G}$ are orthonormal with respect to the inner product defined there. Thus, the characters in $\widehat{G}$ are linearly independent in the vector space $\mathbb{C}^{G}$. 
+  Recall that in theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters}, we have shown that $|\widehat{G}| = |G|$ (since $\widehat{G} \cong G$). Therefore, by exercise~\ref{ex:dimension_of_function_vector_space}, we have exactly $|G|$ linearly independent characters in $\widehat{G}$, which is equal to the dimension of the vector space $\mathbb{C}^{G}$. Thus, the characters in $\widehat{G}$ form a basis of $\mathbb{C}^{G}$.
+\end{proof}
+
+\begin{example} \label{ex:expressing_delta_function_as_linear_combination_of_characters}
+  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation.
+  Let $\delta_{a}: G_q \to \mathbb{C}$ be the function defined by $\delta_{a}([n]) = 1$ if $[n] = [a]$ and $0$ otherwise. By theorem~\ref{thm:characters_form_orthonormal_basis}, we can express $\delta_{a}$ as a linear combination of the characters in $\widehat{G_q}$:
+  \[
+    \delta_{a} = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi,
+  \]
+  and we can easily find the coefficients $c_{\chi}$ using the inner product defined in theorem~\ref{thm:orthogonality_relations_of_characters}:
+  \[
+    c_{\chi} = \langle \delta_{a}, \chi \rangle \quad \text{ for all } \chi \in \widehat{G_q}.
+  \]
+  \textit{The last part follows from the property of orthonormal basis in inner product spaces which we have learned in linear algebra, if you forget, here is the proof:
+  \[
+    \langle \delta_{a}, \chi_j \rangle = \langle \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \langle \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \delta_{\chi_i,\chi_j} = c_{\chi_j}.
+  \]}
+\end{example}
+
+%\begin{lemma}[Just one step to arrive at Dirichlet's Theorem] \label{lem:Dirichlet_L_function_bounded_near_1}
+%  We can extend our previous lemma~\ref{lem:Dirichlet_Euler_product_idea} like below:
+%  Once we have the dirichlet L-function
+%  \[
+%    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} \quad \text{ for } \Re(z) > 1,
+%  \]
+%  remains bounded as $z=x\to 1^{+}$ for any non-principal Dirichlet character $\chi$ modulo $q$.
+%  
+%  We can show that the series
+%  \[
+%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty
+%  \]
+%  and hence the Dirichlet's Theorem~\ref{thm:PN_in_AP} holds.
+%\end{lemma}
+%
+%\begin{proof}
+%  Let $\chi$ be a Dirichlet character modulo $q$. By the definition of Dirichlet character, we have $\chi$ is completely multiplicative. Thus, 
+%  \[
+%    \frac{\chi(n)}{n^z} \cdot \frac{\chi(m)}{m^z} = \frac{\chi(nm)}{(nm)^z} \quad \text{ for all } n,m \in \mathbb{Z}^+.
+%  \]  
+%  which means that the function $a(n) = \frac{\chi(n)}{n^z}$ is also completely multiplicative. Notice that for any $z \in \mathbb{C}$ with $\Re(z) > 1$, we can choose $\varepsilon>0$ such that $\Re(z) > 1 + \varepsilon$. Then, we have
+%  \[
+%    \sum_{n=1}^{\infty} \left| \frac{\chi(n)}{n^z} \right| = \sum_{n=1}^{\infty} \frac{|\chi(n)|}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{1+\varepsilon}} < \infty.
+%  \]
+%  Thus, for any $z \in \mathbb{C}$ with $\Re(z) > 1$, the series $\sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}$ converges absolutely, and therefore by theorem~\ref{thm:euler_product_formula}, we have
+%  \[
+%    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} = \prod_{p \text{ prime}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z) > 1.
+%  \]
+%  Then, by Corollary~\ref{cor:log_dirichlet_L_function}, we have
+%  \[
+%    \log L(z,\chi) := \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kz} \quad \text{ for } \Re(z) > 1.
+%  \]
+%  is a branch of the logarithm of $L(z,\chi)$
+%  \[
+%    e^{\log L(z,\chi)} = L(z,\chi) \quad \text{ for } \Re(z) > 1.
+%  \]
+%
+%  Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
+%  \[
+%    \mathds{1}_{a,q}(n) = \begin{cases} 1 & \text{if } n \equiv a \mod q, \\ 0 & \text{otherwise}. \end{cases}
+%  \]
+%  then we can find that
+%  \[
+%    \mathds{1}_{a,q}(n) = \delta_{a}([n]) \quad \text{ for all } n \in \mathbb{Z}
+%  \]
+%  where $\delta_{a}$ is defined in example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}.
+%  Thus, by example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}, we have
+%  \[
+%    \mathds{1}_{a,q}(n) = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi([n]) \quad \text{ for all } n \in \mathbb{Z}
+%  \]
+%  where
+%  \[
+%    c_{\chi} = \langle \delta_{a}, \chi \rangle = \frac{1}{|G_q|} \sum_{g \in G_q} \delta_{a}(g) \overline{\chi(g)} = \frac{1}{|G_q|} \overline{\chi([a])}.
+%  \]
+%  Especially, $c_{\chi_0} = \frac{1}{|G_q|}\chi_0([a]) = \frac{1}{\varphi(q)}$ where $\chi_0$ is the principal Dirichlet character modulo $q$.
+%  Therefore, we have
+%  \[
+%  \begin{aligned}
+%    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) &= \sum_{\chi \in \widehat{G_q}} \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} c_{\chi} \chi(p^k) p^{-kz} = \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi(p^k)= \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \mathds{1}_{a,q}(p^k)
+%  \end{aligned}
+%  \]
+%  do the same trick as in lemma~\ref{lem:Dirichlet_Euler_product_idea}, we have
+%  \[
+%    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) = \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-z} + E(z) \quad \text{ where } |E(z)| \leq 1
+%  \]
+%  for all $z \in \mathbb{C}$ with $\Re(z) > 1$.
+%  Since we assumed that $L(z,\chi)$ remains bounded as $z=x\to 1^{+}$ for any non-principal Dirichlet character $\chi$ modulo $q$,
+%  we have
+%  \[
+%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-x} = \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(x,\chi) - E(x) = c_{\chi_0} \log L(x,\chi_0) + \sum_{\substack{\chi \in \widehat{G_q} \\ \chi \ne \chi_0}} c_{\chi} \log L(x,\chi) - E(x) = \infty \quad \text{ as } x \to 1^{+}.
+%  \]
+%  Thus, we conclude that
+%  \[
+%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty.
+%  \]
+%\end{proof}
+
+\section{Dirichlet Test}
+
+\begin{lemma}[Summmation by Parts] \label{lem:summation_by_parts}
+  Let $A_n = \sum_{k=1}^{n} a_k$, $D_n = b_n - b_{n+1}$ for sequences $\{a_n\}$ and $\{b_n\}$. Setting $A_0=0$, then for any positive integer $N$, we have
+  \[
+    \sum_{n=1}^{N} a_n b_n = A_N b_{N} - \sum_{n=1}^{N-1} A_n D_{n+1}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  By using the integration by parts idea, we have
+  \[
+    \int^N_{1} a(x)b(x) \, dx = A(N)b(N) - \int^N_{1} A(x) b'(x) \, dx.
+  \]
+  The $A_n$ play the role of integration and the $D_n$ play the role of differentiation. One may consider this lemma as a discrete version of integration by parts.
+  
+  Now we prove it directly:
+  \[
+  \begin{aligned}
+    \sum_{n=1}^{N} a_n b_n &= \sum_{n=1}^{N} (A_n - A_{n-1}) b_n = \sum_{n=1}^{N} A_n b_n - \sum_{n=1}^{N} A_{n-1} b_n \\
+    &= \sum_{n=1}^{N} A_n b_n - \sum_{n=0}^{N-1} A_n b_{n+1} = A_N b_N + \sum_{n=1}^{N-1} A_n b_n - \sum_{n=1}^{N-1} A_n b_{n+1} \\
+    &= A_N b_N - \sum_{n=1}^{N-1} A_n (b_{n+1} - b_n) = A_N b_N - \sum_{n=1}^{N-1} A_n D_{n+1}.
+  \end{aligned}
+  \]
+\end{proof}
+
+\begin{theorem}[Dirichlet Test for Series Convergence] \label{thm:dirichlet_test_for_series_convergence}
+  Let $\{a_n\}$, $\{b_n\}$ be sequences of complex numbers. If the following conditions hold:
+  \begin{enumerate}[(i)]
+    \item The sequence of partial sums $A_N = \sum_{k=1}^{N} a_k$ is bounded.
+    \item The sequence $b_n\to 0$ as $n \to \infty$.
+    \item The series $\sum_{n=1}^{\infty} |b_{n+1} - b_{n}|$ converges.
+  \end{enumerate}
+  Then, the series $\sum_{n=1}^{\infty} a_n b_n$ converges.
+\end{theorem}
+
+\begin{proof}
+  The three conditions imply that the series $\sum_{n=1}^{\infty} A_n D_{n+1}$ converges absolutely, where $D_n = b_n - b_{n+1}$, since
+  \[
+    \sum_{n=1}^{\infty} |A_n D_{n+1}| \leq M \sum_{n=1}^{\infty} |b_{n+1} - b_n| < \infty,
+  \]
+  where $M$ is a bound for the sequence of partial sums $A_N$. \\
+  Consider the partial sums of the series $\sum_{n=1}^{\infty} a_n b_n$:
+  \[
+    S_N = \sum_{n=1}^{N} a_n b_n = A_N b_N - \sum_{n=1}^{N-1} A_n D_{n+1}, \quad \text{ by lemma~\ref{lem:summation_by_parts}.}
+  \]
+  Notice that as $N \to \infty$, the term $A_N b_N \to 0$ since $A_N$ is bounded and $b_N \to 0$ and the series $\sum_{n=1}^{\infty} A_n D_{n+1}$ converges absolutely as shown before. Thus, the partial sums $S_N$ converge to a finite limit as $N \to \infty$. Therefore, the series $\sum_{n=1}^{\infty} a_n b_n$ converges.
+\end{proof}
+
+\begin{example}
+  We can use the Dirichlet test~\ref{thm:dirichlet_test_for_series_convergence} to show the alternating series test:
+  Let $\{a_n\}$ be a sequence of positive real numbers that is monotonically decreasing and converges to $0$. Then, the alternating series
+  \[
+    \sum_{n=1}^{\infty} (-1)^{n+1} a_n
+  \] converges.
+
+  We can apply the Dirichlet test~\ref{thm:dirichlet_test_for_series_convergence} with $b_n = (-1)^{n+1}$ and $a_n$ as given. The sequence of partial sums $A_N = \sum_{k=1}^{N} a_k$ is bounded since $\{a_n\}$ is positive and monotonically decreasing. The sequence $b_n = (-1)^{n+1}$ converges to $0$ as $n \to \infty$. Finally, the series $\sum_{n=1}^{\infty} |b_{n+1} - b_n|$ converges since $|b_{n+1} - b_n| = 2$ for all $n$. Therefore, by the Dirichlet test, the alternating series $\sum_{n=1}^{\infty} (-1)^{n+1} a_n$ converges.
+\end{example}
+
+\begin{theorem}[Convergence of Dirichlet L-function for Non-Principal Characters] \label{thm:convergence_of_dirichlet_L_function_for_non_principal_characters}
+  The Dirichlet L-function
+  \[
+    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}
+  \]
+  is convergent for every \(z\in\mathbb C\) with \(\Re(z)>0\), where \(\chi\) is a non-principal Dirichlet character modulo \(q\).
+\end{theorem}
+
+\begin{proof}
+  We can apply the Dirichlet test~\ref{thm:dirichlet_test_for_series_convergence} to the Dirichlet $L$-function
+  \[
+  L(z,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^z},
+  \]
+  by taking \(a_n=\chi(n)\) and \(b_n=n^{-z}\). We verify the three conditions of the Dirichlet test for \(\Re(z)>0\).
+  \begin{enumerate}[(i)]
+    \item \textbf{Boundedness of the partial sums \(A_N=\sum_{k=1}^{N}\chi(k)\).}
+    Since \(\chi\) is a Dirichlet character modulo \(q\), it is periodic with period \(q\), and \(\chi(n)=0\) whenever \(\gcd(n,q)\neq 1\). As \(\chi\) is not the principal character, we have
+    \[
+      \sum_{r=1}^{q}\chi(r) =\sum_{\substack{1\le r\le q\\ \gcd(r,q)=1}}\chi(r) =\sum_{r\in G_q}\chi(r) =\sum_{r\in G_q}\chi(r)\overline{\chi_0(r)} =|G_q|\langle \chi,\chi_0\rangle =0,
+    \]
+    by the orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}.
+    Now write \(m_0=\lfloor N/q\rfloor\). Using periodicity \(\chi(mq+r)=\chi(r)\), we decompose
+    \[
+      A_N=\sum_{k=1}^{N}\chi(k) =\sum_{m=0}^{m_0-1}\sum_{r=1}^{q}\chi(mq+r)+\sum_{k=m_0q+1}^{N}\chi(k) = m_0\sum_{r=1}^{q}\chi(r)+\sum_{k=m_0q+1}^{N}\chi(k) =\sum_{k=m_0q+1}^{N}\chi(k).
+    \]
+    Hence
+    \[
+      |A_N| \le \sum_{k=m_0q+1}^{N}|\chi(k)| \le q,
+    \]
+    since the last sum has at most \(q\) terms and \(|\chi(k)|\le 1\). Therefore \(\{A_N\}\) is bounded.
+
+    \item \textbf{Decay of \(b_n\).}
+    For \(b_n=n^{-z}\), we have
+    \[
+      |b_n|=|n^{-z}|=n^{-\Re(z)}\longrightarrow 0 \quad (n\to\infty),
+    \]
+    for any \(\Re(z)>0\).
+
+    \item \textbf{Absolute convergence of \(\sum_{n\ge 1}|b_{n+1}-b_n|\).}
+    Let \(\gamma(t)=t^{-z}\). Then \(\gamma'(t)=-z\,t^{-z-1}\), and thus
+    \[
+      b_{n+1}-b_n=(n+1)^{-z}-n^{-z}=\gamma(n+1)-\gamma(n)=\int_n^{n+1}\gamma'(t)\,dt.
+    \]
+    Taking absolute values and using \(|t^{-z-1}|=t^{-\Re(z)-1}\) for \(t>0\), we obtain
+    \[
+      |b_{n+1}-b_n| \le \int_n^{n+1}|\gamma'(t)|\,dt =|z|\int_n^{n+1} t^{-\Re(z)-1}\,dt \le |z|\int_n^{n+1} n^{-\Re(z)-1}\,dt =\frac{|z|}{n^{\Re(z)+1}}.
+    \]
+    Therefore,
+    \[
+      \sum_{n=1}^{\infty}|b_{n+1}-b_n| \le |z|\sum_{n=1}^{\infty}\frac{1}{n^{\Re(z)+1}}<\infty \quad\text{for all }\Re(z)>0.
+    \]
+  \end{enumerate}
+  All three conditions of the Dirichlet test are satisfied when \(\Re(z)>0\). Hence the series
+  \[
+    \sum_{n=1}^{\infty}\frac{\chi(n)}{n^z}
+  \]
+  converges for every \(z\in\mathbb C\) with \(\Re(z)>0\), i.e.\ \(L(z,\chi)\) is well-defined in the half-plane \(\Re(z)>0\).
+\end{proof}
+
+\begin{theorem}[Enhanced for previous Theorem] \label{thm:enhanced_convergence_of_dirichlet_L_function_for_non_principal_characters}
+  
+\end{theorem}
+
+\begin{proof}
+  We now prove that \(L(z,\chi)=\sum_{n=1}^{\infty}\frac{\chi(n)}{n^z}\) converges for \(\Re(z)>0\) and defines an analytic function in this half-plane, assuming \(\chi\) is a nonprincipal Dirichlet character modulo \(q\). \\
+  Define the sequences
+  \[
+    a_n=\chi(n),\qquad b_n(z)=n^{-z},\qquad A_n=\sum_{k=1}^{n}a_k,\qquad D_{n+1}(z)=b_{n+1}(z)-b_n(z).
+  \]
+  Same as in the proof of theorem~\ref{thm:convergence_of_dirichlet_L_function_for_non_principal_characters}, the sequence of partial sums \(A_n\) is bounded:
+  \[
+    |A_n|\le q.
+  \]
+  Fix \(\varepsilon>0\) and consider the half-plane \(\{z\in\mathbb C:\Re(z)\ge \varepsilon\}\).
+  Since \(|b_N(z)|=|N^{-z}|=N^{-\Re(z)}\), we obtain
+  \[
+    |A_N b_N(z)|\le q\,N^{-\Re(z)}\le q\,N^{-\varepsilon}\xrightarrow[N\to\infty]{}0,
+  \]
+  uniformly for \(\Re(z)\ge \varepsilon\). 
+  Next, same as the proof of theorem~\ref{thm:convergence_of_dirichlet_L_function_for_non_principal_characters}, we have
+  \[
+    |D_{n+1}(z)| \le \frac{|z|}{n^{\Re(z)+1}}
+  \]
+  Combining this with the boundedness of \(A_n\), we get
+  \[
+    |A_n D_{n+1}(z)|\le q\,\frac{|z|}{n^{1+\varepsilon}}
+    \qquad (\Re(z)\ge \varepsilon).
+  \]
+  Fix \(z\) with \(\Re(z)\ge \varepsilon\). Since
+  \[
+    \sum_{n=1}^{\infty} n^{-1-\varepsilon}<\infty,
+  \]
+  by using the Weierstrass M-test we conclude that the series
+  \[
+    \sum_{n=1}^{\infty} A_n D_{n+1}(z)
+  \]
+  converges uniformly in the half-plane \(\{\Re(z)\ge \varepsilon\}\).
+
+  Moreover, since \(|b_N(z)|=N^{-x}\) and \(|A_N|\le q\), we have
+  \[
+    |A_N b_N(z)| \le q\,N^{-x} \le q\,N^{-\varepsilon}\xrightarrow[N\to\infty]{}0,
+  \]
+  uniformly for \(\Re(z)\ge \varepsilon\).
+
+  By summation by parts~\ref{lem:summation_by_parts}, we have
+  \[
+    \sum_{n=1}^{N} a_n b_n(z)
+    = A_N b_N(z) - \sum_{n=1}^{N-1} A_n D_{n+1}(z).
+  \]
+  Letting \(N\to\infty\), the first term tends to \(0\) uniformly in \(\{\Re(z)\ge \varepsilon\}\), while the second term converges uniformly. Hence the partial sums of
+  \[
+    \sum_{n=1}^{\infty} a_n b_n(z)
+    = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}
+  \]
+  converge uniformly in the half-plane \(\{\Re(z)\ge \varepsilon\}\).
+
+  Since each term \(z\mapsto \chi(n)n^{-z}\) is an analytic function, uniform convergence implies that \(L(z,\chi)\) defines an analytic function in \(\{\Re(z)\ge \varepsilon\}\). As \(\varepsilon>0\) is arbitrary, we conclude that \(L(z,\chi)\) is analytic in the half-plane \(\{\Re(z)>0\}\).
+
+  In particular, when \(\chi\) is a nonprincipal Dirichlet character modulo \(q\), the function \(L(z,\chi)\) remains bounded as \(z\to 1\).
+\end{proof}
+
+
+\chapter{Dirichlet Theorem on Primes in Arithmetic Progressions}
 
 
 \end{document}
