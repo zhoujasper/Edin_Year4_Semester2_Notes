@@ -164,9 +164,13 @@
             \item Example: Crank-Nicolson for Heat Eq. $u_t=\kappa u_{xx}$: 对$x$用centred difference; 对$t$用trapezoidal:
             \scalebox{0.9}{\tiny $
                 \frac{U_m^{n+1}-U_m^n}{\Delta t} = \frac{\kappa}{2}\left(\frac{U_{m+1}^{n+1}-2U_m^{n+1}+U_{m-1}^{n+1}}{(\Delta x)^2} + \frac{U_{m+1}^n - 2U_m^n + U_{m-1}^n}{(\Delta x)^2}\right)
-            $}
+            $} \\
+            \scalebox{0.9}{\tiny $
+                \Rightarrow -r U_{m-1}^{n+1} + (2+2r) U_m^{n+1} - r U_{m+1}^{n+1} = r U_{m-1}^n + (2-2r) U_m^n + r U_{m+1}^n, \quad r=\frac{\kappa \Delta t}{(\Delta x)^2}
+            $} \\
         \end{enumerate}
 
+        \vspace{-4pt}
         \quad \ok{Solve it}: By iteration: e.g. $A\mathbf{U}^{n+1}=\mathbf{B}\mathbf{U}^n$, \quad where $\mathbf{U}^n=[U_1^n,U_2^n,...,U_{M-1}^n]^\top$.
     \end{MyTh}
 
