@@ -2239,7 +2239,7 @@ Proof omitted.
   \]
   Thus, $d\mathbb{Z}\subseteq I_{m,n}$, and hence $I_{m,n}=d\mathbb{Z}$.
 
-  Furthermore, since both $m$ and $n$ belong to $I_{m,n}$, $d$ divides both $m$ and $n$. Thus, $d$ is a common divisor of $m$ and $n$. If there exists a common divisor $d'$ of $m$ and $n$ such that $d'>d$, then $d'$ divides every element of $I_{m,n}$, which contradicts the definition of $d$ as the smallest positive integer in $I_{m,n}$. Therefore, $d=\gcd(m,n).$
+  Furthermore, since both $m$ and $n$ belong to $I_{m,n}$, $d$ divides both $m$ and $n$. Thus, $d$ is a common divisor of $m$ and $n$. If there exists a common divisor $d'$ of $m$ and $n$ such that $d'<d$, then $d'$ divides every element of $I_{m,n}$, which contradicts the definition of $d$ as the smallest positive integer in $I_{m,n}$. Therefore, $d=\gcd(m,n).$
 \end{example}
 
 \begin{lemma}[Characterization of Group of Units of $\mathbb{Z}/q\mathbb{Z}$]
@@ -2800,7 +2800,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \section{Dirichlet Test}
 
 \begin{lemma}[Summmation by Parts] \label{lem:summation_by_parts}
-  Let $A_n = \sum_{k=1}^{n} a_k$, $D_n = b_n - b_{n+1}$ for sequences $\{a_n\}$ and $\{b_n\}$. Setting $A_0=0$, then for any positive integer $N$, we have
+  Let $A_n = \sum_{k=1}^{n} a_k$, $D_n = b_{n} - b_{n-1}$ for sequences $\{a_n\}$ and $\{b_n\}$. Setting $A_0=0$, then for any positive integer $N$, we have
   \[
     \sum_{n=1}^{N} a_n b_n = A_N b_{N} - \sum_{n=1}^{N-1} A_n D_{n+1}.
   \]
@@ -2816,9 +2816,9 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   Now we prove it directly:
   \[
   \begin{aligned}
-    \sum_{n=1}^{N} a_n b_n &= \sum_{n=1}^{N} (A_n - A_{n-1}) b_n = \sum_{n=1}^{N} A_n b_n - \sum_{n=1}^{N} A_{n-1} b_n \\
-    &= \sum_{n=1}^{N} A_n b_n - \sum_{n=0}^{N-1} A_n b_{n+1} = A_N b_N + \sum_{n=1}^{N-1} A_n b_n - \sum_{n=1}^{N-1} A_n b_{n+1} \\
-    &= A_N b_N - \sum_{n=1}^{N-1} A_n (b_{n+1} - b_n) = A_N b_N - \sum_{n=1}^{N-1} A_n D_{n+1}.
+    \sum_{n=1}^{N} a_n b_n &= \sum_{n=1}^{N} (A_n - A_{n-1}) b_n  = \sum_{n=1}^{N} A_n b_n - \sum_{n=1}^{N} A_{n-1} b_n \\
+    &= \sum_{n=1}^{N} A_n b_n - \sum_{n=0}^{N-1} A_n b_{n+1} = A_N b_N - \sum_{n=1}^{N-1} A_n (b_{n+1} - b_n) \\
+    &= A_N b_N - \sum_{n=1}^{N-1} A_n D_{n+1}.
   \end{aligned}
   \]
 \end{proof}
@@ -2834,7 +2834,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{theorem}
 
 \begin{proof}
-  The three conditions imply that the series $\sum_{n=1}^{\infty} A_n D_{n+1}$ converges absolutely, where $D_n = b_n - b_{n+1}$, since
+  The three conditions imply that the series $\sum_{n=1}^{\infty} A_n D_{n+1}$ converges absolutely, where $D_n = b_n - b_{n-1}$, since
   \[
     \sum_{n=1}^{\infty} |A_n D_{n+1}| \leq M \sum_{n=1}^{\infty} |b_{n+1} - b_n| < \infty,
   \]
@@ -2916,7 +2916,13 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{proof}
 
 \begin{theorem}[Enhanced for previous Theorem] \label{thm:enhanced_convergence_of_dirichlet_L_function_for_non_principal_characters}
-  
+  The Dirichlet L-function
+  \[
+    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}
+  \]
+  defines an analytic function in the half-plane \(\Re(z)>0\), where \(\chi\) is a non-principal Dirichlet character modulo \(q\).  
+
+  In particular, as \(z\to 1^{+}\), the function \(L(z,\chi)\) remains bounded.
 \end{theorem}
 
 \begin{proof}
