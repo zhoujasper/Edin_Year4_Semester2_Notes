@@ -2166,7 +2166,7 @@ Proof omitted.
   This shows that any common divisor of $mn$ and $q$ must divide the right-hand side, which is $1$. Therefore, $\gcd(mn,q)=1$.
 \end{solution}
 
-\begin{proposition}
+\begin{proposition} \label{prop:dirichlet_character_well_defined_on_Z_mod_qZ}
   Let $\chi$ be a Dirichlet character modulo $q$. Consider a function $\widetilde{\chi}:\mathbb{Z}/q\mathbb{Z}\to\mathbb{C}$ defined by
   \[
     \widetilde{\chi}([n]) := \chi(n)
@@ -2555,6 +2555,66 @@ Proof omitted.
 
   For the $\widehat{G} \cong G$ part, we can define the map $\varphi:G\to \widehat{G}$ by $\varphi([k]) = \chi_k$. It is easy to check that $\varphi$ is a group isomorphism.
 \end{proof}
+
+\section{Back to Dirichlet Characters}
+
+In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we have shown that a Dirichlet character $\chi$ modulo $q$ induces a character $\widetilde{\chi}$ of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$. On the other hand, if we start with a character $\chi$ of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$, we can extend $\chi$ to all integers $\mathbb{Z}$ and obtain a Dirichlet character modulo $q$ as follows:
+
+\begin{proposition}
+  Let $\chi$ be a character of the finite abelian group $\mathbb{Z}/q\mathbb{Z}$. Define the map $\widehat{\chi}:\mathbb{Z}\to \mathbb{C}$ by
+  \[
+    \widehat{\chi}(n) = \begin{cases}
+      \chi([n]) & \text{ if } \gcd(n,q) = 1, \\
+      0 & \text{ if } \gcd(n,q) \ne 1.
+    \end{cases}
+  \]
+  Then, $\widehat{\chi}$ is a Dirichlet character modulo $q$.
+\end{proposition}
+
+\begin{exercise}
+  Prove the above proposition.
+\end{exercise}
+
+\begin{solution}
+  We need to verify that $\widehat{\chi}$ satisfies the three properties of a Dirichlet character modulo $q$.
+
+  \begin{enumerate}[(i)]
+    \item (Periodicity) For any integers $n$ and $m$ such that $n \equiv m \mod q$, we have $[n] = [m]$ in $\mathbb{Z}/q\mathbb{Z}$. Thus,
+    \[
+      \widehat{\chi}(n) = \begin{cases}
+        \chi([n]) & \text{ if } \gcd(n,q) = 1, \\
+        0 & \text{ if } \gcd(n,q) \ne 1,
+      \end{cases} = \begin{cases}
+        \chi([m]) & \text{ if } \gcd(m,q) = 1, \\
+        0 & \text{ if } \gcd(m,q) \ne 1,
+      \end{cases} = \widehat{\chi}(m).
+    \]
+    Thus, $\widehat{\chi}$ is periodic modulo $q$.
+    \item (Zero at non-units) By definition, for any integer $n$ such that $\gcd(n,q) \ne 1$, we have
+    \[
+      \widehat{\chi}(n) = 0.
+    \]
+    Thus, $\widehat{\chi}$ is zero at non-units modulo $q$.
+    \item (Completely multiplicative) For any integers $m$ and $n$, we consider the following cases:
+    \begin{itemize}
+      \item If $\gcd(m,q) = 1$ and $\gcd(n,q) = 1$, then $\gcd(mn,q) = 1$. Thus,
+      \[
+        \widehat{\chi}(mn) = \chi([mn]) = \chi([m])\chi([n]) = \widehat{\chi}(m)\widehat{\chi}(n).
+      \]
+      \item If $\gcd(m,q) \ne 1$ or $\gcd(n,q) \ne 1$, then $\gcd(mn,q) \ne 1$. Thus,
+      \[
+        \widehat{\chi}(mn) = 0 = \widehat{\chi}(m)\widehat{\chi}(n).
+      \]
+    \end{itemize}
+    Therefore, in all cases, we have
+    \[
+      \widehat{\chi}(mn) = \widehat{\chi}(m)\widehat{\chi}(n).
+    \]
+    Thus, $\widehat{\chi}$ is completely multiplicative.
+  \end{enumerate}
+  Since $\widehat{\chi}$ satisfies all three properties of a Dirichlet character modulo $q$, we conclude that $\widehat{\chi}$ is indeed a Dirichlet character modulo $q$.
+\end{solution}
+
 
 
 \end{document}
