@@ -107,7 +107,8 @@
             \item Let $z=z_0+e^{i\theta}y$ \scalebox{0.8}{($\theta$选让$f''(z_0)e^{2i\theta}$为负实数)} \ $\to$ \ \scalebox{0.9}{$I(x)\sim \int_{-\infty}^{\infty} e^{x[f(z_0)-\frac{|f''(z_0)|}{2}y^2+\cdots]}g(z_0) e^{i\theta}dy$}
             \item If $f$ 不容易避开singular point: \ok{a.}$\mathrm{Im}(f(z))=\mathrm{Im}(f(z_0))$ and $z_0\in C_0$ to find steepest descent path $C_0$
             \item \ok{b.} 画图看哪些singular points 在$C\to C_0$变形路径上, 计算residues. \quad \ok{c.} $I=$ 1 部分 + $2\pi i\sum$ residues.
-            \item \ok{More than one saddle point}: \scalebox{0.9}{i. 如果通过积分区域可以舍弃,则舍弃 \ \ ii. 否则保留$f(z_0)<0$的点}
+            \item \ok{More than one saddle point}: \scalebox{0.9}{i. 如果通过积分区域可以舍弃,则舍弃 \ \ ii. saddle points: $z_k$, 取能让$\mathrm{Re}(f(z_k))$最小的.} \\
+            \scalebox{0.9}{\ok{iii.} 如果多个saddle points 都满足$\mathrm{Re}(f(z_k))$最小, 则都要计算后叠加.}
             \item \ok{Exact Substitution}: 由1的基础,得到$f(z)$在$z_0$处的展开式,换元令$f(z)$就等于\ps{展开式前几项求解}.
             \item \ok{Remark}: 类似Laplace 3一样,可以对$xf(x)$一个整体处理, 必要时$z_0=f(x)\to$换元$z=f(x)s$.
         \end{enumerate}
