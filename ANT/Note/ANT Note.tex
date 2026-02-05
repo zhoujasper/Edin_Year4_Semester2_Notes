@@ -2876,14 +2876,17 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
     \[
       \sum_{r=1}^{q}\chi(r) =\sum_{\substack{1\le r\le q\\ \gcd(r,q)=1}}\chi(r) =\sum_{r\in G_q}\chi(r) =\sum_{r\in G_q}\chi(r)\overline{\chi_0(r)} =|G_q|\langle \chi,\chi_0\rangle =0,
     \]
-    by the orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}.
-    Now write \(m_0=\lfloor N/q\rfloor\). Using periodicity \(\chi(mq+r)=\chi(r)\), we decompose
-    \[
-      A_N=\sum_{k=1}^{N}\chi(k) =\sum_{m=0}^{m_0-1}\sum_{r=1}^{q}\chi(mq+r)+\sum_{k=m_0q+1}^{N}\chi(k) = m_0\sum_{r=1}^{q}\chi(r)+\sum_{k=m_0q+1}^{N}\chi(k) =\sum_{k=m_0q+1}^{N}\chi(k).
-    \]
+    by the orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}. 
+    Using periodicity \(\chi(mq+r)=\chi(r)\), we decompose
+    \begin{align*}
+      A_N &= \sum_{k=1}^{N}\chi(k) =\sum_{k=1}^{\lfloor N/q \rfloor q}\chi(k) + \sum_{k=\lfloor N/q \rfloor q + 1}^{N}\chi(k) \\
+      &=\sum_{m=0}^{\lfloor N/q \rfloor -1}\sum_{r=1}^{q}\chi(mq+r) + \sum_{k=\lfloor N/q \rfloor q + 1}^{N}\chi(k) \\
+      &=(\lfloor N/q \rfloor)\sum_{r=1}^{q}\chi(r) + \sum_{k=\lfloor N/q \rfloor q+1}^{N}\chi(k) \\
+      &=\sum_{k=\lfloor N/q \rfloor q+1}^{N}\chi(k).
+    \end{align*}
     Hence
     \[
-      |A_N| \le \sum_{k=m_0q+1}^{N}|\chi(k)| \le q,
+      |A_N| \le \sum_{k=\lfloor N/q \rfloor q+1}^{N}|\chi(k)| \le q,
     \]
     since the last sum has at most \(q\) terms and \(|\chi(k)|\le 1\). Therefore \(\{A_N\}\) is bounded.
 
