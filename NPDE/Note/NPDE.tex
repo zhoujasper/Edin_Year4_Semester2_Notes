@@ -47,12 +47,18 @@
         \quad - For $d=1$ and $\Delta x=\frac{D}{N}$, then: \ps{$\forall i,u_i=\Ocal((\Delta x)^p)$ \ $\Rightarrow$ \ $\|\mathbf{u}\|_{2,\Delta x}=\Ocal((\Delta x)^p)$}
 
         \quad - For $A$ symmetric: \ps{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
+
+        \quad \ok{Property}: \tiny If $\|\mathbf{u}\|_{2}\leq \|\mathbf{w}\|_{2}$, then $\|\mathbf{u}\|_{2,\Delta x}\leq \|\mathbf{w}\|_{2,\Delta x}$
     \end{MyTh}
 
     \begin{MyTh}{New Norm}\tiny 
         \ps{The norm $\|\mathbf{u}\|:=\max_{n}\|\mathbf{u}^n\|_{2,\Delta x}$ \quad where $\mathbf{u}^n=[u_1^n,u_2^n,...,u_{M-1}^n]^\top$}
 
         \qquad\qquad\qquad\quad Which means: Infinity norm in time, weighted 2-norm in space. \quad \scalebox{0.9}{\ps{主要用于双变量PDE}}
+
+        \quad - For $\tau^n_m=\Ocal((\Delta x)^a) + \Ocal((\Delta t)^b)$, $\Delta x=\frac{b-a}{M}$, $\Delta t=\frac{T}{N}$, assume $\Delta t=K(\Delta x)^\beta$, then:
+        
+        \quad \ \ $\max_{n}\|\underline{\tau}^n\|_{2,\Delta x}=\Ocal((\Delta x)^{\min\{a,b\beta\}})$
     \end{MyTh}
 
     \subsection{Linear Algebra}
@@ -69,9 +75,11 @@
         Real matrix $A$ is \ok{normal} if \ps{$AA^{\top}=A^{\top}A$} \quad The following are properties of it:
         \begin{enumerate}
             \item $A$ is \ps{orthogonally diagonalizable}, i.e. \ps{$A=Q\Lambda Q^{\top}$} where $Q$ orthogonal, $\Lambda$ diagonal with eigenvalues.
+            \vspace{-2pt}
             \item Exists an eigenvectors of $A$: $\{\mathbf{v}_i\}$ s.t. \ps{$\mathbf{v}_i^{*}\mathbf{v}_j=\delta_{ij}$} \qquad\qquad and \ \ \ps{Symmetric $\Rightarrow$ Normal}
         \end{enumerate}
     \end{MyTh}
+    \vspace{-2pt}
 
     }}
 
@@ -174,7 +182,7 @@
         \quad \ok{Solve it}: By iteration: e.g. $A\mathbf{U}^{n+1}=\mathbf{B}\mathbf{U}^n$, \quad where $\mathbf{U}^n=[U_1^n,U_2^n,...,U_{M-1}^n]^\top$.
     \end{MyTh}
 
-    \begin{MyTh}{Truncation for MoL}\tiny 对于 $\tau_m$, 离散$x$后$U_m$替换为$u_m$; 对于 $\tau_m^n$, 再离散$t$后$U_m^n$替换为$u_m^n$.
+    \begin{MyTh}{Truncation for MoL}\tiny 对于 ${\tau}_m$, 离散$x$后$U_m$替换为$u_m$; 对于 $\tau_m^n$, 再离散$t$后$U_m^n$替换为$u_m^n$.
 
         \vspace{1pt}
         \quad e.g. For Crank-Nicolson above: $\tau_m = \frac{\partial u_m}{\partial t} - \kappa \frac{u_{m+1}-2u_m+u_{m-1}}{(\Delta x)^2}$
@@ -183,21 +191,31 @@
         \quad e.g. For Crank-Nicolson above: $\tau_m^n = \frac{u_m^{n+1}-u_m^n}{\Delta t} - \frac{\kappa}{2}(\cdots)$
     \end{MyTh}
 
+    }}
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{}
+
     \begin{MyTh}{Abs. Stability for ODEs}\tiny
         For ODEs \ok{$\frac{d\mathbf{u}}{dt}=A \mathbf{u}$}, $\mathbf{u}$ vector. \quad \scalebox{0.9}{A 1-step method for $t$ \ (i.e. $\mathbf{U}^{n+1}=B\mathbf{U}^n$)}
 
         \quad It's \ps{absolutely stable} if \quad $\|B\mathbf{w}\|_2 \leq \|\mathbf{w}\|_2$ \quad for all $\mathbf{w}\in\R^{N-1}$
         
-        \quad \ok{Property}: If $A$ normal, then absolutely stable $\Leftrightarrow$ \ps{$|\lambda_i(B)|\leq1,\forall i$}
+        \quad \ok{Property}: If $B$ normal, then absolutely stable $\Leftrightarrow$ \ps{$|\lambda_i(B)|\leq1,\forall i$}
+
+        \quad \ok{Property}: Absolute stability $\Rightarrow$ Lax-Richtmyer stability (i.e. $\|B^n\mathbf{w}\|_{2,\Delta x} \leq \|\mathbf{w}\|_{2,\Delta x}$ for all $n$)
     \end{MyTh}
 
-    }}
+    \begin{MyTh}{Lax-Richtmyer Stability}\tiny
+        For PDE which discrete form $\frac{1}{\Delta t}\mathbf{U}^{n+1} = \frac{1}{\Delta t}B\mathbf{U}^n + \mathbf{F}^n$, $B$ fixed, $\mathbf{F}$ can change.
 
-    \fbox{\parbox{\linewidth}{
+        \quad It's \ps{Lax-Richtmyer stable} if \quad $\|B^n\mathbf{w}\| \leq C\|\mathbf{w}\|$ \quad for all $\mathbf{w}\in\R^{N-1}$, $n\leq \frac{T}{\Delta t}=N$
 
-    \section{WKB Theory}
+        \quad \ok{Property}: If consistent with $\max_{n}\|\underline{\tau}^n\|_{2,\Delta x}=\Ocal((\Delta x)^\beta)$ and L-R stable $\|B^n\mathbf{w}\|_{2,\Delta x} \leq C\|\mathbf{w}\|_{2,\Delta x}$,
 
-
+        \quad then, it convergents with $\max_{n}\|\mathbf{e}^n\|_{2,\Delta x}=\Ocal((\Delta x)^\beta)$ \quad \ps{Remark}: \scalebox{0.85}{\ok{Always Assume $\Delta t = K(\Delta x)^\alpha$}}
+    \end{MyTh}
 
 
 
@@ -235,7 +253,7 @@
 
     \vspace{1pt}
     \begin{MyTh}{Useful Tools}\tiny
-        If \ps{$e^n=Ae^{n-1}+B\tau^n$}, then \ \ \ps{$e^n=\sum_{k=0}^{n}A^{n-k}B\tau^k$}, \quad where $A$ is amplification factor.
+        If \ps{$e^n=Ae^{n-1}+B\tau^n$}, then \ \ \ps{$e^n=A^ne^0+\sum_{k=1}^{n}A^{n-k}B\tau^k$}, \quad $A$: amplification factor.
     \end{MyTh}
 
     }}
