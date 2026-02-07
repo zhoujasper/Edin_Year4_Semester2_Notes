@@ -195,7 +195,7 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{}
+    \section{ Lax-Richtmyer Stability, von Neumann Analysis}
 
     \begin{MyTh}{Abs. Stability for ODEs}\tiny
         For ODEs \ok{$\frac{d\mathbf{u}}{dt}=A \mathbf{u}$}, $\mathbf{u}$ vector. \quad \scalebox{0.9}{A 1-step method for $t$ \ (i.e. $\mathbf{U}^{n+1}=B\mathbf{U}^n$)}
@@ -215,6 +215,20 @@
         \quad \ok{Property}: If consistent with $\max_{n}\|\underline{\tau}^n\|_{2,\Delta x}=\Ocal((\Delta x)^\beta)$ and L-R stable $\|B^n\mathbf{w}\|_{2,\Delta x} \leq C\|\mathbf{w}\|_{2,\Delta x}$,
 
         \quad then, it convergents with $\max_{n}\|\mathbf{e}^n\|_{2,\Delta x}=\Ocal((\Delta x)^\beta)$ \quad \ps{Remark}: \scalebox{0.85}{\ok{Always Assume $\Delta t = K(\Delta x)^\alpha$}}
+    \end{MyTh}
+
+    \begin{MyTh}{von Neumann Analysis}\tiny
+        For PDE with \ok{1.} \textit{periodic} BCs, \ok{2.} 满足 L-R 中PDE的定义框架, \ok{3.} 假设$\mathbf{F}^n=0$
+
+        \quad $\Rightarrow$ Let $v_{k,m}=\exp(2\pi i k \frac{m\Delta x}{D})$ for $m=0,1,...,M-1$. \quad Then vector $\mathbf{v}_k$ 为 $B$ 的正交特征向量.
+
+        \quad $\Rightarrow$ By \ps{$U^n_m = \exp(2\pi i k \frac{m\Delta x}{D})$,$U^{n+1}_m=\alpha_k U^n_m$}, 可得特征值(放大因子) $\alpha_k$ 表达式, $B\mathbf{v}_k=\alpha_k \mathbf{v}_k$.
+
+        \quad $\Rightarrow$ If all $\alpha_k$ for $k=0,1,...,M-1$ can be found $\Rightarrow$ $B$ is normal and then:
+
+        \qquad \ If $|\alpha_k|\leq 1,\forall k$ \ $\Rightarrow$ \ps{$B$ is absolutely stable} and \ps{L-R stable in weighted 2-norm}
+        
+        \quad \ok{Remark}: \ps{假设$\Delta t=K(\Delta x)^\alpha$会得$K$, $\alpha$的限制条件}
     \end{MyTh}
 
 
