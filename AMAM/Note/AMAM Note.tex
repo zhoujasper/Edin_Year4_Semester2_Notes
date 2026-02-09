@@ -162,8 +162,16 @@
 
     \fbox{\parbox{\linewidth}{
     
-    \section{WKB Theory}
-    
+    \section{WKB Theory \& Solving PDE}
+    \begin{MyTh}{\imp{WKB}}\tiny
+        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$ (or $k^2q\gg 1$)} we have: $u\sim A(x)e^{ik\phi(x)}$. \quad Substitution can get:
+
+        \quad If $q(x)<0$: $u(x)\sim A_{+}|q|^{-\frac{1}{4}}e^{k\int^x_{x_0} \sqrt{|q(t)|}dt} + A_{-}|q|^{-\frac{1}{4}}e^{-k\int^x_{x_0} \sqrt{|q(t)|}dt}$ \quad \scalebox{0.9}{\ok{(Exp. Decay/Growth)}}
+
+        \quad If $q(x)>0$: $u(x)\sim A_{+}q^{-\frac{1}{4}}e^{ik\int^x_{x_0} \sqrt{q(t)}dt} + A_{-}q^{-\frac{1}{4}}e^{-ik\int^x_{x_0} \sqrt{q(t)}dt}$ \quad \scalebox{0.9}{\ok{(Oscillation)}}
+
+        \quad \ok{Turning Point}: If $q(x_0)=0$, then $x_0$ is a WKB turning point.
+    \end{MyTh}
     }}
 
     \columnbreak

@@ -1,6 +1,8 @@
 \documentclass{elegantbook}
 
 \usepackage{dsfont}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta}
 
 \title{Analytic Number Theory Note}
 \subtitle{Introduction to the Theory of Numbers}
@@ -2693,110 +2695,6 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{remark}
 
 
-\section{Putting Things Together}
-
-\begin{theorem}[Characters Form an Orthonormal Basis] \label{thm:characters_form_orthonormal_basis}
-  For the vector space $\mathbb{C}^{G}$ defined in exercise~\ref{ex:vector_space_of_functions}, the characters in $\widehat{G}$ form an orthonormal basis of $\mathbb{C}^{G}$.
-\end{theorem}
-
-\begin{proof}
-  By orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}, the characters in $\widehat{G}$ are orthonormal with respect to the inner product defined there. Thus, the characters in $\widehat{G}$ are linearly independent in the vector space $\mathbb{C}^{G}$. 
-  Recall that in theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters}, we have shown that $|\widehat{G}| = |G|$ (since $\widehat{G} \cong G$). Therefore, by exercise~\ref{ex:dimension_of_function_vector_space}, we have exactly $|G|$ linearly independent characters in $\widehat{G}$, which is equal to the dimension of the vector space $\mathbb{C}^{G}$. Thus, the characters in $\widehat{G}$ form a basis of $\mathbb{C}^{G}$.
-\end{proof}
-
-\begin{example} \label{ex:expressing_delta_function_as_linear_combination_of_characters}
-  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation.
-  Let $\delta_{a}: G_q \to \mathbb{C}$ be the function defined by $\delta_{a}([n]) = 1$ if $[n] = [a]$ and $0$ otherwise. By theorem~\ref{thm:characters_form_orthonormal_basis}, we can express $\delta_{a}$ as a linear combination of the characters in $\widehat{G_q}$:
-  \[
-    \delta_{a} = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi,
-  \]
-  and we can easily find the coefficients $c_{\chi}$ using the inner product defined in theorem~\ref{thm:orthogonality_relations_of_characters}:
-  \[
-    c_{\chi} = \langle \delta_{a}, \chi \rangle \quad \text{ for all } \chi \in \widehat{G_q}.
-  \]
-  \textit{The last part follows from the property of orthonormal basis in inner product spaces which we have learned in linear algebra, if you forget, here is the proof:
-  \[
-    \langle \delta_{a}, \chi_j \rangle = \langle \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \langle \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \delta_{\chi_i,\chi_j} = c_{\chi_j}.
-  \]}
-\end{example}
-
-%\begin{lemma}[Just one step to arrive at Dirichlet's Theorem] \label{lem:Dirichlet_L_function_bounded_near_1}
-%  We can extend our previous lemma~\ref{lem:Dirichlet_Euler_product_idea} like below:
-%  Once we have the dirichlet L-function
-%  \[
-%    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} \quad \text{ for } \Re(z) > 1,
-%  \]
-%  remains bounded as $z=x\to 1^{+}$ for any non-principal Dirichlet character $\chi$ modulo $q$.
-%  
-%  We can show that the series
-%  \[
-%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty
-%  \]
-%  and hence the Dirichlet's Theorem~\ref{thm:PN_in_AP} holds.
-%\end{lemma}
-%
-%\begin{proof}
-%  Let $\chi$ be a Dirichlet character modulo $q$. By the definition of Dirichlet character, we have $\chi$ is completely multiplicative. Thus, 
-%  \[
-%    \frac{\chi(n)}{n^z} \cdot \frac{\chi(m)}{m^z} = \frac{\chi(nm)}{(nm)^z} \quad \text{ for all } n,m \in \mathbb{Z}^+.
-%  \]  
-%  which means that the function $a(n) = \frac{\chi(n)}{n^z}$ is also completely multiplicative. Notice that for any $z \in \mathbb{C}$ with $\Re(z) > 1$, we can choose $\varepsilon>0$ such that $\Re(z) > 1 + \varepsilon$. Then, we have
-%  \[
-%    \sum_{n=1}^{\infty} \left| \frac{\chi(n)}{n^z} \right| = \sum_{n=1}^{\infty} \frac{|\chi(n)|}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{1+\varepsilon}} < \infty.
-%  \]
-%  Thus, for any $z \in \mathbb{C}$ with $\Re(z) > 1$, the series $\sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}$ converges absolutely, and therefore by theorem~\ref{thm:euler_product_formula}, we have
-%  \[
-%    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} = \prod_{p \text{ prime}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z) > 1.
-%  \]
-%  Then, by Corollary~\ref{cor:log_dirichlet_L_function}, we have
-%  \[
-%    \log L(z,\chi) := \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kz} \quad \text{ for } \Re(z) > 1.
-%  \]
-%  is a branch of the logarithm of $L(z,\chi)$
-%  \[
-%    e^{\log L(z,\chi)} = L(z,\chi) \quad \text{ for } \Re(z) > 1.
-%  \]
-%
-%  Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
-%  \[
-%    \mathds{1}_{a,q}(n) = \begin{cases} 1 & \text{if } n \equiv a \mod q, \\ 0 & \text{otherwise}. \end{cases}
-%  \]
-%  then we can find that
-%  \[
-%    \mathds{1}_{a,q}(n) = \delta_{a}([n]) \quad \text{ for all } n \in \mathbb{Z}
-%  \]
-%  where $\delta_{a}$ is defined in example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}.
-%  Thus, by example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}, we have
-%  \[
-%    \mathds{1}_{a,q}(n) = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi([n]) \quad \text{ for all } n \in \mathbb{Z}
-%  \]
-%  where
-%  \[
-%    c_{\chi} = \langle \delta_{a}, \chi \rangle = \frac{1}{|G_q|} \sum_{g \in G_q} \delta_{a}(g) \overline{\chi(g)} = \frac{1}{|G_q|} \overline{\chi([a])}.
-%  \]
-%  Especially, $c_{\chi_0} = \frac{1}{|G_q|}\chi_0([a]) = \frac{1}{\varphi(q)}$ where $\chi_0$ is the principal Dirichlet character modulo $q$.
-%  Therefore, we have
-%  \[
-%  \begin{aligned}
-%    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) &= \sum_{\chi \in \widehat{G_q}} \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} c_{\chi} \chi(p^k) p^{-kz} = \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi(p^k)= \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \mathds{1}_{a,q}(p^k)
-%  \end{aligned}
-%  \]
-%  do the same trick as in lemma~\ref{lem:Dirichlet_Euler_product_idea}, we have
-%  \[
-%    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) = \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-z} + E(z) \quad \text{ where } |E(z)| \leq 1
-%  \]
-%  for all $z \in \mathbb{C}$ with $\Re(z) > 1$.
-%  Since we assumed that $L(z,\chi)$ remains bounded as $z=x\to 1^{+}$ for any non-principal Dirichlet character $\chi$ modulo $q$,
-%  we have
-%  \[
-%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-x} = \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(x,\chi) - E(x) = c_{\chi_0} \log L(x,\chi_0) + \sum_{\substack{\chi \in \widehat{G_q} \\ \chi \ne \chi_0}} c_{\chi} \log L(x,\chi) - E(x) = \infty \quad \text{ as } x \to 1^{+}.
-%  \]
-%  Thus, we conclude that
-%  \[
-%    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty.
-%  \]
-%\end{proof}
-
 \section{Dirichlet Test}
 
 \begin{lemma}[Summmation by Parts] \label{lem:summation_by_parts}
@@ -2987,7 +2885,575 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{proof}
 
 
+\section{Putting Things Together}
+
+\begin{theorem}[Characters Form an Orthonormal Basis] \label{thm:characters_form_orthonormal_basis}
+  For the vector space $\mathbb{C}^{G}$ defined in exercise~\ref{ex:vector_space_of_functions}, the characters in $\widehat{G}$ form an orthonormal basis of $\mathbb{C}^{G}$.
+\end{theorem}
+
+\begin{proof}
+  By orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}, the characters in $\widehat{G}$ are orthonormal with respect to the inner product defined there. Thus, the characters in $\widehat{G}$ are linearly independent in the vector space $\mathbb{C}^{G}$. 
+  Recall that in theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters}, we have shown that $|\widehat{G}| = |G|$ (since $\widehat{G} \cong G$). Therefore, by exercise~\ref{ex:dimension_of_function_vector_space}, we have exactly $|G|$ linearly independent characters in $\widehat{G}$, which is equal to the dimension of the vector space $\mathbb{C}^{G}$. Thus, the characters in $\widehat{G}$ form a basis of $\mathbb{C}^{G}$.
+\end{proof}
+
+\begin{example} \label{ex:expressing_delta_function_as_linear_combination_of_characters}
+  Let $G_q$ be the group of units of $\mathbb{Z}/q\mathbb{Z}$ with multiplication modulo $q$ as the group operation.
+  Let $\delta_{a}: G_q \to \mathbb{C}$ be the function defined by $\delta_{a}([n]) = 1$ if $[n] = [a]$ and $0$ otherwise. By theorem~\ref{thm:characters_form_orthonormal_basis}, we can express $\delta_{a}$ as a linear combination of the characters in $\widehat{G_q}$:
+  \[
+    \delta_{a} = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi,
+  \]
+  and we can easily find the coefficients $c_{\chi}$ using the inner product defined in theorem~\ref{thm:orthogonality_relations_of_characters}:
+  \[
+    c_{\chi} = \langle \delta_{a}, \chi \rangle \quad \text{ for all } \chi \in \widehat{G_q}.
+  \]
+  \textit{The last part follows from the property of orthonormal basis in inner product spaces which we have learned in linear algebra, if you forget, here is the proof:
+  \[
+    \langle \delta_{a}, \chi_j \rangle = \langle \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \langle \chi_i, \chi_j \rangle = \sum_{\chi_i \in \widehat{G_q}} c_{\chi_i} \delta_{\chi_i,\chi_j} = c_{\chi_j}.
+  \]}
+\end{example}
+
+\begin{lemma}[Just one step to arrive at Dirichlet's Theorem] \label{lem:Dirichlet_L_function_bounded_near_1}
+  We can extend our previous lemma~\ref{lem:Dirichlet_Euler_product_idea} like below:
+
+  Once we have the dirichlet L-function
+  \[
+    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} \quad \text{ for } \Re(z) > 1,
+  \]
+  not equal to zero at $z=1$ (i.e., $L(1,\chi) \ne 0$) for any non-principal Dirichlet character $\chi$ modulo $q$.
+  
+  We can show that the series
+  \[
+    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty
+  \]
+  and hence the Dirichlet's Theorem~\ref{thm:PN_in_AP} holds.
+\end{lemma}
+
+\begin{proof}
+  \textbf{For any Dirichlet character $\chi$ modulo $q$}:
+  
+  Let $\chi$ be a Dirichlet character modulo $q$. By the definition of Dirichlet character, we have $\chi$ is completely multiplicative. Thus, 
+  \[
+    \frac{\chi(n)}{n^z} \cdot \frac{\chi(m)}{m^z} = \frac{\chi(nm)}{(nm)^z} \quad \text{ for all } n,m \in \mathbb{Z}^+.
+  \]  
+  which means that the function $a(n) = \frac{\chi(n)}{n^z}$ is also completely multiplicative. Notice that for any $z \in \mathbb{C}$ with $\Re(z) > 1$, we can choose $\varepsilon>0$ such that $\Re(z) > 1 + \varepsilon$. Then, we have
+  \[
+    \sum_{n=1}^{\infty} \left| \frac{\chi(n)}{n^z} \right| = \sum_{n=1}^{\infty} \frac{|\chi(n)|}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{\Re(z)}} \leq \sum_{n=1}^{\infty} \frac{1}{n^{1+\varepsilon}} < \infty.
+  \]
+  Thus, for any $z \in \mathbb{C}$ with $\Re(z) > 1$, the series $\sum_{n=1}^{\infty} \frac{\chi(n)}{n^z}$ converges absolutely, and therefore by theorem~\ref{thm:euler_product_formula}, we have
+  \[
+    L(z,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^z} = \prod_{p \text{ prime}} \frac{1}{1 - \chi(p)p^{-z}} \quad \text{ for } \Re(z) > 1.
+  \]
+  Then, by Corollary~\ref{cor:log_dirichlet_L_function}, we have
+  \[
+    \log L(z,\chi) := \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kz} \quad \text{ for } \Re(z) > 1.
+  \]
+  is a branch of the logarithm of $L(z,\chi)$ satisfying
+  \[
+    e^{\log L(z,\chi)} = L(z,\chi) \quad \text{ for } \Re(z) > 1.
+  \]
+
+  \textbf{Returning to the main proof of the lemma}:
+  
+  Let $\mathds{1}_{a,q}(n)$ be the indicator function for the arithmetic progression $\mathrm{AP}_{a,q}$, defined as
+  \[
+    \mathds{1}_{a,q}(n) = \begin{cases} 1 & \text{if } n \equiv a \mod q, \\ 0 & \text{otherwise}. \end{cases}
+  \]
+  then we can find that
+  \[
+    \mathds{1}_{a,q}(n) = \delta_{a}([n]) \quad \text{ for all } n \in \mathbb{Z}
+  \]
+  where $\delta_{a}$ is defined in example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}.
+  Thus, by example~\ref{ex:expressing_delta_function_as_linear_combination_of_characters}, we have
+  \[
+    \mathds{1}_{a,q}(n) = \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi([n]) \quad \text{ for all } n \in \mathbb{Z}
+  \]
+  where
+  \[
+    c_{\chi} = \langle \delta_{a}, \chi \rangle = \frac{1}{|G_q|} \sum_{g \in G_q} \delta_{a}(g) \overline{\chi(g)} = \frac{1}{|G_q|} \overline{\chi([a])}.
+  \]
+  Especially, $c_{\chi_0} = \frac{1}{|G_q|}\chi_0([a]) = \frac{1}{\varphi(q)}$ where $\chi_0$ is the principal Dirichlet character modulo $q$.
+  Therefore, we have
+  \[
+  \begin{aligned}
+    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) &= \sum_{\chi \in \widehat{G_q}} \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} c_{\chi} \chi(p^k) p^{-kz} = \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \sum_{\chi \in \widehat{G_q}} c_{\chi} \chi(p^k)= \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \mathds{1}_{a,q}(p^k)
+  \end{aligned}
+  \]
+  do the same trick as in lemma~\ref{lem:Dirichlet_Euler_product_idea}, we have
+  \begin{equation} \label{eq:sum_of_log_L_functions_equals_sum_over_primes}
+    \sum_{\chi \in \widehat{G_q}} c_{\chi} \log L(z,\chi) = \sum_{p \text{ prime}} \left( p^{-z} \mathds{1}_{a,q}(p) + \sum_{k=2}^{\infty} \frac{1}{k} p^{-kz} \mathds{1}_{a,q}(p^k) \right) = \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-z} + E(z)
+  \end{equation}
+  where
+  \[
+    |E(z)| = \left| \sum_{p \text{ prime}} \sum_{k=2}^{\infty} \frac{1}{k} p^{-kz} \mathds{1}_{a,q}(p^k) \right| \leq \sum_{p \text{ prime}} \sum_{k=2}^{\infty} p^{-k\Re(z)} \leq \sum_{p \text{ prime}} \sum_{k=2}^{\infty} p^{-k} = \sum_{p \text{ prime}} \frac{1}{p(p-1)} < 1 \quad \text{ for } \Re(z) > 1.
+  \]
+  Rearranging the above equation~\ref{eq:sum_of_log_L_functions_equals_sum_over_primes}, we have
+  \[
+    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-z} = c_{\chi_0} \log L(z,\chi_0) + \sum_{\substack{\chi \in \widehat{G_q} \\ \chi \ne \chi_0}} c_{\chi} \log L(z,\chi) - E(z) \quad \text{ for } \Re(z) > 1.
+  \]
+  where $\chi_0$ is the principal Dirichlet character modulo $q$ (i.e., $\chi_0(n) = 1$ if $\gcd(n,q) = 1$ and $0$ otherwise).
+
+  Recall the Theorem~\ref{thm:enhanced_convergence_of_dirichlet_L_function_for_non_principal_characters} that for any non-principal Dirichlet character $\chi$ modulo $q$, the function $L(z,\chi)$ remains bounded as $z=x \to 1^{+}$, and we assume that $L(z,\chi)$ is nonzero at $z=1$ for any non-principal Dirichlet character $\chi$ modulo $q$. Thus, we have
+  \[
+    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} p^{-z} = c_{\chi_0} \log L(z,\chi_0) + M \quad \text{ for } \Re(z) > 1,
+  \]
+  where $M$ is a constant that does not depend on $z$ since the sum $\sum_{\substack{\chi \in \widehat{G_q} \\ \chi \ne \chi_0}} c_{\chi} \log L(z,\chi)$ remains bounded as $z=x \to 1^{+}$ and $E(z)$ is also bounded for $\Re(z) > 1$.
+
+  Notice that the principal Dirichlet character $\chi_0$ modulo $q$ is defined by $\chi_0(n) = 1$ if $\gcd(n,q) = 1$ and $0$ otherwise. Thus, we have
+  \[
+    c_{\chi_0} = \langle \delta_{a}, \chi_0 \rangle = \frac{1}{|G_q|} \sum_{g \in G_q} \delta_{a}(g) \overline{\chi_0(g)} = \frac{1}{|G_q|} = \frac{1}{\varphi(q)}\ne 0.
+  \]
+  and we also have \( \log L(z,\chi_0) = \infty \) as \(z=x \to 1^{+}\)  by using the lemma~\ref{lem:Dirichlet_L_function_principal_character}.
+  Thus, we conclude that
+  \[
+    \sum_{\substack{p \text{ prime} \\ p \equiv a \mod q}} \frac{1}{p} = \infty.
+  \]
+\end{proof}
+
+
+
+
+
+
+
 \chapter{Dirichlet Theorem on Primes in Arithmetic Progressions}
+
+\section{Complex Case}
+
+\begin{lemma}[Dirichlet's Euler Product Idea] \label{lem:Dirichlet_Euler_product_idea}
+  The product of all Dirichlet L-functions modulo \(q\)
+  \[
+    \prod_{\chi} L(x,\chi) \geq 1 \quad \text{ for } x > 1,
+  \]
+  where $x$ is a real number and the product is taken over all Dirichlet characters \(\chi\) modulo \(q\).
+\end{lemma}
+
+\begin{proof}
+  By Corollary~\ref{cor:log_dirichlet_L_function}, for any Dirichlet character \(\chi\) modulo \(q\), we have
+  \[
+    L(x,\chi) = \exp\left( \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kx} \right) \quad \text{ for } x > 1.
+  \]
+  Hence, we have
+  \[
+    \prod_{\chi} L(x,\chi) = \exp\left( \sum_{\chi} \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} \chi(p^k) p^{-kx} \right) = \exp\left( \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kx} \sum_{\chi} \chi(p^k) \right) \quad \text{ for } x > 1.
+  \]
+  where the product is taken over all Dirichlet characters \(\chi\) modulo \(q\).
+
+  Consider the sum \(S(p^k) := \sum_{\chi} \chi(p^k)\). We consider the following two cases:
+  \begin{enumerate}[label=(\textbf{Case \arabic*}),leftmargin=43pt]
+    \item If there there exists a dirichlet character \(\chi_{\star} \) such that \(\chi_{\star}(p^k) \ne 1\). Then, by the orthogonality relations of characters~\ref{thm:orthogonality_relations_of_characters}, we have
+    \[
+      S(p^k) = \sum_{\chi} \chi(p^k) = \sum_{\chi} [\chi\chi_{\star}](p^k) = \sum_{\chi} \chi(p^k) \chi_{\star}(p^k) = \chi_{\star}(p^k) S(p^k).
+    \]
+    where the second equality follows from the exercise~\ref{ex:left-translation-bijection}.
+    Since \(\chi_{\star}(p^k) \ne 1\), we have \( (1 - \chi_{\star}(p^k)) S(p^k) = 0\), which implies that \(S(p^k) = 0\).
+    \item If all dirichlet characters \(\chi\) satisfy \(\chi(p^k) = 1\). Then \( S(p^k) = \sum_{\chi} 1 = |\widehat{G_q}| = |G_q| = \varphi(q) \).
+  \end{enumerate}
+  Therefore, in either case, we have \(S(p^k) \geq 0\). Hence, we conclude that
+  \[
+    \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kz} \sum_{\chi} \chi(p^k) \geq 0 \quad \text{ for } \Re(z) > 1,
+  \]
+  which implies that
+  \[
+    \prod_{\chi} L(x,\chi) = \exp\left( \sum_{p \text{ prime}} \sum_{k=1}^{\infty} \frac{1}{k} p^{-kx} \sum_{\chi} \chi(p^k) \right) \geq 1 \quad \text{ for } x > 1.
+  \]
+\end{proof}
+
+
+
+
+
+\begin{lemma}[Non-vanishing of Dirichlet L-functions at 1 for Complex Characters] \label{lem:Dirichlet_L_function_non_vanishing_at_1_for_complex_characters}
+  For every non-principal Dirichlet character \(\chi\) modulo \(q\), the Dirichlet L-function \(L(z,\chi)\) at \(z=1\) is nonzero, i.e.
+  \[
+    L(1,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n} \ne 0.
+  \]
+  when \(\chi\) is a complex character.
+\end{lemma}
+
+\begin{proof}
+  We consider two cases: the real case where \(\chi\) takes only real values so that \( \chi(n) = \overline{\chi(n)} \) for all \(n\), and the complex case where \(\chi\) takes some non-real values. But here we only prove the complex case, the real case will be proved in the next section.
+
+  We prove that by using contradiction. Assume that there exists a non-principal Dirichlet character \(\chi\) modulo \(q\) such that \(L(1,\chi) = 0\). Consider the conjugate character \(\overline{\chi}\) defined by \(\overline{\chi}(n) = \overline{\chi(n)}\) for all \(n\). It is easy to verify that \(\overline{\chi}\) is also a non-principal Dirichlet character modulo \(q\). Then, we have
+  \[
+    L(z;\overline{\chi}) = \overline{L(x;\chi)} \quad \text{ for } x > 1, \quad \text{ and hence } L(1;\overline{\chi}) = \overline{L(1;\chi)} = 0.
+  \]
+  Recall that both \(\chi\) and \(\overline{\chi}\) are analytic functions in a neighborhood of \(z=1\) by theorem~\ref{thm:enhanced_convergence_of_dirichlet_L_function_for_non_principal_characters}. 
+  Thus, we can write the Taylor expansions of \(L(z;\chi)\) and \(L(z;\overline{\chi})\) at \(z=1\) as
+  \[
+    L(z;\chi) = \sum_{n=0}^{\infty} a_n (z-1)^n, \quad L(z;\overline{\chi}) = \sum_{n=0}^{\infty} b_n (z-1)^n,
+  \]
+  where \(a_n = \frac{L^{(n)}(1;\chi)}{n!}\) and \(b_n = \frac{L^{(n)}(1;\overline{\chi})}{n!}\) for all \(n\). 
+  Since $L(1;\chi)=0$ and $L(1;\overline{\chi})=0$, we have $a_0=b_0=0$. Hence the Taylor expansions may be written as
+  \[
+    L(z;\chi) = (z-1)\sum_{n=1}^{\infty} a_n (z-1)^{n-1}, \qquad L(z;\overline{\chi}) = (z-1)\sum_{n=1}^{\infty} b_n (z-1)^{n-1}.
+  \]
+  Since both $L(z;\chi)$ and $L(z;\overline{\chi})$ are analytic in a neighborhood of $z=1$, the power series
+  \[
+    \sum_{n=1}^{\infty} a_n (z-1)^{n-1} \quad \text{and} \quad \sum_{n=1}^{\infty} b_n (z-1)^{n-1}
+  \]
+  converge uniformly on some closed disk $|z-1|\le r$, where $r$ is a sufficiently small positive number. In particular, there exists a constant $C>0$ such that
+  \[
+    \left|\sum_{n=1}^{\infty} a_n (z-1)^{n-1}\right|\le C_1, \qquad \left|\sum_{n=1}^{\infty} b_n (z-1)^{n-1}\right|\le C_2
+  \]
+  for all $|z-1|\le r$. 
+  So that when $z\to 1$, we have
+  \[
+    L(z;\chi) \leq C|z-1| \quad \text{ and } \quad L(z;\overline{\chi}) \leq C|z-1|
+  \]
+  for some constant \(C > 0\). 
+  
+  On the other hand, by the first formula in the proof of lemma~\ref{lem:Dirichlet_L_function_principal_character}, we have
+  \[
+    L(x;\chi_0) \leq \phi(q)\sum_{n=1}^{\infty} \frac{1}{n^x},
+  \]
+  and by the Integral Test for convergence, we have
+  \[
+    \sum_{n=1}^{\infty} \frac{1}{n^x} \leq 1 + \int_1^{\infty} \frac{1}{t^x} dt = \frac{x}{x-1} \quad \text{ for } x > 1.
+  \]
+  Hence, we have
+  \[
+    L(x;\chi_0) \leq \phi(q) \frac{x}{x-1} \quad \text{ for } x > 1.
+  \]
+
+  Now, consider the product of all Dirichlet L-functions modulo \(q\):
+  \[
+    \prod_{\chi} L(x,\chi) = L(x;\chi_0) \cdot L(x;\chi) \cdot L(x;\overline{\chi}) \cdot \prod_{\substack{\chi' \in \widehat{G_q} \\ \chi' \ne \chi, \overline{\chi}, \chi_0}} L(x;\chi').
+  \]
+  By using the above bounds for \(L(x;\chi_0)\), \(L(x;\chi)\) and \(L(x;\overline{\chi})\), recall that for any non-principal Dirichlet character \(\chi'\) modulo \(q\), the function \(L(z;\chi')\) remains bounded as \(z=x \to 1^{+}\) by theorem~\ref{thm:enhanced_convergence_of_dirichlet_L_function_for_non_principal_characters}, we have
+  \[
+    \prod_{\chi} L(x,\chi) \leq C' \frac{x}{x-1} |x-1|^2= C' x|x-1| \to 0 \quad \text{ as } x \to 1^{+}
+  \]
+  But this contradicts with the lemma~\ref{lem:Dirichlet_Euler_product_idea} that \(\prod_{\chi} L(x,\chi) \geq 1\) for \(x > 1\). Hence, we conclude that \(L(1,\chi) \ne 0\) for any non-principal Dirichlet character \(\chi\) modulo \(q\).
+\end{proof}
+
+\section{Real Case - Some Extra Work is Needed}
+
+\begin{definition}[Divisor function] \label{def:divisor_function}
+  For any positive integer \(n\), we define the divisor function \( d(n) \) as the number of positive divisors of \(n\).
+  
+  For example,
+  \[
+    d(1) = 1, \quad d(2) = 2, \quad d(3) = 2, \quad d(4) = 3, \quad d(5) = 2, \quad d(6) = 4, \quad d(12) = 6.
+  \]
+\end{definition}
+
+\begin{theorem}[Formula for the Divisor Function] \label{thm:formula_for_divisor_function}
+  For any positive integer \(n\), we have
+  \[
+    d(n) = \prod_{i=1}^{k} (1 + \nu_i),
+  \]
+  where
+  \[
+    n = p_1^{\nu_1} p_2^{\nu_2} \cdots p_k^{\nu_k}
+  \]
+  is the prime factorization of \(n\).
+\end{theorem}
+
+\begin{proof}
+  Notice that any positive divisor \(d\) of \(n\) must be of the form
+  \[
+    d = p_1^{\mu_1} p_2^{\mu_2} \cdots p_k^{\mu_k}
+  \]
+  where \(0 \leq \mu_i \leq \nu_i\) for all \(i=1,2,\ldots,k\). Hence, for each prime factor \(p_i\), we have \(\nu_i + 1\) choices for the exponent \(\mu_i\) (i.e., \(\mu_i = 0, 1, 2, \ldots, \nu_i\)). Therefore, the total number of positive divisors of \(n\) is given by
+  \[
+    d(n) = (\nu_1 + 1)(\nu_2 + 1) \cdots (\nu_k + 1) = \prod_{i=1}^{k} (1 + \nu_i).
+  \]
+\end{proof}
+
+\begin{proposition}[Multiplicativity of the Divisor Function] \label{prop:multiplicativity_of_divisor_function}
+  For any two positive integers \(m\) and \(n\), we have
+  \[
+    d(mn) = \prod_{p \text{ prime}} (1 + \nu_p(m) + \nu_p(n)),
+  \]
+  where
+  \[
+    m = \prod_{p \text{ prime}} p^{\nu_p(m)}, \quad n = \prod_{p \text{ prime}} p^{\nu_p(n)}
+  \]
+  are the prime factorizations of \(m\) and \(n\) respectively.
+\end{proposition}
+
+\begin{exercise}
+  Prove the above proposition.
+\end{exercise}
+
+\begin{solution}
+  Notice that the prime factorization of \(mn\) is given by
+  \[
+    mn = \prod_{p \text{ prime}} p^{\nu_p(m) + \nu_p(n)}.
+  \]
+  Hence, by the formula for the divisor function in theorem~\ref{thm:formula_for_divisor_function}, we have
+  \[
+    d(mn) = \prod_{p \text{ prime}} (1 + \nu_p(m) + \nu_p(n)).
+  \]
+\end{solution}
+
+\begin{remark}
+  For the average value of the divisor function, define it as
+  \[
+    A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n).
+  \]
+  Dirichlet proved that
+  \[
+    A(N) = \log N + 2\gamma - 1 + E(N), \quad \text{ where } |E(n)| \leq \frac{C}{\sqrt{N}}
+  \]
+  for some constant \(C > 0\) and \(\gamma\) is the Euler-Mascheroni constant defined by
+  \[
+    \gamma = \lim_{n\to\infty} \left( \sum_{k=1}^{n} \frac{1}{k} - \log n \right).
+  \]
+\end{remark}
+
+\begin{definition}[Big O Notation] \label{def:big_O_notation}
+  Let \(f\) and \(g\) be two functions defined on some subset of the real numbers. We say that \(f(x) = \mathcal{O}(g(x))\) as \(x \to a\) if there exist positive constants \(C\) and \(\delta\) such that
+  \[
+    |f(x)| \leq C |g(x)| \quad \text{ for all } x \text{ with } 0 < |x - a| < \delta.
+  \]
+
+  For example, we have
+  \[
+    A(N) = \log N + 2\gamma - 1 + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty.
+  \]
+\end{definition}
+
+\begin{example}
+  Let $A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n)$ be the average value of the divisor function. We can prove that
+  \[
+    A(N) = \log N + \mathcal{O}(1)
+  \]
+  \textit{(Hint: You can use this useful fact that \( \sum_{k=1}^N \frac{1}{k} = \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \) as \(N \to \infty\))}.
+
+  Here is the proof: Notice that the divisor function \(d(n)\) can be expressed as
+  \[
+    d(n) = \sum_{d|n} 1 = \underset{jk=n}{\sum_{j}\sum_{k}}\ 1
+  \]
+  because we can consider the sum of all divisors of \(n\) as the sum of lattice points \((j,k)\) in the first quadrant on a hyperbola $y = \frac{n}{x}$, where \(j\) and \(k\) are positive integers.
+  So that we have
+  \[
+    A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n) = \frac{1}{N} \sum_{n=1}^{N} \left[\underset{jk=n}{\sum_{j}\sum_{k}}\ 1 \right] = \frac{1}{N} \sum_{j=1}^{N} \sum_{k=1}^{\lfloor N/j \rfloor} 1 = \frac{1}{N} \sum_{j=1}^{N} \left\lfloor \frac{N}{j} \right\rfloor.
+  \]
+  Therefore, 
+  \[
+    A(N) = \frac{1}{N} \sum_{k=1}^{N} \frac{N}{k} + \mathcal{O}(1)
+  \]
+  By using the hint, we have
+  \[
+    A(N) = \frac{1}{N} \cdot N \left( \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \right) + \mathcal{O}(1) = \log N + \mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \]
+\end{example}
+
+\begin{theorem}[A Key Step for the Real Case] \label{thm:key_step_for_real_case}
+  Define a sum
+  \[
+    \mathcal{S}_N := N A(N) = \sum_{n=1}^{N} \left[\underset{jk=n}{\sum_{j}\sum_{k}}\ 1 \right]
+  \]
+  where \(A(N)\) is the average value of the divisor function defined by \(A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n)\). Then, we have
+  \[
+    \mathcal{S}_N = 2 \sum_{(j,k)\in L} 1 + \sum_{(j,k) \in S_q} 1
+  \]
+  where
+  \[
+    L = \{ 1 \leq j \leq \sqrt{N}: \sqrt{N} < k \leq N/j \}, \quad S_q = \{ (j,k)\in \mathbb{N}^2 : (j,k) \in [0,\sqrt{N}]^2\}
+  \]
+\end{theorem}
+
+\begin{proof}
+  We first rewrite \(\mathcal{S}_N\) as a lattice point count
+  \[
+    \mathcal{S}_N := N A(N) = \sum_{n=1}^{N} \left[\underset{jk=n}{\sum_{j}\sum_{k}}\ 1 \right]
+  \]
+  Hence, if we define the region
+  \[
+    H_N:=\{(j,k)\in\mathbb N^2:\ jk\le N\},
+  \]
+  then
+  \[
+    \mathcal{S}_N=\sum_{(j,k)\in H_N}1.
+  \]
+
+  \medskip
+  \noindent\textbf{Geometric decomposition.}
+  Let \(Q=\lfloor\sqrt N\rfloor\). Since \(jk\le N\) implies \(j\le \sqrt N\) or \(k\le \sqrt N\),
+  every point of \(H_N\) lies either in the square \(S_q=[1,Q]\times[1,Q]\) or in one of the two
+  ``rectangular'' parts below/above the diagonal (see Figure~\ref{fig:HN_decomp_smooth}).
+  More precisely, define
+  \[
+    U := \{(j,k)\in\mathbb N^2:\ 1\le j\le Q,\ Q< k\le N/j\}.
+  \]
+  Then one checks that the three sets \(S_q,L,U\) are pairwise disjoint and
+  \[
+    H_N = S_q \,\cup\, L \,\cup\, U.
+  \]
+  Indeed:
+  \begin{itemize}
+    \item If \((j,k)\in S_q\), then \(j\le Q\) and \(k\le Q\).
+    \item If \((j,k)\in L\), then \(k\le Q\) and \(j>Q\).
+    \item If \((j,k)\in U\), then \(j\le Q\) and \(k>Q\).
+  \end{itemize}
+  These conditions are mutually exclusive, so the union is disjoint. Also, if \((j,k)\in H_N\) and
+  \(j\le Q\) and \(k\le Q\), then \((j,k)\in S_q\); if \((j,k)\in H_N\) and \(k\le Q<j\), then
+  \(j\le N/k\) so \((j,k)\in L\); and if \((j,k)\in H_N\) and \(j\le Q<k\), then \(k\le N/j\) so
+  \((j,k)\in U\). Hence the disjoint union holds.
+
+
+  \begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[x=0.45cm,y=0.45cm,>=Latex, line cap=round, line join=round]
+
+    % ---------------- parameters ----------------
+    \def\N{64} % <-- change N here
+    \pgfmathtruncatemacro{\Q}{floor(sqrt(\N))} % Q = floor(sqrt N)
+
+    % window
+    \def\xmax{26}
+    \def\ymax{18}
+
+    % label position tweak for k=N/j (smaller = more left/down)
+    \def\labx{8.8}
+    \def\laby{11.0}
+
+    \begin{scope}
+      % leave room on the right for legend
+      \clip (-1.5,-1.2) rectangle (\xmax+9.0,\ymax+1.2);
+
+      % ---------------- axes ----------------
+      \draw[very thick,->] (0,0) -- (\xmax,0) node[below right] {$j$};
+      \draw[very thick,->] (0,0) -- (0,\ymax) node[above left] {$k$};
+
+      % ---------------- smooth filled region strictly under k = N/j ----------------
+      \begin{scope}
+        % clip to the region: 0<=k<=min(ymax, N/j), 0<=j<=xmax
+        \clip (0,0) --
+              (\xmax,0) --
+              plot[domain=\xmax:0.9, samples=400, smooth] (\x, {min(\ymax,\N/\x)}) --
+              (0,\ymax) -- cycle;
+
+        % now fill a big rectangle; only the clipped part remains
+        \fill[blue!30, opacity=0.55] (0,0) rectangle (\xmax,\ymax);
+      \end{scope}
+
+      % ---------------- S_q (green square) ----------------
+      \fill[green!55, opacity=0.75] (0,0) rectangle (\Q,\Q);
+      \draw[green!60!black, very thick] (0,0) rectangle (\Q,\Q);
+
+      % ---------------- lattice points (keep dots) ----------------
+      % Draw dots in the region jk<=N (and within window)
+      \foreach \j in {1,...,\xmax} {
+        \foreach \k in {1,...,\ymax} {
+          \pgfmathtruncatemacro{\prod}{\j*\k}
+          \ifnum\prod>\N\relax\else
+            \fill[blue!85] (\j-0.5,\k-0.5) circle (0.11);
+          \fi
+        }
+      }
+
+      % ---------------- hyperbola k=N/j ----------------
+      \draw[black, very thick, domain=0.9:\xmax, samples=380, smooth]
+        plot (\x, {\N/\x});
+
+      % (2) move label left & down via labx/laby
+      \node at (\labx,\laby) {$k=\dfrac{N}{j}$};
+
+      % ---------------- red outlines for U and L (stylised like your picture) ----------------
+      % U outline: left boundary + top cap + curve segment + bottom at k=Q
+      \draw[red, very thick] (0,\Q) -- (0,\ymax);
+      \draw[red, very thick] (0,\ymax) -- (3.0,\ymax); % top cap (adjust 3.0 if you want longer)
+      \draw[red, very thick, domain=1:\Q, samples=250, smooth]
+        plot (\x, {min(\ymax,\N/\x)});
+      \draw[red, very thick] (0,\Q) -- (\Q,\Q);
+
+      % L outline: vertical at j=Q + bottom axis + curve segment
+      \draw[red, very thick] (\Q,0) -- (\Q,\Q);
+      \draw[red, very thick] (\Q,0) -- (\xmax,0);
+      \draw[red, very thick, domain=\Q:\xmax, samples=320, smooth]
+        plot (\x, {\N/\x});
+
+      % Labels U, L
+      \node[red!80!black, scale=1.2] at (0.52*\Q, \Q+4.3) {$\mathbf{U}$};
+      \node[red!80!black, scale=1.2] at (\Q+8.0, 1.4) {$\mathbf{L}$};
+
+      % mark sqrt(N) on axes
+      \node[below] at (\Q,0) {$\sqrt{N}$};
+      \node[left]  at (0,\Q) {$\sqrt{N}$};
+
+      % ---------------- (3) remove S_N formula: nothing to draw here ----------------
+
+      % ---------------- (4) legend on the right, with bigger gap ----------------
+      \begin{scope}[shift={(\xmax+1.8,10.0)}]
+        \node[anchor=west] at (0,2.6) {\textbf{Legend}};
+        % increase spacing between title and items by starting items lower
+        % (was 1.1,0.2,... now use 0.7,-0.2,... etc.)
+        \fill[blue!30, opacity=0.55] (0,1.4) rectangle (0.6,2.0);
+        \fill[blue!85] (0.3,1.7) circle (0.11);
+        \node[anchor=west] at (0.9,1.7) {$H_N$};
+
+        \fill[green!55, opacity=0.75] (0,0.4) rectangle (0.6,1.0);
+        \draw[green!60!black, very thick] (0,0.4) rectangle (0.6,1.0);
+        \node[anchor=west] at (0.9,0.7) {$S_q$};
+
+        \draw[red, very thick] (0,-0.6) rectangle (0.6,0.0);
+        \node[anchor=west] at (0.9,-0.3) {$\mathbf{U},\;\mathbf{L}$};
+      \end{scope}
+
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Decomposition of the region under $jk\le N$ into $S_q$ and the symmetric parts $U$ and $L$.}
+  \label{fig:HN_decomp_smooth}
+  \end{figure}
+
+
+  \medskip
+  \noindent\textbf{Using symmetry.}
+  Consider the involution \(\sigma:\mathbb N^2\to\mathbb N^2\) given by \(\sigma(j,k)=(k,j)\).
+  It preserves the condition \(jk\le N\), hence \(\sigma(H_N)=H_N\).
+  Moreover, by definition, \(\sigma(L)=U\) and \(\sigma(U)=L\), so \(|L|=|U|\), i.e.
+  \[
+    \sum_{(j,k)\in L}1=\sum_{(j,k)\in U}1.
+  \]
+  Therefore, using the disjoint union \(H_N=S_q\dot\cup L\dot\cup U\),
+  \[
+    \mathcal{S}_N=\sum_{(j,k)\in H_N}1
+    =\sum_{(j,k)\in S_q}1+\sum_{(j,k)\in L}1+\sum_{(j,k)\in U}1
+    =\sum_{(j,k)\in S_q}1+2\sum_{(j,k)\in L}1,
+  \]
+  which is exactly the claimed identity.
+\end{proof}
+
+
+\section{Returning to the real case}
+
+\begin{lemma}[Non-vanishing of Dirichlet L-functions at 1 for Real Characters] \label{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}
+  For every non-principal Dirichlet character \(\chi\) modulo \(q\), the Dirichlet L-function \(L(z,\chi)\) at \(z=1\) is nonzero, i.e.
+  \[
+    L(1,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n} \ne 0.
+  \]
+  when \(\chi\) is a real character.
+\end{lemma}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{corollary}[Non-vanishing of Dirichlet L-functions at 1 for Non-principal Characters] \label{cor:Dirichlet_L_function_non_vanishing_at_1_for_non_principal_characters}
+  For every non-principal Dirichlet character \(\chi\) modulo \(q\), the Dirichlet L-function \(L(z,\chi)\) at \(z=1\) is nonzero, i.e.
+  \[
+    L(1,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n} \ne 0.
+  \]
+  no matter \(\chi\) is a real character or a complex character.
+\end{corollary}
+
+\begin{proof}
+  Directly follows from lemma~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_complex_characters} and lemma~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}.
+\end{proof}
+
+
+
+\begin{theorem}[Dirichlet's Theorem on Primes in Arithmetic Progressions] \label{thm:PN_in_AP}
+  Let \(a\) and \(q\) be positive integers with \(\gcd(a,q)=1\). Then, there are infinitely many prime numbers in the arithmetic progression
+  \[
+    \mathrm{AP}_{a,q} = \{ a + kq : k \in \mathbb{Z}^+ \}.  
+  \]
+\end{theorem}
+
+
 
 
 \end{document}
