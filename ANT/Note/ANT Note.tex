@@ -3349,7 +3349,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
       \draw[black, very thick, domain=0.9:\xmax, samples=380, smooth]
         plot (\x, {\N/\x});
 
-      % (2) move label left & down via labx/laby
+      % move label left & down via labx/laby
       \node at (\labx,\laby) {$k=\dfrac{N}{j}$};
 
       % ---------------- red outlines for U and L (stylised like your picture) ----------------
@@ -3374,9 +3374,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
       \node[below] at (\Q,0) {$\sqrt{N}$};
       \node[left]  at (0,\Q) {$\sqrt{N}$};
 
-      % ---------------- (3) remove S_N formula: nothing to draw here ----------------
-
-      % ---------------- (4) legend on the right, with bigger gap ----------------
+      % ---------------- legend on the right, with bigger gap ----------------
       \begin{scope}[shift={(\xmax+1.8,10.0)}]
         \node[anchor=west] at (0,2.6) {\textbf{Legend}};
         % increase spacing between title and items by starting items lower
@@ -3408,7 +3406,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \[
     \sum_{(j,k)\in L}1=\sum_{(j,k)\in U}1.
   \]
-  Therefore, using the disjoint union \(H_N=S_q\dot\cup L\dot\cup U\),
+  Therefore, using the disjoint union \(H_N=S_q\cup L\cup U\),
   \[
     \mathcal{S}_N=\sum_{(j,k)\in H_N}1
     =\sum_{(j,k)\in S_q}1+\sum_{(j,k)\in L}1+\sum_{(j,k)\in U}1
