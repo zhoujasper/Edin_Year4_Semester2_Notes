@@ -172,6 +172,20 @@
 
         \quad \ok{Turning Point}: If $q(x_0)=0$, then $x_0$ is a WKB turning point.
     \end{MyTh}
+
+    \begin{MyTh}{\imp{Method of Characteristics}}\tiny
+        For $\frac{\partial u}{\partial t} + c(x,t) \frac{\partial u}{\partial x} = r(x,t,u)$, \ $u(x,t_0)=f(x)$, then:
+        
+        \quad \ok{1.} In characteristic form: $\frac{du}{dt}=r(x,t,u)$ on $\frac{dx}{dt}=c(x,t)$
+        
+        \quad \ok{2.} Solve $\frac{dx}{dt}=c(x,t)$ with $x(t_0)=\xi$ \ps{(or $t(x_0)=\xi$)}, get $x=x(t;\xi)$
+        
+        \quad \ok{3.} Solve $\frac{du}{dt}=r(x(t;\xi),t,u)$ on $x=x(t;\xi)$ with $u(t_0;\xi)=f(\xi)$, \scalebox{0.8}{(initial condition)} get $u=u(t;\xi)$
+
+        \quad \ok{4.} Get $u(x,t)$ by eliminating $\xi$ from $x=x(t;\xi)$ and $u=u(t;\xi)$
+
+        \ok{Remark}: 特征曲线上的$u$变化是固定的 -> 特征曲线上的变化决定了整个解的变化.
+    \end{MyTh}
     }}
 
     \columnbreak
