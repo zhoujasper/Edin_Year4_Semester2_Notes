@@ -1,5 +1,8 @@
 \documentclass{note}
 
+\usepackage{tikz}
+\usetikzlibrary{patterns,decorations.pathreplacing}
+
 \title{AMAM Note}
 \author{}
 
@@ -173,26 +176,93 @@
         \quad \ok{Turning Point}: If $q(x_0)=0$, then $x_0$ is a WKB turning point.
     \end{MyTh}
 
-
-
-
-    
-    \begin{MyTh}{\imp{Method of Characteristics}}\tiny (need chanege)
-        For $\frac{\partial u}{\partial t} + c(x,t) \frac{\partial u}{\partial x} = r(x,t,u)$, \ $u(x,t_0)=f(x)$, then:
-        
-        \quad \ok{1.} In characteristic form: $\frac{du}{dt}=r(x,t,u)$ on $\frac{dx}{dt}=c(x,t)$
-        
-        \quad \ok{2.} Solve $\frac{dx}{dt}=c(x,t)$ with $x(t_0)=\xi$ \ps{(or $t(x_0)=\xi$)}, get $x=x(t;\xi)$
-        
-        \quad \ok{3.} Solve $\frac{du}{dt}=r(x(t;\xi),t,u)$ on $x=x(t;\xi)$ with $u(t_0;\xi)=f(\xi)$, \scalebox{0.8}{(initial condition)} get $u=u(t;\xi)$
-
-        \quad \ok{4.} Get $u(x,t)$ by eliminating $\xi$ from $x=x(t;\xi)$ and $u=u(t;\xi)$
-
-        \ok{Remark}: 特征曲线上的$u$变化模式是固定的 -> 特征曲线上的变化决定了整个解的变化.
+    \begin{MyTh}{\imp{Method of Characteristics}|IC} \tiny
+        For $u_t + c(x,t)u_x = r(x,t,u)$ with IC $u(x,t_0)=f(x)$:
+        \begin{enumerate}
+            \item In characteristic form: $\tfrac{du}{dt}=r(x,t,u)$ on $\tfrac{dx}{dt}=c(x,t)$ \quad $\to$ \scalebox{0.9}{解ODEs$\to$ $u$,$x$各产生一个未知常数$A$,$B$.}
+            \item Assume characteristic curve \scalebox{0.9}{(solution of $\tfrac{dx}{dt}=c(x,t)$)} $x(t=t_0)=\xi$ SO $u(t=t_0)=f(\xi)$: \\
+            $\to$ get $u(t=t_0)=f(\xi)$ on $x(t=t_0)=\xi$ \quad $\to$ solve $A,B$.
+            \item Substitute $A,B$ back to get $u$.
+        \end{enumerate}
     \end{MyTh}
+
+    \begin{MyTh}{Method of Characteristics|BC} \tiny
+        For $u_t + c(x,t)u_x = r(x,t,u)$ with BC $u(x_0,t)=f(t)$:
+        \begin{enumerate}
+            \item In characteristic form: $\tfrac{du}{dt}=r(x,t,u)$ on $\tfrac{dx}{dt}=c(x,t)$ \quad $\to$ \scalebox{0.9}{解ODEs$\to$ $u$,$t$各产生一个未知常数$A$,$B$.}
+            \item Assume characteristic curve \scalebox{0.9}{(solution of $\tfrac{dx}{dt}=c(x,t)$)} $t(x=x_0)=\xi$ SO $u(x=x_0)=f(\xi)$: \\
+            $\to$ get $u(x=x_0)=f(\xi)$ on $t(x=x_0)=\xi$ \quad $\to$ solve $A,B$.
+            \item Substitute $A,B$ back to get $u$.
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Special Cases of Method of Characteristics} \tiny
+        \begin{enumerate}
+            \item 如果Characteristic curve 和初始曲线/边界条件相交 $\to$ ill-posed \& if not unique $\to$ no solution.
+            \item \imp{For $u_t + c(u)u_x = 0$:} If a initial jump $u(x,t_0)=u_L$ for $x<b$ and $u(x,t_0)=u_R$ for $x>b$ \\
+            \ps{If $c(u_L)<c(u_R)$} $\to$ expansion wave; \ps{If $c(u_L)>c(u_R)$} $\to$ shock wave.
+            \item \imp{For $u_t + c(u)u_x = 0$, $u(x,t_0)=f(x)$:} \scalebox{0.9}{The \ok{breaking time} $t_b=t_0+\min_{\xi}\frac{-1}{F'(\xi)}$ where $F(\xi)=c(f(\xi))$} \\
+            \vspace{-2pt}
+            Break time 是 $\frac{du}{dx}=\infty$ \scalebox{0.9}{(i.e. 分母为0)} 时的最早时间. \scalebox{0.9}{(通过chain rule得到)} \ \ || \ \ \imp{If $\min_{\xi} F'(\xi)<0 \to $ shock}
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{minipage}{0.65\linewidth}
+        \begin{MyTh}{\imp{Expansion}} \tiny
+            \scalebox{0.9}{For $u_t + c(u)u_x = 0$, $u(x,t_0)=u_L|u_R$}
+            \begin{enumerate}
+                \item 正常解 $\to$ $\xi$边界值$\xi_0$ $\to$ 特征曲线$x(t;\xi)$在$\xi_0$边界情况: \\
+                $x=c(u_L)(t-t_0)+\xi_0$ 和 $x=c(u_R)(t-t_0)+\xi_0$
+                \item \scalebox{0.9}{$\Rightarrow$ $\tfrac{x-\xi_0}{t-t_0}=c(u)$ for $c(u_{\text{L}})(t-t_0)+\xi_0<x<c(u_{\text{R}})(t-t_0)+\xi_0$} \\
+                $\Rightarrow$ $u=c^{-1}[\frac{x-\xi_0}{t-t_0}]$
+            \end{enumerate}
+        \end{MyTh}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.35\linewidth}
+        \includegraphics[width=\linewidth]{shock.png}
+    \end{minipage}
+
+    \begin{MyTh}{\ok{Conservation Law}} \tiny
+        \imp{$u_t + c(u)u_x = 0$}: $u_t + [\int c(u)du]_x = 0$
+    \end{MyTh}
+
     }}
 
     \columnbreak
+
+    \fbox{\parbox{\linewidth}{
+
+    \begin{MyTh}{\imp{Shock Wave}|$u_L,u_R$} \tiny
+        For $u_t + c(u)u_x = 0$, $u(x,t_0)=u_L$ for $x<b$ and $u(x,t_0)=u_R$ for $x>b$.
+        \begin{enumerate}
+            \item 正常解 $\to$ In conservation form: $u_t + [\int c(u)du]_x = 0$ \\
+            \ok{shock velocity} $\frac{ds}{dt}=\dot{s}=\frac{[q]}{[\rho]}$ where $q=\int c(u)du$ and $\rho=u$; $[u]:=u_{\text{ahead}}-u_{\text{behind}}$. \\
+            其中: $u_{\text{ahead}}=u_R$ , $u_{\text{behind}}=u_L$
+            \item Solve $\dot{s}$. As shock starts at $x=b$ at $t=t_0$, $s(t=t_0)=b$ get unknown constant.
+            \item Then solution $u=u_L$ for $x<s(t)$ and $u=u_R$ for $x>s(t)$. 
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{Shock Wave|$f(x)$} \tiny
+        \scalebox{0.92}{For $u_t + c(u)u_x = 0$, $u(x,t_0)=f(x)$ with $t_b=t_0+\min_{\xi}\frac{-1}{F'(\xi)}$ where $F(\xi)=c(f(\xi))$.}
+        \begin{enumerate}
+            \item 正常解 $\to$ In conservation form: $u_t + [\int c(u)du]_x = 0$ \\
+            \ok{shock velocity} $\frac{ds}{dt}=\dot{s}=\frac{[q]}{[\rho]}$ where $q=\int c(u)du$ and $\rho=u$; $[u]:=u_{\text{ahead}}-u_{\text{behind}}$. \\
+            其中: $u_{\text{ahead}}=\lim\limits_{x\to s(t)^+}u(x,t)$ , $u_{\text{behind}}=\lim\limits_{x\to s(t)^-}u(x,t)$ \scalebox{0.85}{(which is calculated by characteristics method)}
+            \vspace{-2pt}
+            \item Solve $\dot{s}$. As shock starts at $x(t=t_b)$ at $t=t_b$, $s(t=t_b)=x(t=t_b)$ get unknown constant. \\
+            \ps{ps: i.e. $x(t=t_b)=\xi_{\star}+F(\xi_{\star})(t_b-t_0)$, \ \ 其中$\xi_{\star}$是使得$t_b=t_0+\min_{\xi}\frac{-1}{F'(\xi)}$的$\xi$.}
+        \end{enumerate}
+    \end{MyTh}
+    
+    \vspace{-2pt}
+    \begin{MyTh}{Remark} \tiny
+        \scalebox{0.9}{可能Expansion和Shock \imp{同时存在}且衔接一起. (看$u$解出来后$x$范围->\ps{某些范围 是否 可被压缩})}
+
+        \quad \ps{此时 Solve $\dot{s}$ 后, 用$t_b=$ 压缩点时间, $x=$\textit{原先shock时}$x$的特征线代入$t_b$的解$\to$来求未知常数.}
+    \end{MyTh}
+    }}
 
     \fbox{\parbox{\linewidth}{
     
