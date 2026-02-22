@@ -29,14 +29,19 @@
         \quad \ok{c.} \ps{$F(x,y)=\Ocal(x^m) + \Ocal(y^n)$ \quad if \scalebox{0.9}{[Given $G(x)=\Ocal(x^{\frac{m}{n}})$ $\implies$ $F(x,G(x))=\Ocal(x^m)$], 且另一项同理}}
     \end{MyTh}
 
-    \begin{MyTh}{Classification}
+    \begin{MyTh}{Classification} \tiny
         For \ps{$au_{xx}+bu_{xy}+cu_{yy}+du_x+eu_y+fu+g=0$} \quad \scalebox{0.9}{\tiny $(a,b,c)\ne(0,0,0)$}
 
+        \vspace{-2pt}
         \begin{enumerate}
             \item \ok{Hyperbolic}: $b^2-4ac>0$ \ \ \ps{Admits non-trivial plane wave solutions}
-            \item \ok{Parabolic}: $b^2-4ac=0$ \qquad\qquad (\ok{\tiny 对变量$x,y$进行缩放后不会改变PDE类型})
+            \vspace{-4pt}
+            \item \ok{Parabolic}: $b^2-4ac=0$ \ \ \ps{and we can get \ $2cd=be$ \ or \ $2ae=bd$}
+            \vspace{-4pt}
             \item \ok{Elliptic}: $b^2-4ac<0$ \ \ \ps{No non-trivial plane wave solutions}
         \end{enumerate}
+        
+        \quad \ok{Remark}: \ps{\tiny 对变量$x,y$进行缩放后不会改变PDE类型}
     \end{MyTh}
 
     \subsection{Norm}
@@ -158,7 +163,7 @@
         $\frac{d^2u}{dt^2}|_{n\Delta t}\approx \frac{U_{n-1}-2U_n+U_{n+1}}{(\Delta t)^2}$
     \end{MyTh}
 
-    \begin{MyTh}{Method of Lines}\tiny
+    \begin{MyTh}{\imp{Method of Lines}}\tiny
         Using $U_m(t)\approx u(a+m\Delta x,t)$, $U_m^n\approx u(a+m\Delta x,n\Delta t)$ \quad \scalebox{0.8}{\ps{\tiny $a$为空间起点,不重要}}
 
         \vspace{-2pt}
@@ -207,7 +212,7 @@
         \quad \ok{Property}: Absolute stability $\Rightarrow$ Lax-Richtmyer stability in \ps{2-norm} and \ps{weighted 2-norm}
     \end{MyTh}
 
-    \begin{MyTh}{Lax-Richtmyer Stability}\tiny
+    \begin{MyTh}{\imp{Lax-Richtmyer Stability}}\tiny
         For PDE which discrete form $\frac{1}{\Delta t}\mathbf{U}^{n+1} = \frac{1}{\Delta t}B\mathbf{U}^n + \mathbf{F}^n$, $B$ fixed, $\mathbf{F}$ can change.
 
         \quad It's \ps{Lax-Richtmyer stable} if \quad $\|B^n\mathbf{w}\| \leq C\|\mathbf{w}\|$ \quad for all $\mathbf{w}\in\R^{N-1}$, $n\leq \frac{T}{\Delta t}=N$
@@ -217,7 +222,7 @@
         \quad then, it convergents with $\max_{n}\|\mathbf{e}^n\|_{2,\Delta x}=\Ocal((\Delta x)^\beta)$ \quad \ps{Remark}: \scalebox{0.85}{\ok{Always Assume $\Delta t = K(\Delta x)^\alpha$}}
     \end{MyTh}
 
-    \begin{MyTh}{von Neumann Analysis}\tiny
+    \begin{MyTh}{\imp{von Neumann Analysis}}\tiny
         PDE: \ok{1.} \textit{periodic} BCs in spatial $x$, length $D$. \ok{2.} 满足 L-R 中PDE框架, \ok{3.} $\mathbf{F}^n=0$
 
         \quad $\Rightarrow$ Let \ps{$v_{k,m}=\exp(2\pi i k \frac{m\Delta x}{D})$} for $m=0,1,...,M-1$. \quad Then vector $\mathbf{v}_k$ 为 $B$ 的\ps{正交特征向量}.
@@ -259,6 +264,12 @@
             \item \ok{Two Neumann}: $u_x(x=a,t)=c$ \quad $u_x(x=b,t)=d$
         \end{enumerate}
         
+    \end{MyTh}
+
+    \begin{MyTh}{\ok{Remark}} \tiny
+        For $u_x(x=a, t)=c$ $\Rightarrow$ descrite $\tfrac{u_1^n-u_0^n}{\Delta x}=c$ \quad \scalebox{0.9}{\ps{Boundary condition itself can effect the accuracy}}
+        
+        \quad For $u_t(x, t_0)=P(x)$ $\Rightarrow$ descrite $\tfrac{u_m^1-u_m^0}{\Delta t}=P(a+m\Delta x)$
     \end{MyTh}
 
     }}
