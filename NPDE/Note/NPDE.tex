@@ -235,17 +235,30 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{}
+    \section{Boundary Condition}
 
-    \begin{MyTh}{Boundary Condition} \tiny
+    \begin{MyTh}{2nd ODE} \tiny
         For $u_xx=\beta(x)$ with $x\in(a,b)$, there are three types of BCs:
         \begin{enumerate}
             \item \ok{Two Dirichlet}: $u(x=a)=c$ \quad $u(x=b)=d$
             \vspace{-2pt}
-            \item \ok{One Dirichlet, One Neumann}: $u(x=a)=c$ \quad $u_x(x=b)=d$ \quad or \ \ \scalebox{0.9}{$u_x(x=a)=c$ \quad $u(x=b)=d$}
+            \item \ok{One Dirichlet, One Neumann}: $u(x=a)=c$ \quad $u_x(x=b)=d$ \quad or \ \ \scalebox{0.8}{$u_x(x=a)=c$ \ \ $u(x=b)=d$}
             \vspace{-2pt}
             \item \ok{One Neumann, One Constraint}: $u_x(x=a)=c$ \quad $\int_a^b u(x)dx=d$
         \end{enumerate}
+    \end{MyTh}
+
+    \vspace{-2pt}
+    \begin{MyTh}{Heat PDE} \tiny
+        For $u_t=\kappa u_{xx}$ with $x\in(a,b)$, there are three types of BCs: \quad \ok{$\star$ Basic IC}: $u(x,t_0)=P(x)$
+        \begin{enumerate}
+            \item \ok{Two Dirichlet}: $u(x=a,t)=c$ \quad $u(x=b,t)=d$
+            \vspace{-2pt}
+            \item \ok{One Dirichlet, One Neumann}: \scalebox{0.95}{$u(x=a,t)=c$ \ \ \ $u_x(x=b,t)=d$} \quad or \ \ \scalebox{0.8}{$u_x(x=a,t)=c$ \ \ $u(x=b,t)=d$}
+            \vspace{-2pt}
+            \item \ok{Two Neumann}: $u_x(x=a,t)=c$ \quad $u_x(x=b,t)=d$
+        \end{enumerate}
+        
     \end{MyTh}
 
     }}
@@ -259,7 +272,7 @@
     \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}
     \tiny
     
-    \begin{MyTh}{Prototype PDEs}
+    \begin{MyTh}{Types of PDEs}\tiny
         Laplace Eq.: $u_{xx}+u_{yy}=0$ {\tiny (E)} \quad Poisson Eq.: $u_{xx}+u_{yy}=f(x,y)$ {\tiny (E)}
 
         \quad Helmholtz Eq.: $u_{xx}+u_{yy}+\alpha u=0,\alpha\ne0$ {\tiny (E)} \quad Heat Eq.: $u_t=\kappa(u_{xx}+u_{yy}),\kappa>0$ {\tiny (P)}
@@ -283,6 +296,19 @@
     \begin{MyTh}{Others}
         Periodic boundary conditions for $x$: \ps{$u(a,t)=u(b,t)$, $u_x(a,t)=u_x(b,t)$} \quad $a,b$ 边界.
     \end{MyTh}
+
+    \begin{MyTh}{Heat Equation} \tiny
+        For $u_t=\kappa u_{xx}$
+        
+        \begin{tabular}{c|c|c|c}
+            & Forard Euler & Backward Euler & Crank-Nicolson \\
+            \hline
+            Solve Matrix? & No & Yes & Yes \\
+            $r^n_m$ & $\Ocal(\Delta t)+\Ocal((\Delta x)^2)$ & $\Ocal(\Delta t)+\Ocal((\Delta x)^2)$ & $\Ocal((\Delta t)^2)+\Ocal((\Delta x)^2)$ \\
+            Stability Condition & $\kappa\frac{\Delta t}{(\Delta x)^2}\leq \frac{1}{2}$ & None & None \\
+        \end{tabular}
+    \end{MyTh}
+
     }}
 
 
