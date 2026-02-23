@@ -34,11 +34,11 @@
 
         \vspace{-2pt}
         \begin{enumerate}
-            \item \ok{Hyperbolic}: $b^2-4ac>0$ \ \ \ps{Admits non-trivial plane wave solutions}
+            \item \ok{Hyperbolic}: $b^2-4ac>0$ \ \ \ps{Admits non-trivial plane \textit{wave solutions} (Propagation)}
             \vspace{-4pt}
             \item \ok{Parabolic}: $b^2-4ac=0$ \ \ \ps{and we can get \ $2cd=be$ \ or \ $2ae=bd$}
             \vspace{-4pt}
-            \item \ok{Elliptic}: $b^2-4ac<0$ \ \ \ps{No non-trivial plane wave solutions}
+            \item \ok{Elliptic}: $b^2-4ac<0$ \ \ \ps{\textit{No} non-trivial plane \textit{wave solutions} (No Propagation)}
         \end{enumerate}
         
         \quad \ok{Remark}: \ps{\tiny 对变量$x,y$进行缩放后不会改变PDE类型}
@@ -276,20 +276,34 @@
 
     \columnbreak
 
+    \fbox{\parbox{\linewidth}{
+
+    \section{}
+
+    \begin{MyTh}{Elliptic Equation} \tiny
+        $Lu = F(x_1,...,x_d)$ is an elliptic PDE if \ \ $L$ is an elliptic operator.
+
+        \quad \ok{Theorem}: $L=\sum_{r=1}^d\sum{s=1}^d A_{r,s}\frac{\partial^2}{\partial x_r \partial x_s} + \sum_{n=1}^d B_n \frac{\partial}{\partial x_n} + C$ is elliptic operator if:
+
+        \vspace{2pt}
+        \quad \qquad \qquad \quad \ps{A is symmetric} \ \ and \ \ \ps{A is positive|negative definite ($\lambda_i>0|\lambda_i<0$).}
+    \end{MyTh}
+
+    \begin{MyTh}{Poisson Equation} \tiny
+        $\Delta u = F(x_1,...,x_d)$ is a Poisson equation \ and \ it's elliptic. \ \ with BCs:
+
+        \quad \ps{Dirichlet}: $u=u_D$ on $\partial\Omega$; \quad \ps{Neumann}: $\Delta u \cdot \hat{\mathbf{n}}=g$ on $\partial\Omega$ where $\int_{\Omega} F = \int_{\partial\Omega} g$ and $\int_{\Omega} u = \int_{\partial\Omega} u_D$. 
+    \end{MyTh}
+
+    }}
 
 
     \fbox{\parbox{\linewidth}{
 
     \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}
     \tiny
-    
-    \begin{MyTh}{Types of PDEs}\tiny
-        Laplace Eq.: $u_{xx}+u_{yy}=0$ {\tiny (E)} \quad Poisson Eq.: $u_{xx}+u_{yy}=f(x,y)$ {\tiny (E)}
 
-        \quad Helmholtz Eq.: $u_{xx}+u_{yy}+\alpha u=0,\alpha\ne0$ {\tiny (E)} \quad Heat Eq.: $u_t=\kappa(u_{xx}+u_{yy}),\kappa>0$ {\tiny (P)}
-
-        \quad Wave Eq.: $u_{xx}-u_{yy}=f(x,y)$ {\tiny (H)} \quad Advection Eq.: $u_t+vy_x+wu_y=0$ {\tiny (H)}
-    \end{MyTh}
+    \section{Useful Tools}
 
     \begin{MyTh}{Taylor Series} \tiny
         \scalebox{0.9}{$f(t+\Delta t)=f(t)+f'(t)\Delta t + \frac{1}{2}f''(t)(\Delta t)^2 + \cdots + \Ocal((\Delta t)^N)$} \ \ \tiny \imp{ps:$u_{n+1}=u(n\Delta t+\Delta t)$}
@@ -304,12 +318,12 @@
         If \ps{$e^n=Ae^{n-1}+B\tau^n$}, then \ \ \ps{$e^n=A^ne^0+\sum_{k=1}^{n}A^{n-k}B\tau^k$}, \quad $A$: amplification factor.
     \end{MyTh}
 
-    \begin{MyTh}{Others}
+    \begin{MyTh}{Periodic BCs} \tiny
         Periodic boundary conditions for $x$: \ps{$u(a,t)=u(b,t)$, $u_x(a,t)=u_x(b,t)$} \quad $a,b$ 边界.
     \end{MyTh}
 
     \begin{MyTh}{Heat Equation} \tiny
-        For $u_t=\kappa u_{xx}$
+        For $u_t=\kappa u_{xx}$ with two Dirichlet BCs
         
         \begin{tabular}{c|c|c|c}
             & Forard Euler & Backward Euler & Crank-Nicolson \\
@@ -318,6 +332,11 @@
             $r^n_m$ & $\Ocal(\Delta t)+\Ocal((\Delta x)^2)$ & $\Ocal(\Delta t)+\Ocal((\Delta x)^2)$ & $\Ocal((\Delta t)^2)+\Ocal((\Delta x)^2)$ \\
             Stability Condition & $\kappa\frac{\Delta t}{(\Delta x)^2}\leq \frac{1}{2}$ & None & None \\
         \end{tabular}
+    \end{MyTh}
+
+    \subsection{Other}
+    \begin{MyTh}{Divergence Theorem} \tiny
+        $\int_{\Omega} \nabla \cdot \mathbf{F} dV = \int_{\partial\Omega} \mathbf{F}\cdot\hat{\mathbf{n}} dS$ \quad $\hat{\mathbf{n}}$ outward normal. \qquad \ps{$\nabla^2=\nabla\cdot\nabla=\Delta$}
     \end{MyTh}
 
     }}
