@@ -3010,11 +3010,6 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{proof}
 
 
-
-
-
-
-
 \chapter{Dirichlet Theorem on Primes in Arithmetic Progressions}
 
 \section{Complex Case}
@@ -3198,7 +3193,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \]
   for some constant \(C > 0\) and \(\gamma\) is the Euler-Mascheroni constant defined by
   \[
-    \gamma = \lim_{n\to\infty} \left( \sum_{k=1}^{n} \frac{1}{k} - \log n \right).
+    \gamma = 1 - \int_1^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt.
   \]
 \end{remark}
 
@@ -3240,7 +3235,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \]
 \end{example}
 
-\begin{theorem}[A Key Step for the Real Case] \label{thm:key_step_for_real_case}
+\begin{theorem}[Lattice Point Count for the Divisor Function] \label{thm:lattice_point_count_for_divisor_function}
   Define a sum
   \[
     \mathcal{S}_N := N A(N) = \sum_{n=1}^{N} \left[\underset{jk=n}{\sum_{j}\sum_{k}}\ 1 \right]
@@ -3251,7 +3246,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \]
   where
   \[
-    L = \{ 1 \leq j \leq \sqrt{N}: \sqrt{N} < k \leq N/j \}, \quad S_q = \{ (j,k)\in \mathbb{N}^2 : (j,k) \in [0,\sqrt{N}]^2\}
+    L = \{ (j,k)\in \mathbb{N}^2 : 1 \leq j \leq \sqrt{N}, \sqrt{N} < k \leq N/j \}, \quad S_q = \{ (j,k)\in \mathbb{N}^2 : (j,k) \in [0,\sqrt{N}]^2\}
   \]
 \end{theorem}
 
@@ -3415,6 +3410,48 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   which is exactly the claimed identity.
 \end{proof}
 
+\begin{theorem}[Asymptotic Formula for the Average Value of the Divisor Function] \label{thm:asymptotic_formula_for_average_value_of_divisor_function}
+  The partial sums of the harmonic series satisfies
+  \[
+    \sum_{n=1}^{N} \frac{1}{n} = \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \quad \text{ as } N \to \infty,
+  \]
+  where $\gamma$ is the \textit{Euler constant} defined by
+  \[
+    \gamma = 1 - \int_1^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt.
+  \]
+  and more precisely, we have
+  \[
+    A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n) = \log N + 2\gamma - 1 + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty.
+  \]
+\end{theorem}
+
+\begin{proof}
+  See Exercise set at the end of this chapter.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Returning to the real case}
 
@@ -3450,6 +3487,188 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
     \mathrm{AP}_{a,q} = \{ a + kq : k \in \mathbb{Z}^+ \}.  
   \]
 \end{theorem}
+
+
+\begin{problemset}[Exercises]
+  \item Suppose that $f:\mathbb{R}^+ \to \mathbb{R}$ is continuously differentiable. By using the integral by parts, prove that for any $n\geq 2$,
+  \[
+    \int_{n-1}^{n} tf'(t) dt = n f(n) - (n-1)f(n-1) - \int_{n-1}^{n} f(t) dt
+  \]
+  and then use this to show that for any $n\geq 2$,
+  \[
+    f(n)  = \int_{n-1}^{n} f(t) dt + \int_{n-1}^n(t-\lfloor t \rfloor)f'(t) dt.
+  \]
+  Finally, by using the above formula, prove that
+  \[
+    \sum_{n=M}^{N} f(n) = \int_{M-1}^{N} f(t) dt + \int_{M-1}^{N} (t-\lfloor t \rfloor) f'(t) dt \quad \text{ for any } 2 \leq M < N.
+  \]
+
+  \begin{solution}
+    By using the integration by parts, for any $n\geq 2$, we have
+    \[
+      \int_{n-1}^{n} tf'(t) dt = \left. tf(t) \right|_{n-1}^{n} - \int_{n-1}^{n} f(t) dt = n f(n) - (n-1)f(n-1) - \int_{n-1}^{n} f(t) dt.
+    \]
+    Hence, we have
+    \[
+    \begin{aligned}
+      nf(n) - (n-1)f(n-1) &= \int_{n-1}^{n} tf'(t) dt + \int_{n-1}^{n} f(t) dt \\
+      &=\int_{n-1}^{n} (t-\lfloor t \rfloor+ \lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt \\
+      &= \int_{n-1}^{n} (t-\lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt + \int_{n-1}^{n} \lfloor t \rfloor f'(t) dt \\
+      &= \int_{n-1}^{n} (t-\lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt + \int_{n-1}^{n} (n-1)f'(t) dt \\
+      &= \int_{n-1}^{n} (t-\lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt + (n-1)f(n) - (n-1)f(n-1). \\
+    \implies
+    nf(n) &= \int_{n-1}^{n} (t-\lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt + nf(n) - f(n) \\
+    \implies f(n) &= \int_{n-1}^{n} (t-\lfloor t \rfloor)f'(t) dt + \int_{n-1}^{n} f(t) dt.
+    \end{aligned}
+    \]
+    Finally, by using the above formula, for any $2 \leq M < N$, we have
+    \[
+      \sum_{n=M}^{N} f(n) = \sum_{n=M}^{N} \left[ \int_{n-1}^{n} f(t) dt + \int_{n-1}^n(t-\lfloor t \rfloor)f'(t) dt \right] = \int_{M-1}^{N} f(t) dt + \int_{M-1}^{N} (t-\lfloor t \rfloor) f'(t) dt.
+    \]
+  \end{solution}
+
+
+  \item By using the final formula in the above problem, show that
+  \[
+    S(N) := \sum_{n=1}^{N} \frac{1}{n} = \log N + 1 - \int_{1}^{N} \frac{t-\lfloor t \rfloor}{t^2} dt.
+  \]
+  and that for any $M\geq 1$, the limit
+  \[
+    L(M) := \lim_{R\to\infty}\int_{M}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt \quad \text{ exists.}
+  \]
+  and that
+  \[
+    0 \leq L(M) \leq \frac{1}{M}.
+  \]
+  
+  \begin{solution}
+    By using the final formula in the above problem with $f(n) = \frac{1}{n}$, we have
+    \[
+      S(N) = \sum_{n=1}^{N} \frac{1}{n} = 1 + \sum_{n=2}^{N} f(n) = 1 + \int_{1}^{N} \frac{1}{t} dt - \int_{1}^{N} \frac{t-\lfloor t \rfloor}{t^2} dt = \log N + 1 - \int_{1}^{N} \frac{t-\lfloor t \rfloor}{t^2} dt.
+    \]
+
+    For any $M\geq 1$, we have
+    \[
+    \begin{aligned}
+      \int_{M}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt &\leq \int_{M}^{R} \frac{1}{t^2} dt \quad \text{since } 0 \leq t-\lfloor t \rfloor < 1 \\
+      &= \frac{1}{M} - \frac{1}{R} \to \frac{1}{M} \quad \text{as} \quad R \to \infty.
+    \end{aligned}
+    \]
+    Moreover, notice that
+    \(
+      \frac{t-\lfloor t \rfloor}{t^2} \geq 0 \quad \text{ for all } t \geq 1,
+    \)
+    so that $\int_{M}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt$ is an increasing and bounded above by $\frac{1}{M}$ as $R \to \infty$. Hence, by the monotone convergence theorem, $L(M)$ exists and clearly, we have $0 \leq L(M) \leq \frac{1}{M}$.
+  \end{solution}
+
+
+  \item Show that 
+  \[
+    S(N) = \log(N) + 1 - \int_{1}^\infty \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt.
+  \]
+  (where the integral on the right-hand side converges by the previous problem) and hence conclude that
+  \[
+    S(N) = \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \quad \text{ as } N \to \infty,
+  \]
+  where 
+  \[
+    \gamma = 1 - \int_{1}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt,
+  \]
+  and $S_N$ is defined by previously as $S(N) = \sum_{n=1}^{N} \frac{1}{n}$.
+  
+  \begin{solution}
+      By previous problem, we have
+      \[
+        S(N) = \log N + 1 - \int_{1}^{N} \frac{t-\lfloor t \rfloor}{t^2} dt.
+      \]
+      Consider the integral
+      \[
+        \widetilde{S}_R := \log N + 1 - \int_{1}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt.
+      \]
+      By the previous problem, both $\int_{1}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt$ and $\int_{N}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt$ converge as $R \to \infty$. Hence, we can take the limit as $R \to \infty$ on both sides to get
+      \[
+        \widetilde{S}_R \to \log N + 1 - \int_{1}^\infty \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt \quad \text{ as } R \to \infty.
+      \]
+      On the other hand, by the definition of $\widetilde{S}_R$, we have
+      \[
+        \widetilde{S}_R = \log N + 1 - \int_{1}^{N} \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{R} \frac{t-\lfloor t \rfloor}{t^2} dt.
+      \]
+      Taking the limit as $R\to\infty$, we get
+      \[
+        S(N) = \lim_{R\to\infty} \widetilde{S}_R = \log N + 1 - \int_{1}^\infty \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt.
+      \]
+      Finally, since $0 \leq \int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt \leq \frac{1}{N}$ by the previous problem, it follows that $\int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt = \mathcal{O}\left( \frac{1}{N} \right)$ as $N \to \infty$. Hence, we have
+      \[
+      \begin{aligned}
+        S(N) &= \log N + 1 - \int_{1}^\infty \frac{t-\lfloor t \rfloor}{t^2} dt + \int_{N}^{\infty} \frac{t-\lfloor t \rfloor}{t^2} dt = \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \quad \text{ as } N \to \infty.
+      \end{aligned}
+      \]
+  \end{solution}
+
+
+  \item Finally, using the Theorem~\ref{thm:lattice_point_count_for_divisor_function}:
+  \[
+    A(N) = \frac{1}{N} \sum_{n=1}^{N} d(n) \quad \text{ and } \quad \mathcal{S}_N = \sum_{n=1}^{N} d(n) = N A(N) = 2 \sum_{(j,k)\in L} 1 + \sum_{(j,k) \in S_q} 1 =: A + B
+  \]
+  where
+  \[
+    L = \{(i,j)\in \mathbb{N}^2 : 1 \leq j \leq \sqrt{N}, \sqrt{N} < k \leq N/j \}, \quad S_q = \{ (j,k)\in \mathbb{N}^2 : (j,k) \in [0,\sqrt{N}]^2\}
+  \]
+  show that
+  \[
+    A = 2\sum_{k=1}^{\lfloor \sqrt{N} \rfloor} \left( \left\lfloor N/k \right\rfloor - \lfloor \sqrt{N} \rfloor \right) 
+  \]
+  and then use the previous problems: $S(N) = \sum_{n=1}^{N} \frac{1}{n} = \log N + \gamma + \mathcal{O}\left( \frac{1}{N} \right)$ as $N \to \infty$, to show that
+  \[
+    A = N \log N + (2\gamma - 2)N + \mathcal{O}(\sqrt{N}) \quad \text{ as } N \to \infty.
+  \]
+  and also show that
+  \[
+    B = N + \mathcal{O}(\sqrt{N}) \quad \text{ as } N \to \infty.
+  \]
+  Hence, conclude that
+  \[
+    \frac{1}{N} \sum_{n=1}^{N} d(n) = A(N) = \log N + 2\gamma - 1 + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty.
+  \]
+  (Here $S(N),\gamma$ are defined in the previous problems.)
+
+  \begin{solution}
+    For the first part, by the definition of \(L\), we have
+    \[
+      A = 2 \sum_{(j,k)\in L} 1 = 2 \sum_{k=1}^{\lfloor \sqrt{N} \rfloor} \sum_{j=\lfloor \sqrt{N} \rfloor + 1}^{\lfloor N/k \rfloor} 1 = 2\sum_{k=1}^{\lfloor \sqrt{N} \rfloor} \left( \left\lfloor N/k \right\rfloor - \lfloor \sqrt{N} \rfloor \right).
+    \]
+    For the second part, notice that $\lfloor N/k \rfloor - \lfloor \sqrt{N} \rfloor \geq 0$ for all $1 \leq k \leq \lfloor \sqrt{N} \rfloor$, so that
+    \[
+    \begin{aligned}
+      |A| = A &\leq 2 \sum_{k=1}^{\lfloor \sqrt{N} \rfloor} N/k - 2 \sum_{k=1}^{\lfloor \sqrt{N} \rfloor} \lfloor \sqrt{N} \rfloor \\
+      &\leq 2N \left( \log \sqrt{N} + \gamma + \mathcal{O}\left( \frac{1}{N} \right) \right) - 2 \lfloor \sqrt{N} \rfloor^2 \\
+      &= N \log N + 2\gamma N + \mathcal{O}(1) - 2(\sqrt{N} - 1)^2 \\
+      &= N \log N + (2\gamma - 2)N + 2\sqrt{N} + 2 + \mathcal{O}(1) \\
+      &= N \log N + (2\gamma - 2)N + \mathcal{O}(\sqrt{N}) \quad \text{ as } N \to \infty.
+    \end{aligned}
+    \]
+    To estimate $B$, notice that
+    \[
+      |B| = B = \sum_{(j,k) \in S_q} 1 = \lfloor \sqrt{N} \rfloor^2 \leq (\sqrt{N} - 1)^2 = N - 2\sqrt{N} + 1 = N + \mathcal{O}(\sqrt{N}) \quad \text{ as } N \to \infty.
+    \]
+    Finally, by the definition of $A(N)$, we have
+    \[
+    \begin{aligned}
+      A(N) &= \frac{1}{N} \mathcal{S}_N= \frac{1}{N} (A + B) \\
+      &= \log N + (2\gamma - 2) + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) + 1 + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \\
+      &= \log N + 2\gamma - 1 + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty.
+    \end{aligned}
+    \]
+  \end{solution}
+
+\end{problemset}
+
+
+
+
+
+
+
 
 
 
