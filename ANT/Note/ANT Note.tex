@@ -2798,11 +2798,11 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
     \item \textbf{Absolute convergence of \(\sum_{n\ge 1}|b_{n+1}-b_n|\).}
     Let \(\gamma(t)=t^{-z}\). Then \(\gamma'(t)=-z\,t^{-z-1}\), and thus
     \[
-      b_{n+1}-b_n=(n+1)^{-z}-n^{-z}=\gamma(n+1)-\gamma(n)=\int_n^{n+1}\gamma'(t)\,dt.
+      b_{n+1}-b_n=(n+1)^{-z}-n^{-z}=\gamma(n+1)-\gamma(n)=\int_n^{n+1}\gamma'(t) dt.
     \]
     Taking absolute values and using \(|t^{-z-1}|=t^{-\Re(z)-1}\) for \(t>0\), we obtain
     \[
-      |b_{n+1}-b_n| \le \int_n^{n+1}|\gamma'(t)|\,dt =|z|\int_n^{n+1} t^{-\Re(z)-1}\,dt \le |z|\int_n^{n+1} n^{-\Re(z)-1}\,dt =\frac{|z|}{n^{\Re(z)+1}}.
+      |b_{n+1}-b_n| \le \int_n^{n+1}|\gamma'(t)| dt =|z|\int_n^{n+1} t^{-\Re(z)-1} dt \le |z|\int_n^{n+1} n^{-\Re(z)-1} dt =\frac{|z|}{n^{\Re(z)+1}}.
     \]
     Therefore,
     \[
@@ -3429,42 +3429,297 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   See Exercise set at the end of this chapter.
 \end{proof}
 
+\begin{theorem}[Asymptotic Formula for the Partial Sums of the Square Root Function] \label{thm:asymptotic_formula_for_partial_sums_of_square_root_function}
+  Similarly as the above theorem, we can also prove that
+  \[
+    \sum_{n=1}^N \frac{1}{\sqrt{n}} = 2\sqrt{N} + \sigma + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty,
+  \]
+  where $\sigma$ is a constant defined by
+  \[
+    \sigma = 1 - \int_1^{\infty} \frac{t-\lfloor t \rfloor}{t^{3/2}} dt.
+  \]
+\end{theorem}
 
+\begin{proof}
+  We begin by recalling (from the previous theorem proof) the summation identity: if $f:\mathbb{R}^+\to\mathbb{R}$ is continuously differentiable, then for any integers $2\le M<N$,
+  \begin{equation}\label{eq:floor_summation_formula}
+    \sum_{n=M}^{N} f(n) = \int_{M-1}^{N} f(t) dt + \int_{M-1}^{N} (t-\lfloor t\rfloor)\, f'(t) dt.
+  \end{equation}
+  (Indeed, this follows by applying integration by parts on each interval $[n-1,n]$ and summing.)
 
+  Now set $f(t)=t^{-1/2}$, so that $f'(t)=-\tfrac12 t^{-3/2}$. Taking $M=2$ in \eqref{eq:floor_summation_formula} gives
+  \[
+    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = \int_{1}^{N} t^{-1/2} dt + \int_{1}^{N} (t-\lfloor t\rfloor)\Bigl(-\frac12 t^{-3/2}\Bigr) dt,
+  \]
+  hence
+  \begin{equation}\label{eq:sum_from_2}
+    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = \int_{1}^{N} t^{-1/2} dt - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+  \end{equation}
+  Adding the $n=1$ term to both sides yields
+  \[
+    \sum_{n=1}^{N} \frac{1}{\sqrt{n}} = 1 + \int_{1}^{N} t^{-1/2} dt - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+  \]
+  We can evaluate the main integral explicitly:
+  \[
+    \int_{1}^{N} t^{-1/2} dt = \left[2\sqrt{t}\right]_{1}^{N} = 2\sqrt{N}-2,
+  \]
+  so
+  \begin{equation}\label{eq:main_rewrite}
+    \sum_{n=1}^{N} \frac{1}{\sqrt{n}} = 2\sqrt{N}-1 - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+  \end{equation}
 
+  Next we justify convergence of the improper integral and estimate the tail. Since $0\le t-\lfloor t\rfloor<1$ for all $t\ge 1$, we have the bound
+  \[
+    0\le \frac{t-\lfloor t\rfloor}{t^{3/2}} \le \frac{1}{t^{3/2}}.
+  \]
+  Because $\int_{1}^{\infty} t^{-3/2} dt$ converges, the comparison test implies that
+  \[
+    \int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt
+  \]
+  converges (to a finite real number). Moreover, for any $N\ge 1$,
+  \begin{equation}\label{eq:tail_bound}
+    0\le \int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \le \int_{N}^{\infty}\frac{1}{t^{3/2}} dt = \left[-2t^{-1/2}\right]_{N}^{\infty} = \frac{2}{\sqrt{N}}.
+  \end{equation}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  Now decompose the integral up to $N$ as an integral to $\infty$ minus a tail:
+  \[
+    \int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt = \int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt - \int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+  \]
+  Substituting this into \eqref{eq:main_rewrite} gives
+  \[
+  \begin{aligned}
+    \sum_{n=1}^{N}\frac{1}{\sqrt{n}}
+    &= 2\sqrt{N}-1 -\frac12\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt +\frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \\
+    &= 2\sqrt{N} +\Bigl(1-\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt\Bigr) +\frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+  \end{aligned}
+  \]
+  Define
+  \[
+    \sigma := 1-\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt,
+  \]
+  which is a well-defined constant by the convergence shown above. Finally, by \eqref{eq:tail_bound},
+  \[
+    0 \le \frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \le \frac12\cdot \frac{2}{\sqrt{N}} = \frac{1}{\sqrt{N}},
+  \]
+  so the remaining term is $\mathcal{O}(N^{-1/2})$ as $N\to\infty$. Therefore,
+  \[
+    \sum_{n=1}^{N}\frac{1}{\sqrt{n}} = 2\sqrt{N} + \sigma + \mathcal{O}\!\left(\frac{1}{\sqrt{N}}\right) \quad \text{as } N\to\infty,
+  \]
+  as claimed.
+\end{proof}
 
 
 \section{Returning to the real case}
 
-\begin{lemma}[Non-vanishing of Dirichlet L-functions at 1 for Real Characters] \label{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}
+\begin{lemma}[Abel's Summation Formula] \label{lem:abel_summation_formula}
+    Let $\{a_n\}$ and $\{b_n\}$ be two sequences of complex numbers. Define the partial sums $A_N = \sum_{n=1}^N a_n$ for $N \geq 1$. Then, for any integers $M \geq J \geq 1$,
+    \[
+        \sum_{n=J}^M a_n b_n = A_M b_M - A_{J-1} b_{J} + \sum_{n=J}^{M-1} A_n (b_n - b_{n+1}),
+    \]
+    where we define $A_0 = 0$.
+\end{lemma}
+
+\begin{proof}
+    We have
+    \begin{align*}
+        \sum_{n=J}^M a_n b_n &= \sum_{n=J}^M (A_n - A_{n-1}) b_n \\
+        &= \sum_{n=J}^M A_n b_n - \sum_{n=J}^M A_{n-1} b_n \\
+        &= \sum_{n=J}^M A_n b_n - \sum_{n=J-1}^{M-1} A_n b_{n+1} \\
+        &= A_M b_M - A_{J-1} b_J + \sum_{n=J}^{M-1} A_n b_n - \sum_{n=J}^{M-1} A_n b_{n+1} \\
+        &= A_M b_M - A_{J-1} b_J + \sum_{n=J}^{M-1} A_n (b_n - b_{n+1}).
+    \end{align*}
+\end{proof}
+
+
+\begin{lemma}[Bound for Partial Sums of Non-Principal Dirichlet Characters] \label{lem:bound_for_partial_sums_of_non_principal_dirichlet_characters}
+    Let $\chi$ be a non-principal Dirichlet character modulo $q$. Then for $K\geq J \geq 1$,
+    \[
+        \left|\sum_{n=J}^{K} \frac{\chi(n)}{\sqrt{n}}\right| \leq \frac{2q}{\sqrt{J}}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    Let $G_q$ denote the multiplicative group of invertible elements of $\mathbb{Z}/ q\mathbb{Z}$. By using the periodicity of Dirichlet character $\chi$ modulo $q$, we have
+    \[
+        \sum_{r=1}^{q}\chi(r)
+        =\sum_{\substack{1\le r\le q\\ \gcd(r,q)=1}}\chi(r)
+        =\sum_{r\in G_q}\chi(r)
+        =\sum_{r\in G_q}\chi(r)\overline{\chi_0(r)}
+        =|G_q|\langle \chi,\chi_0\rangle
+        =0,
+    \]
+    where $\chi_0$ is the principal Dirichlet character modulo $q$ and the last equality follows from the orthogonality of characters (see Theorem~\ref{thm:orthogonality_relations_of_characters}).
+    Thus, if we use $A_N=\sum_{n=1}^N a_n$ where $a_n=\chi(n)$, to denote the partial sums of $\chi(n)$, then for any integer $N\ge 1$, we have
+    \begin{align*}
+      A_N &= \sum_{k=1}^{N}\chi(k)
+      =\sum_{k=1}^{\lfloor N/q \rfloor q}\chi(k) + \sum_{k=\lfloor N/q \rfloor q + 1}^{N}\chi(k) \\
+      &=\sum_{m=0}^{\lfloor N/q \rfloor -1}\sum_{r=1}^{q}\chi(mq+r) + \sum_{k=\lfloor N/q \rfloor q + 1}^{N}\chi(k) \\
+      &=(\lfloor N/q \rfloor)\sum_{r=1}^{q}\chi(r) + \sum_{k=\lfloor N/q \rfloor q+1}^{N}\chi(k) \\
+      &=\sum_{k=\lfloor N/q \rfloor q+1}^{N}\chi(k).
+    \end{align*}
+    Hence
+    \[
+      |A_N| \le \sum_{k=\lfloor N/q \rfloor q+1}^{N}|\chi(k)| \le q.
+    \]
+    Let $b_n=n^{-1/2}$. By Lemma~\ref{lem:summation_by_parts}, for integers $K \ge J\ge 1$,
+    \[
+        \sum_{n=J}^{K} \frac{\chi(n)}{\sqrt{n}} = A_K b_K - A_{J-1} b_{J} + \sum_{n=J}^{K-1} A_n (b_n - b_{n+1}).
+    \]
+    Since $|A_N| \leq q$ for all $N \geq 1$ and $b_n = n^{-1/2}$ is decreasing, we have
+    \[
+    \begin{aligned}
+        \left|\sum_{n=J}^K \frac{\chi(n)}{\sqrt{n}}\right|
+        &\leq |A_K b_K| + |A_{J-1} b_{J}| + \sum_{n=J}^{K-1} |A_n|\, |b_n - b_{n+1}| \\
+        &\leq q \left( \frac{1}{\sqrt{K}} + \frac{1}{\sqrt{J}} + \sum_{n=J}^{K-1} \left( \frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n+1}} \right) \right) \\
+        &= q \left( \frac{1}{\sqrt{K}} + \frac{1}{\sqrt{J}} + \left( \frac{1}{\sqrt{J}} - \frac{1}{\sqrt{K}} \right) \right) \\
+        &= \frac{2q}{\sqrt{J}}
+    \end{aligned}
+    \]
+\end{proof}
+
+
+\begin{lemma} \label{lem:lattice_point_count_for_dirichlet_characters}
+  For any non-principal Dirichlet character \(\chi\) modulo \(q\). Consider the partial sums:
+  \[
+    F_N(\chi) := \sum_{(m,n)\in H_N}\frac{\chi(n)}{\sqrt{mn}}
+  \]
+  where $H_N=\{(m,n)\in\mathbb{N}^2:\ mn\le N\}$. Then, we have
+  \[
+    F_N(\chi) = 2\sqrt{N}L(1;\chi) + \mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \]
+  and for some $c>0$, we have
+  \[
+    F_N(\chi) \geq c \log N \quad \text{ for sufficiently large } N.
+  \]
+\end{lemma}
+
+\begin{proof}
+  We begin with the proof of $F_N(\chi) \geq c\log N$ for some constant \(c > 0\). Notice that for any non-principal real Dirichlet character \(\chi\) modulo \(q\), there exists an integer \(a\) such that \(\gcd(a,q)=1\) and \(\chi(a) = -1\). Hence, we have
+  \[
+    F_N(\chi) = \sum_{(m,n)\in H_N} \frac{\chi(n)}{\sqrt{mn}} = \sum_{k=1}^N\left[\underset{mn=k}{\sum_{m}\sum_{n}}\frac{\chi(n)}{\sqrt{mn}}\right]=\sum_{k=1}^N \frac{1}{\sqrt{k}}\sum_{n|k}\chi(n)
+  \]
+  Since \(\chi\) is a real character, and we know that it's a root of unity from Theorem~\ref{thm:number_of_characters_of_cyclic_group_and_dirichlet_characters}, we have \(\chi(n)=\pm 1\) if $\gcd(n,q)=1$. Hence, by factoring index $k$ into prime factors $k=\prod_{p\text{ prime}} p^{\nu_p(k)}$, once $n$ divides $k$, we can write $n$ as $n=\prod_{p\text{ prime}} p^{\mu_p}$ where $0\le \mu_p \le \nu_p(k)$ for all $p$. Hence,
+  \[
+    \chi(n) = \chi\left(\prod_{p\text{ prime}} p^{\mu_p}\right) = \prod_{p\text{ prime}} \chi(p)^{\mu_p}.
+  \]
+  and the sum over all divisors $n$ of $k$ can be written as
+  \[
+    \sum_{n|k}\chi(n) = \prod_{p\text{ prime}} \left(1 + \chi(p) + \chi(p)^2 + \cdots + \chi(p)^{\nu_p(k)}\right).
+  \]
+  Since $\chi(p) = 0$ for $\gcd(p,q)>1$, and $\mu_p(k)=0$ for all $p \not| k$, we can further simplify the above formula as
+  \[
+    \sum_{n|k}\chi(n) = \prod_{\substack{p\text{ prime} \\ p|k \\ \gcd(p,q)=1}} \left(1 + \chi(p) + \chi(p)^2 + \cdots + \chi(p)^{\nu_p(k)}\right) = \prod_{\substack{p\text{ prime} \\ p|k \\ \gcd(p,q)=1}} \sum_{j=0}^{\nu_p(k)} \chi(p)^j.
+  \]
+  Now, we discuss the value of $\sum_{j=0}^{\nu_p(k)} \chi(p)^j$ for each prime factor \(p\) of \(k\) with \(\gcd(p,q)=1\).
+  \begin{itemize}
+    \item If $\chi(p) = 1$, then $\sum_{j=0}^{\nu_p(k)} \chi(p)^j = \nu_p(k) + 1$.
+    \item If $\chi(p) = -1$, and $\nu_p(k)$ is even, then $\sum_{j=0}^{\nu_p(k)} \chi(p)^j = 1$.
+    \item If $\chi(p) = -1$, and $\nu_p(k)$ is odd, then $\sum_{j=0}^{\nu_p(k)} \chi(p)^j = 0$.
+  \end{itemize}
+  Thus, once we have $k=l^2$ is a perfect square, then $\nu_p(k)$ is even for all prime factors \(p\) of \(k\), and we have
+  \[
+    \sum_{n|l^2}\chi(n) = \prod_{\substack{p\text{ prime} \\ p|l^2 \\ \gcd(p,q)=1}} \sum_{j=0}^{\nu_p(l^2)} \chi(p)^j \geq 1.
+  \]
+  Return to the formula for \(F_N(\chi)\), we have
+  \[
+  \begin{aligned}
+    F_N(\chi) &= \sum_{k=1}^N \frac{1}{\sqrt{k}}\sum_{n|k}\chi(n) \geq \sum_{l=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{l} \sum_{n|l^2}\chi(n) \geq \sum_{l=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{l} \\
+    &\geq \log(\lfloor \sqrt{N} \rfloor) + \gamma + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty \quad \text{ (by the theorem~\ref{thm:asymptotic_formula_for_average_value_of_divisor_function})} \\
+    &= \frac{1}{2} \log N + \gamma + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \\
+    &\geq c \log N \quad \text{ for sufficiently large } N. \quad (\text{since } \gamma > 0 \text{ and } \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \to 0 \text{ as } N \to \infty.)
+  \end{aligned}
+  \]
+
+  \noindent
+  \textbf{Now, we turn to the proof of \(F_N(\chi) = 2\sqrt{N}L(1;\chi) + \mathcal{O}(1)\) as \(N \to \infty\).} Doing the same lattice point count as in the proof of theorem~\ref{thm:lattice_point_count_for_divisor_function}, we have
+  \[
+    H_N = S_q \cup L \cup U
+  \]
+  where
+  \[
+    S_q = \{ (m,n)\in \mathbb{N}^2 : (m,n) \in [0,\sqrt{N}]^2 \}
+  \]
+  and
+  \[
+    L = \{ (m,n)\in \mathbb{N}^2 : 1 \leq m \leq \sqrt{N}, \sqrt{N} < n \leq N/m \}, \quad U = \{ (m,n)\in \mathbb{N}^2 : \sqrt{N} < m \leq N/n, 1 \leq n \leq \sqrt{N} \}.
+  \]
+  Hence, we have
+  \[
+    F_{N}(\chi) = \sum_{(m,n)\in H_N} \frac{\chi(n)}{\sqrt{mn}} = \sum_{(m,n)\in L\cup S_q} \frac{\chi(n)}{\sqrt{mn}} + \sum_{(m,n)\in U} \frac{\chi(n)}{\sqrt{mn}} =: A + B.
+  \]
+  Then, by using the lemma~\ref{lem:bound_for_partial_sums_of_non_principal_dirichlet_characters}, we have
+  \[
+    |B| = \left| \sum_{(m,n)\in U} \frac{\chi(n)}{\sqrt{mn}} \right| \leq \sum_{n=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{\sqrt{n}} \sum_{m=\lfloor \sqrt{N} \rfloor + 1}^{N/n} \frac{|\chi(n)|}{\sqrt{n}} \leq \sum_{n=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{\sqrt{n}} \cdot \frac{2q}{\sqrt{\sqrt{N}+1}} \leq \frac{2q}{N^{1/4}} \sum_{n=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{\sqrt{n}}
+  \]
+  thus
+  \[
+  \begin{aligned}
+    |B| &\leq \frac{2q}{N^{1/4}} \sum_{n=1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{\sqrt{n}} \leq \frac{2q}{N^{1/4}}\left(1 + \int_{1}^{\lfloor \sqrt{N} \rfloor} \frac{1}{\sqrt{t}} dt \right) = \frac{2q}{N^{1/4}} \left(1 + 2(\sqrt{\lfloor \sqrt{N} \rfloor} - 1) \right) \\
+    &\leq \frac{2q}{N^{1/4}} \left(2 + 2(\sqrt{\sqrt{N}} - 1) \right) = 4q=\mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \end{aligned}
+  \]
+  For the term \(A\), notice that $L\cup S_q = \{(m,n)\in\mathbb{N}^2:\ 1\le m\le \sqrt{N},\ 1\le n\le N/m\}$, hence
+  \[
+    A = \sum_{(m,n)\in L\cup S_q} \frac{\chi(n)}{\sqrt{mn}} = \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} \sum_{n=1}^{\lfloor N/m \rfloor} \frac{1}{\sqrt{n}} \leq \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} P_{N/m} \quad \text{ where } P_{N/m} = \sum_{n=1}^{N/m} \frac{1}{\sqrt{n}}.
+  \]
+  By theorem~\ref{thm:asymptotic_formula_for_partial_sums_of_square_root_function}, we have
+  \[
+    P_{N/m} \leq P_{N} = 2\sqrt{N} + \sigma + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty.
+  \]
+  Hence,
+  \[
+  \begin{aligned}
+    A &\leq \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} P_{N} = P_{N} \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} \\
+    &= 2\sqrt{N}\sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} + \sigma \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}}.
+  \end{aligned}
+  \]
+  As
+  \[
+    \left|\sigma \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} \right| \leq |\sigma| \cdot \frac{2q}{1} = \mathcal{O}(1) \quad \text{ as } N \to \infty \quad \text{ (by lemma~\ref{lem:bound_for_partial_sums_of_non_principal_dirichlet_characters})}
+  \]
+  and
+  \[
+    \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} \leq \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \cdot \frac{2q}{1} = \mathcal{O}(1) \quad \text{ as } N \to \infty \quad \text{ (by lemma~\ref{lem:bound_for_partial_sums_of_non_principal_dirichlet_characters})},
+  \]
+  so we have
+  \[
+    A = 2\sqrt{N}\sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}} + \mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \]
+  Finally,
+  \[
+  \begin{aligned}
+    \left|2\sqrt{N}\sum_{m=1}^{\lfloor \sqrt{N} \rfloor} \frac{\chi(m)}{\sqrt{m}}\right| = 2\sqrt{N} \left| L(1;\chi) - \sum_{m=\lfloor \sqrt{N} \rfloor + 1}^{\infty} \frac{\chi(m)}{\sqrt{m}} \right| \leq 2\sqrt{N} \left( |L(1;\chi)| + \left|\sum_{m=\lfloor \sqrt{N} \rfloor + 1}^{\infty} \frac{\chi(m)}{\sqrt{m}}\right| \right) \\
+    \leq 2\sqrt{N} \left( |L(1;\chi)| + \frac{2q}{\sqrt{\lfloor \sqrt{N} \rfloor + 1}} \right) = 2\sqrt{N}L(1;\chi) + \mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \end{aligned}
+  \]
+  Hence, we have
+  \[
+    F_N(\chi) = A + B = 2\sqrt{N}L(1;\chi) + \mathcal{O}(1) \quad \text{ as } N \to \infty.
+  \]
+\end{proof}
+
+\begin{corollary}[Non-vanishing of Dirichlet L-functions at 1 for Real Characters] \label{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}
   For every non-principal Dirichlet character \(\chi\) modulo \(q\), the Dirichlet L-function \(L(z,\chi)\) at \(z=1\) is nonzero, i.e.
   \[
     L(1,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n} \ne 0.
   \]
   when \(\chi\) is a real character.
-\end{lemma}
+\end{corollary}
 
 \begin{proof}
-  
+  By lemma~\ref{lem:lattice_point_count_for_dirichlet_characters}, we have
+  \[
+    F_N(\chi) = 2\sqrt{N}L(1;\chi) + \mathcal{O}(1) \quad \text{ as } N \to \infty. \quad \text{ and } F_N(\chi) \geq c \log N \quad \text{ for sufficiently large } N.
+  \]
+  Hence, we have
+  \[
+    L(1;\chi) = \frac{F_N(\chi)}{2\sqrt{N}} + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) 
+  \]
+  By definition of the Big O notation, there exists a constant \(C > 0\) such that $\mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \leq \frac{C}{\sqrt{N}}$ for sufficiently large \(N\). Hence, we have
+  \[
+    L(1;\chi) \geq \frac{c \log N}{2\sqrt{N}} - \frac{C}{\sqrt{N}} = \frac{c \log N - 2C}{2\sqrt{N}}>0 \quad \text{ for sufficiently large } N.
+  \]
+  Therefore, we conclude that \(L(1;\chi) \ne 0\) for any non-principal real Dirichlet character \(\chi\) modulo \(q\).
 \end{proof}
 
 \begin{corollary}[Non-vanishing of Dirichlet L-functions at 1 for Non-principal Characters] \label{cor:Dirichlet_L_function_non_vanishing_at_1_for_non_principal_characters}
@@ -3476,10 +3731,8 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{corollary}
 
 \begin{proof}
-  Directly follows from lemma~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_complex_characters} and lemma~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}.
+  Directly follows from lemma~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_complex_characters} and corollary~\ref{lem:Dirichlet_L_function_non_vanishing_at_1_for_real_characters}.
 \end{proof}
-
-
 
 \begin{theorem}[Dirichlet's Theorem on Primes in Arithmetic Progressions] \label{thm:PN_in_AP}
   Let \(a\) and \(q\) be positive integers with \(\gcd(a,q)=1\). Then, there are infinitely many prime numbers in the arithmetic progression
@@ -3487,6 +3740,10 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
     \mathrm{AP}_{a,q} = \{ a + kq : k \in \mathbb{Z}^+ \}.  
   \]
 \end{theorem}
+
+\begin{proof}
+  Directly follows from Lemma~\ref{lem:Dirichlet_L_function_bounded_near_1} and Corollary~\ref{cor:Dirichlet_L_function_non_vanishing_at_1_for_non_principal_characters} by using the same argument as in the proof of Theorem~\ref{thm:infinitely_many_primes}.
+\end{proof}
 
 
 \begin{problemset}[Exercises]
@@ -3663,6 +3920,8 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 
 \end{problemset}
 
+
+\chapter{}
 
 
 
