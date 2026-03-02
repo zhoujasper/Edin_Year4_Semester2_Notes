@@ -3440,72 +3440,61 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \]
 \end{theorem}
 
+%\begin{proof}
+%  We begin by recalling (from the previous theorem proof) the summation identity: if $f:\mathbb{R}^+\to\mathbb{R}$ is continuously differentiable, then for any integers $2\le M<N$,
+%  \begin{equation}\label{eq:floor_summation_formula}
+%    \sum_{n=M}^{N} f(n) = \int_{M-1}^{N} f(t) dt + \int_{M-1}^{N} (t-\lfloor t\rfloor)\, f'(t) dt.
+%  \end{equation}
+%  (Indeed, this follows by applying integration by parts on each interval $[n-1,n]$ and summing.)
+%
+%  Now set $f(t)=t^{-1/2}$, so that $f'(t)=-\tfrac12 t^{-3/2}$. Taking $M=2$ in \eqref{eq:floor_summation_formula} gives
+%  \[
+%    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = \int_{1}^{N} t^{-1/2} dt + \int_{1}^{N} (t-\lfloor t\rfloor)\Bigl(-\frac12 t^{-3/2}\Bigr) dt,
+%  \]
+%  hence
+%  \begin{equation}\label{eq:sum_from_2}
+%    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = 2\sqrt{N} - 2 - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+%  \end{equation}
+%  and thus
+%  \[
+%    S(N) := \sum_{n=1}^{N} \frac{1}{\sqrt{n}} = 1 + 2\sqrt{N} - 2 - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt = 2\sqrt{N} - 1 - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+%  \]
+%
+%  \noindent
+%  \textbf{Claim.} For all \(M \geq 1\), the limit
+%  \[
+%    L(M) := \lim_{R\to\infty}\frac12\int_{M}^{R}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \quad \text{ and } 0\leq L(M) \leq \frac{1}{\sqrt{M}}
+%  \]
+%  \textbf{Proof of Claim.} Notice that for any integer \(n \geq M\), we have
+%  \[
+%    \frac{t - \lfloor t \rfloor}{t^2} \geq 0 \quad \text{ for all } t \geq M
+%  \]
+%  so that $ \frac12\int_{M}^{R}\frac{t-\lfloor t\rfloor}{t^{3/2}} $ is increasing in \(R\). On the other hand, since \(t - \lfloor t \rfloor < 1\) for all \(t\), we have
+%  \[
+%    \frac12\int_{M}^{R}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \leq \frac12\int_{M}^{R} t^{-3/2} dt = \frac{1}{\sqrt{M}} - \frac{1}{\sqrt{R}} \leq \frac{1}{\sqrt{M}} \leq 1.
+%  \]
+%  Hence, by the Monotone Convergence Theorem, the limit \(L(M)\) exists and is finite and satisfies \(0 \leq L(M) \leq \frac{1}{\sqrt{M}}\). \textit{The claim is proved.}
+%
+%  Now, by the above claim, we can write $S(N)$ as:
+%  \[
+%    S(N) = 2\sqrt{N} - 1 - \frac12\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt + \frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
+%  \]
+%  Since
+%  \[
+%    |\frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt| \leq \frac12\int_{N}^{\infty} t^{-3/2} dt = \frac{1}{\sqrt{N}} \quad \text{as } t - \lfloor t \rfloor < 1,
+%  \]
+%  so that
+%  \[
+%    S(N) = 2\sqrt{N} - \sigma + \mathcal{O}\left( \frac{1}{\sqrt{N}} \right) \quad \text{ as } N \to \infty,
+%  \]
+%  where
+%  \[
+%    \sigma = 1 - \int_1^{\infty} \frac{t-\lfloor t \rfloor}{t^{3/2}} dt.
+%  \]
+%\end{proof}
+
 \begin{proof}
-  We begin by recalling (from the previous theorem proof) the summation identity: if $f:\mathbb{R}^+\to\mathbb{R}$ is continuously differentiable, then for any integers $2\le M<N$,
-  \begin{equation}\label{eq:floor_summation_formula}
-    \sum_{n=M}^{N} f(n) = \int_{M-1}^{N} f(t) dt + \int_{M-1}^{N} (t-\lfloor t\rfloor)\, f'(t) dt.
-  \end{equation}
-  (Indeed, this follows by applying integration by parts on each interval $[n-1,n]$ and summing.)
-
-  Now set $f(t)=t^{-1/2}$, so that $f'(t)=-\tfrac12 t^{-3/2}$. Taking $M=2$ in \eqref{eq:floor_summation_formula} gives
-  \[
-    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = \int_{1}^{N} t^{-1/2} dt + \int_{1}^{N} (t-\lfloor t\rfloor)\Bigl(-\frac12 t^{-3/2}\Bigr) dt,
-  \]
-  hence
-  \begin{equation}\label{eq:sum_from_2}
-    \sum_{n=2}^{N} \frac{1}{\sqrt{n}} = \int_{1}^{N} t^{-1/2} dt - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
-  \end{equation}
-  Adding the $n=1$ term to both sides yields
-  \[
-    \sum_{n=1}^{N} \frac{1}{\sqrt{n}} = 1 + \int_{1}^{N} t^{-1/2} dt - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
-  \]
-  We can evaluate the main integral explicitly:
-  \[
-    \int_{1}^{N} t^{-1/2} dt = \left[2\sqrt{t}\right]_{1}^{N} = 2\sqrt{N}-2,
-  \]
-  so
-  \begin{equation}\label{eq:main_rewrite}
-    \sum_{n=1}^{N} \frac{1}{\sqrt{n}} = 2\sqrt{N}-1 - \frac12\int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
-  \end{equation}
-
-  Next we justify convergence of the improper integral and estimate the tail. Since $0\le t-\lfloor t\rfloor<1$ for all $t\ge 1$, we have the bound
-  \[
-    0\le \frac{t-\lfloor t\rfloor}{t^{3/2}} \le \frac{1}{t^{3/2}}.
-  \]
-  Because $\int_{1}^{\infty} t^{-3/2} dt$ converges, the comparison test implies that
-  \[
-    \int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt
-  \]
-  converges (to a finite real number). Moreover, for any $N\ge 1$,
-  \begin{equation}\label{eq:tail_bound}
-    0\le \int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \le \int_{N}^{\infty}\frac{1}{t^{3/2}} dt = \left[-2t^{-1/2}\right]_{N}^{\infty} = \frac{2}{\sqrt{N}}.
-  \end{equation}
-
-  Now decompose the integral up to $N$ as an integral to $\infty$ minus a tail:
-  \[
-    \int_{1}^{N}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt = \int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt - \int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
-  \]
-  Substituting this into \eqref{eq:main_rewrite} gives
-  \[
-  \begin{aligned}
-    \sum_{n=1}^{N}\frac{1}{\sqrt{n}}
-    &= 2\sqrt{N}-1 -\frac12\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt +\frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \\
-    &= 2\sqrt{N} +\Bigl(1-\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt\Bigr) +\frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt.
-  \end{aligned}
-  \]
-  Define
-  \[
-    \sigma := 1-\int_{1}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt,
-  \]
-  which is a well-defined constant by the convergence shown above. Finally, by \eqref{eq:tail_bound},
-  \[
-    0 \le \frac12\int_{N}^{\infty}\frac{t-\lfloor t\rfloor}{t^{3/2}} dt \le \frac12\cdot \frac{2}{\sqrt{N}} = \frac{1}{\sqrt{N}},
-  \]
-  so the remaining term is $\mathcal{O}(N^{-1/2})$ as $N\to\infty$. Therefore,
-  \[
-    \sum_{n=1}^{N}\frac{1}{\sqrt{n}} = 2\sqrt{N} + \sigma + \mathcal{O}\!\left(\frac{1}{\sqrt{N}}\right) \quad \text{as } N\to\infty,
-  \]
-  as claimed.
+  omitted.
 \end{proof}
 
 
@@ -3921,7 +3910,7 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 \end{problemset}
 
 
-\chapter{}
+\chapter{The Riemann Zeta Function}
 
 
 

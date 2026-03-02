@@ -166,14 +166,30 @@
     \fbox{\parbox{\linewidth}{
     
     \section{WKB Theory \& Solving PDE}
-    \begin{MyTh}{\imp{WKB}}\tiny
-        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$ (or $k^2q\gg 1$)} we have: $u\sim A(x)e^{ik\phi(x)}$. \quad Substitution can get:
+    \begin{MyTh}{\imp{WKB (I)}}\tiny
+        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$} we have: $u\sim A(x)e^{ik\phi(x)}$. \quad Substitution can get:
 
         \quad If $q(x)<0$: $u(x)\sim A_{+}|q|^{-\frac{1}{4}}e^{k\int^x_{x_0} \sqrt{|q(t)|}dt} + A_{-}|q|^{-\frac{1}{4}}e^{-k\int^x_{x_0} \sqrt{|q(t)|}dt}$ \quad \scalebox{0.9}{\ok{(Exp. Decay/Growth)}}
 
         \quad If $q(x)>0$: $u(x)\sim A_{+}q^{-\frac{1}{4}}e^{ik\int^x_{x_0} \sqrt{q(t)}dt} + A_{-}q^{-\frac{1}{4}}e^{-ik\int^x_{x_0} \sqrt{q(t)}dt}$ \quad \scalebox{0.9}{\ok{(Oscillation)}}
 
-        \quad \ok{Turning Point}: If $q(x_0)=0$, then $x_0$ is a WKB turning point.
+        \quad \ok{Turning Point}: If $q(x_0)=0$, then $x_0$ is a WKB turning point. \quad \imp{\scalebox{0.9}{ps: 如果$q(x)$含$k$,对其展开保留到$k^0$项}}
+    \end{MyTh}
+
+    \section{WKB Theory \& Solving PDE}
+    \begin{MyTh}{\imp{WKB (II)}}\tiny
+        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$} Then:
+
+        \quad If $q(x)<0$: Assume $u\sim A(x)e^{k\phi(x)}$ then: $u'=(A'+k\phi'A)e^{k\phi}$ and
+        
+        \vspace{1pt}
+        \qquad $u''=(A''+2k\phi'A'+k\phi''A+k^2\phi'^2A)e^{k\phi}$ \scalebox{0.9}{代入并比较} $\Ocal(k^2)$, $\Ocal(k)$ \ \ \scalebox{0.9}{(No $\Ocal(1)$)}
+
+        \vspace{2pt}
+        \quad If $q(x)>0$: Assume $u\sim A(x)e^{ik\phi(x)}$ then: $u'=(A'+ik\phi'A)e^{ik\phi}$ and
+        
+        \vspace{1pt}
+        \qquad $u''=(A''+2ik\phi'A+k\phi''A-k^2\phi'^2A)e^{ik\phi}$ \scalebox{0.9}{代入并比较} $\Ocal(k^2)$, $\Ocal(k)$ \ \ \scalebox{0.9}{(No $\Ocal(1)$)}
     \end{MyTh}
 
     \begin{MyTh}{\imp{Method of Characteristics}|IC} \tiny
@@ -207,6 +223,13 @@
         \end{enumerate}
     \end{MyTh}
 
+    }}
+
+    \columnbreak
+
+
+    \fbox{\parbox{\linewidth}{
+
     \begin{minipage}{0.65\linewidth}
         \begin{MyTh}{\imp{Expansion}} \tiny
             \scalebox{0.9}{For $u_t + c(u)u_x = 0$, $u(x,t_0)=u_L|u_R$}
@@ -226,12 +249,6 @@
     \begin{MyTh}{\ok{Conservation Law}} \tiny
         \imp{$u_t + c(u)u_x = 0$}: $u_t + [\int c(u)du]_x = 0$
     \end{MyTh}
-
-    }}
-
-    \columnbreak
-
-    \fbox{\parbox{\linewidth}{
 
     \begin{MyTh}{\imp{Shock Wave}|$u_L,u_R$} \tiny
         For $u_t + c(u)u_x = 0$, $u(x,t_0)=u_L$ for $x<b$ and $u(x,t_0)=u_R$ for $x>b$.
@@ -266,6 +283,14 @@
     \end{MyTh}
     }}
 
+
+    \fbox{\parbox{\linewidth}{
+    
+    \section{Sturm-Liouville Theory}
+
+    }}
+
+    
     \fbox{\parbox{\linewidth}{
     
     \section{Appendix \qquad \imp{\tiny $x,x^2,x^3$ as $x\to0$, \quad $x^{-1},x^{-2},x^{-3}$ as $x\to\text{inf}$}}

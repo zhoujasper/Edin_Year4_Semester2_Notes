@@ -51,9 +51,9 @@
 
         \quad - For $d=1$ and $\Delta x=\frac{D}{N}$, then: \ps{$\forall i,u_i=\Ocal((\Delta x)^p)$ \ $\Rightarrow$ \ $\|\mathbf{u}\|_{2,\Delta x}=\Ocal((\Delta x)^p)$}
 
-        \quad - For $A$ symmetric: \ps{$\|A^{-1}\mathbf{w}\|_{2,\Delta x}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2,\Delta x}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
+        \quad - For $A$ symmetric: \imp{$\|A^{-1}\mathbf{w}\|_{2}\leq \frac{1}{|\lambda_{1}|}\|\mathbf{w}\|_{2}$} \quad \scalebox{0.8}{\tiny \ps{$0<|\lambda_{1}|\leq\cdots\leq|\lambda_{n}|$}}
 
-        \quad \ok{Property}: \tiny If $\|\mathbf{u}\|_{2}\leq \|\mathbf{w}\|_{2}$, then $\|\mathbf{u}\|_{2,\Delta x}\leq \|\mathbf{w}\|_{2,\Delta x}$
+        \quad \imp{Property}: \tiny If $\|\mathbf{u}\|_{2}\leq \|\mathbf{w}\|_{2}$, then $\|\mathbf{u}\|_{2,\Delta x}\leq \|\mathbf{w}\|_{2,\Delta x}$
     \end{MyTh}
 
     \begin{MyTh}{New Norm}\tiny 
@@ -104,7 +104,7 @@
     \begin{MyTh}{Convergence}\tiny
         A numerical method is convergent if \ok{$\lim_{\Delta t\to 0}\|\mathbf{e}(\Delta t)\|=0$}
         
-        \qquad If \ok{$\lim_{\Delta t\to 0}\frac{\|\mathbf{e}(\Delta t)\|}{(\Delta t)^p}=C$} \ \ (i.e. $\lim_{\Delta t\to 0}\|\mathbf{e}(\Delta t)\|=\Ocal((\Delta t)^p)$) \ $\Rightarrow$ \ok{$p$-th order accurate}
+        \qquad If \ok{$\lim_{\Delta t\to 0}\frac{\|\mathbf{e}(\Delta t)\|}{(\Delta t)^p}=C$} \ \ (i.e. $\|\mathbf{e}(\Delta t)\|=\Ocal((\Delta t)^p)$) \ $\Rightarrow$ \ \ok{$p$-th order accurate}
     \end{MyTh}
 
     \begin{MyTh}{Local Truncation Error $(\tau_n)$}\tiny
@@ -127,11 +127,11 @@
         Goal: Finally change ODE/PDE into \ok{$Au=b$} where \ok{$A$ is matrix}, \ok{$u=[U_1,...,U_{N-1}]^\top$}
     \end{MyTh}
 
-    \begin{MyTh}{Stability}
+    \begin{MyTh}{Stability} \tiny
         A numerical method is stable if \quad $\exists \Delta x_0$ s.t. For the Linear System \ok{$Au=b$}:
         \begin{enumerate}
             \item $A(\Delta x)$ is invertible $\forall \Delta x<\Delta x_0$
-            \item \ok{$\|A^{-1}(\Delta x)\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$
+            \item \ok{$\|[A(\Delta x)]^{-1}\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$
         \end{enumerate}
         \quad \ok{Property}: Consistent + Stable $\Rightarrow$ Convergent \scalebox{0.9}{\tiny (same norm!)} \quad and $\|\mathbf{e}(\Delta t)\|=\Ocal(\|\tau(\Delta t)\|)$
     \end{MyTh}
@@ -278,7 +278,7 @@
 
     \fbox{\parbox{\linewidth}{
 
-    \section{}
+    \section{One Time Solve Two Variables PDEs}
 
     \begin{MyTh}{Elliptic Equation} \tiny
         $Lu = F(x_1,...,x_d)$ is an elliptic PDE if \ \ $L$ is an elliptic operator.
@@ -293,8 +293,107 @@
         $\Delta u = F(x_1,...,x_d)$ is a Poisson equation \ and \ it's elliptic. \ \ with BCs:
 
         \quad \ps{Dirichlet}: $u=u_D$ on $\partial\Omega$; \quad \ps{Neumann}: $\Delta u \cdot \hat{\mathbf{n}}=g$ on $\partial\Omega$ where $\int_{\Omega} F = \int_{\partial\Omega} g$ and $\int_{\Omega} u = \int_{\partial\Omega} u_D$. 
+
+        \quad e.g. For 2D: $u_{xx}+u_{yy}=F(x,y)$ with BCs: $u(x,y)=u_D$ on $\partial\Omega$
+
+        \qquad $\to$ \ok{5-point stencil}: $\tfrac{U_{m-1,p}+U_{m+1,p}+U_{m,p-1}+U_{m,p+1}-4U_{m,p}}{(\Delta x)^2}=F(a+m\Delta x, a+p\textcolor{green}{\Delta x})$
+
+        \qquad $\to$ Using $\mathbf{u} = [U_{1,1}, U_{2,1}, ..., U_{M-1,1}, U_{1,2}, ..., U_{M-1,M-1}]^\top$ and 
+        
+        \qquad \quad \ \ $\mathbf{b}_{m+(p-1)(M-1)}=F(a+m\Delta x, a+p\textcolor{green}{\Delta x})$ then $A\mathbf{u}=\mathbf{b}$ where $A$ is a symmetric matrix.
+
+        \qquad $\to$ \scalebox{0.9}{Eigenvalue/vectors of $A$: $\mathbf{v}_{k,l}=[v_{k,l,1,1}, v_{k,l,2,1}, ..., v_{k,l,1,2}, ..., v_{k,l,M-1,M-1}]^\top$}
+
+        \qquad \quad \ \ \scalebox{0.87}{$v_{k,l,m,p}=\sin(\pi k m \Delta x)\sin(\pi l p \Delta x)$, \quad $\lambda_{k,l}=\frac{2}{(\Delta x)^2}[\cos(\pi k \Delta x)+\cos(\pi l \Delta x)-2]<0$, \ \ \ $\lambda_{\min}=\lambda_{1,1}$}
     \end{MyTh}
 
+    \vspace{1pt}
+    \begin{MyTh}{\imp{Remark}} \tiny
+        这一节都是用同一个$\Delta x$ 离散$x$和$y$的, 和前面$t,x$分别不同.
+    \end{MyTh}
+
+
+    \begin{MyTh}{Consistency} \tiny
+        If $\lim_{\Delta x\to 0}\|\underline{\tau}(\Delta x)\|=0$, the method is consistent. 
+    \end{MyTh}
+
+    \begin{MyTh}{Convergence} \tiny
+        If $\|\mathbf{e}(\Delta x)\|=\Ocal((\Delta x)^p)$, the method is $p$-th order accurate.
+    \end{MyTh}
+
+    \begin{MyTh}{Stability} \tiny
+        A numerical method is stable if for the linear system $A\mathbf{u}=\mathbf{b}$:
+
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item $A(\Delta x)$ is invertible $\forall \Delta x<\Delta x_0$
+            \vspace{-2pt}
+            \item \ok{$\|[A(\Delta x)]^{-1}\mathbf{w}\|\leq C\|\mathbf{w}\|$} \quad for all $\mathbf{w}\in\R^{N-1}$
+        \end{enumerate}
+
+        \ok{Property I}: If $A$ normal, then $\|A^{-1}\mathbf{w}\|_2 \leq \frac{1}{|\lambda_1|}\|\mathbf{w}\|_2$ where $0<|\lambda_1|\leq\cdots\leq|\lambda_{N-1}|$ are eigenvalues of $A$.
+    \end{MyTh}
+
+    }}
+
+
+    \fbox{\parbox{\linewidth}{
+
+    \section{Spectral Methods}
+    
+    \begin{MyTh}{Inner Product Space for Function} \tiny
+        $\langle \phi_{i}, \phi_j \rangle = \int_a^b \phi_i \ \phi_j \  w \  dx$ \quad ps: $w(x)$ is weight function.
+
+        \quad For Fourier Series: $w(x)=1$, $a=-\pi$, $b=\pi$: \quad $\sin(nx)$, $\cos(mx)$ are orthogonal basis.
+    \end{MyTh}
+
+    \begin{MyTh}{Fourier Series} \tiny
+        $f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx)=\sum_{n=-\infty}^{\infty} A_{k} e^{ikx}$ \quad where
+        
+        \vspace{2pt}
+        \quad $\to$ $a_0=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x) dx$ \qquad $a_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx) dx$ \qquad $b_n=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx) dx$.
+
+        \vspace{2pt}
+        \quad $\to$ $k>0$: $A_k=\frac{1}{2}(a_k - i b_k)$; \quad $k<0$: $A_k=\frac{1}{2}(a_{-k} + i b_{-k})$; \quad $k=0$: $A_0=\frac{a_0}{2}$.
+
+        \vspace{2pt}
+        \quad $\to$ $\mathcal{F}\{f\}=A_k=\frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{-ikx} dx$ \quad \scalebox{0.9}{(i.e. Fourier Transform)} \qquad \ok{Remark}: For real func: $A_{-k}=\overline{A_k}$
+
+        \quad \imp{Property}: $\frac{df}{dx}=\sum_{n=-\infty}^{\infty} (ik) A_k e^{ikx}$ \quad $\Rightarrow$ \quad $f^{(m)}(x)=\sum_{n=-\infty}^{\infty} (ik)^m A_k e^{ikx}$
+    \end{MyTh}
+
+    \begin{MyTh}{Discrete Fourier Transform (DFT)} \tiny
+        Assume $x_{n}$ are \ok{equally-spaced} points with $n=0,1,...,N-1$
+
+        \vspace{-1pt}
+        \begin{enumerate}
+            \item \ok{Fourier Transform}: $\mathcal{F}\{f\}\approx\widehat{f}_k= \frac{1}{N}\sum_{n=0}^{N-1} f(x_n) e^{-2\pi i k n / N}$
+            \vspace{-1pt}
+            \item \ok{Inverse Fourier Transform}: $\mathcal{F}^{-1}\{\widehat{f}\}\approx f(x_n)= \sum_{k=0}^{N-1} \widehat{f}_k e^{2\pi i k n / N}$
+        \end{enumerate}
+
+        \vspace{1pt}
+        \quad \imp{Property}: $\widehat{f}'_k = (ik) \widehat{f}_k$ \quad $\Leftrightarrow$ \quad $\mathcal{F}\{f'\}=(ik)\mathcal{F}\{f\}$
+        
+        \vspace{1pt}
+        \quad \ps{Remark}: Quickly compute DFT: Fast Fourier Transform (FFT) 
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Using Fourier to solve PDE}} \tiny
+        For PDE with \ps{periodic BCs}
+        
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item Take Fourier Transform in PDE (in space) \qquad \scalebox{0.9}{e.g. $u_t=u_{xx}$ $\to$ $\frac{d}{dt}\widehat{u}_k = -k^2 \widehat{u}_k$}
+            \vspace{-2pt}
+            \item Take Fourier Transform in IC (in space) \qquad \scalebox{0.9}{e.g. $u(x,0)=f(x)$ $\to$ $\widehat{u}_k(t=0)=$ $\widehat{f}_k$}
+            \vspace{-2pt}
+            \item Using Transformed PDE and IC \ $\to$ \ a. Directly Solve ODE. \quad b. numerical method for ODE.
+            \vspace{-2pt}
+            \item Once $\widehat{u}_k$ is obtained, take Inverse Fourier Transform to get $u(x,t)$.
+        \end{enumerate}
+        
+    \end{MyTh}
     }}
 
 
@@ -337,6 +436,10 @@
     \subsection{Other}
     \begin{MyTh}{Divergence Theorem} \tiny
         $\int_{\Omega} \nabla \cdot \mathbf{F} dV = \int_{\partial\Omega} \mathbf{F}\cdot\hat{\mathbf{n}} dS$ \quad $\hat{\mathbf{n}}$ outward normal. \qquad \ps{$\nabla^2=\nabla\cdot\nabla=\Delta$}
+    \end{MyTh}
+
+    \begin{MyTh}{How to improve Approximation Accuracy?} \tiny
+        a. Using more neighboring points. (more terms from Taylor expansion) \qquad b. Make $\Delta t$, $\Delta x$ smaller. \qquad c. For Periodic BCs, use Fourier Transform.
     \end{MyTh}
 
     }}
