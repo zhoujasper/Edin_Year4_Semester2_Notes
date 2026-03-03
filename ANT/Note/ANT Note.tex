@@ -3912,9 +3912,259 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 
 \chapter{The Riemann Zeta Function}
 
+\begin{theorem}[Identity Theorem] \label{thm:identity_theorem}
+  Let $h$ be a holomorphic function on a domain $Y \subseteq \mathbb{C}$ such that $h=0$ on some open subset $X \subseteq Y$. Then, $h=0$ on the whole domain $Y$.
+\end{theorem}
+
+\begin{proof}
+  omitted. (In Honour Complex Variables)
+\end{proof}
+
+\begin{theorem}[Principal of Analytic Continuation]
+  Given a complex function $f:X\to\mathbb{C}$ defined on a domain $X\subseteq \mathbb{C}$, if there exists a holomorphic function $F:Y\to\mathbb{C}$ defined on a domain $Y\subseteq \mathbb{C}$ such that $X\subseteq Y$ and $F=f$ on $X$, then we say that
+  \[
+  F \text{ is an analytic continuation of } f \text{ from } X \text{ to } Y.
+  \]
+  and the analytic continuation of $f$ from $X$ to $Y$ is unique if it exists.
+\end{theorem}
+
+\begin{proof}
+  Suppose that there are two analytic continuations $F_1$ and $F_2$ of $f$ from $X$ to $Y$. Then, we have
+  \[
+    F_1 = F_2 \text{ on } X.
+  \]
+  Hence, by the identity theorem~\ref{thm:identity_theorem}, we have
+  \[
+    F_1 = F_2 \text{ on } Y,
+  \]
+  so the analytic continuation of $f$ from $X$ to $Y$ is unique if it exists.
+\end{proof}
+
+\begin{theorem}[Sequence version of the Identity Theorem] \label{thm:sequence_version_of_identity_theorem}
+  Let $h$ be a holomorphic function on a domain $Y \subseteq \mathbb{C}$ such that there exists a sequence of distinct points $\{z_n\}_{n=1}^{\infty} \subseteq Y$ converging to some point $z_0 \in Y$ such that $h(z_n) = 0$ for all $n\in\mathbb{Z}^+$. Then, $h=0$ on the whole domain $Y$.
+\end{theorem}
+
+\begin{proof}
+  omitted. (In Honour Complex Variables)
+\end{proof}
+
+\begin{note}
+  This Theorem is very useful since $X$ may just be a piece of curve in $Y$, much smaller than an open subset of $Y$. 
+\end{note}
+
+\begin{exercise}
+  A small example is to show $\sin(z)^2+\cos(z)^2=1$ for all $z\in\mathbb{C}$ by using the sequence version of the identity theorem. 
+
+  As we know that $\sin(z)^2+\cos(z)^2=1$ for all $z\in\mathbb{R}$, so we can take the sequence $\{z_n\}_{n=1}^{\infty} = \{n\pi\}_{n=1}^{\infty}$ which converges to $+\infty$ and satisfies $\sin(z_n)^2+\cos(z_n)^2-1=0$ for all $n\in\mathbb{Z}^+$. Hence, by the sequence version of the identity theorem~\ref{thm:sequence_version_of_identity_theorem}, we have $\sin(z)^2+\cos(z)^2-1=0$ for all $z\in\mathbb{C}$, i.e. $\sin(z)^2+\cos(z)^2=1$ for all $z\in\mathbb{C}$.
+\end{exercise}
 
 
+\section{Analytic Continuation of the zeta function}
 
+\begin{lemma}[Analytic Continuation of a Simple Integral Function] \label{lem:analytic_continuation_of_a_simple_integral_function}
+  Define a function
+  \[
+    I(z) := \int_{1}^{\infty} \frac{1}{t^z} dt.
+  \]
+  It will be shown that $I(z)$ converges for all $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 1$ and defines an analytic function
+  \[
+    \mathcal{I}(z) = \frac{1}{z-1} \quad \text{ for all } z\in\mathbb{C}\setminus\{1\},
+  \]
+  which is an analytic continuation of $I(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 1\}$ to $\mathbb{C}\setminus\{1\}$.
+\end{lemma}
+
+\begin{proof}
+  For the function $I(z)$, notice that
+  \[
+    I(z) = \int_{1}^{\infty} \frac{1}{t^z} dt = \lim_{N\to\infty} \int_{1}^{N} \frac{1}{t^z} dt = \lim_{N\to\infty} \left[ \frac{t^{1-z}}{1-z} \right]_{1}^{N} = \lim_{N\to\infty} \frac{N^{1-z}-1}{1-z}.
+  \]
+  Since
+  \[
+    |N^{1-z}-0| = |N^{1-z}| \leq N^{1-\mathrm{Re}(z)} \to 0 \quad \text{ as } N \to \infty \quad \text{ once } \quad \mathrm{Re}(z) > 1,
+  \]
+  so the limit $\lim_{N\to\infty} \frac{N^{1-z}-1}{1-z}= \frac{1}{z-1}$ exists for all $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 1$. Hence, we have
+  \[
+    I(z) = \frac{1}{z-1} \quad \text{ for all } z\in\mathbb{C} \text{ with } \mathrm{Re}(z) > 1.
+  \]
+  Moreover, the function $\mathcal{I}(z) = \frac{1}{z-1}$ is analytic on $\mathbb{C}\setminus\{1\}$ and clearly, $\mathcal{I}(z) = I(z)$ for all $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 1$. Hence, $\mathcal{I}(z)$ is an analytic continuation of $I(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 1\}$ to $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$
+\end{proof}
+
+\begin{exercise}[Absolute Value of an Integral] \label{ex:abs_value_of_integral}
+  Show that
+  \[
+    \left|\int_{a}^{b} f(t) dt\right| \leq \int_{a}^{b} |f(t)| dt
+  \]
+  for any continuous function $f:[a,b]\to\mathbb{C}$ and any $a,b\in\mathbb{R}$ with $a < b$.
+\end{exercise}
+
+\begin{solution}
+  By the definition of the absolute value of a complex number, we have
+  \[
+    \left|\int_{a}^{b} f(t) dt\right|^2 = \left( \int_{a}^{b} f(t) dt \right) \overline{\left( \int_{a}^{b} f(t) dt \right)} = \left( \int_{a}^{b} f(t) dt \right) \left( \int_{a}^{b} \overline{f(t)} dt \right).
+  \]
+  By Fubini's theorem, we have
+  \[
+    \left|\int_{a}^{b} f(t) dt\right|^2 = \int_{a}^{b} \int_{a}^{b} f(t)\overline{f(s)} dt ds.
+  \]
+  By the Cauchy-Schwarz inequality for integrals, we have
+  \[
+    \left|\int_{a}^{b} f(t) dt\right|^2 = \int_{a}^{b} \int_{a}^{b} f(t)\overline{f(s)} dt ds \leq \int_{a}^{b} |f(t)|^2 dt.
+  \]
+  Hence, we have
+  \[
+    \left|\int_{a}^{b} f(t) dt\right|^2 \leq \left( \int_{a}^{b} |f(t)| dt\right)^2,
+  \]
+  which implies that
+  \[
+    \left|\int_{a}^{b} f(t) dt\right| \leq \int_{a}^{b} |f(t)| dt.
+  \]
+\end{solution}
+
+
+\begin{theorem}[Analytic Continuation of the Riemann Zeta Function] \label{thm:analytic_continuation_of_riemann_zeta_function}
+  The Riemann zeta function
+  \[
+    \zeta(z) = \sum_{n=1}^{\infty} \frac{1}{n^z} = \frac{1}{z-1} - g(z) \quad \text{ for all } z\in\mathbb{C} \text{ with } \mathrm{Re}(z) > 1,
+  \]
+  where
+  \[
+    g(z) = \sum_{n=1}^{\infty} g_n(z) \quad \text{ and } \quad g_n(z) := \int_{n}^{n+1} \left[ \frac{1}{t^z} - \frac{1}{n^z} \right] dt.
+  \]
+  is an analytic function on $\mathbb{C}\setminus\{1\}$
+
+  So that $\frac{1}{z-1} - g(z)$ is an analytic continuation of $\zeta(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 1\}$ to $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$
+\end{theorem}
+
+\begin{proof}
+  Consider the partial sums of zeta function and compare
+  \[
+    \int_{1}^{N+1}\frac{1}{t^z}dt - \sum_{n=1}^{N} \frac{1}{n^z} = \sum_{n=1}^{N} \int_{n}^{n+1} \frac{1}{t^z} dt - \sum_{n=1}^{N} \int_{n}^{n+1}\frac{1}{n^z} dt = \sum_{n=1}^{N} \int_{n}^{n+1} \left[ \frac{1}{t^z} - \frac{1}{n^z} \right] dt = \sum_{n=1}^{N} g_n(z),
+  \]
+  where $g_n(z)=\int_{n}^{n+1} \left[ \frac{1}{t^z} - \frac{1}{n^z} \right] dt$ is analytic on $\mathbb{C}$. We will use the complex Weierstrass M-test to see that $g(z) = \sum_{n=1}^{\infty} g_n(z)$ converges uniformly on $\mathbb{C}$ with $\mathrm{Re}(z) > 0$:
+
+  For any $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$, we have
+  \[
+    |g_n(z)| = \left| \int_{n}^{n+1} \left[ \frac{1}{t^z} - \frac{1}{n^z} \right] dt \right| \leq \int_{n}^{n+1} \left| \frac{1}{t^z} - \frac{1}{n^z} \right| dt. \quad \text{ by Exercise~\ref{ex:abs_value_of_integral}}.
+  \]
+  Notice that for $n<t<n+1$,
+  \[
+    \left| \frac{1}{t^z} - \frac{1}{n^z} \right| = \left| -z\int_{n}^{t} \frac{1}{s^{z+1}} ds \right| \leq |z| \int_{n}^{t} \frac{1}{s^{\mathrm{Re}(z)+1}} ds \leq |z| \int_{n}^{n+1} \frac{1}{s^{\mathrm{Re}(z)+1}} ds = |z| \frac{1}{n^{\mathrm{Re}(z)+1}}.
+  \]
+  Hence, consider for any $\varepsilon > 0, R>0$, on the open set $X_{\varepsilon,R}=\{z\in\mathbb{C} : \mathrm{Re}(z) > \varepsilon, |z| < R\}$, we have
+  \[
+    |g_n(z)| \leq |z| \frac{1}{n^{\mathrm{Re}(z)+1}} \leq |z| \frac{1}{n^{\varepsilon+1}}.
+  \]
+  Since $\sum_{n=1}^{\infty} \frac{1}{n^{\varepsilon+1}}$ converges for $\varepsilon > 0$, we have that $g(z) = \sum_{n=1}^{\infty} g_n(z)$ converges uniformly on $\{z\in\mathbb{C} : \mathrm{Re}(z) > \varepsilon, |z| < R\}$ for any $\varepsilon > 0, R>0$. Therefore, $g(z)$ is analytic on $X_{\varepsilon,R}$ for any $\varepsilon > 0, R>0$, which implies that $g(z)$ is analytic on $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$.
+
+  Finally, since $\frac{1}{z-1} - g(z)$ is an analytic function on $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$ and $\frac{1}{z-1} - g(z) = \zeta(z)$ for all $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 1$, we conclude that $\frac{1}{z-1} - g(z)$ is an analytic continuation of $\zeta(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 1\}$ to $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$.
+
+\end{proof}
+
+
+\section{The Gamma Function}
+
+\begin{definition}[Gamma Function]
+  For any $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$, we define the Gamma function $\Gamma(z)$ by
+  \[
+    \Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt.
+  \]
+\end{definition}
+
+\begin{proof}
+  The proof of the convergence of the integral defining $\Gamma(z)$ for $\mathrm{Re}(z) > 0$ is omitted.
+\end{proof}
+
+\begin{proposition}[Properties of the Gamma Function]
+  The Gamma function $\Gamma(z)$, $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$, has the following properties:
+  \begin{enumerate}
+    \item $\Gamma(n+1) = n!$ for all $n\in\mathbb{Z}^+$.
+    \item $\Gamma(z+1) = z\Gamma(z)$ for all $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$
+    \item $\Gamma(n+1) = n! \sim \sqrt{2\pi n} e^{-n} n^n$ as $n \to \infty$. (Stirling's formula)
+  \end{enumerate}
+\end{proposition}
+
+\begin{solution}
+  omitted. (In Advanced Methods in Applied Mathematics)
+\end{solution}
+
+\begin{theorem}[Analytic Continuation of the Gamma Function] \label{thm:analytic_continuation_of_gamma_function}
+  There is a analytic continuation of the Gamma function $\Gamma(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$ to $\mathbb{C}\setminus\{0,-1,-2,\ldots\}$
+\end{theorem}
+
+\begin{proof}
+  By using the functional equation $\Gamma(z+1) = z\Gamma(z)$, we can redefine a new gamma function $\widetilde{\Gamma}(z)$ by
+  \[
+    \widetilde{\Gamma}(z) = \frac{\Gamma(z+1)}{z},
+  \]
+  which is an analytic continuation of $\Gamma(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$ to $\{z\in\mathbb{C} : \mathrm{Re}(z) > -1\}\setminus\{0\}$. 
+  By repeating the above process, we can redefine a new gamma function $\widehat{\Gamma}_n(z)$ by
+  \[
+    \widehat{\Gamma}_n(z) = \frac{\Gamma(z+n)}{z(z+1)\cdots(z+n-1)},
+  \]
+  which is an analytic continuation of $\Gamma(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$ to $\{z\in\mathbb{C} : \mathrm{Re}(z) > -n\}\setminus\{0,-1,\ldots,-n+1\}$ for any $n\in\mathbb{Z}^+$. Hence, by taking the limit as $n \to \infty$, we can get an analytic continuation of $\Gamma(z)$ from $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$ to $\mathbb{C}\setminus\{0,-1,-2,\ldots\}$.
+\end{proof}
+
+\begin{theorem}
+  After the analytic continuation we have constructed in Theorem~\ref{thm:analytic_continuation_of_gamma_function}, for any $z\in\mathbb{C}\setminus \mathbb{Z}$, we have
+  \[
+    \Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin(\pi z)}.
+  \]
+\end{theorem}
+
+\begin{note}
+  One can also rewrite the above formula as
+  \[
+    \frac{1}{\Gamma(z)} = \frac{\sin(\pi z)}{\pi} \Gamma(1-z),
+  \]
+  and notice that $\sin(\pi z)$ has zeros at $z\in\mathbb{Z}$, so that it can cancel the poles of $\Gamma(z)$ at $z=1,2,\ldots$ and hence $\frac{1}{\Gamma(z)}$ is an entire function on $\mathbb{C}$ with zeros at $z=0,-1,-2,\ldots$.
+\end{note}
+
+\begin{proof}
+  Consider $z=a$ with $0<a<1$ and for $t>0$. By using the change of variable $u=tv$ we have
+  \[
+    \Gamma(1-a) = \int_{0}^{\infty} e^{-u} u^{-a} du = \int_{0}^{\infty} e^{-tv} (tv)^{-a} t dv = t^{1-a} \int_{0}^{\infty} e^{-tv} v^{-a} dv.
+  \]
+  Hence, we have
+  \[
+  \begin{aligned}
+    \Gamma(a)\Gamma(1-a) &= \int_{0}^{\infty} e^{-t} t^{a-1} \Gamma(1-a) dt = \int_{0}^{\infty} e^{-t} t^{a-1} \left[ t^{1-a} \int_{0}^{\infty} e^{-tv} v^{-a} dv \right] dt \\
+    &= \int_{0}^{\infty} \int_{0}^{\infty} e^{-t(1+v)} v^{-a} dt dv \\
+    &= \int_{0}^{\infty} \frac{v^{-a}}{1+v} dv \\
+    &= \int_{-\infty}^{\infty} \frac{e^{(1-a)x}}{1+e^x} dx \quad \text{ by the change of variable } v=e^x \\
+    &= \mathrm{Re} \left( \int_{-\infty}^{\infty} \frac{e^{(1-a)z}}{1+e^z} dz \right) \\
+    &= \frac{\pi}{\sin(\pi a)} \quad \text{ by the Cauchy Residue Theorem }
+  \end{aligned}
+  \]
+  and by the sequence version of the identity theorem~\ref{thm:sequence_version_of_identity_theorem}, we have $\Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin(\pi z)}$ for all $z\in\mathbb{C}\setminus \mathbb{Z}$.
+\end{proof}
+
+\begin{theorem}[Connection between the Riemann zeta function and the Gamma function]
+  Fo any $z\in\mathbb{C}\setminus\{0,-2,-4,\ldots\}$, and any $n\in\mathbb{Z}^+$, we have
+  \[
+    \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du = \pi^{-z/2} \Gamma(z/2) n^{-z}
+  \]
+\end{theorem}
+
+\begin{proof}
+  Simply by the change of variable $t = \pi n^2 u$, we have
+  \[
+  \begin{aligned}
+    \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du &= \int_{0}^{\infty} e^{-t} \left( \frac{t}{\pi n^2} \right)^{z/2 - 1} \frac{dt}{\pi n^2} = \pi^{-z/2} n^{-z} \int_{0}^{\infty} e^{-t} t^{z/2 - 1} dt \\
+    &= \pi^{-z/2} \Gamma(z/2) n^{-z}.
+  \end{aligned}
+  \]
+\end{proof}
+
+\begin{remark}
+  By summing over $n\in\mathbb{Z}^+$, we have
+  \[
+    \pi^{-z/2} \Gamma(z/2) \zeta(z) = \sum_{n=1}^{\infty} \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du = \int_{0}^{\infty} \left( \sum_{n=1}^{\infty} e^{-\pi n^2 u } \right) u^{z/2 - 1} du,
+  \]
+  where the interchange of the sum and the integral is justified by the complex Weierstrass M-test since for any $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$ (doing in our homework)
+\end{remark}
+
+
+\section{The Theta Function}
 
 
 

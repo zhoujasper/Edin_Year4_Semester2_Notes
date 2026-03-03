@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  28 FEB 2026 09:08
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  3 MAR 2026 11:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1099,7 +1099,8 @@ File: pgflibrarypatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfdecorationsegmentlength=\dimen337
 )
 \tikz@lib@dec@box=\box125
-) (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (./AMAM Note.aux)
+) (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex))
+No file "AMAM Note".aux.
 \openout1 = `"AMAM Note.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -1122,7 +1123,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1160,9 +1160,11 @@ LaTeX Font Info:    ... okay on input line 11.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 11.
-(./AMAM Note.out) (./AMAM Note.out)
 \@outlinefile=\write4
 \openout4 = `"AMAM Note.out"'.
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
 (Font)                  TU/LatinModernMath(1)/m/n --> TU/Cambria(0)/m/n on input line 11.
@@ -1187,7 +1189,7 @@ LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 60.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
- (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+(d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
@@ -1214,109 +1216,109 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 164--165
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 226--227
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 225--226
 [][] 
  []
 
 File: shock.png Graphic file (type bmp)
 <shock.png>
 
-Overfull \hbox (1.02766pt too wide) in paragraph at lines 284--284
+Overfull \hbox (1.02766pt too wide) in paragraph at lines 283--283
 []$[]$  $[]$ 
  []
 
 
-Overfull \hbox (2.70975pt too wide) in paragraph at lines 284--284
+Overfull \hbox (2.70975pt too wide) in paragraph at lines 283--283
 [][]\TU/Cambria(0)/b/n/7 Shock Wave|$[][][][]$: []  [] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 284--285
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 283--284
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 291--292
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 290--291
 [][] 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 14.0pt
-(hyperref)                replaced by space on input line 384.
+(hyperref)                replaced by space on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 384.
+(hyperref)                removing `superscript' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 384.
+(hyperref)                removing `superscript' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\to' on input line 384.
+(hyperref)                removing `\to' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 7.0pt
-(hyperref)                replaced by space on input line 384.
+(hyperref)                replaced by space on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 384.
+(hyperref)                removing `superscript' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 384.
+(hyperref)                removing `superscript' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 384.
+(hyperref)                removing `superscript' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\to' on input line 384.
+(hyperref)                removing `\to' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 384.
+(hyperref)                removing `math shift' on input line 383.
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 384--385
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 383--384
 [][] 
  []
 
 LaTeX Font Info:    Font shape `TU/Cambria(0)/m/sl' in size <10.53937> not available
-(Font)              Font shape `TU/Cambria(0)/m/it' tried instead on input line 390.
+(Font)              Font shape `TU/Cambria(0)/m/it' tried instead on input line 389.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 12.64723pt, for example:
@@ -1340,12 +1342,12 @@ Package rerunfilecheck Info: File `"AMAM Note".out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 31315 strings out of 468179
- 648504 string characters out of 5423114
- 1416643 words of memory out of 5000000
- 59520 multiletter control sequences out of 15000+600000
+ 31305 strings out of 468179
+ 648355 string characters out of 5423114
+ 1414107 words of memory out of 5000000
+ 59516 multiletter control sequences out of 15000+600000
  632808 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,12n,125p,544b,690s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,12n,125p,544b,686s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on AMAM Note.pdf (1 page).
