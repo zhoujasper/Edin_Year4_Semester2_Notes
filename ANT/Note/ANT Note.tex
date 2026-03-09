@@ -4170,5 +4170,74 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 
 
 
+\begin{problemset}[Exercises]
+  \item Recall the Gamma function $\Gamma(z)$ defined by
+  \[
+    \Gamma(z) := \int^\infty_0 e^{-t} t^{z-1} dt \quad \text{defined for } \mathrm{Re}(z) > 0.
+  \]
+  Write $\Gamma(z)=h(z) + g(z)$ where 
+  \[
+    h(z) := \lim_{R\to\infty}\int_{1}^{R} e^{-t} t^{z-1} dt \quad \text{ and } \quad g(z) := \lim_{\varepsilon \to 0} \int_{\varepsilon}^{1} e^{-t} t^{z-1} dt.
+  \]
+  Show the sequence of integrals defining $h(z)$ converges uniformly on on $D_{N}(0) := \{z\in\mathbb{C} : |z| < N\}$ for any $N\in\mathbb{Z}^+$, and the sequence of integrals defining $g(z)$ converges uniformly on $E_{\delta} := \{z\in\mathbb{C} : \mathrm{Re}(z) > \delta\}$ for any $\delta > 0$.
+
+  Hence Conclude that $\Gamma(z)$ defines an analytic function on $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$.
+
+  \textit{Hint: Note that $e^{-t}t^{N-1}\leq t^{-2}$ for $t\geq R$ when $\frac{R}{\log R}\geq N+1$.}
+
+  \begin{solution}
+    
+  \end{solution}
+
+  \item For $t>0$, define $\psi(t) := \sum_{n\geq 1}e^{-\pi n^2 t}$. Show that:
+  \begin{enumerate}[(a)]
+    \item $\psi(t) \leq 2e^{-\pi t}$ for all $t\geq1$.
+    \item $I := \int_{\mathbb{R}} e^{-y^2} dy = \sqrt{\pi}$.
+    
+    \textit{Hint: Consider $I^2=\int\int_{\mathbb{R}^2} e^{-x^2-y^2} dx dy$ and compute this integral using the polar coordinates.}
+    
+    \item $\psi(t) \leq \frac{1}{2\sqrt{t}}$ for all $t>0$.
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+
+  \item Do the following things:
+  \begin{enumerate}[(a)]
+    \item \label{ex:changeofseriesandint_part_a}Show that for $\mathrm{Re}(z) > 0$,
+    \[
+      \pi^{-z/2}\Gamma(z/2) \frac{1}{n^z} = \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du.
+    \]
+    and hence for every $N\geq 1$,
+    \[
+      \pi^{-z/2}\Gamma(z/2) \sum_{n=1}^{N} \frac{1}{n^z} = \int_{0}^{\infty} \left( \sum_{n=1}^{N} e^{-\pi n^2 u } \right) u^{z/2 - 1} du.
+    \]
+    \item Now we want to take the limit as $N\to\infty$ in part \ref{ex:changeofseriesandint_part_a}. To justify the interchange of the limit and the integral, we will use the following version of the \textit{Dominated Convergence Theorem} for integrals:
+    If $\sum_{n\geq 1}|f_n(x)| \leq g(x)$ for all $x>0$ and $\int_{0}^{\infty} g(x) dx < \infty$, then
+    \[
+      \lim_{N\to\infty} \int_{0}^{\infty} \left( \sum_{n=1}^{N} f_n(x) \right) dx = \int_{0}^{\infty} \left( \lim_{N\to\infty} \sum_{n=1}^{N} f_n(x) \right) dx.
+    \]
+    i.e.
+    \[
+      \lim_{N\to\infty} \sum_{n=1}^{N} \int_{0}^{\infty} f_n(x) dx = \int_{0}^{\infty} \sum_{n=1}^{\infty} f_n(x) dx.
+    \]
+    Using this result, show that for $\mathrm{Re}(z)>1$,
+    \[
+      \pi^{-z/2}\Gamma(z/2) \zeta(z) = \int_{0}^{\infty} \psi(u) u^{z/2 - 1} du.
+    \]
+    where $\psi(u) = \sum_{n\geq 1}e^{-\pi n^2 u}$ same as previous question.
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 
+    \end{enumerate}
+  \end{solution}
+\end{problemset}
+
+
 
 \end{document}

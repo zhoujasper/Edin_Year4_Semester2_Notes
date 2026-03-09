@@ -1,5 +1,6 @@
 \documentclass{note}
 
+\usepackage{multicol}
 \usepackage{tikz}
 \usetikzlibrary{patterns,decorations.pathreplacing}
 
@@ -301,6 +302,7 @@
             \item \ok{Algebra}: \scalebox{0.95}{\ok{a.} $\langle f,g\rangle = \int_a^b f(x)g(x)\rho(x)dx$; \ \ \ok{b.} Any $f(x)$ $\to$ $f(x)=\sum_{n=1}^{\infty}a_nu_n(x)$, \ \ $a_n=\frac{\langle f,u_n\rangle}{\langle u_n,u_n\rangle}$.}
             \vspace{-5pt}
             \item \ok{Rayleigh Quotient}: $\lambda_n = \frac{ [-pu_n u_n']_a^b + \int_a^b (p u_n'^2 - q u_n^2) dx}{\int_a^b \rho u_n^2 dx}$.
+            \item \ok{Useful Tools}: $u_n,\lambda_n$ homogeneous eigenvalues/functions. \ \ $\Rightarrow$ \ \ $[pu_n']' + q u_n + \lambda_n \rho u_n=0$.
         \end{enumerate}
     \end{MyTh}
 
@@ -308,17 +310,51 @@
         \scalebox{0.9}{Seperation of variables $\to$ Two ODEs $\to$ 优先解 $y''\pm\lambda y=0$ and $\lambda=\pm \xi^2$ $\to$ eigenvalues/functions.}
 
         \quad \scalebox{0.9}{Then Superposition $\to$ e.g. $u(x,t)=\sum A_n X_n(x)T_n(t)$ $\to$ with Coefficients: IC/BC \& $A_n=\frac{\langle f,u_n\rangle}{\langle u_n,u_n\rangle}$}.
+
+        \ $\star$ For higher order PDEs: e.g. (2D) $\langle f,g\rangle = \int_a^b \int_{c}^d f(x,y)g(x,y)\rho_{1}(x)\rho_{2}(y) dxdy$ \qquad \scalebox{0.9}{\text{$\downarrow$ (not include $t$)}}
+
+        \quad \quad - where: \ok{a.} $a,b,c,d$ BCs for $x,y$. \quad \ok{b.} $\rho_1,\rho_2$ are weight functions for $x,y$ in their sub-SL problems.
+
+        \quad For IC ($t$), if contain $x$ \ \ $\Rightarrow$ \ \ 最后使用,用orthogonality求系数.
     \end{MyTh}
 
-    % \begin{MyTh}{Singular S-L} \tiny
-    %     $\frac{d}{dx}[p(x)\frac{dy}{dx}]+q(x)y+\lambda \rho(x)y=0$, with $a<x<b$ and BCs: \ok{a.} $p(a)=0$ or $p(b)=0$; \ok{b.} $a=-\infty$ or $b=\infty$.
-    %     
-    % \end{MyTh}
+    \begin{MyTh}{\imp{Non-Homogeneous}} \tiny
+        对于一般的\ok{BCs} \ps{非齐次} \scalebox{0.9}{(RHS$\ne0$, IC正常)} $\to$ e.g. Heat $T_t=\nu \Delta T$ with BCs.
 
-    \begin{MyTh}{}
+        \quad \ok{a. Steady State} $T_t=0$ \scalebox{0.8}{(对于Heat来说更好解加的)} find $S(x,y)$ 满足BCs
         
+        \quad \ok{b.} Solve $S(x,y)$ and then $T=S+\Theta$, where $\Theta$满足齐次BCs 和 PDE.
     \end{MyTh}
 
+    \begin{MyTh}{Useful Tools} \tiny
+        \ok{a.} For $y'' + \lambda y=0$ with \ps{$y(0)=y(L)=0$} $\to$ Only need discuss \ok{$\lambda>0$} else trivial solution.
+
+        \quad \ok{b.} For $y'' + \lambda y=0$ with \ps{$y'(0)=y'(L)=0$} $\to$ Only need discuss \ok{$\lambda\geq0$} else trivial solution.
+
+        \quad \ok{c.} For $y'' + \lambda y=0$ with \ps{$y(0)=y'(L)=0$} $\to$ Only need discuss \ok{$\lambda>0$} else trivial solution.
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Laplace Transformation}} \tiny
+        \scalebox{0.9}{$\mathcal{L}\{f(t)\}=\int_0^{\infty} e^{-st}f(t)dt=\overline{f}(s)$ \quad $\mathcal{L}^{-1}\{\overline{f}(s)\}=\frac{1}{2\pi i}\int_{\gamma-i\infty}^{\gamma+i\infty} e^{st}\overline{f}(s)ds$.}
+
+        \quad \ok{a.} $\gamma$ lies to \textit{right of all singularities} of $\overline{f}(s)$.
+
+        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$t$}做Laplace $\to$ $^2$ 得ODE,解ODE;\ok{如有$\delta$分类讨论}, $\delta$处用\ok{continuity}加相等条件.
+
+        \quad $^3$ \scalebox{0.95}{同时使用$u\to0$ as $t\to\infty$ 做限制条件 在$\delta$两侧确定一部分未知常数.} 
+        
+        \quad $^4$ \scalebox{0.95}{对于$\delta(x-b)$,对Laplace后的PDE两侧进行$\int_{b-}^{b+}$积分 (\ok{Jump condition}) $\to$ 代入前面ODE解得值求未知常数.}
+
+        \quad $^5$ \scalebox{0.95}{最后对解做Inverse Laplace $\to$ $u(x,t)$}
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Fourier Transformation}} \tiny
+        \scalebox{0.9}{$\mathcal{F}\{f(x)\}=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{ikx}dx$ \quad $\mathcal{F}^{-1}\{\overline{f}(k)\}=\frac{1}{2\pi}\int_{-\infty}^{\infty} \overline{f}(k)e^{-ikx}dk$.}
+
+        \quad \ok{a.} We suppose $f(x)\to0$ as $x\to\pm\infty$ and \ps{$\mathcal{F}\{f'(x)\}=-ik\mathcal{F}(f(x))$ \ \ $\mathcal{F}\{f^{(n)}(x)\}=(-ik)^n\mathcal{F}(f(x))$}.
+
+        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$x$}做Fourier $\to$ $^2$ 得ODE,解ODE. $\to$ $^3$ 最后对解做Inverse Fourier $\to$ $u(x,t)$
+    \end{MyTh}
     }}
 
     
@@ -365,6 +401,12 @@
         \ok{a.} e.g. $\int e^{at}\cos(bt)dt=\mathrm{Re}(\int e^{(a+ib)t}dt)$
     \end{MyTh}
     
+    \begin{MyTh}{Basis}
+        For $\langle \cdot,\cdot \rangle$ with $\langle f,g\rangle = \int_a^b f(x)g(x) dx$ \scalebox{0.9}{$(\rho = 1)$} we have: \quad \scalebox{0.9}{$\langle \sin(n\pi (x-a)/L), \cos(m\pi (x-b)/L)\rangle = 0$}
+
+        For \scalebox{0.9}{$\langle \sin(n\pi (x-a)/L), \sin(m\pi (x-b)/L)\rangle = \frac{L}{2}\delta_{nm}$, \ \ $\langle \cos(n\pi (x-a)/L), \cos(m\pi (x-b)/L)\rangle = \frac{L}{2}\delta_{nm}$}.
+    \end{MyTh}
+
 
     \subsection{Expansion}
 
@@ -431,9 +473,56 @@
     }}
 
 
+\end{multicols}
 
+
+\begin{multicols}{2}
+    
+    \fbox{\parbox{\linewidth}{
+    
+    \section{Laplace Transform Table}
+        \tiny
+        \begin{minipage}{0.5\linewidth}
+            \begin{tabular}{@{\hskip 2pt}c@{\hskip 2pt}|@{\hskip 2pt}c@{\hskip 2pt}||@{\hskip 2pt}c@{\hskip 2pt}|@{\hskip 2pt}c@{\hskip 2pt}}
+                $f(t)$ & $\mathcal{L}\{f(t)\}$ & $f(t)$ & $\mathcal{L}\{f(t)\}$ \\
+                \hline
+                $1$ & $\frac{1}{s}$ & $t^n$ & $\frac{n!}{s^{n+1}}$ \\
+                $e^{at}$ & $\frac{1}{s-a}$ & $t^ne^{at}$ & $\frac{n!}{(s-a)^{n+1}}$ \\
+                $\sin(at)$ & $\frac{a}{s^2+a^2}$ & $t^n\sin(at)$ & $\frac{n!a}{(s^2+a^2)^{n+1}}$ \\
+                $\cos(at)$ & $\frac{s}{s^2+a^2}$ & $t^n\cos(at)$ & $\frac{n!s}{(s^2+a^2)^{n+1}}$ \\
+                $\sinh(at)$ & $\frac{a}{s^2-a^2}$ & $t^n\sinh(at)$ & $\frac{n!a}{(s^2-a^2)^{n+1}}$ \\
+                $\cosh(at)$ & $\frac{s}{s^2-a^2}$ & $t^n\cosh(at)$ & $\frac{n!s}{(s^2-a^2)^{n+1}}$ \\
+                $u_b(t)$ & $\frac{e^{-bs}}{s}$ & $\delta(t-b)$ & $e^{-bs}$
+            \end{tabular}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\linewidth}
+            \begin{tabular}{@{\hskip 2pt}c@{\hskip 2pt}|@{\hskip 2pt}c@{\hskip 2pt}}
+                $f(t)$ & $\mathcal{L}\{f(t)\}$ \\
+                \hline
+                $f'(t)$ & $s\overline{f}(s) - f(0)$ \\
+                $\int_0^t f(\tau)d\tau$ & $\frac{1}{s}\overline{f}(s)$ \\
+                $e^{at}f(t)$ & \ok{s-shift} \quad $\overline{f}(s-a)$ \\
+                $f(t-a)u_a(t)$ & \ok{t-shift} \quad $e^{-as}\overline{f}(s)$ \\
+                $\int_0^t f(t-\tau)g(\tau)d\tau$ & \ok{Convolution} \quad $\overline{f}(s)\cdot\overline{g}(s)$ \\
+                \multicolumn{2}{c}{$f^{n}(t)$: \ \ $s^n\overline{f}(s) - s^{n-1}f(0) - \cdots - f^{(n-1)}(0)$} \\
+                \multicolumn{2}{c}{$f*g = \int_0^t f(t-\tau)g(\tau)d\tau$}
+            \end{tabular}
+        \end{minipage}
+
+        ps: $u_b(t) = H(t-b) = \left\{\begin{smallmatrix} 0, & t<b \\ 1, & t\ge b \end{smallmatrix}\right.$ \quad \imp{$\int_{-\infty}^{\infty}\delta(t-b)\phi(t) dt=\int_{b^{-}}^{b^+}\delta(t-b)\phi(t)dt=\phi(b)$}
+    }}
+
+    \columnbreak
+
+    \fbox{\parbox{\linewidth}{
+    
+    \section{}
+
+    }}
 
 
 \end{multicols}
+
 
 \end{document}
