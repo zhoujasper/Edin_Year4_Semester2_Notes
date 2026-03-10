@@ -4160,14 +4160,58 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \[
     \pi^{-z/2} \Gamma(z/2) \zeta(z) = \sum_{n=1}^{\infty} \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du = \int_{0}^{\infty} \left( \sum_{n=1}^{\infty} e^{-\pi n^2 u } \right) u^{z/2 - 1} du,
   \]
-  where the interchange of the sum and the integral is justified by the complex Weierstrass M-test since for any $z\in\mathbb{C}$ with $\mathrm{Re}(z) > 0$ (doing in our homework)
+  where the interchange of the sum and the integral is justified by the Dominated Convergence Theorem which leaves the details to the reader. (In our homework. Also in the problem set at the end of this chapter we also have an exercise to justify the interchange of the sum and the integral.)
 \end{remark}
 
 
 \section{The Theta Function}
 
+\begin{definition}[The Theta Function]
+  The theta function is:
+  \[
+    \vartheta(t) := \sum_{n=-\infty}^{\infty} e^{\pi i n^2 t}
+  \]
+  and it is well-defined for any $t>0$.
+\end{definition}
 
+\begin{exercise}
+  Show that $\vartheta(t) = 1 + 2\psi(t)$ for any $t>0$, where $\psi(t) := \sum_{n\geq 1}e^{-\pi n^2 t}$.
+\end{exercise}
 
+\begin{solution}
+  Consider the partial sums of $\vartheta(t)$, we have
+  \[
+  \begin{aligned}
+    \sum_{n=-N}^{N} e^{\pi i n^2 t} &= e^{\pi i 0^2 t} + \sum_{n=1}^{N} e^{\pi i n^2 t} + \sum_{n=-N}^{-1} e^{\pi i n^2 t} = 1 + \sum_{n=1}^{N} e^{\pi i n^2 t} + \sum_{n=1}^{N} e^{\pi i n^2 t} \\
+    &= 1 + 2\sum_{n=1}^{N} e^{\pi i n^2 t}.
+  \end{aligned}
+  \]
+  Hence, by taking the limit as $N \to \infty$, and since $\sum_{n=1}^{\infty} e^{\pi i n^2 t}$ converges for any $t>0$ (as it is smaller than $\vartheta(t)$ which is well-defined for any $t>0$ and it is increasing in $t$), we have
+  \[
+    \vartheta(t) = 1 + 2\sum_{n=1}^{\infty} e^{\pi i n^2 t} = 1 + 2\psi(t).
+  \]
+\end{solution}
+
+\begin{note}
+  By the above exercise, we can see that
+  \[
+    \sum_{n=1}^{\infty} e^{-\pi n^2 t} = \psi(t) = \frac{\vartheta(t) - 1}{2} \quad \text{ for any } t>0,
+  \]
+\end{note}
+
+\begin{corollary}[Integral Representation of the Riemann Zeta Function]
+  For any $z\in\mathbb{C}\setminus\{0,-2,-4,\ldots\}$, we have
+  \[
+    \pi^{-z/2} \Gamma(z/2) \zeta(z) = \frac12 \int_{0}^{\infty} \left( \vartheta(u) - 1 \right) u^{z/2 - 1} du.
+  \]
+\end{corollary}
+
+\begin{proof}
+  By the above remark, we have
+  \[
+    \pi^{-z/2} \Gamma(z/2) \zeta(z) = \int_{0}^{\infty} \left( \sum_{n=1}^{\infty} e^{-\pi n^2 u } \right) u^{z/2 - 1} du = \int_{0}^{\infty} \frac{\vartheta(u) - 1}{2} u^{z/2 - 1} du.
+  \]
+\end{proof}
 
 
 \begin{problemset}[Exercises]
@@ -4186,7 +4230,27 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
   \textit{Hint: Note that $e^{-t}t^{N-1}\leq t^{-2}$ for $t\geq R$ when $\frac{R}{\log R}\geq N+1$.}
 
   \begin{solution}
-    
+    For function $h(z)$, notice that for any $z\in D_{N}(0)$, we have
+    \[
+    \begin{aligned}
+      \sup_{z\in D_{N}(0)} \left| \int_{1}^{R} e^{-t} t^{z-1} dt - \int_{1}^{\infty} e^{-t} t^{z-1} dt \right| &= \sup_{z\in D_{N}(0)} \left| \int_{R}^{\infty} e^{-t} t^{z-1} dt \right| \\
+      &\leq \int_{R}^{\infty} e^{-t} t^{N-1} dt \quad \text{ since we can choose $R$ large enough} \\
+      &\leq \int_{R}^{\infty} t^{-2} dt = \frac{1}{R} \to 0 \quad \text{ as } R \to \infty.
+    \end{aligned}
+    \]
+    so the sequence of integrals defining $h(z)$ converges uniformly on $D_{N}(0)$ for any $N\in\mathbb{Z}^+$.
+
+    For the function $g(z)$, notice that for any $z\in E_{\delta}$, we have
+    \[
+    \begin{aligned}
+      \sup_{z\in E_{\delta}} \left| \int_{\varepsilon}^{1} e^{-t} t^{z-1} dt - \int_{0}^{1} e^{-t} t^{z-1} dt \right| &= \sup_{z\in E_{\delta}} \left| \int_{0}^{\varepsilon} e^{-t} t^{z-1} dt \right| \\
+      & \leq \int_{0}^{\varepsilon} e^{-t} t^{\delta-1} dt \quad \text{ since we can choose $\varepsilon$ small enough} \\
+      & \leq \int_{0}^{\varepsilon} t^{\delta-1} dt = \frac{\varepsilon^{\delta}}{\delta} \to 0 \quad \text{ as } \varepsilon \to 0.
+    \end{aligned}
+    \]
+    so the sequence of integrals defining $g(z)$ converges uniformly on $E_{\delta}$ for any $\delta > 0$.
+
+    Finally, since $\Gamma(z) = h(z) + g(z)$ and for each $z\in\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$, we can choose $N$ large enough and $\delta$ small enough such that $z\in D_{N}(0)$ and $z\in E_{\delta}$, so we have that $\Gamma(z)$ defines an analytic function on $\{z\in\mathbb{C} : \mathrm{Re}(z) > 0\}$.
   \end{solution}
 
   \item For $t>0$, define $\psi(t) := \sum_{n\geq 1}e^{-\pi n^2 t}$. Show that:
@@ -4201,7 +4265,21 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item For $t\geq 1$, we have
+      \[
+        \psi(t) = \sum_{n\geq 1}e^{-\pi n^2 t} \leq \sum_{n\geq 1}e^{-\pi n t} = \frac{e^{-\pi t}}{1-e^{-\pi t}} \leq \frac{e^{-\pi t}}{1-e^{-\pi}} \leq 2e^{-\pi t} \quad \text{ since } e^{-\pi} < \frac{1}{2}.
+      \]
+
+      \item By using the change of variable $x=r\cos\theta, y=r\sin\theta$, we have
+      \[
+        I^2 = \int\int_{\mathbb{R}^2} e^{-x^2-y^2} dx dy = \int_{0}^{2\pi} \int_{0}^{\infty} e^{-r^2} r dr d\theta = 2\pi \int_{0}^{\infty} e^{-r^2} r dr = 2\pi \cdot \frac{1}{2} = \pi,
+      \]
+      which implies that $I = \sqrt{\pi}$.
+
+      \item For $t>0$, notice that the function $f(x) = e^{-\pi x^2 t}$ is a decreasing function for $x>0$ and $f(n) = e^{-\pi n^2 t}$ for $n\in\mathbb{Z}^+$. Hence, we have
+      \[
+        \psi(t) = \sum_{n\geq 1}e^{-\pi n^2 t} \leq \int_{0}^{\infty} e^{-\pi x^2 t} dx = \frac{1}{\sqrt{\pi t}} \int_{0}^{\infty} e^{-y^2} dy = \frac{1}{2\sqrt{t}}.
+      \]
     \end{enumerate}
   \end{solution}
 
@@ -4233,7 +4311,42 @@ In the proposition~\ref{prop:dirichlet_character_well_defined_on_Z_mod_qZ}, we h
 
   \begin{solution}
     \begin{enumerate}[(a)]
-      \item 
+      \item For $\mathrm{Re}(z) > 0$, by using the change of variable $t = \pi n^2 u$, we have
+      \[
+        \int_{0}^{\infty} e^{-\pi n^2 u }u^{z/2 - 1} du = \int_{0}^{\infty} e^{-t} \left( \frac{t}{\pi n^2} \right)^{z/2 - 1} \frac{dt}{\pi n^2} = \pi^{-z/2} n^{-z} \int_{0}^{\infty} e^{-t} t^{z/2 - 1} dt = \pi^{-z/2} \Gamma(z/2) n^{-z}.
+      \]
+      and hence for every $N\geq 1$,
+      \[
+        \pi^{-z/2}\Gamma(z/2) \sum_{n=1}^{N} \frac{1}{n^z} = \int_{0}^{\infty} \left( \sum_{n=1}^{N} e^{-\pi n^2 u } \right) u^{z/2 - 1} du.
+      \]
+      \item By previous question, for the $\mathrm{Re}(z) > 1$, we have
+      \[
+        \sum_{n=1}^{N} e^{-\pi n^2 u } \leq \sum_{n=1}^{\infty} e^{-\pi n^2 u } = \psi(u) \leq
+        \begin{cases}
+          2e^{-\pi u} & \text{ for } u\geq 1, \\
+          \frac{1}{2\sqrt{u}} & \text{ for } u>0,
+        \end{cases}
+      \]
+      so the $g(u)$ in the Dominated Convergence Theorem can be chosen as\
+      \[
+        g(u) = \begin{cases}
+          2e^{-\pi u} u^{z/2 - 1} & \text{ for } u\geq 1, \\
+          \frac{1}{2\sqrt{u}} u^{z/2 - 1} & \text{ for } 0<u<1,
+        \end{cases}
+      \]
+
+      When we integrate over the right hand side, we need to seperate the integral into two parts: $\int_{0}^{1} \psi(u) u^{z/2 - 1} du$ and $\int_{1}^{\infty} \psi(u) u^{z/2 - 1} du$. For the first part, we have
+      \[
+        \int_{0}^{1} \psi(u) u^{z/2 - 1} du \leq \int_{0}^{1} \frac{1}{2\sqrt{u}} u^{z/2 - 1} du = \int_{0}^{1} \frac{1}{2} u^{(z-1)/2 - 1} du = \frac{1}{z-1} < \infty \quad \text{ since } \mathrm{Re}(z) > 1,
+      \]
+      and for the second part, we have
+      \[
+        \int_{1}^{\infty} \psi(u) u^{z/2 - 1} du \leq \int_{1}^{\infty} 2e^{-\pi u} u^{z/2 - 1} du \leq 2\int_0^{\infty} e^{-\pi u} u^{z/2 - 1} du = 2\pi^{-z/2} \Gamma(z/2) < \infty \quad \text{ since } \mathrm{Re}(z) > 1.
+      \]
+      Thus, we have $\int_{0}^{\infty} g(u) du < \infty$. Hence, by the Dominated Convergence Theorem, we have
+      \[
+        \pi^{-z/2}\Gamma(z/2) \zeta(z) = \lim_{N\to\infty} \pi^{-z/2}\Gamma(z/2) \sum_{n=1}^{N} \frac{1}{n^z} = \lim_{N\to\infty} \int_{0}^{\infty} \left( \sum_{n=1}^{N} e^{-\pi n^2 u } \right) u^{z/2 - 1} du = \int_{0}^{\infty} \psi(u) u^{z/2 - 1} du.
+      \]
     \end{enumerate}
   \end{solution}
 \end{problemset}
