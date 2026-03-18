@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  10 MAR 2026 13:27
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  13 MAR 2026 13:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1243,87 +1243,87 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 284--285
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 358--359
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 366--367
 [][] 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 14.0pt
-(hyperref)                replaced by space on input line 473.
+(hyperref)                replaced by space on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 473.
+(hyperref)                removing `superscript' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 473.
+(hyperref)                removing `superscript' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\to' on input line 473.
+(hyperref)                removing `\to' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 7.0pt
-(hyperref)                replaced by space on input line 473.
+(hyperref)                replaced by space on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 473.
+(hyperref)                removing `superscript' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 473.
+(hyperref)                removing `superscript' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 473.
+(hyperref)                removing `superscript' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\to' on input line 473.
+(hyperref)                removing `\to' on input line 481.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 473.
+(hyperref)                removing `math shift' on input line 481.
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 473--474
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 481--482
 [][] 
  []
 
 LaTeX Font Info:    Font shape `TU/Cambria(0)/m/sl' in size <10.53937> not available
-(Font)              Font shape `TU/Cambria(0)/m/it' tried instead on input line 476.
+(Font)              Font shape `TU/Cambria(0)/m/it' tried instead on input line 484.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 12.64723pt, for example:
@@ -1339,22 +1339,22 @@ Package fancyhdr Warning: \footskip is too small (0.0pt):
 [1
 
 ]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 486--487
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 549--550
 [][] 
  []
 
 
-Overfull \hbox (2.16011pt too wide) in paragraph at lines 521--521
+Overfull \hbox (2.16011pt too wide) in paragraph at lines 584--584
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 521--522
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 584--585
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 529--530
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 592--593
 [][] 
  []
 
@@ -1381,7 +1381,7 @@ Package rerunfilecheck Info: File `"AMAM Note".out' has not changed.
 Here is how much of TeX's memory you used:
  31309 strings out of 468179
  648479 string characters out of 5423114
- 1486326 words of memory out of 5000000
+ 1490571 words of memory out of 5000000
  59520 multiletter control sequences out of 15000+600000
  632808 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

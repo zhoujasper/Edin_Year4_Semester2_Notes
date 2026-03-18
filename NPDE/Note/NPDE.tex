@@ -563,7 +563,65 @@
 \begin{multicols}{2}
     \fbox{\parbox{\linewidth}{
     
-    \section{}
+    \section{The Steepest Descent Method}
+
+    \begin{MyTh}{Theorem} \tiny
+        Let $\phi(\mathbf{x})=\frac{1}{2}\mathbf{x}^TA\mathbf{x}-\mathbf{b}^T\mathbf{x}$, then it has unique minimum if $A$ is \textit{positive definite}.
+
+        \quad If $A$ is symmetric positive definite \quad $\Rightarrow$ \quad \ps{$\mathbf{x} \text{:} A\mathbf{x}=\mathbf{b} \Leftrightarrow \mathbf{x} \text{:} \phi(\mathbf{x})=\min_{\widetilde{\mathbf{x}}}\phi(\widetilde{\mathbf{x}})=\min_{\widetilde{\mathbf{x}}}[\frac{1}{2}\widetilde{\mathbf{x}}^TA\widetilde{\mathbf{x}}-\mathbf{b}^T\widetilde{\mathbf{x}}]$}
+    \end{MyTh}
+
+    \imp{Following need $A$ to be symmetric positive definite.}
+
+    \begin{MyTh}{Steepest Descent Method} \tiny
+        To solve \ps{$\min \phi(x)$} or \ps{$A\mathbf{x}=\mathbf{b}$}, we can use the following iteration:
+
+        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}+\alpha_{k-1} \nabla \phi(\mathbf{x}^{(k-1)})$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}-\alpha \nabla \phi(\mathbf{x}^{(k-1)}))$.
+
+        \begin{enumerate}
+            \item \ok{Property 1}: $\nabla \phi(\mathbf{x})$ is the direction of steepest ascent (most rapid increase) of $\phi$ at $\mathbf{x}$.
+            \item \ok{Property 2}: $\alpha_{k-1} = \frac{(\mathbf{r}^{(k-1)})^{\top}\mathbf{r}^{(k-1)}}{(\mathbf{r}^{(k-1)})^{\top}A\mathbf{r}^{(k-1)}}$ \quad and \quad $\nabla \phi(\mathbf{x}^{(k)}) = A\mathbf{x}^{(k)}-\mathbf{b} =: -\mathbf{r}^{(k)}$ is \ok{$k$-th residual}.
+            \vspace{-1pt}
+            \item \ok{Property 3}: $\mathbf{r}^{(k)} = \mathbf{r}^{(k-1)} - \alpha_{k-1} A \mathbf{r}^{(k-1)}$
+        \end{enumerate}
+
+        \quad \ps{Remark}: Convergence behaviour is \textit{highly problem-dependent}. \scalebox{0.9}{(如果$\phi$的等高线是圆形则快,椭圆形则慢)}
+    \end{MyTh}
+
+    \begin{MyTh}{The Conjugate Gradient Method} \tiny
+        To solve \ps{$\min \phi(x)$} or \ps{$A\mathbf{x}=\mathbf{b}$}, we can use the following iteration:
+
+        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}+\alpha_{k-1} \mathbf{p}^{(k-1)}$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}-\alpha \mathbf{p}^{(k-1)})$ 
+        
+        \quad and $\mathbf{p}^{(k)}$ is \textit{$A$-conjugate} to previous \ok{search directions}: $\mathbf{p}^{(k-1)}$: \ok{$(\mathbf{p}^{(k)})^{\top}A\mathbf{p}^{(k-1)}=0$}
+
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item \ok{Property 1}: $\alpha_{k-1} = \frac{(\mathbf{r}^{(k-1)})^{\top}\mathbf{r}^{(k-1)}}{(\mathbf{p}^{(k-1)})^{\top}A\mathbf{p}^{(k-1)}}$ \quad and \quad $-\mathbf{r}^{(k)} = A\mathbf{x}^{(k)}-\mathbf{b}$ is \ok{$k$-th residual}.
+            \vspace{-3pt}
+            \item \ok{Property 2}: $\mathbf{p}^{(k)} = \mathbf{r}^{(k)} + \beta_{k-1} \mathbf{p}^{(k-1)}$ \quad where $\beta_{k-1} = \frac{(\mathbf{r}^{(k)})^{\top}\mathbf{r}^{(k)}}{(\mathbf{r}^{(k-1)})^{\top}\mathbf{r}^{(k-1)}}$
+            \vspace{-2pt}
+            \item \ok{Property 3}: $(\mathbf{p}^{(k)})^{\top}A\mathbf{p}^{(j)}=0$ \quad and \quad $(\mathbf{r}^{(k)})^{\top}\mathbf{r}^{(j)}=0$ \quad for $j=0,1,...,k-1$
+            \item \ok{Property 4}: \scalebox{0.9}{$\mathrm{span}\{\mathbf{p}^{(0)}, ..., \mathbf{p}^{(k-1)}\} = \mathrm{span}\{A^0\mathbf{r}^{(0)}, ..., A^{k-1}\mathbf{r}^{(0)}\}=\mathrm{span}\{A\mathbf{e}^{(0)}, ..., A^k\mathbf{e}^{(0)}\}$}
+
+            \vspace{-3pt}
+            \scalebox{0.9}{where $\mathbf{e}^{(k)}=\mathbf{x}^{(k)}-\mathbf{x}$ is the error at $k$-th iteration.} \qquad \qquad \qquad \scalebox{0.9}{(Quicker than JAC|GAU)}
+            \vspace{-3pt}
+            \item \ok{Exact Property}: For $A\in\mathbb{R}$ has $n$ \textit{distinct} eigenvalues $\Rightarrow$ solve in \ok{at most $n$} iterations. (By exact arithmetic)
+        \end{enumerate}
+    \end{MyTh}
+
+    \begin{MyTh}{A-Norm}
+        The $A$-norm of $\mathbf{x}$ is defined as $\|\mathbf{x}\|_A = \sqrt{\mathbf{x}^TA\mathbf{x}}$.
+    \end{MyTh}
+
+    \begin{MyTh}{Condition Number} \tiny
+        The condition number of $A$ is $\kappa(A) = \|A\|\|A^{-1}\|\geq 1$ \quad and \quad $\kappa_2(A) = \frac{\lambda_{\max}(A)}{\lambda_{\min}(A)}$
+    \end{MyTh}
+
+    \begin{MyTh}{Error of Conjugate Gradient} \tiny
+        To solve $A\mathbf{x}=\mathbf{b}$, error is: \scalebox{0.9}{$\frac{\|\mathbf{e}^{(k)}\|_A}{\|\mathbf{e}^{(0)}\|_A} \leq 2\left(\frac{\sqrt{\kappa(A)}-1}{\sqrt{\kappa(A)}+1}\right)^k$}
+    \end{MyTh}
 
     }}
 

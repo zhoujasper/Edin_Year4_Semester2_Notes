@@ -341,11 +341,12 @@
 
         \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$t$}做Laplace $\to$ $^2$ 得ODE,解ODE;\ok{如有$\delta$分类讨论}, $\delta$处用\ok{continuity}加相等条件.
 
-        \quad $^3$ \scalebox{0.95}{同时使用$u\to0$ as $t\to\infty$ 做限制条件 在$\delta$两侧确定一部分未知常数.} 
+        \quad $^3$ \scalebox{0.95}{使用BC或IC得到的限制条件 在$\delta$两侧确定一部分未知常数.} 
         
         \quad $^4$ \scalebox{0.95}{对于$\delta(x-b)$,对Laplace后的PDE两侧进行$\int_{b-}^{b+}$积分 (\ok{Jump condition}) $\to$ 代入前面ODE解得值求未知常数.}
 
         \quad $^5$ \scalebox{0.95}{最后对解做Inverse Laplace $\to$ $u(x,t)$}
+        \qquad\qquad\ok{Remark}: \ok{Need initial value.}
     \end{MyTh}
 
     \begin{MyTh}{\imp{Fourier Transformation}} \tiny
@@ -354,6 +355,13 @@
         \quad \ok{a.} We suppose $f(x)\to0$ as $x\to\pm\infty$ and \ps{$\mathcal{F}\{f'(x)\}=-ik\mathcal{F}(f(x))$ \ \ $\mathcal{F}\{f^{(n)}(x)\}=(-ik)^n\mathcal{F}(f(x))$}.
 
         \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$x$}做Fourier $\to$ $^2$ 得ODE,解ODE. $\to$ $^3$ 最后对解做Inverse Fourier $\to$ $u(x,t)$
+
+        \quad \ok{c.} $^1$ 如有 $\delta$ 进行分类两侧讨论 (不用像Laplace那样使用continuity)
+
+        \quad $^2$ IC得部分未知常数 $\to$ jump condition (e.g. $\delta(x-b)$) $\to$ $\int_{b-}^{b+}$积分两侧得剩余未知常数 $\to$ 解ODE的解.
+
+        \quad $^3$ 对解做Inverse Fourier $\to$ $u(x,t)$
+        \qquad\qquad\ok{Remark}: \ok{Need with infinite space domain.}
     \end{MyTh}
     }}
 
@@ -448,7 +456,7 @@
     \begin{MyTh}{sin|cos}
         \scalebox{0.9}{$a\sin(x)+b\cos(x)=\sqrt{a^2+b^2}\sin(x+\varphi)$ \quad $a\cos(x)+b\sin(x)=\sqrt{a^2+b^2}\cos(x-\varphi)$, $\varphi$ 过$(a,b)$.}
 
-        - \scalebox{0.9}{$\sin(x)+\sin(y)=2\sin(\frac{x+y}{2})\cos(\frac{x-y}{2})$ | $\sin(x)\cos(y)=\frac{1}{2}[\sin(x+y)+\sin(x-y)]$} \quad s+s=sc,s-s=cs,c+c=cc,s-s=-ss
+        - \scalebox{0.9}{$\sin(x)+\sin(y)=2\sin(\frac{x+y}{2})\cos(\frac{x-y}{2})$ | $\sin(x)\cos(y)=\frac{1}{2}[\sin(x+y)+\sin(x-y)]$} \quad s+s=sc,s-s=cs,c+c=cc,c-c=-ss
     \end{MyTh}
 
 
@@ -481,8 +489,63 @@
     \fbox{\parbox{\linewidth}{
 
     \section{Green's Function}
+    \ps{\tiny ps: To solve \textit{forced equation}. 即PDE RHS $\ne0$}
 
 
+    \begin{MyTh}{\imp{Green's Function}} \tiny
+        For PDE $L u(x,t) = F(x,t)$ where $L$ is \textit{linear} differential operation with BCs and ICs.
+        
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item Consider $G(x,t;\xi,\tau)$ satisfying $L G(x,t;\xi,\tau) = \delta(x-\xi)\delta(t-\tau)$ with BCs and ICs.
+            \vspace{-2pt}
+            \item Solve $G$ $\to$ $G(x,t;\xi,\tau)$.
+            \vspace{-2pt}
+            \item Then $u(x,t) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} G(x,t;\xi,\tau) F(\xi,\tau) d\xi d\tau$.
+        \end{enumerate}
+
+        \vspace{1pt}
+        \quad \ps{ps: 可以拓展到更多的空间维度, e.g. \scalebox{0.9}{$G(x,y,t;\xi,\eta,\tau)$ $\to$ $L G(x,y,t;\xi,\eta,\tau) = \delta(x-\xi)\delta(y-\eta)\delta(t-\tau)$}}
+
+        - How to solve: $L G(x,t;\xi,\tau) = \delta(x-\xi)\delta(t-\tau)$ with BCs and ICs. $\downarrow$
+
+        \quad \ok{a. Fourier Transform} (infinite space domain ($x,t$), \ps{[2 dimensions]})
+
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item Take Fourier transform in \imp{$x$} $\to$ Get ODE $\to$ Solve ODE with \ok{$t\ne\tau$}. $\to$ Get $\overline{G}$ split by $t<\tau$ and $t>\tau$.
+            \vspace{-2pt}
+            \item ICs $\to$ Get some unknown constants in $\overline{G}$.
+            \vspace{-2pt}
+            \item Apply \ok{Jump Condition} to \textit{ODE}, $\int_{\tau-}^{\tau+} \cdot \ dt$ $\to$ Get unknown constant.
+            \vspace{-2pt}
+            \item Inverse Fourier $\to$ $G(x,t;\xi,\tau)$.
+        \end{enumerate}
+
+        \quad \ok{b. Separation of Variables} (finite space domain ($x$))
+        
+        \vspace{-2pt}
+        \begin{enumerate}
+            \item Need homogeneous BCs $\to$ Assume \ok{$t\ne \tau$ and $x\ne \xi$} $\to$ Seperation of variables $\to$ Get \ps{$\lambda_n$ and $X_n(x)$.}
+            \vspace{-2pt}
+            \item Assume $G = \sum_n$ \ok{$g_n(t)$} $X_n(x)$ $\to$ Substitute into PDE $L G=\delta(x-\xi)\delta(t-\tau)$.
+            \vspace{-2pt}
+            \item Use orthogonality of $X_n$ $\to$ Get $\delta(x-\xi) = \sum_n d_n X_n(x)$ and find $d_n$.
+            \vspace{-2pt}
+            \item 通过前面substitute得到的对比terms $\to$ Get ODE for $g_n(t)$ $\to$ Solve ODE split by $t<\tau$ and $t>\tau$.
+            \vspace{-2pt}
+            \item ICs $\to$ Get some unknown constants in $g_n(t)$. $\to$ \ok{Continuity} at $t=\tau$ $\to$ some unknown constants.
+            \vspace{-2pt}
+            \item Apply \ok{Jump Condition} to \textit{ODE}, $\int_{\tau-}^{\tau+} \cdot \ dt$ $\to$ Get unknown constant $\to$ Get $g_n(t)$ and we solve it :)
+        \end{enumerate}
+
+        \qquad \ps{Remark}: \scalebox{0.9}{可以拓展为更多空间维度 $\to$ Separation of variables 后留空间不算到最后假设来找.}
+
+        \qquad \scalebox{0.9}{\ps{e.g. $G_t-\Delta G = \delta(x-\xi)\delta(y-\eta)\delta(t-\tau)$ $\to \cdots \to$ $G=\sum_{m,n} g_{m,n}(t)X_n(x)Y_m(y)$ $\to \cdots$}}
+
+        \quad \ok{c. High Variables / Laplace Transform}
+    \end{MyTh}
+    
     }}
     
     \fbox{\parbox{\linewidth}{
