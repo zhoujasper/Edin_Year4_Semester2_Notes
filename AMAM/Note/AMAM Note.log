@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  13 MAR 2026 13:20
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  19 MAR 2026 19:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1099,8 +1099,7 @@ File: pgflibrarypatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfdecorationsegmentlength=\dimen337
 )
 \tikz@lib@dec@box=\box125
-) (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex))
-No file "AMAM Note".aux.
+) (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (./AMAM Note.aux)
 \openout1 = `"AMAM Note.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -1123,6 +1122,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1160,11 +1160,9 @@ LaTeX Font Info:    ... okay on input line 12.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 12.
+(./AMAM Note.out) (./AMAM Note.out)
 \@outlinefile=\write4
 \openout4 = `"AMAM Note.out"'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
 (Font)                  TU/LatinModernMath(1)/m/n --> TU/Cambria(0)/m/n on input line 12.
@@ -1189,7 +1187,7 @@ LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 61.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
-(d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (d:/windows/ProgramFiles/TeX Live/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
@@ -1354,7 +1352,7 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 584--585
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 592--593
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 598--599
 [][] 
  []
 
@@ -1379,10 +1377,10 @@ Package rerunfilecheck Info: File `"AMAM Note".out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 31309 strings out of 468179
- 648479 string characters out of 5423114
- 1490571 words of memory out of 5000000
- 59520 multiletter control sequences out of 15000+600000
+ 31319 strings out of 468179
+ 648628 string characters out of 5423114
+ 1493981 words of memory out of 5000000
+ 59524 multiletter control sequences out of 15000+600000
  632808 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  108i,14n,125p,544b,686s stack positions out of 10000i,1000n,20000p,200000b,200000s
