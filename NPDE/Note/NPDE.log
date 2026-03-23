@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  18 MAR 2026 19:07
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2026.1.12)  23 MAR 2026 20:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1337,7 +1337,12 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 626--627
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 643--644
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 658--659
+[][] 
+ []
+
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 675--676
 [][] 
  []
 
@@ -1359,12 +1364,12 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2022/07/14>
  ***********
 Package rerunfilecheck Info: File `NPDE.out' has not changed.
-(rerunfilecheck)             Checksum: 5D3126203FBB46B9DDF17CF516E21383;2852.
+(rerunfilecheck)             Checksum: E27127A1B382A089F1921D80927CA296;3013.
  ) 
 Here is how much of TeX's memory you used:
  30763 strings out of 468179
  629312 string characters out of 5423114
- 1504091 words of memory out of 5000000
+ 1504272 words of memory out of 5000000
  58990 multiletter control sequences out of 15000+600000
  632800 words of font info for 103 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

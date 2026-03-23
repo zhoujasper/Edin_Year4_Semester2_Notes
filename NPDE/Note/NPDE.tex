@@ -625,6 +625,38 @@
 
     }}
 
+    \fbox{\parbox{\linewidth}{
+
+    \section{The advection equation}
+
+    \begin{MyTh}{Hyperbolic system} \tiny
+        For $\mathbf{u}_t + A \mathbf{u}_x = 0$, if $A$ is \ps{diagonalizable with real eigenvalues} $\Rightarrow$ \ps{hyperbolic system}.
+
+        \quad \ps{Diagonalization}: If $P^{-1}AP = \Lambda$, then Let $\mathbf{v} = P^{-1}\mathbf{u}$, we have $\mathbf{v}_t + \Lambda \mathbf{v}_x = 0$
+    \end{MyTh}
+
+    \begin{MyTh}{Advection Equation} \tiny
+        The advection equation is $u_t + v u_x = 0$ where $v$ is the advection speed.
+
+        \quad \ok{Translate to Wave Equation}: \scalebox{0.9}{两边对$t$求导后代入原式可得} $u_{tt} = v^2 u_{xx}$
+
+        \quad - \ok{If IC is $u(x,0)=P(x)$}: solution is $u(x,t)=P(x-vt)$
+
+        \quad \quad - Moreover, \ok{if BC is Periodic}: sol $u(x,t)=\widetilde{P}(x-vt)$ where $\widetilde{P}(x+k(b-a))=P(x)$ for $x\in[a,b], k\in\mathbb{Z}$.
+
+        \quad - \ok{If BC is $u(a,t)=P(t)$}: solution is $u(x,t)=P(t-\frac{x-a}{v})$
+    \end{MyTh}
+
+    \vspace{2pt}
+    \ok{Remark}: Periodic BCs $\Rightarrow$ $U_{p} = U_{M+p}$ for $p=-1,0$
+    \vspace{2pt}
+
+    \begin{MyTh}{Courant Number} \tiny
+        The Courant number is defined as $C = \frac{v\Delta t}{\Delta x}$.
+    \end{MyTh}
+
+    }}
+
     \columnbreak
 
     \fbox{\parbox{\linewidth}{
