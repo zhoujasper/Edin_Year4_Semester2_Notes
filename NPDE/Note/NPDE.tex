@@ -282,7 +282,7 @@
 
     \section{One Time Solve Two Variables PDEs}
 
-    \begin{MyTh}{Elliptic Equation} \tiny
+    \begin{MyTh}{\imp{Elliptic Equation}} \tiny
         $Lu = F(x_1,...,x_d)$ is an elliptic PDE if \ \ $L$ is an elliptic operator.
 
         \quad \ok{Theorem}: $L=\sum_{r=1}^d\sum{s=1}^d A_{r,s}\frac{\partial^2}{\partial x_r \partial x_s} + \sum_{n=1}^d B_n \frac{\partial}{\partial x_n} + C$ is elliptic operator if:
@@ -629,7 +629,7 @@
 
     \section{The advection equation}
 
-    \begin{MyTh}{Hyperbolic system} \tiny
+    \begin{MyTh}{\imp{Hyperbolic system}} \tiny
         For $\mathbf{u}_t + A \mathbf{u}_x = 0$, if $A$ is \ps{diagonalizable with real eigenvalues} $\Rightarrow$ \ps{hyperbolic system}.
 
         \quad \ps{Diagonalization}: If $P^{-1}AP = \Lambda$, then Let $\mathbf{v} = P^{-1}\mathbf{u}$, we have $\mathbf{v}_t + \Lambda \mathbf{v}_x = 0$
@@ -653,6 +653,16 @@
 
     \begin{MyTh}{Courant Number} \tiny
         The Courant number is defined as $C = \frac{v\Delta t}{\Delta x}$.
+    \end{MyTh}
+
+    \begin{MyTh}{\imp{Characteristics Based Method}} \tiny
+        For the advection equation $u_t + v u_x = 0$, and $|C|=|\frac{v\Delta t}{\Delta x}| \leq 1$:
+
+        \quad \scalebox{0.88}{$\Rightarrow u(x_m, t_{n+1}) = u(x_m - v\Delta t, t_n)\approx U^n_m+\frac{|v|+v}{2}\frac{\Delta t}{\Delta x}(U^n_{m-1}-U^n_m)+\frac{|v|-v}{2}\frac{\Delta t}{\Delta x}(U^n_{m+1}-U^n_m) =:U^{n+1}_m$}
+
+        \quad Equivalently, \scalebox{0.9}{$\frac{U^{n+1}_m - U^n_m}{\Delta t} + \frac{|v|+v}{2}\frac{U^n_m - U^n_{m-1}}{\Delta x} - \frac{|v|-v}{2}\frac{U^n_{m+1} - U^n_m}{\Delta x} = 0$}
+
+        \ok{Remark}: Above is for linear interpolation. \scalebox{0.85}{(e.g. For \ps{$v>0$, $u(x_m, t_{n+1})\approx U^{n+1}_m = (1-C)U^n_m + C U^n_{m-1}$})}
     \end{MyTh}
 
     }}

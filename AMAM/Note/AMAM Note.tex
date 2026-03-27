@@ -168,7 +168,7 @@
     
     \section{WKB Theory \& Solving PDE}
     \begin{MyTh}{\imp{WKB (I)}}\tiny
-        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$} we have: $u\sim A(x)e^{ik\phi(x)}$. \quad Substitution can get:
+        For $u''+k^2q(x)u=0$, \ps{$k\gg 1$} we have: $u\sim A(x)e^{ik\phi(x)}$. \quad Substitution can get: \scalebox{0.9}{\imp{($q$里不能带$k$)}}
 
         \quad If $q(x)<0$: $u(x)\sim A_{+}|q|^{-\frac{1}{4}}e^{k\int^x_{x_0} \sqrt{|q(t)|}dt} + A_{-}|q|^{-\frac{1}{4}}e^{-k\int^x_{x_0} \sqrt{|q(t)|}dt}$ \quad \scalebox{0.9}{\ok{(Exp. Decay/Growth)}}
 
@@ -339,7 +339,7 @@
 
         \quad \ok{a.} $\gamma$ lies to \textit{right of all singularities} of $\overline{f}(s)$.
 
-        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$t$}做Laplace $\to$ $^2$ 得ODE,解ODE;\ok{如有$\delta$分类讨论}, $\delta$处用\ok{continuity}加相等条件.
+        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$t$}做Laplace $\to$ $^2$ 得ODE,解ODE;\ok{如有$\delta$分类讨论}, $\delta$处用\ok{continuous}加相等条件.
 
         \quad $^3$ \scalebox{0.95}{使用BC或IC得到的限制条件 在$\delta$两侧确定一部分未知常数.} 
         
@@ -356,7 +356,7 @@
 
         \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$x$}做Fourier $\to$ $^2$ 得ODE,解ODE. $\to$ $^3$ 最后对解做Inverse Fourier $\to$ $u(x,t)$
 
-        \quad \ok{c.} $^1$ 如有 $\delta$ 进行分类两侧讨论 (不用像Laplace那样使用continuity)
+        \quad \ok{c.} $^1$ 如有 $\delta$ 进行分类两侧讨论 (may use continuous)
 
         \quad $^2$ IC得部分未知常数 $\to$ jump condition (e.g. $\delta(x-b)$) $\to$ $\int_{b-}^{b+}$积分两侧得剩余未知常数 $\to$ 解ODE的解.
 
@@ -425,7 +425,7 @@
 
     \vspace{-2pt}
     \begin{MyTh}{For $x\to a$}\tiny
-        Taylor at $x=a$: $f(x)\sim f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots$ as $x\to a$        
+        Taylor at $x=a$: $f(x)\sim f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots$ as $x\to a$
     \end{MyTh}
 
     \vspace{-2pt}
@@ -544,6 +544,12 @@
         \qquad \scalebox{0.9}{\ps{e.g. $G_t-\Delta G = \delta(x-\xi)\delta(y-\eta)\delta(t-\tau)$ $\to \cdots \to$ $G=\sum_{m,n} g_{m,n}(t)X_n(x)Y_m(y)$ $\to \cdots$}}
 
         \quad \ok{c. High Variables / Laplace Transform}
+    \end{MyTh}
+
+    \begin{MyTh}{Remark} \tiny
+        如$F(x,t)$ 给具体函数 $\to$ 考虑homogeneous PDE $\to$ Eigenfunction $X_n(x)$ $\to$ $u=\sum_n g_n(t)X_n(x)$
+        
+        \quad RHS 含$x$的写为$\sum_n d_n X_n(x)$ $\to$ 比较系数 $\to$ 得到 $g_n(t)$ 的ODE $\to$ Solve ODE $\to$ 最后得到 $u(x,t)$
     \end{MyTh}
     
     }}
