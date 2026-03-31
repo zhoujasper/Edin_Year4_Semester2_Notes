@@ -547,9 +547,11 @@
     \end{MyTh}
 
     \begin{MyTh}{Remark} \tiny
-        如$F(x,t)$ 给具体函数 $\to$ 考虑homogeneous PDE $\to$ Eigenfunction $X_n(x)$ $\to$ $u=\sum_n g_n(t)X_n(x)$
+        如$F(x,t)$ 给具体函数 $\to$ 考虑\ok{齐次} PDE $\to$ Eigenfunction $X_n(x)$ $\to$ $u=\sum_n g_n(t)X_n(x)$
         
-        \quad RHS 含$x$的写为$\sum_n d_n X_n(x)$ $\to$ 比较系数 $\to$ 得到 $g_n(t)$ 的ODE $\to$ Solve ODE $\to$ 最后得到 $u(x,t)$
+        \quad $\to$ RHS 含$x$的写为$\sum_n d_n X_n(x)$ $\to$ 比较系数 $\to$ 得到 $g_n(t)$ 的ODE $\to$ Solve ODE $\to$ 最后得到 $u(x,t)$
+
+        \quad \ps{i.e. 跳过求$G$的步骤, 直接用$X_n$展开RHS}
     \end{MyTh}
     
     }}
@@ -587,6 +589,14 @@
         \end{minipage}
 
         ps: $u_b(t) = H(t-b) = \left\{\begin{smallmatrix} 0, & t<b \\ 1, & t\ge b \end{smallmatrix}\right.$ \quad \imp{$\int_{-\infty}^{\infty}\delta(t-b)\phi(t) dt=\int_{b^{-}}^{b^+}\delta(t-b)\phi(t)dt=\phi(b)$}
+
+        \begin{MyTh}{Hyperbolic Functions} \tiny
+            $\sinh(x) = \frac{e^x - e^{-x}}{2}$ \quad $\cosh(x) = \frac{e^x + e^{-x}}{2}$
+
+            \qquad $1+\tanh^2(x) = \text{sech}^2(x)$ \quad $\coth^2(x) - 1 = \text{csch}^2(x)$
+
+            \qquad ps: $1+\tan^2(x) = \sec^2(x)$ \quad $1+\cot^2(x) = \csc^2(x)$
+        \end{MyTh}
     }}
 
     \columnbreak
