@@ -673,6 +673,8 @@
 
     \section{Appendix}
 
+    \tiny
+
     \subsection{Other}
     \begin{MyTh}{Divergence Theorem} \tiny
         $\int_{\Omega} \nabla \cdot \mathbf{F} dV = \int_{\partial\Omega} \mathbf{F}\cdot\hat{\mathbf{n}} dS$ \quad $\hat{\mathbf{n}}$ outward normal. \qquad \ps{$\nabla^2=\nabla\cdot\nabla=\Delta$}
@@ -682,7 +684,118 @@
         a. Using more neighboring points. (more terms from Taylor expansion) \qquad b. Make $\Delta t$, $\Delta x$ smaller. \qquad c. For Periodic BCs, use Fourier Transform.
     \end{MyTh}
 
+
+    \subsection{ODE}
+    \begin{MyTh}{$y'+Py=Q$}
+        $\mu y = \int Q(x) \mu dx + C$ , \ \ $\mu(x)=e^{\int P(x)dx}$
+    \end{MyTh}
+    \qquad
+    \begin{MyTh}{$y'=Py$}
+        $y=Ce^{\int P(x)dx}$
+    \end{MyTh}
+
+    \begin{MyTh}{$y''+k^2y=0$}
+        $y=A\cos(kx)+B\sin(kx)$
+    \end{MyTh}
+    \qquad
+    \begin{MyTh}{$y''-k^2y=0$}
+        $y=Ae^{kx}+Be^{-kx}$, $k>0$
+    \end{MyTh}
+
+    \begin{MyTh}{$ay''+by'+cy=0$} 
+        Characteristic equation: $ar^2+br+c=0$ \quad $r_{1,2}= \mu \pm i\nu$
+
+        \quad \scalebox{0.9}{\ok{a.} $\Delta>0$: $y=Ae^{r_1x}+Be^{r_2x}$; \ok{b.} $\Delta=0$: $y=(A+Bx)e^{\mu x}$; \ok{c.} $\Delta<0$: $y=e^{\mu x}(A\cos(\nu x)+B\sin(\nu x))$}
+    \end{MyTh}
+
+    \subsection{Integral}
+
+    \vspace{-2pt}
+    \begin{MyTh}{Gaussian Integral}
+        $\int^\infty_{-\infty} e^{-ax^2} dx =$ \ok{$\frac{\sqrt{\pi}}{\sqrt{a}}$} \qquad \imp{$\int_{0}^{\infty} e^{-xt^n}t^m = \frac{1}{n} \Gamma(\frac{m+1}{n}) x^{-\frac{m+1}{n}}$}
+    \end{MyTh}
+
+    \begin{MyTh}{Integral}
+        $\int \tan x = -\ln|\cos x| = \ln|\sec x|$ \quad $\int \cot x = \ln|\sin x|= -\ln|\csc x|$
+    \end{MyTh}
+
+    \begin{MyTh}{Techniques}
+        \ok{a.} e.g. $\int e^{at}\cos(bt)dt=\mathrm{Re}(\int e^{(a+ib)t}dt)$
+    \end{MyTh}
+    
+    \begin{MyTh}{Basis}
+        For $\langle \cdot,\cdot \rangle$ with $\langle f,g\rangle = \int_a^b f(x)g(x) dx$ \scalebox{0.9}{$(\rho = 1)$} we have: \quad \scalebox{0.9}{$\langle \sin(n\pi (x-a)/L), \cos(m\pi (x-b)/L)\rangle = 0$}
+
+        For \scalebox{0.9}{$\langle \sin(n\pi (x-a)/L), \sin(m\pi (x-b)/L)\rangle = \frac{L}{2}\delta_{nm}$, \ \ $\langle \cos(n\pi (x-a)/L), \cos(m\pi (x-b)/L)\rangle = \frac{L}{2}\delta_{nm}$}.
+    \end{MyTh}
+
+
+    \subsection{Expansion}
+
+    \vspace{-2pt}
+    \begin{MyTh}{Binomial Expansion}
+        $(1+x)^{\alpha}\sim 1+\alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots$ as $x\to0$
+    \end{MyTh}
+
+    \vspace{-2pt}
+    \begin{MyTh}{For $x\to a$}\tiny
+        Taylor at $x=a$: $f(x)\sim f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots$ as $x\to a$
+    \end{MyTh}
+
+    \vspace{-2pt}
+    \begin{MyTh}{Taylor|$x\to0$}
+        $f(x+h)\sim f(x) + f'(x)h + \frac{f''(x)}{2!}h^2 + \cdots$ as $h\to0$
+
+        \vspace{-2pt}
+        \quad $\sin(x)\sim x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$ as $x\to0$ \quad $e^x \sim 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$ as $x\to0$
+
+        \quad $\cos(x)\sim 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$ as $x\to0$ \quad $\ln(1+x) \sim x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots$ as $x\to0$
+
+        \quad $\sinh(x)\sim x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots$ as $x\to0$ \quad $\cosh(x) \sim 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots$ as $x\to0$
+        
+        \quad $\tan(x)\sim x + \frac{x^3}{3} + \frac{2x^5}{15} + \cdots$ as $x\to0$ \quad $\cot(x) \sim \frac{1}{x} - \frac{x}{3} - \frac{x^3}{45} - \cdots$ as $x\to0$
+    \end{MyTh}
+
+    \begin{MyTh}{For $x\to\infty$}
+        $\arctan(x) \sim \frac{\pi}{2} - \frac{1}{x} + \frac{1}{3x^3} - \cdots$ as $x\to\infty$
+
+        \vspace{-2pt}
+        \quad $\ln(a+x) = \ln x + \ln(1+\frac{a}{x}) \sim \ln x + \frac{a}{x} - \frac{a^2}{2x^2} + \cdots$ as $x\to\infty$
+
+        \vspace{-2pt}
+        \quad $\frac{1}{a+x} = \frac{1}{x}\cdot\frac{1}{1+\frac{a}{x}} \sim \frac{1}{x} - \frac{a}{x^2} + \frac{a^2}{x^3} - \cdots$ as $x\to\infty$
+        
+    \end{MyTh}
+
+    \begin{MyTh}{sin|cos}
+        \scalebox{0.9}{$a\sin(x)+b\cos(x)=\sqrt{a^2+b^2}\sin(x+\varphi)$ \quad $a\cos(x)+b\sin(x)=\sqrt{a^2+b^2}\cos(x-\varphi)$, $\varphi$ 过$(a,b)$.}
+
+        - \scalebox{0.9}{$\sin(x)+\sin(y)=2\sin(\frac{x+y}{2})\cos(\frac{x-y}{2})$ | $\sin(x)\cos(y)=\frac{1}{2}[\sin(x+y)+\sin(x-y)]$} \quad s+s=sc,s-s=cs,c+c=cc,c-c=-ss
+    \end{MyTh}
+
+
+    \begin{MyTh}{Inequalities}
+        $\ln(x+1) < x$ , \ \ $e^x > x+1$ , \ \ $(1+x)^a < e^{ax}$
+    \end{MyTh}
+
+    \subsection{Other}
+    \begin{MyTh}{Nabla}
+        \scalebox{0.9}{$\nabla^2 u = u_{xx} + u_{yy} + u_{zz}+\cdots$ \qquad $\nabla\cdot \mathbf{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}$}
+    \end{MyTh}
+
+
+    \begin{MyTh}{Binomial Expansion}
+        \scalebox{0.9}{$(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k}b^k$} \quad \scalebox{0.9}{$\binom{n}{k} = \frac{n!}{k!(n-k)!}$} \quad \scalebox{0.9}{$(1+x)^n=\sum_{k=0}^{n} \binom{n}{k} x^k$}
+    \end{MyTh}
+
+    \begin{MyTh}{Sin/Cos}
+        $\sin[\tfrac{2n+1}{2}\pi] = (-1)^n$ \quad $\cos(n\pi) = (-1)^n$
+    \end{MyTh}
+
+
     }}
+
+    
     
 
 \end{multicols}

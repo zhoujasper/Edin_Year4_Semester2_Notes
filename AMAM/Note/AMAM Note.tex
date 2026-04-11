@@ -605,12 +605,29 @@
     
     \section{Appendix II}
     
-    \begin{MyTh}{Useful Tools} \tiny        
+    \tiny
+
+    \begin{MyTh}{Useful Tools} 
         $\int_{0}^{L}\sin^2(ax) dx = \frac{L}{2} - \frac{\sin(2aL)}{4a}$ \quad $\int_{0}^{L}\cos^2(ax) dx = \frac{L}{2} + \frac{\sin(2aL)}{4a}$
 
         \quad $\int_{0}^{L}\sin(ax)\cos(ax) dx = \frac{\sin^2(aL)}{2a}$
     \end{MyTh}
     
+    \begin{MyTh}{Quick Calculations}
+        $\int xe^{ax} dx = \frac{1}{a}xe^{ax} - \frac{1}{a^2}e^{ax}$ \quad $\int x^2 e^{ax} dx = \frac{1}{a}e^{ax}x^2 - \frac{2}{a^2}e^{ax}x + \frac{2}{a^3}e^{ax}$
+
+        \quad If $y_p=P(x)\sin(\beta x)+Q(x)\cos(\beta x)$ where $P,Q$ are polynomials, then 
+        
+        \quad $\cdot$ $y_p' = P'\sin(\beta x) + Q'\cos(\beta x) + \beta P \cos(\beta x) - \beta Q \sin(\beta x)$ and 
+                
+        \quad $\cdot$ $y_p'' = P''\sin(\beta x) + Q''\cos(\beta x) + 2\beta P' \cos(\beta x) - 2\beta Q' \sin(\beta x) - \beta^2 P \sin(\beta x) - \beta^2 Q \cos(\beta x)$
+
+        \quad $y_p'' + \beta^2 y_p = P''\sin(\beta x) + Q''\cos(\beta x) + 2\beta P' \cos(\beta x) - 2\beta Q' \sin(\beta x)$
+
+        \quad $y_p'' - \beta^2 y_p = (P'' - 2\beta^2 P)\sin(\beta x) + (Q'' - 2\beta^2 Q)\cos(\beta x) + 2\beta P' \cos(\beta x) - 2\beta Q' \sin(\beta x)$
+    \end{MyTh}
+
+
     }}
 
 
