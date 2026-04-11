@@ -370,7 +370,7 @@
             \item The inverse Fourier Transform: $\mathcal{F}^{-1}\{\widehat{f}(k)\}=f(x)=\sum_{k=-\infty}^{\infty} \widehat{f}(k) e^{ikx}$
         \end{enumerate}
 
-        \quad \imp{Change $L$ $\to$ $2\pi$ period}: If $f(x)$ has period $L$ \ \ $\Rightarrow$ \ \ $g(x)=f(\frac{L}{2\pi}y)$ has $2\pi$ period.
+        \quad \imp{Change $L$ $\to$ $2\pi$ period}: If $f(x)$ has period $L$ \ \ $\Rightarrow$ \ \ $g(x)=f(\frac{L}{2\pi}x)$ has $2\pi$ period.
     \end{MyTh}
 
     \begin{MyTh}{\imp{Discrete Fourier Transform (DFT)}} \tiny
@@ -426,7 +426,7 @@
             $\Rightarrow$ \scalebox{0.9}{$P_{\delta}(x-x_m)=\frac{1}{2\pi}$\scalebox{0.8}{$\sum_{k=-N/2}^{N/2}$}${}^{\prime}\!\widetilde{\delta}_{k-m} e^{i k x}=\frac{1}{2\pi}$\scalebox{0.8}{$\sum_{k=-N/2}^{N/2}$}${}^{\prime}\!e^{i k (x-x_m)}$} and \scalebox{0.95}{$P_{\delta}(x)=\frac{\sin(\pi x/\Delta x)}{(2\pi/\Delta x) \tan(x/2)}$}
 
             \vspace{-2pt}
-            $\Rightarrow$ \scalebox{0.9}{$f'(x_n)\approx p'(x_n)=\sum_{m=0}^{N-1}f(x_m)P'_{\delta}(x_n-x_m)$} \quad and \scalebox{0.9}{$P^{\prime}_{\delta}(x_n-x_m)=\left\{\begin{smallmatrix} 0 \qquad\qquad\qquad \ \ \ & j\equiv 0 \ (\text{mod } N) \\ \frac{1}{2}(-1)^{j}\cot(\frac{jh}{2}) & j\not\equiv 0 \ (\text{mod } N) \end{smallmatrix}\right.$}
+            $\Rightarrow$ \scalebox{0.9}{\imp{$f'(x_n)\approx p'(x_n)=\sum_{m=0}^{N-1}f(x_m)P'_{\delta}(x_n-x_m)$}} \quad and \scalebox{0.9}{$P^{\prime}_{\delta}(x_n-x_m)=\left\{\begin{smallmatrix} 0 \qquad\qquad\qquad \ \ \ & j\equiv 0 \ (\text{mod } N) \\ \frac{1}{2}(-1)^{j}\cot(\frac{jh}{2}) & j\not\equiv 0 \ (\text{mod } N) \end{smallmatrix}\right.$}
 
             \vspace{-2pt}
             $\Rightarrow$ Can be written in matrix form: $\mathbf{w} = D \mathbf{v}$ \scalebox{0.9}{其中 $\mathbf{w}$ 是 $f'(x_n)$ 的估计向量, $v$ 是 $f(x_n)$ 的向量 and \ok{$f^{(n)} \Leftrightarrow D^n$}}
