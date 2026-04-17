@@ -339,29 +339,28 @@
 
         \quad \ok{a.} $\gamma$ lies to \textit{right of all singularities} of $\overline{f}(s)$.
 
-        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$t$}做Laplace $\to$ $^2$ 得ODE,解ODE;\ok{如有$\delta$分类讨论}, $\delta$处用\ok{continuous}加相等条件.
+        \quad \ok{b.} Method: PDE|ICs|BCs 对\imp{$t$}做Laplace $\to$ 解ODE \ok{如有$\delta$分类讨论} $\to$ inverse Laplace
 
-        \quad $^3$ \scalebox{0.95}{使用BC或IC得到的限制条件 在$\delta$两侧确定一部分未知常数.} 
-        
-        \quad $^4$ \scalebox{0.95}{对于$\delta(x-b)$,对Laplace后的PDE两侧进行$\int_{b-}^{b+}$积分 (\ok{Jump condition}) $\to$ 代入前面ODE解得值求未知常数.}
-
-        \quad $^5$ \scalebox{0.95}{最后对解做Inverse Laplace $\to$ $u(x,t)$}
-        \qquad\qquad\ok{Remark}: \ok{Need initial value.}
+        \quad\ok{Remark}: \ok{Need initial value.}
     \end{MyTh}
 
     \begin{MyTh}{\imp{Fourier Transformation}} \tiny
-        \scalebox{0.9}{$\mathcal{F}\{f(x)\}=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{ikx}dx$ \quad $\mathcal{F}^{-1}\{\overline{f}(k)\}=\frac{1}{2\pi}\int_{-\infty}^{\infty} \overline{f}(k)e^{-ikx}dk$.}
+        \scalebox{0.9}{$\mathcal{F}\{f(x)\}=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(x)e^{ikx}dx$ \quad $\mathcal{F}^{-1}\{\overline{f}(k)\}=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \overline{f}(k)e^{-ikx}dk$.}
 
         \quad \ok{a.} We suppose $f(x)\to0$ as $x\to\pm\infty$ and \ps{$\mathcal{F}\{f'(x)\}=-ik\mathcal{F}(f(x))$ \ \ $\mathcal{F}\{f^{(n)}(x)\}=(-ik)^n\mathcal{F}(f(x))$}.
 
-        \quad \ok{b.} How to use: $^1$ PDE \& IC 对\imp{$x$}做Fourier $\to$ $^2$ 得ODE,解ODE. $\to$ $^3$ 最后对解做Inverse Fourier $\to$ $u(x,t)$
+        \quad \ok{b.} Method: PDE|ICs|BCs 对\imp{$x$}做Fourier $\to$ 解ODE \ok{如有$\delta$分类讨论} $\to$ inverse Fourier
 
-        \quad \ok{c.} $^1$ 如有 $\delta$ 进行分类两侧讨论 (may use continuous)
+        \quad\ok{Remark}: \ok{Need with infinite space domain.}
+    \end{MyTh}
 
-        \quad $^2$ IC得部分未知常数 $\to$ jump condition (e.g. $\delta(x-b)$) $\to$ $\int_{b-}^{b+}$积分两侧得剩余未知常数 $\to$ 解ODE的解.
-
-        \quad $^3$ 对解做Inverse Fourier $\to$ $u(x,t)$
-        \qquad\qquad\ok{Remark}: \ok{Need with infinite space domain.}
+    \begin{MyTh}{\imp{Useful Tool when have $\delta$}} \tiny
+        \begin{enumerate}
+            \item If ODE order $\geq 2$: \ok{continuous} at $\delta$ point (LHS=RHS)
+            \vspace{-2pt}
+            \item \ok{Jump condition}: \scalebox{0.9}{$\int_{\xi^-}^{\xi^+} \text{PDE|ODE LHS} dx = \int_{\xi^-}^{\xi^+} \text{PDE|ODE RHS} dx$} once we have $\delta(x-\xi)$.
+        \end{enumerate}
+        \vspace{-4pt}
     \end{MyTh}
     }}
 
@@ -381,9 +380,9 @@
     \end{MyTh}
 
     \begin{MyTh}{$y''+k^2y=0$}
-        $y=A\cos(kx)+B\sin(kx)$
+        $y=A\cos(kx)+B\sin(kx)=Ae^{ikx}+Be^{-ikx}$, $k>0$
     \end{MyTh}
-    \qquad
+    
     \begin{MyTh}{$y''-k^2y=0$}
         $y=Ae^{kx}+Be^{-kx}$, $k>0$
     \end{MyTh}
@@ -419,11 +418,6 @@
     \subsection{Expansion}
 
     \vspace{-2pt}
-    \begin{MyTh}{Binomial Expansion}
-        $(1+x)^{\alpha}\sim 1+\alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots$ as $x\to0$
-    \end{MyTh}
-
-    \vspace{-2pt}
     \begin{MyTh}{For $x\to a$}\tiny
         Taylor at $x=a$: $f(x)\sim f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots$ as $x\to a$
     \end{MyTh}
@@ -442,15 +436,17 @@
         \quad $\tan(x)\sim x + \frac{x^3}{3} + \frac{2x^5}{15} + \cdots$ as $x\to0$ \quad $\cot(x) \sim \frac{1}{x} - \frac{x}{3} - \frac{x^3}{45} - \cdots$ as $x\to0$
     \end{MyTh}
 
-    \begin{MyTh}{For $x\to\infty$}
+    \begin{MyTh}{For $x\to\infty$} \tiny
         $\arctan(x) \sim \frac{\pi}{2} - \frac{1}{x} + \frac{1}{3x^3} - \cdots$ as $x\to\infty$
 
         \vspace{-2pt}
-        \quad $\ln(a+x) = \ln x + \ln(1+\frac{a}{x}) \sim \ln x + \frac{a}{x} - \frac{a^2}{2x^2} + \cdots$ as $x\to\infty$
+        \quad $\ln(a+x) = \ln x + \ln(1+\frac{a}{x}) \sim \ln x + \frac{a}{x} - \frac{a^2}{2x^2} + \cdots$ as \imp{$x\to\infty$}
 
         \vspace{-2pt}
-        \quad $\frac{1}{a+x} = \frac{1}{x}\cdot\frac{1}{1+\frac{a}{x}} \sim \frac{1}{x} - \frac{a}{x^2} + \frac{a^2}{x^3} - \cdots$ as $x\to\infty$
+        \quad $\frac{1}{(a+x)^k} =$ \scalebox{0.9}{$\frac{1}{x^k}\cdot\frac{1}{\left(1+\frac{a}{x}\right)^k} \sim \frac{1}{x^k}-\frac{ka}{x^{k+1}}+\frac{k(k+1)a^2}{2x^{k+2}}-\cdots$} as \imp{$x\to\infty$}
         
+        \vspace{-3pt}
+        \quad $\frac{1}{(a+x)^k} =$ \scalebox{0.9}{$\frac{1}{a^k}\cdot\frac{1}{\left(1+\frac{x}{a}\right)^k} \sim \frac{1}{a^k}-\frac{kx}{a^{k+1}}+\frac{k(k+1)x^2}{2a^{k+2}}+\cdots$} as \imp{$x\to0$}
     \end{MyTh}
 
     \begin{MyTh}{sin|cos}
@@ -546,7 +542,7 @@
         \quad \ok{c. High Variables / Laplace Transform}
     \end{MyTh}
 
-    \begin{MyTh}{Remark} \tiny
+    \begin{MyTh}{\imp{Remark}} \tiny
         如$F(x,t)$ 给具体函数 $\to$ 考虑\ok{齐次} PDE $\to$ Eigenfunction $X_n(x)$ $\to$ $u=\sum_n g_n(t)X_n(x)$
         
         \quad $\to$ RHS 含$x$的写为$\sum_n d_n X_n(x)$ $\to$ 比较系数 $\to$ 得到 $g_n(t)$ 的ODE $\to$ Solve ODE $\to$ 最后得到 $u(x,t)$
@@ -610,7 +606,7 @@
     \begin{MyTh}{Useful Tools} 
         $\int_{0}^{L}\sin^2(ax) dx = \frac{L}{2} - \frac{\sin(2aL)}{4a}$ \quad $\int_{0}^{L}\cos^2(ax) dx = \frac{L}{2} + \frac{\sin(2aL)}{4a}$
 
-        \quad $\int_{0}^{L}\sin(ax)\cos(ax) dx = \frac{\sin^2(aL)}{2a}$
+        \qquad \qquad \qquad \ $\int_{0}^{L}\sin(ax)\cos(ax) dx = \frac{\sin^2(aL)}{2a}$
     \end{MyTh}
     
     \begin{MyTh}{Quick Calculations}
@@ -625,6 +621,13 @@
         \quad $y_p'' + \beta^2 y_p = P''\sin(\beta x) + Q''\cos(\beta x) + 2\beta P' \cos(\beta x) - 2\beta Q' \sin(\beta x)$
 
         \quad $y_p'' - \beta^2 y_p = (P'' - 2\beta^2 P)\sin(\beta x) + (Q'' - 2\beta^2 Q)\cos(\beta x) + 2\beta P' \cos(\beta x) - 2\beta Q' \sin(\beta x)$
+    \end{MyTh}
+
+    \begin{MyTh}{Note for $ay''+by'+cy=f(x)$}
+        If $r=\alpha \pm i\beta$, and $f(x)$ contain $e^{\alpha x}\sin(\beta x)|\cos(\beta x)$ then
+
+        \quad $\cdot$ 一个根: $\times x$; 两个根: $\times x^2$. \quad \ps{ps: if $r=0$ remember $e^{0x}=1$}
+        
     \end{MyTh}
 
 

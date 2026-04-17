@@ -665,6 +665,22 @@
         \ok{Remark}: Above is for linear interpolation. \scalebox{0.85}{(e.g. For \ps{$v>0$, $u(x_m, t_{n+1})\approx U^{n+1}_m = (1-C)U^n_m + C U^n_{m-1}$})}
     \end{MyTh}
 
+    \begin{MyTh}{Upwinding} \tiny
+        For the advection equation $u_t + v u_x = 0$:
+        
+        \quad \scalebox{0.9}{For $v>0$, use $U_{m}^n,U_{m-1}^n,U_{m-2}^n,...$ to estimate $u(x_m-v\Delta t,t_n)=u(x_m,t_{n+1})$, denote by $U^{n+1}_m$.}
+        
+        \quad \scalebox{0.9}{For $v<0$, use $U_{m}^n,U_{m+1}^n,U_{m+2}^n,...$ to estimate $u(x_m-v\Delta t,t_n)=u(x_m,t_{n+1})$, denote by $U^{n+1}_m$.}
+
+        \quad $\Rightarrow$ Thus $v>0$ $\to$ \scalebox{0.9}{\ok{$\frac{dU_m}{dt} + \frac{v}{\Delta x}\sum_{q=0}^{Q}\gamma_q U_{m-q} = 0$}} \quad \scalebox{0.9}{(i.e. $\frac{du}{dx}|_{x_m} \approx \frac{1}{\Delta x}\sum_{q=0}^{Q}\gamma_q U_{m-q}$)}
+
+        \quad $\Rightarrow$ Thus $v<0$ $\to$ \scalebox{0.9}{\ok{$\frac{dU_m}{dt} + \frac{v}{\Delta x}\sum_{q=0}^{Q}\gamma_q U_{m+q} = 0$}} \quad \scalebox{0.9}{(i.e. $\frac{du}{dx}|_{x_m} \approx \frac{1}{\Delta x}\sum_{q=0}^{Q}\gamma_q U_{m+q}$)}
+
+        ps: \ps{\scalebox{0.9}{For $u_t + v u_x = 0$ $\to$ In characteristics form: $\frac{du}{dt} = 0 $ on $\frac{dx}{dt} = v$ $\Rightarrow$ $u=A$ on $x=vt+B$}}
+
+
+    \end{MyTh}
+
     }}
 
     \columnbreak
