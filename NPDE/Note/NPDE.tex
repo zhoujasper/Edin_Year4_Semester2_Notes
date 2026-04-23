@@ -889,6 +889,14 @@
 
         \quad \scalebox{0.9}{Thus $\|\mathbf{u}\|_{2,\Delta x} = \mathcal{O}((\Delta x)^p)$.}
     \end{MyTh}
+
+    \begin{MyTh}{固定答题模板}
+        It's given that the discretisation proposed above is stable in the 2-norm. Explain, step-by-step, how you would argue that this scheme is converges at [n]-th order, in a norm which you should specify. [You are not repired to carry out the calculations,...]
+
+        \quad \ok{Answer:} The assumption given in part [(?)] tells us that the scheme is also stable in the \ok{weighted 2-norm}. One would them analyse the local truncation error of the scheme finite difference scheme by using Taylor expansion. After algebraic calculations, and use of the partial differential equation itself. Notice that the local truncation error associated with the boundary conditions is zero, as this is applied exactly. Overall we could argue that the local truncation error is $\mathcal{O}((\Delta t)^p + (\Delta x)^q)$, hence the scheme is consistent in the \ok{weighted 2-norm}. Combining the stability and consistency results, we can conclude that the scheme is convergent in the \ok{weighted 2-norm}.
+
+        \quad or: \ok{weighted 2-norm in $x$-dimension and $\infty$-norm in $t$-dimension.}
+    \end{MyTh}
     }}
     
 
