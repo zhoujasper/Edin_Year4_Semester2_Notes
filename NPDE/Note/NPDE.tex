@@ -38,7 +38,7 @@
         \begin{enumerate}
             \item \ok{Hyperbolic}: $b^2-4ac>0$ \ \ \ps{Admits non-trivial plane \textit{wave solutions} (Propagation)}
             \vspace{-4pt}
-            \item \ok{Parabolic}: $b^2-4ac=0$ \ \ \ps{and we can get \ $2cd=be$ \ or \ $2ae=bd$}
+            \item \ok{Parabolic}: $b^2-4ac=0$ \ \ \ps{\ok{and} we can get \ $2cd\ne be$ \ or \ $2ae\ne bd$}
             \vspace{-4pt}
             \item \ok{Elliptic}: $b^2-4ac<0$ \ \ \ps{\textit{No} non-trivial plane \textit{wave solutions} (No Propagation)}
         \end{enumerate}
@@ -298,7 +298,7 @@
 
         \quad e.g. For 2D: $u_{xx}+u_{yy}=F(x,y)$ with BCs: $u(x,y)=u_D$ on $\partial\Omega$
 
-        \qquad $\to$ \ok{5-point stencil}: $\tfrac{U_{m-1,p}+U_{m+1,p}+U_{m,p-1}+U_{m,p+1}-4U_{m,p}}{(\Delta x)^2}=F(a+m\Delta x, a+p\textcolor{green}{\Delta x})$
+        \qquad $\to$ \imp{5-point Laplacian}: $\tfrac{U_{m-1,p}+U_{m+1,p}+U_{m,p-1}+U_{m,p+1}-4U_{m,p}}{(\Delta x)^2}=F(a+m\Delta x, a+p\textcolor{green}{\Delta x})$
 
         \qquad $\to$ Using $\mathbf{u} = [U_{1,1}, U_{2,1}, ..., U_{M-1,1}, U_{1,2}, ..., U_{M-1,M-1}]^\top$ and 
         
@@ -576,13 +576,13 @@
     \begin{MyTh}{Steepest Descent Method} \tiny
         To solve \ps{$\min \phi(x)$} or \ps{$A\mathbf{x}=\mathbf{b}$}, we can use the following iteration:
 
-        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}+\alpha_{k-1} \nabla \phi(\mathbf{x}^{(k-1)})$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}-\alpha \nabla \phi(\mathbf{x}^{(k-1)}))$.
+        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}-\alpha_{k-1} \nabla \phi(\mathbf{x}^{(k-1)})$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}-\alpha \nabla \phi(\mathbf{x}^{(k-1)}))$.
 
         \begin{enumerate}
             \item \ok{Property 1}: $\nabla \phi(\mathbf{x})$ is the direction of steepest ascent (most rapid increase) of $\phi$ at $\mathbf{x}$.
             \item \ok{Property 2}: $\alpha_{k-1} = \frac{(\mathbf{r}^{(k-1)})^{\top}\mathbf{r}^{(k-1)}}{(\mathbf{r}^{(k-1)})^{\top}A\mathbf{r}^{(k-1)}}$ \quad and \quad $\nabla \phi(\mathbf{x}^{(k)}) = A\mathbf{x}^{(k)}-\mathbf{b} =: -\mathbf{r}^{(k)}$ is \ok{$k$-th residual}.
             \vspace{-1pt}
-            \item \ok{Property 3}: $\mathbf{r}^{(k)} = \mathbf{r}^{(k-1)} - \alpha_{k-1} A \mathbf{r}^{(k-1)}$
+            \item \ok{Property 3}: $\mathbf{r}^{(k)} = \mathbf{b} - A\mathbf{x}^{k} = \cdots = \mathbf{r}^{(k-1)} - \alpha_{k-1} A \mathbf{r}^{(k-1)}$
         \end{enumerate}
 
         \quad \ps{Remark}: Convergence behaviour is \textit{highly problem-dependent}. \scalebox{0.9}{(如果$\phi$的等高线是圆形则快,椭圆形则慢)}
@@ -591,9 +591,9 @@
     \begin{MyTh}{The Conjugate Gradient Method} \tiny
         To solve \ps{$\min \phi(x)$} or \ps{$A\mathbf{x}=\mathbf{b}$}, we can use the following iteration:
 
-        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}+\alpha_{k-1} \mathbf{p}^{(k-1)}$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}-\alpha \mathbf{p}^{(k-1)})$ 
+        \quad $\mathbf{x}^{(k)}=\mathbf{x}^{(k-1)}+\alpha_{k-1} \mathbf{p}^{(k-1)}$ \quad and \quad $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)} + \alpha \mathbf{p}^{(k-1)})$ 
         
-        \quad and $\mathbf{p}^{(k)}$ is \textit{$A$-conjugate} to previous \ok{search directions}: $\mathbf{p}^{(k-1)}$: \ok{$(\mathbf{p}^{(k)})^{\top}A\mathbf{p}^{(k-1)}=0$}
+        \quad and $\mathbf{p}^{(k)}$ is \textit{$A$-conjugate} to previous \ok{search direction}: $\mathbf{p}^{(k-1)}$: \ok{$(\mathbf{p}^{(k)})^{\top}A\mathbf{p}^{(k-1)}=0$}
 
         \vspace{-2pt}
         \begin{enumerate}
@@ -811,7 +811,85 @@
 
     }}
 
+    \fbox{\parbox{\linewidth}{
     
+    \tiny
+
+    \section{Some Proofs}
+
+    \begin{MyTh}{§10 Theorem Proof}
+        \scalebox{0.9}{$\phi(x)=\min_{\widetilde{x}}\phi(\widetilde{x})=\min_{\widetilde{x}}[\frac{1}{2}\widetilde{x}^TA\widetilde{x}-\mathbf{b}^T\widetilde{x}]$, $A$ symmetric positive definite, $x$ solves $Ax=b$.}
+
+        \quad \scalebox{0.9}{$(\Rightarrow)$ Let $x$ solve $Ax=b$, then $\phi(x) = \frac12 \underbrace{\left( A^{\frac12}x-A^{-\frac12}b \right)^{\top}\left(A^{\frac12}x-A^{-\frac12}b\right)}_{= \|A^{1/2}x-A^{-1/2}b\|_2^2} - \underbrace{\frac{1}{2}b^TA^{-1}b}_{\text{constant}}$}
+
+        \vspace{-3pt}
+        \quad \scalebox{0.9}{As $Ax=b$, then $A^{\frac12}x-A^{-\frac12}b=0$, thus $\phi(x) = -\frac{1}{2}b^TA^{-1}b$ achieves the minimum.}
+
+        \quad \scalebox{0.9}{$(\Leftarrow)$ Let $\phi(x)=\min_{\widetilde{x}}\phi(\widetilde{x})$, then $\nabla \phi(x) = Ax - b = 0$, thus $Ax=b$.}
+    \end{MyTh}
+
+    \begin{MyTh}{§10 Why choose $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}+\alpha \mathbf{r}^{(k-1)})$} \ok{Steepest descent method}
+        
+        \quad \scalebox{0.9}{Since $\phi(\mathbf{x}^{(k-1)}+\alpha \mathbf{r}^{(k-1)})=[\frac12 (\mathbf{x}^{(k-1)})^\top A\mathbf{x}^{(k-1)} - \mathbf{b}^\top \mathbf{x}^{(k-1)}]$}
+
+        \quad \hspace{69pt}\scalebox{0.9}{$ + \alpha [\mathbf{x}^{(k-1)\top}A\mathbf{r}^{(k-1)} - \mathbf{b}^\top \mathbf{r}^{(k-1)}] + \frac{\alpha^2}{2}(\mathbf{r}^{(k-1)})^\top A\mathbf{r}^{(k-1)}$}
+
+        \quad \scalebox{0.9}{So that $\frac{d\phi}{d\alpha} = (\mathbf{x}^{(k-1)})^\top A\mathbf{r}^{(k-1)} - \mathbf{b}^\top \mathbf{r}^{(k-1)} + \alpha (\mathbf{r}^{(k-1)})^\top A\mathbf{r}^{(k-1)}$}
+
+        \quad \hspace{26pt}\scalebox{0.9}{$=(A\mathbf{x}^{(k-1)}-\mathbf{b})^\top \mathbf{r}^{(k-1)} + \alpha (\mathbf{r}^{(k-1)})^\top A\mathbf{r}^{(k-1)} = -(\mathbf{r}^{(k-1)})^\top \mathbf{r}^{(k-1)} + \alpha (\mathbf{r}^{(k-1)})^\top A\mathbf{r}^{(k-1)}$}
+
+        \quad \scalebox{0.9}{Set $\frac{d\phi}{d\alpha}=0$, we have $\alpha_{k-1} = \frac{(\mathbf{r}^{(k-1)})^{\top}\mathbf{r}^{(k-1)}}{(\mathbf{r}^{(k-1)})^{\top}A\mathbf{r}^{(k-1)}}$}
+    \end{MyTh}
+
+    \begin{MyTh}{§10 Why choose $\alpha_{k-1}$ s.t. $\min_{\alpha} \phi(\mathbf{x}^{(k-1)}+\alpha \mathbf{p}^{(k-1)})$} \ok{Conjugate gradient method}
+        
+        \quad \scalebox{0.9}{Since $\phi(\mathbf{x}^{(k-1)}+\alpha \mathbf{p}^{(k-1)})=[\frac12 (\mathbf{x}^{(k-1)})^\top A\mathbf{x}^{(k-1)} - \mathbf{b}^\top \mathbf{x}^{(k-1)}]$}
+
+        \quad \hspace{69pt}\scalebox{0.9}{$ + \alpha [\mathbf{x}^{(k-1)\top}A\mathbf{p}^{(k-1)} - \mathbf{b}^\top \mathbf{p}^{(k-1)}] + \frac{\alpha^2}{2}(\mathbf{p}^{(k-1)})^\top A\mathbf{p}^{(k-1)}$}
+
+        \quad \scalebox{0.9}{So that $\frac{d\phi}{d\alpha} = (\mathbf{x}^{(k-1)})^\top A\mathbf{p}^{(k-1)} - \mathbf{b}^\top \mathbf{p}^{(k-1)} + \alpha (\mathbf{p}^{(k-1)})^\top A\mathbf{p}^{(k-1)}$}
+
+        \quad \hspace{26pt}\scalebox{0.9}{$=(A\mathbf{x}^{(k-1)}-\mathbf{b})^\top \mathbf{p}^{(k-1)} + \alpha (\mathbf{p}^{(k-1)})^\top A\mathbf{p}^{(k-1)} = -(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-1)} + \alpha (\mathbf{p}^{(k-1)})^\top A\mathbf{p}^{(k-1)}$}
+
+        \quad \scalebox{0.9}{Set $\frac{d\phi}{d\alpha}=0$, we have $\alpha_{k-1} = \frac{(\mathbf{r}^{(k-1)})^{\top}\mathbf{p}^{(k-1)}}{(\mathbf{p}^{(k-1)})^{\top}A\mathbf{p}^{(k-1)}}$ \quad As $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-1)} = (\mathbf{r}^{(k-1)})^\top \mathbf{r}^{(k-1)}$ so we have $\alpha_{k-1} = ...$}
+
+        \quad \ok{Show that: $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-1)}=(\mathbf{r}^{(k-1)})^\top \mathbf{r}^{(k-1)}$.}
+
+        \quad \scalebox{0.9}{Since $\mathbf{p}^{(k)}=\mathbf{r}^{(k)} + \beta_{k-1} \mathbf{p}^{(k-1)}$, we have $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-1)} = (\mathbf{r}^{(k-1)})^\top \mathbf{r}^{(k-1)} + \beta_{k-2} (\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-2)}$.}
+        
+        \quad \scalebox{0.9}{As $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-2)}=0$, we have $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-1)} = (\mathbf{r}^{(k-1)})^\top \mathbf{r}^{(k-1)}$.} 
+
+        \quad \ok{Show that: $(\mathbf{r}^{(k-1)})^\top\mathbf{p}^{(k-2)}=0$.}
+
+        \quad \scalebox{0.9}{Since $\phi(\alpha_{k-2}) = \frac12 (\mathbf{x}^{(k-2)}+\alpha_{k-2}\mathbf{p}^{(k-2)})^\top A(\mathbf{x}^{(k-2)}+\alpha_{k-2}\mathbf{p}^{(k-2)}) - \mathbf{b}^\top (\mathbf{x}^{(k-2)}+\alpha_{k-2}\mathbf{p}^{(k-2)})$.}
+
+        \quad \scalebox{0.9}{By using $A=A^\top$, we have $\phi'(\alpha_{k-2}) = (\mathbf{x}^{(k-2)})^\top A\mathbf{p}^{(k-2)} - \mathbf{b}^\top \mathbf{p}^{(k-2)} + \alpha_{k-2} (\mathbf{p}^{(k-2)})^\top A\mathbf{p}^{(k-2)}$}
+
+        \quad \hspace{88pt}\scalebox{0.9}{$=(A\mathbf{x}^{(k-2)}-\mathbf{b})^\top \mathbf{p}^{(k-2)} + \alpha_{k-2} (\mathbf{p}^{(k-2)})^\top A\mathbf{p}^{(k-2)}$}
+
+        \quad \scalebox{0.9}{Since $\phi'(\alpha_{k-2})=0$, we have $(A\mathbf{x}^{(k-2)}-\mathbf{b})^\top \mathbf{p}^{(k-2)} + \alpha_{k-2} (\mathbf{p}^{(k-2)})^\top A\mathbf{p}^{(k-2)}=0$.}
+
+        \quad \scalebox{0.9}{So that $(A(\mathbf{x}^{(k-2)}+\alpha_{k-2}\mathbf{p}^{(k-2)})-\mathbf{b})^\top \mathbf{p}^{(k-2)}=0$.}
+
+        \quad \scalebox{0.9}{As $\mathbf{x}^{(k-1)} = \mathbf{x}^{(k-2)}+\alpha_{k-2}\mathbf{p}^{(k-2)}$ and $-\mathbf{r}^{(k-1)} = A\mathbf{x}^{(k-1)}-\mathbf{b}$, we have $(\mathbf{r}^{(k-1)})^\top \mathbf{p}^{(k-2)}=0$.}
+    \end{MyTh}
+
+    \begin{MyTh}{§1.2 Norm}
+        For $d=1$, $\Delta x = \frac DN$, $u_i = \mathcal{O}((\Delta x)^p)$, then $\|\mathbf{u}\|_{2,\Delta x} = \mathcal{O}((\Delta x)^p)$.
+
+        \quad \ok{Proof:}\scalebox{0.9}{ $\|\mathbf{u}\|_{2,\Delta x}^2 = \Delta x \sum_{i=1}^{N-1} u_i^2 \leq \Delta x (N-1) \max_{1\leq i \leq N-1} u_i^2 \leq D \max_{1\leq i \leq N-1} u_i^2$, where $\Delta x = \frac DN$.}
+
+        \quad \scalebox{0.9}{Thus $\|\mathbf{u}\|_{2,\Delta x} = \mathcal{O}((\Delta x)^p)$.}
+
+        \quad \ok{Proof:} \scalebox{0.9}{If $u=[U_{1,1},U_{2,1},...,U_{1,2},U_{2,2},...,U_{M-1,M-1}]^\top$, \ok{$d=2$} (x,y), $x=m\Delta x, y=p\Delta x$, }
+
+        \quad \scalebox{0.9}{$\|\mathbf{u}\|_{2,\Delta x}^2 = (\Delta x)^2 \sum_{m=1}^{M-1}\sum_{p=1}^{M-1} U_{m,p}^2 \leq (\Delta x)^2 (M-1)^2 \max_{1\leq m,p \leq M-1} U_{m,p}^2$}
+
+        \quad \hspace{23pt}\scalebox{0.9}{$\leq D^2 \max_{1\leq i,j \leq M-1} U_{i,j}^2$, where $\Delta x = \frac DM$.}
+
+        \quad \scalebox{0.9}{Thus $\|\mathbf{u}\|_{2,\Delta x} = \mathcal{O}((\Delta x)^p)$.}
+    \end{MyTh}
+    }}
     
 
 \end{multicols}
