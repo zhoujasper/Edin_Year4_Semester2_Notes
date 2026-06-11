@@ -10,7 +10,6 @@ This README follows the repository's actual visible folder structure. The curren
 
 | Course | Folder | Notes |
 |---|---:|---|
-| Algebraic Geometry | `AG/Note/` | Algebraic geometry notes and revision material |
 | Advanced Methods of Applied Mathematics | `AMAM/Note/` | Applied mathematics methods, examples, and revision summaries |
 | Analytic Number Theory | `ANT/Note/` | Number-theoretic definitions, results, examples, and proof-oriented notes |
 | Numerical / Nonlinear PDE material | `NPDE/Note/` | PDE-related LaTeX notes and supporting style files |
@@ -19,7 +18,6 @@ This README follows the repository's actual visible folder structure. The curren
 
 ```text
 .
-├── AG/Note/        # Algebraic Geometry notes
 ├── AMAM/Note/      # Advanced Methods of Applied Mathematics notes
 ├── ANT/Note/       # Analytic Number Theory notes
 ├── NPDE/Note/      # PDE-related notes
